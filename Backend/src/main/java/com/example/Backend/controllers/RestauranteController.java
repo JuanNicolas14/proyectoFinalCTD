@@ -20,6 +20,7 @@ import java.util.logging.Logger;
  */
 @RestController
 @RequestMapping("/restaurante")
+@CrossOrigin(origins = "*")
 public class RestauranteController {
     // TODO: Proteger algunos endpoints con roles
     private Logger logger = Logger.getLogger(Restaurante.class.getName());
