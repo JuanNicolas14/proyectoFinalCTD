@@ -1,0 +1,40 @@
+footer {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  display: flex;
+  justify-content: center;
+  background-color: var(--main-color);
+  font-weight: bold;
+}
+  
+.copyright {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+  
+h4 {
+  color: white;
+  font-weight: lighter;
+  font-size: small;
+}
+  
+footer section {
+  width: 95%;
+  display: flex;
+  justify-content: space-between;
+}
+  
+footer section div img {
+  width: 25px;
+  height: 25px;
+}
+  
+.social-media{
+  width: 25%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
