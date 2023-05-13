@@ -34,8 +34,11 @@ section{
 .detalle-producto .producto-nombre {
   display: flex;
   justify-content: space-between;
-  text-align: center;
+  text-align: start;
   align-items: center;
+}
+.detalle-producto .producto-nombre span{
+  font-weight: 300;
 }
 .detalle-producto .producto-nombre div {
   color: var(--main-color);
@@ -103,6 +106,40 @@ section{
 
 
 /* ---------------------- MEDIA QUERIES -----------------------*/
+@media (max-width: 1250px) {
+  /*---------------- PAGINA DETALLE ----------------------*/
+  .detalle-producto p, .detalle-producto li, .detalle-producto span {
+    font-size: .8rem;
+  }
+  .detalle-producto .producto-nombre span {
+    font-size: 1.2rem;
+  }
+  .detalle-producto img{
+    width: 39%;
+  }
+  .detalle-producto .producto-plan {
+    width: 30%;
+  }
+}
+
+@media (max-width: 1024px) {
+  /*---------------- PAGINA DETALLE ----------------------*/
+  .detalle-producto article {
+    width: 85%;
+  }
+  .detalle-producto p, .detalle-producto li, .detalle-producto span {
+    font-size: .9rem;
+  }
+  .detalle-producto img{
+    margin: 10px;
+    width: 37%;
+  }
+
+  .detalle-producto button {
+    font-size: .7rem;
+    width: 90%;
+  }
+}
 
 @media (max-width: 768px) {
   main {
@@ -112,8 +149,70 @@ section{
   section {
     max-width: 95%;
   }
+
+  /*---------------- PAGINA DETALLE ----------------------*/
+  .detalle-producto article {
+    width: 90%;
+  }
+  .detalle-producto p, .detalle-producto li, .detalle-producto span {
+    font-size: .7rem;
+  }
 }
 
 @media (max-width: 480px) {
-  
+  /*---------------- PAGINA DETALLE ----------------------*/
+  .main-detail {
+    padding: 10px;
+  }
+  .detalle-producto .producto-nombre{
+    text-align: start;
+  }
+  .detalle-producto .producto-nombre h2 {
+    margin-right: 50px;
+    font-size: 1.3rem;
+  }
+  .detalle-producto .producto-nombre span{
+    font-size: 1rem;
+  }
+  .detalle-producto article {
+    justify-content: start;
+    flex-wrap: wrap;
+    max-height: 350px;
+  }
+  .detalle-producto img {
+    width: 48%;
+    height: 50%;
+  }
+  .detalle-producto .producto-plan {
+    width: 40%;
+  }
+  .detalle-producto ul {
+    margin: 5px;
+  }
+  .detalle-producto .producto-precio {
+    padding: 0 0 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+  }
+  .detalle-producto .producto-precio .suscripcion{
+    width: 48%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .detalle-producto .precio {
+    width: 40%;
+    align-items: center;
+    text-align: start;
+  }
+}
+
+@media (max-width: 360px){
+  /*--------------------- PAGINA DETALLE  ---------------------*/
+  .detalle-producto p, .detalle-producto li, .detalle-producto span {
+    font-size: .63rem;
+  }
 }

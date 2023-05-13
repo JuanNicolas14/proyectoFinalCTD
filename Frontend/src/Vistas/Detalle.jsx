@@ -13,7 +13,7 @@ const Detalle = () => {
           className='producto-nombre' 
           style={{ textDecoration: 'none' }}
         >
-          <h2>Restaurante Donde Leito</h2>
+          <h2><span>Restaurante</span><br/> Donde Leito</h2>
           <div>
             <BiArrowBack/> <span>Volver</span>
           </div>
