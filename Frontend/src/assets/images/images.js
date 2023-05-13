@@ -9,6 +9,9 @@ import instagram from '../images/instagram.png'
 import linkedin from '../images/linkedin.png'
 import twitter from '../images/twitter.png'
 import facebook from '../images/facebook.png'
+import medallaPlata from '../images/medalla-plata.jpg'
+import medallaOro from '../images/medalla-oro.jpg'
+import medallaBronce from '../images/medalla-bronce.jpg'
 
 export default {
     sancocho,
@@ -21,5 +24,8 @@ export default {
     instagram,
     linkedin,
     facebook,
-    twitter
+    twitter,
+    medallaPlata,
+    medallaOro,
+    medallaBronce
 }

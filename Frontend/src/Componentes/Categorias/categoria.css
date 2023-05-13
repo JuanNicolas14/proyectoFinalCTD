@@ -1,77 +1,154 @@
 /* CATEGORIAS */
 .categorias {
-    max-width: 95%;
-  }
+  max-width: 95%;
+}
   
-  .listado-categorias{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
+.listado-categorias{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
   
+.categorias article {
+  width: 25.5%;
+  height: 300px;
+  margin: 10px 40px 30px;
+  border-radius: 5%;
+  -webkit-box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.47);
+  -moz-box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.47);
+  box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.47);
+}
+  
+.categorias .categoria-imagen {
+  height: 80%;
+  background-size: cover;
+  background-repeat:no-repeat;
+  position: relative;
+  background-image: url(../../assets/images/fondo-planes.jpg);
+}
+.categorias .wrap {
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  
+  color: white;
+}
+.categorias .wrap:hover {
+  color: white;
+  backdrop-filter: blur(0px);
+}
+.categorias .wrap h2, .categorias .wrap p {
+  margin: 5px auto;
+}
+.categorias .wrap h2 {
+ font-size: 1.4rem;
+}
+.categorias .wrap p {
+  font-size: 1rem;
+  margin: 3px;
+}
+  
+.categorias .descripcion-button {
+  text-align: center;
+  padding: 2px 10px;
+}
+  
+.categorias .descripcion-button button {
+  margin: 10px auto;
+  padding: 10px;
+  background-color: var(--secondary-color);
+  color: white;
+  transition: all ease 1s;
+  
+  border: none;
+  border-radius: 5px;
+}
+.categorias .descripcion-button button:hover {
+  cursor: pointer;
+  background-color: rgb(255, 69, 0, .8);
+  scale: 1.1;
+}
+.categorias .medalla svg{
+  font-size: 30px;
+}
+  
+/*---------------- HOME ----------------------*/
+
+@media (max-width: 1250px) {
   .categorias article {
-    width: 25.5%;
+    width: 26.5%;
     height: 300px;
-    margin: 10px 40px 30px;
-    border-radius: 5%;
-    -webkit-box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.47);
-    -moz-box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.47);
-    box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.47);
+    margin: 10px 20px 30px;
   }
-  
-  .categorias .categoria-imagen {
-    height: 80%;
-    background-size: cover;
-    background-repeat:no-repeat;
-    position: relative;
-    background-image: url(../../assets/images/fondo-planes.jpg);
+}
+
+@media (max-width: 1024px) {
+  section {
+    padding: 20px;
+    max-width: 100%;
   }
-  .categorias .wrap {
-    width: 100%;
-    height: 100%;
-    backdrop-filter: blur(5px);
-  
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  
-    color: white;
+  .categorias article {
+    width: 26%;
+    margin: 0 15px 30px;
+    height: 250px;
   }
-  .categorias .wrap:hover {
-    color: white;
-    backdrop-filter: blur(0px);
+  .categorias img{
+    height: 150px;
   }
-  .categorias .wrap h2, .categorias .wrap p {
-    margin: 5px auto;
+  .categorias article h3, .categorias article p{
+    margin: 0;
   }
   .categorias .wrap h2 {
-   font-size: 1.4rem;
+    font-size: 1.1rem;
   }
-  .categorias .wrap p {
-    font-size: 1rem;
-    margin: 3px;
+  .categorias .wrap p{
+    font-size: .8rem;
   }
-  
-  .categorias .descripcion-button {
-    text-align: center;
-    padding: 2px 10px;
+  .listado-categorias{
+    width: 100%;
   }
-  
   .categorias .descripcion-button button {
-    margin: 10px auto;
-    padding: 10px;
-    background-color: var(--secondary-color);
-    color: white;
-    transition: all ease 1s;
-  
-    border: none;
-    border-radius: 5px;
+    margin-top: 5px;
+    padding: 8px 10px;
   }
-  .categorias .descripcion-button button:hover {
-    cursor: pointer;
-    background-color: rgb(255, 69, 0, .8);
-    scale: 1.1;
+  .categorias .medalla svg{
+    font-size: 25px;
   }
-  
+}
+
+@media (max-width: 768px) {
+  .listado-categorias{
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .categorias article {
+    margin: 10px 20px;
+    width: 40%;
+    height: 270px;
+  }
+
+  .categorias .descripcion-button button {
+    margin-bottom: 0;
+    padding-bottom: 7px;
+  }
+  .categorias .medalla svg{
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 480px){
+  .listado-categorias{
+    width: 100%;
+  }
+  .categorias article {
+    width: 85%;
+    height: 220px;
+  }
+}
