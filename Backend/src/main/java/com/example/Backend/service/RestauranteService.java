@@ -43,4 +43,12 @@ public class RestauranteService {
         return restauranteRepository.findAll();
     }
 
+/**
+     * Elimina un restaurante por su id
+     * @param id id del restaurante a eliminar
+     */
+    public void eliminarRestaurante(Long id) {
+        restauranteRepository.deleteById(id);
+    }
+
 }
