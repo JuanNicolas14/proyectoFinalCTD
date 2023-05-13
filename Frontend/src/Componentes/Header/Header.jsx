@@ -1,8 +1,9 @@
 import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
-import images from '../assets/images/images'
+import images from '../../assets/images/images'
 import {HiMenu} from 'react-icons/hi'
 import {GrClose} from 'react-icons/gr'
+import './header.css'
 
 const Header = () => {
 

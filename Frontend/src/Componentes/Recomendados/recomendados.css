@@ -1,0 +1,72 @@
+/* RECOMENDACIONES */
+
+.recomendados{
+    max-width: 95%;
+  }
+  
+  .listado-recomendados {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .recomendados article{
+    display: flex;
+    justify-content: space-around;
+    width: 45%;
+    height: 275px;
+    margin: 20px;
+    border-radius:10px;
+    -webkit-box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.47);
+    -moz-box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.47);
+    box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.47);
+  }
+  .recomendados img {
+    object-fit: cover;
+    width: 45%;
+    border-radius: 10px;
+  }
+  .recomendados .descripcion {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+  .recomendados .descripcion div {
+    height: 70%;
+  }
+  .recomendados .descripcion p,.recomendados .descripcion h2{
+    color: var(--third-color);
+  }
+  .recomendados .descripcion h2 {
+    font-size: 1.5rem;
+    margin: 5px 0;
+  }
+  .recomendados .descripcion p {
+    font-size: .8rem;
+  }
+  .recomendados a {
+    width: 90%;
+    height: 15%;
+    margin: 10px 15px 20px;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    background-color: var(--secondary-color);
+    align-self: center;
+    transition: all ease 1s;
+  }
+  .recomendados a:hover {
+    cursor: pointer;
+    scale: 1.05;
+    background-color: #f3571e;
+  }
+  .recomendados button {
+    width: 90%;
+    height: 15%;
+    margin: 10px 15px 20px;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    background-color: var(--secondary-color);
+  }

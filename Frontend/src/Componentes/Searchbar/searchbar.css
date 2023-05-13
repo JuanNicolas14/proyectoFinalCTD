@@ -1,0 +1,56 @@
+/* BUSQUEDA */
+.busqueda {
+    display: flex;
+    justify-content: center;
+    background-color: brown;
+    color: white;
+    height: 130px;
+  }
+  
+  .busqueda div {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .busqueda h2 {
+    font-weight: bold;
+    font-size: x-large;
+  }
+  
+  .formulario {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .busqueda .formulario {
+    width: 100%;
+  }
+  
+  .busqueda form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .busqueda input {
+    width: 25%;
+    margin: 0 10px;
+    height: 29px;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .busqueda button {
+    width: 25%;
+    height: 32px;
+    border: none;
+    border-radius: 5px;
+    font-family: "Quicksand", sans-serif;
+    font-weight: bold;
+    color: white;
+    background-color: orangered;
+  }
