@@ -40,10 +40,10 @@ header section {
   justify-content: space-between;
 }
 .imagotipo{
-  width: 50%;
+  width: 70%;
 }
 .imagotipo a{
-  width: 45%;
+  width: 100%;
   display: flex;
 }
 
@@ -59,7 +59,6 @@ header section {
 }
 
 h1 {
-  font-size: .85rem;
   color: orangered;
   margin: 0;
 }
@@ -67,7 +66,6 @@ h1 {
 header h3 {
   color: brown;
   font-weight: lighter;
-  font-size: .75rem;
   margin: 0;
 }
 
@@ -98,4 +96,143 @@ header h3 {
   background-color: white;
   border: solid 1.5px orangered;
   border-radius: 7.5px;
+}
+
+/*-------------------- HEADER - MENU MOVIL ---------------------*/
+.menu-movil{
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 20%;
+  bottom: 0%;
+  background-color: white;
+  z-index: 1000;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: right;
+}
+.menu-movil ul {
+  padding: 0px 15px 0 5px;
+  list-style: none;
+  color: var(--third-color);
+}
+.menu-movil li {
+  font-weight: 500;
+  margin: 20px 10px;
+}
+.menu-movil li:last-child{
+  padding-top: 20px;
+  margin-right: 10px;
+  border-top: 1px solid black;
+}
+.menu-movil .menu {
+  height: 50%;
+}
+.menu-movil .menu-container {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 40%;
+  justify-content: flex-end;
+
+  background-color: var(--main-color);
+  color: white;
+}
+.menu-movil .menu-container button {
+  position: absolute;
+  top: 0;
+  margin: 10px;
+
+  border: none;
+  background-color: var(--main-color);
+  font-size: 1.5rem;
+  color: white;
+}
+.menu-movil h2 {
+  margin: 10px;
+  padding: 0px 15px 0 5px;
+}
+.redes-menu{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  background-color: var(--main-color);
+}
+.redes-menu img {
+  width: 12%;
+  margin: 10px auto;
+  background-color: #A52A2A;
+  color: var(--main-color);
+}
+
+
+/*-------------------------------------------- MEDIA QUERIES ---------------------------------*/
+/*DESKTOP*/
+@media (max-width: 1250px) {
+
+}
+
+/*TABLETS Y PORTATILES*/
+@media (max-width: 1024px) {
+  header .texto-logo h1 {
+    font-size: 1.3rem;
+  }
+  header .texto-logo h3 {
+    font-size: 1rem;
+  }
+}
+
+/*TABLETS Y TELEFONOS MAS GRANDES*/
+@media (max-width: 768px) {
+  /*------------------- HEADER -------------------*/
+  header .texto-logo h1 {
+    font-size: 1.1rem;
+  }
+  header .texto-logo h3 {
+    font-size: .8rem;
+  }
+  
+  .botones-logueo button{
+    font-size: .7rem;
+  }
+}
+
+/*BREAKPOINT INTERMEDIO*/
+@media (max-width:700px) {
+
+}
+
+/* TELEFONOS PEQUEÑOS */
+@media (max-width: 480px) {
+  /*-------------------- HEADER ---------------------*/
+  header {
+    height: 60px;
+  }
+  header .imagotipo {
+    width: 70%;
+  }
+  header .imagotipo a {
+    margin: 5px auto 0;
+  }
+  header .imagotipo img{
+    width: 40px;
+  }
+  header .texto-logo h1 {
+    font-size: 1rem;
+  }
+  header .texto-logo h3 {
+    font-size: .7rem;
+  }
+  .botones-logueo {
+    display: none;
+  }
+
+  .menu-icono {
+    margin: 0 15px;
+    display: block;
+  }
 }

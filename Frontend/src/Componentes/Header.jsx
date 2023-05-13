@@ -18,18 +18,18 @@ const Header = () => {
   return (
     <header>
       <section>
-          <div class="imagotipo">
+          <div className="imagotipo">
             <Link to='/home' style={{ textDecoration: 'none' }}>
             
               <img src={images.logoBukinFood} alt="icon-logo" />
-              <div class="texto-logo">
+              <div className="texto-logo">
                 <h1>La forma más fácil </h1>
                 <h3>De tener almuerzos deliciosos</h3>
               </div>
             </Link>
           </div>
 
-        <div class="botones-logueo">
+        <div className="botones-logueo">
           <button>Crear cuenta</button>
           <button>Iniciar sesión</button>
         </div>
