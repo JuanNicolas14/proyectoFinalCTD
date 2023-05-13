@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -70,6 +71,18 @@ public class RestauranteController {
     }
 
     /**
+     * Endpoint para listar todos los restaurantes
+     * @return ResponseEntity con la lista de restaurantes
+     */
+    @GetMapping("/")
+    public List<Restaurante> listarRestaurantes() {
+        this.logger.info("Listando restaurantes");
+        List<Restaurante> restaurantes = RestauranteService.buscarTodosRestaurantes();
+        this.logger.info("Se encontraron " + restaurantes.size() + " restaurantes");
+        return restaurantes;
+    }
+
+    /**
      * Maneja la excepción SQLException y retorna un ResponseEntity con el mensaje de error
      * @param exc instancia de SQLException
      * @return ResponseEntity con el mensaje de error
@@ -77,5 +90,15 @@ public class RestauranteController {
     @ExceptionHandler(SQLException.class)
     public ResponseEntity<String> handleSQLException(SQLException exc) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exc.getMessage());
+    }
+
+    /**
+     * Maneja la excepción ResourceNotFoundException y retorna un ResponseEntity con el mensaje de error
+     * @param exc instancia de ResourceNotFoundException
+     * @return ResponseEntity con el mensaje de error
+     */
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<String> handleResourceNotFoundException(ResourceNotFoundException exc) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exc.getMessage());
     }
 }

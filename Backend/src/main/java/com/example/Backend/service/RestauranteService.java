@@ -5,6 +5,7 @@ import com.example.Backend.repository.RestauranteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,6 +33,14 @@ public class RestauranteService {
      */
     public Optional<Restaurante> buscarRestaurante(Long id) {
         return restauranteRepository.findById(id);
+    }
+
+    /**
+     * Busca todos los restaurantes
+     * @return Lista de restaurantes
+     */
+    public List<Restaurante> buscarTodosRestaurantes() {
+        return restauranteRepository.findAll();
     }
 
 }
