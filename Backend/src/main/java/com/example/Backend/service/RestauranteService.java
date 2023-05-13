@@ -5,6 +5,8 @@ import com.example.Backend.repository.RestauranteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class RestauranteService {
     private RestauranteRepository restauranteRepository;
@@ -21,6 +23,15 @@ public class RestauranteService {
      */
     public Restaurante guardarRestaurante(Restaurante restaurante) {
         return restauranteRepository.save(restaurante);
+    }
+
+    /**
+     * Busca un restaurante por su id
+     * @param id id del restaurante a buscar
+     * @return Restaurante buscado
+     */
+    public Optional<Restaurante> buscarRestaurante(Long id) {
+        return restauranteRepository.findById(id);
     }
 
 }
