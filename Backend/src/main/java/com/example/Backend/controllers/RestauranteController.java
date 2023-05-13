@@ -83,6 +83,24 @@ public class RestauranteController {
     }
 
     /**
+     * Endpoint para eliminar un restaurante
+     * @param id id del restaurante a eliminar
+     * @return ResponseEntity con el mensaje de éxito
+     */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> eliminarRestaurante(@PathVariable Long id) throws ResourceNotFoundException {
+        this.logger.info("Eliminando restaurante con id: " + id);
+        Optional<Restaurante> restauranteBuscado = RestauranteService.buscarRestaurante(id);
+        if (restauranteBuscado.isEmpty()) {
+            this.logger.warning("No se encontró el restaurante con id: " + id);
+            throw new ResourceNotFoundException("No se encontró el restaurante con id: " + id);
+        }
+        RestauranteService.eliminarRestaurante(id);
+        this.logger.info("Se eliminó el restaurante con id: " + id);
+        return ResponseEntity.ok("Se eliminó el restaurante con id: " + id);
+    }
+
+    /**
      * Maneja la excepción SQLException y retorna un ResponseEntity con el mensaje de error
      * @param exc instancia de SQLException
      * @return ResponseEntity con el mensaje de error
