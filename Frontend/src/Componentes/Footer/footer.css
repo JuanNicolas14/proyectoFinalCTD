@@ -38,3 +38,59 @@ footer section div img {
   justify-content: space-around;
   align-items: center;
 }
+
+@media (max-width: 768px) {
+    .social-media {
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .social-media img {
+      margin: 5px 22px;
+    }
+    .social-media .logo {
+      margin: 5px 10px;
+    }
+}
+
+@media (max-width: 700px) {
+    .copyright {
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    .copyright h4, .copyright p {
+      margin: 0 auto
+    }
+    
+    .social-media img {
+      margin: 5px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+  .copyright {
+    max-width: 60%;
+    align-items: start;
+    font-size: .8rem;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .copyright h4 {
+    font-size: .7rem;
+  }
+
+  .copyright h4, .copyright p {
+    margin: 0;
+  }
+
+  .social-media img {
+    margin: 5px;
+  } 
+}
+
+@media (max-width: 360px){
+  .social-media img {
+    width: 17px;
+    height: 17px;
+  }  
+}
