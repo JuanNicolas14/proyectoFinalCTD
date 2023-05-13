@@ -1,0 +1,101 @@
+/*--------------- Variables css ---------------*/
+:root {
+  --main-color: #A52A2A;
+  --secondary-color:#FF4500;
+  --third-color: #383b58;
+}
+
+body{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  color: var(--main-color);
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+main{
+  width: 100%;
+}
+
+/*-------------------- HEADER ---------------------*/
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  max-height: 80px;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-bottom: 1px solid brown;
+}
+
+header section {
+  width: 95%;
+  height: 75%;
+  display: flex;
+  justify-content: space-between;
+}
+.imagotipo{
+  width: 50%;
+}
+.imagotipo a{
+  width: 45%;
+  display: flex;
+}
+
+.imagotipo img {
+  width: 45px;
+}
+
+.texto-logo {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h1 {
+  font-size: .85rem;
+  color: orangered;
+  margin: 0;
+}
+
+header h3 {
+  color: brown;
+  font-weight: lighter;
+  font-size: .75rem;
+  margin: 0;
+}
+
+.botones-logueo {
+  width: 30%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-icono {
+  display: none;
+}
+
+.menu-icono button {
+  border: none;
+  margin: 7px auto;
+  font-size: 2rem;
+  color: #FF4500;
+}
+
+.botones-logueo button {
+  width: 47.5%;
+  height: 75%;
+  font-family: "Quicksand", sans-serif;
+  font-weight: bold;
+  color: orangered;
+  background-color: white;
+  border: solid 1.5px orangered;
+  border-radius: 7.5px;
+}
