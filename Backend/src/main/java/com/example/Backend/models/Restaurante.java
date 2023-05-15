@@ -18,15 +18,27 @@ public class Restaurante {
     @Column(name = "imagen")
     private String imagen;
 
-    private Long plan_id;
+    @Column(name = "precio")
+    private double precio;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "domicilio_id",referencedColumnName = "id")
+    private Domicilio domicilio;
+
+    @ManyToOne
+    @JoinColumn(name = "plan_id",referencedColumnName = "id")
+    private Plan plan;
 
     // Constructor
 
-    public Restaurante(String nombre, String descripcion, String imagen, Long plan_id) {
+
+    public Restaurante(String nombre, String descripcion, String imagen, double precio, Domicilio domicilio, Plan plan) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.imagen = imagen;
-        this.plan_id = plan_id;
+        this.precio = precio;
+        this.domicilio = domicilio;
+        this.plan = plan;
     }
 
     public Restaurante() {
@@ -66,12 +78,28 @@ public class Restaurante {
         this.imagen = imagen;
     }
 
-    public Long getPlan_id() {
-        return plan_id;
+    public Domicilio getDomicilio() {
+        return domicilio;
     }
 
-    public void setPlan_id(Long plan_id) {
-        this.plan_id = plan_id;
+    public void setDomicilio(Domicilio domicilio) {
+        this.domicilio = domicilio;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public Plan getPlan() {
+        return plan;
+    }
+
+    public void setPlan(Plan plan) {
+        this.plan = plan;
     }
 
     // toString method

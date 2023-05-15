@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Searchbar from '../Componentes/Searchbar/Searchbar'
 import Categoria from '../Componentes/Categorias/Categoria'
 import RestauranteRecomendado from '../Componentes/Recomendados/RestauranteRecomendado'
+import baseUrl from '../utils/baseUrl.json'
 
 const Home = () => {
-
+  
   const planes = [
     {
       nombre: 'Semanal',
@@ -22,6 +23,40 @@ const Home = () => {
       descripcion: 'Un almuerzo por dia, durante 30 dias.'
     },
   ]
+
+  const [restaurantes, setRestaurantes] = useState([])
+
+  const url = baseUrl.url + "/restaurante";
+
+  useEffect(() => {
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        // Mezcla aleatoria de los restaurantes
+        const restaurantesAleatorios = shuffleArray(data);
+  
+        // Obtener los primeros 4 restaurantes aleatorios
+        const restaurantesSeleccionados = restaurantesAleatorios.slice(0, 4);
+  
+        setRestaurantes(restaurantesSeleccionados);
+
+        console.log(restaurantes);
+      })
+      .catch((err) => console.log(err));
+  }, [url]);
+  
+  console.log(restaurantes);
+  
+  console.log(url);
+  
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+  
 
   return (
     <main className='home'>
@@ -43,8 +78,8 @@ const Home = () => {
         <section className='recomendados'>
           <h2>Restaurantes recomendados</h2>
           <div className='listado-recomendados'>
-            {['El corral','Presto','McDonalds','Otro'].map((plato,key) => (
-              <RestauranteRecomendado key={key} nombre={plato}/>
+            {restaurantes.map(restaurante => (
+              <RestauranteRecomendado key={restaurante.id} restaurante={restaurante}/>
             ))
             }
           </div>

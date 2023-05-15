@@ -3,17 +3,17 @@ import images from '../../assets/images/images'
 import { Link } from 'react-router-dom'
 import './recomendados.css'
 
-const RestauranteRecomendado = ({nombre}) => {
+const RestauranteRecomendado = ({restaurante}) => {
   return (
     <article>
         <img src={images.plato1} alt="" />
         <div className='descripcion'>
             <div>
                 <p>⭐⭐⭐⭐</p>
-                <h2>{nombre}</h2>
-                <p>Una descripcion del restaurante y el tipo de comida que oferta, una descripcion del restaurante y el tipo de comida que podrian estar sirviendo.</p>
+                <h2>{restaurante.nombre}</h2>
+                <p>{restaurante.descripcion}</p>
             </div>
-            <Link to='/detalle' style={{ textDecoration: 'none' }}>
+            <Link to={'/detalle/'+restaurante.id} style={{ textDecoration: 'none' }}>
               <button>Ver mas</button>
             </Link>
         </div>
