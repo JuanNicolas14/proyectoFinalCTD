@@ -13,7 +13,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Navigate to='/home' replace/>}/>
         <Route path='/home' element={<Home/>}/>
-        <Route path='/detalle' element={<Detalle/>}/>
+        <Route path='/detalle/:id' element={<Detalle/>}/>
       </Routes>
       <Footer/>
     </>

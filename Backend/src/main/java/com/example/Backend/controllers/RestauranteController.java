@@ -8,8 +8,10 @@ import com.example.Backend.models.Restaurante;
 import com.example.Backend.service.RestauranteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -33,6 +35,7 @@ public class RestauranteController {
      * Constructor de RestauranteController
      * @param RestauranteService instancia de RestauranteService
      */
+
     @Autowired
     public RestauranteController(RestauranteService RestauranteService) {
         this.RestauranteService = RestauranteService;
@@ -43,6 +46,7 @@ public class RestauranteController {
      * @param restaurante restaurante a guardar
      * @return ResponseEntity con el restaurante guardado
      */
+
     @PostMapping
     public ResponseEntity<Restaurante> guardarRestaurante(@RequestBody Restaurante restaurante) {
         // TODO: Se debe validar que el restaurante no exista con el mismo nombre
@@ -51,6 +55,7 @@ public class RestauranteController {
         this.logger.info("Se guardó el restaurante: " + restauranteGuardado.toString());
         return ResponseEntity.status(HttpStatus.CREATED).body(restauranteGuardado);
     }
+
 
     /**
      * Endpoint para listar todos los restaurantes
@@ -74,7 +79,7 @@ public class RestauranteController {
      * Endpoint para listar todos los restaurantes
      * @return ResponseEntity con la lista de restaurantes
      */
-    @GetMapping("/")
+    @GetMapping
     public List<Restaurante> listarRestaurantes() {
         this.logger.info("Listando restaurantes");
         List<Restaurante> restaurantes = RestauranteService.buscarTodosRestaurantes();

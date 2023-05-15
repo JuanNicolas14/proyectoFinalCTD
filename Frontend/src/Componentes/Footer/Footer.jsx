@@ -6,11 +6,11 @@ const Footer = () => {
   return (
     <footer id="footerContainer">
       <section>
-        <div class="copyright">
+        <div className="copyright">
           <p>©2023 BukinFood</p>
           <h4>Todos los derechos reservados</h4>
         </div>
-        <div class="social-media">
+        <div className="social-media">
           <img
             src={images.facebook}
             alt="icono-facebook"
