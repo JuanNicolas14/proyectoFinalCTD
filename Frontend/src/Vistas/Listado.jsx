@@ -1,16 +1,15 @@
 import React from 'react'
 import  { useEffect, useState } from 'react'
-import Restaurante from '../Componentes/Recomendados/RestauranteRecomendado.jsx'
+import Restaurante from '../Componentes/Restaurante/Restaurante.jsx'
 import '../index.css'
 import baseUrl from '../utils/baseUrl.json'
 
 const Listado = () => {
 
   const [restaurantes, setRestaurantes] = useState([])
+  
 
-  const url = baseUrl+"/restaurante"
-
-  //const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
+  const url = baseUrl.url + "/restaurante"
 
   useEffect(() => {
     fetch( url)
@@ -22,19 +21,22 @@ const Listado = () => {
 
   console.log(restaurantes);
 
+  
+
   return (
     <section className='contenedor-restaurantes'>
         <h2>Restaurantes</h2>
           <div className='listado-restaurantes'>
             {restaurantes.map((restaurante,key) => (
-              <Restaurante 
-                key={key} 
-                nombre={restaurante.nombre}
-                descripcion={restaurante.descripcion}
-                plan={restaurante.plan_id}
-              />
+                <Restaurante 
+                  key={key} 
+                  nombre={restaurante.nombre}
+                  descripcion={restaurante.descripcion}
+                  plan={restaurante.plan_id}
+                />
             ))
             }
+            
           </div>
     </section>
   )

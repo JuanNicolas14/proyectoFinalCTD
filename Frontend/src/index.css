@@ -22,7 +22,9 @@ section{
   max-width: 100%;
   margin: 0 auto;
 }
-
+.home {
+  min-height: 90vh;
+}
 /* ---------------------- VISTA DETALLE -----------------------*/
 .detalle-producto {
   padding: 20px;
@@ -104,6 +106,64 @@ section{
   margin: 7px auto;
 }
 
+/* ---------------------- VISTA ADMINISTRACION -----------------------*/
+.administracion-panel{
+  width: 100%;
+  padding: 20px;
+}
+.administracion-panel h2 {
+  margin: 10px;
+}
+
+.administracion-panel ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+
+  padding: 0;
+}
+
+.administracion-panel li a{
+  display: block;
+  background-color: #FF4500;
+  color: white;
+  margin: 10px;
+  padding: 10px;
+  height: 20px;
+  border-radius: 5px;
+}
+.administracion-panel li a:hover {
+  cursor: pointer;
+  background-color: #fa5b21;
+}
+
+/*---------------------- FORM AGREGAR PRODUCTO -----------------------*/
+.form-add-product {
+  height: 85vh;
+  padding: 10px 30px;
+}
+.form-add-product form {
+  width: 400px;
+  padding: 1em;
+  border: 1px solid var(--secondary-color);
+  border-radius: 1em;
+  margin-bottom: 30px;
+}
+.form-add-product button {
+  text-align: center;
+  width: 40%;
+  padding: 10px;
+  color: white;
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: 5px;
+  transition: all ease-in-out .5s;
+}
+.form-add-product button:hover {
+  cursor: pointer;
+  background-color: #fa5b21;
+}
 
 /* ---------------------- MEDIA QUERIES -----------------------*/
 @media (max-width: 1250px) {
@@ -157,6 +217,9 @@ section{
   .detalle-producto p, .detalle-producto li, .detalle-producto span {
     font-size: .7rem;
   }
+  .administracion-panel li span {
+    font-size: .94rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -208,6 +271,20 @@ section{
     align-items: center;
     text-align: start;
   }
+
+  /* ---------------------- VISTA ADMINISTRACION -----------------------*/
+  .administracion-panel h2 {
+    font-size: 1.2rem;
+  }
+  .administracion-panel ul li {
+    width: 60%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .administracion-panel li span {
+    font-size: .9rem;
+  }
+
 }
 
 @media (max-width: 360px){
