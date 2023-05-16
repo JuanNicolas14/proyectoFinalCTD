@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
     color: black;
+    margin-bottom: 30px;
 }
 .paginacion-contenedor button {
     margin: 0 10px;
@@ -20,4 +21,14 @@
     border-radius: 5px;
     margin: 0 10px 0 0;
     text-align: center;
+}
+
+@media (max-width: 480px) {
+    .paginacion-contenedor input {
+        width: 30px;
+    }
+    .paginacion-contenedor button {
+        width: 40px;
+        height: 40px;
+    }
 }

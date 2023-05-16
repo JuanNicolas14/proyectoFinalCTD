@@ -1,7 +1,7 @@
 /*------------------- PAGINA LISTADO RESTAURANTES --------------------*/
 .contenedor-restaurantes {
   max-width: 95%;
-  min-height: 86vh;
+  min-height: 100vh;
 }
 .contenedor-restaurantes .listado-restaurantes {
   display: flex;
