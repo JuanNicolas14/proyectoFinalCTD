@@ -1,16 +1,17 @@
 import React from 'react'
 import  { useEffect, useState } from 'react'
-import Restaurante from '../Componentes/Recomendados/RestauranteRecomendado.jsx'
+import Restaurante from '../Componentes/Restaurante/Restaurante.jsx'
+import Paginacion from '../Componentes/Paginacion/Paginacion.jsx'
 import '../index.css'
 import baseUrl from '../utils/baseUrl.json'
 
 const Listado = () => {
 
   const [restaurantes, setRestaurantes] = useState([])
+  const [pagina, setPagina] = useState(1)
+  const [cantidadPorPagina, setCantidadPorPagina] = useState(3)
 
-  const url = baseUrl+"/restaurante"
-
-  //const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
+  const url = baseUrl.url + "/restaurante"
 
   useEffect(() => {
     fetch( url)
@@ -20,13 +21,20 @@ const Listado = () => {
     
   }, [url]);
 
-  console.log(restaurantes);
+
+  /* Codigo paginacion */
+  const maximo = restaurantes.length / cantidadPorPagina
+
+  
 
   return (
     <section className='contenedor-restaurantes'>
         <h2>Restaurantes</h2>
           <div className='listado-restaurantes'>
-            {restaurantes.map((restaurante,key) => (
+            {restaurantes.slice(
+              (pagina - 1) * cantidadPorPagina,
+              (pagina - 1) * cantidadPorPagina + cantidadPorPagina
+            ).map((restaurante,key) => (
               <Restaurante 
                 key={key} 
                 nombre={restaurante.nombre}
@@ -36,6 +44,7 @@ const Listado = () => {
             ))
             }
           </div>
+          <Paginacion pagina={pagina} setPagina={setPagina} maximo={maximo}/>
     </section>
   )
 }

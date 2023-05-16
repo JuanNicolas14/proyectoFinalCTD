@@ -4,6 +4,7 @@ import './index.css'
 import Home from './Vistas/Home'
 import Footer from './Componentes/Footer/Footer'
 import Detalle from './Vistas/Detalle'
+import Listado from './Vistas/Listado'
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
         <Route path='/' element={<Navigate to='/home' replace/>}/>
         <Route path='/home' element={<Home/>}/>
         <Route path='/detalle/:id' element={<Detalle/>}/>
+        <Route path='/restaurantes' element={<Listado/>}/>
       </Routes>
       <Footer/>
     </>
