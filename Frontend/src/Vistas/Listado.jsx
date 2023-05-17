@@ -9,7 +9,7 @@ const Listado = () => {
 
   const [restaurantes, setRestaurantes] = useState([])
   const [pagina, setPagina] = useState(1)
-  const [cantidadPorPagina, setCantidadPorPagina] = useState(3)
+  const [cantidadPorPagina, setCantidadPorPagina] = useState(8)
 
   const url = baseUrl.url + "/restaurante"
 
