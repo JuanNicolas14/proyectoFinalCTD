@@ -1,6 +1,7 @@
 # Equipo 7
 
-
+DIAGRAMA ENTIDAD RELACION
+![diagrama-er](diagrama-ER.png)
 
 ## Getting started
 
