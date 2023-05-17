@@ -138,32 +138,6 @@ section{
   background-color: #fa5b21;
 }
 
-/*---------------------- FORM AGREGAR PRODUCTO -----------------------*/
-.form-add-product {
-  height: 85vh;
-  padding: 10px 30px;
-}
-.form-add-product form {
-  width: 400px;
-  padding: 1em;
-  border: 1px solid var(--secondary-color);
-  border-radius: 1em;
-  margin-bottom: 30px;
-}
-.form-add-product button {
-  text-align: center;
-  width: 40%;
-  padding: 10px;
-  color: white;
-  background-color: var(--secondary-color);
-  border: none;
-  border-radius: 5px;
-  transition: all ease-in-out .5s;
-}
-.form-add-product button:hover {
-  cursor: pointer;
-  background-color: #fa5b21;
-}
 
 /* ---------------------- MEDIA QUERIES -----------------------*/
 @media (max-width: 1250px) {
@@ -206,9 +180,7 @@ section{
     padding: 0px;
   }
 
-  section {
-    max-width: 95%;
-  }
+  
 
   /*---------------- PAGINA DETALLE ----------------------*/
   .detalle-producto article {

@@ -28,13 +28,13 @@ const Detalle = () => {
           className='producto-nombre' 
           style={{ textDecoration: 'none' }}
         >
-          <h2><span>Restaurante</span><br/> {restaurante?.nombre}</h2>
+          <h2>{restaurante?.nombre}</h2>
           <div>
             <BiArrowBack/> <span>Volver</span>
           </div>
         </Link>
         <article>
-          <img src={images.plato3} alt="img-detalle-producto" />
+          <img src={restaurante?.imagen} alt="img-detalle-producto" />
           <div className='producto-plan'>
             <ul>
               <li>Plan:</li>

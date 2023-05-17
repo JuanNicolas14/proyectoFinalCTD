@@ -3,10 +3,10 @@ import './searchbar.css'
 
 const Searchbar = () => {
   return (
-    <section class="busqueda">
+    <section className="busqueda">
         <div>
           <h2>Buscar restaurantes por ciudad y fecha</h2>
-          <div class="formulario">
+          <div className="formulario">
             <form>
               <input type="text" placeholder=" 📍 Digita tu ciudad" />
               <input type="text" placeholder=" 🗓️ Inicio - Final" />

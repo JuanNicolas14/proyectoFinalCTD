@@ -6,7 +6,7 @@ import './recomendados.css'
 const RestauranteRecomendado = ({restaurante}) => {
   return (
     <article>
-        <img src={images.plato1} alt="" />
+        <img src={restaurante.imagen} alt="" />
         <div className='descripcion'>
             <div>
                 <p>⭐⭐⭐⭐</p>
