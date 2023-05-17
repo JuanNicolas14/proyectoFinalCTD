@@ -3,16 +3,16 @@ import images from '../../assets/images/images'
 import { Link } from 'react-router-dom'
 import './restaurante.css'
 
-const Restaurante = ({nombre, descripcion, plan}) => {
+const Restaurante = ({restaurante}) => {
   return (
     <article className='restaurante'>
-        <img src={images.plato1} alt="" />
+        <img src={restaurante.imagen} alt="" />
         <div className='restaurante-descripcion'>
             <p>⭐⭐⭐⭐</p>
-            <h2>{nombre}</h2>
-            <p className='descripcion'>{descripcion}</p>
+            <h2>{restaurante.nombre}</h2>
+            <p className='descripcion'>{restaurante.descripcion}</p>
         </div>
-        <Link to='/detalle' style={{ textDecoration: 'none' }}>
+        <Link to={'/detalle/'+restaurante.id} style={{ textDecoration: 'none' }}>
           Ver mas
         </Link>
     </article>

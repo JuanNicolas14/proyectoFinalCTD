@@ -22,7 +22,9 @@ section{
   max-width: 100%;
   margin: 0 auto;
 }
-
+.home {
+  min-height: 90vh;
+}
 /* ---------------------- VISTA DETALLE -----------------------*/
 .detalle-producto {
   padding: 20px;
@@ -104,6 +106,38 @@ section{
   margin: 7px auto;
 }
 
+/* ---------------------- VISTA ADMINISTRACION -----------------------*/
+.administracion-panel{
+  width: 100%;
+  padding: 20px;
+}
+.administracion-panel h2 {
+  margin: 10px;
+}
+
+.administracion-panel ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+
+  padding: 0;
+}
+
+.administracion-panel li a{
+  display: block;
+  background-color: #FF4500;
+  color: white;
+  margin: 10px;
+  padding: 10px;
+  height: 20px;
+  border-radius: 5px;
+}
+.administracion-panel li a:hover {
+  cursor: pointer;
+  background-color: #fa5b21;
+}
+
 
 /* ---------------------- MEDIA QUERIES -----------------------*/
 @media (max-width: 1250px) {
@@ -146,9 +180,7 @@ section{
     padding: 0px;
   }
 
-  section {
-    max-width: 95%;
-  }
+  
 
   /*---------------- PAGINA DETALLE ----------------------*/
   .detalle-producto article {
@@ -156,6 +188,9 @@ section{
   }
   .detalle-producto p, .detalle-producto li, .detalle-producto span {
     font-size: .7rem;
+  }
+  .administracion-panel li span {
+    font-size: .94rem;
   }
 }
 
@@ -208,6 +243,20 @@ section{
     align-items: center;
     text-align: start;
   }
+
+  /* ---------------------- VISTA ADMINISTRACION -----------------------*/
+  .administracion-panel h2 {
+    font-size: 1.2rem;
+  }
+  .administracion-panel ul li {
+    width: 60%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .administracion-panel li span {
+    font-size: .9rem;
+  }
+
 }
 
 @media (max-width: 360px){

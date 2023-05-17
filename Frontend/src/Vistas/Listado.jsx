@@ -9,7 +9,7 @@ const Listado = () => {
 
   const [restaurantes, setRestaurantes] = useState([])
   const [pagina, setPagina] = useState(1)
-  const [cantidadPorPagina, setCantidadPorPagina] = useState(3)
+  const [cantidadPorPagina, setCantidadPorPagina] = useState(8)
 
   const url = baseUrl.url + "/restaurante"
 
@@ -25,7 +25,7 @@ const Listado = () => {
   /* Codigo paginacion */
   const maximo = restaurantes.length / cantidadPorPagina
 
-  
+  console.log(restaurantes)
 
   return (
     <section className='contenedor-restaurantes'>
@@ -37,12 +37,11 @@ const Listado = () => {
             ).map((restaurante,key) => (
               <Restaurante 
                 key={key} 
-                nombre={restaurante.nombre}
-                descripcion={restaurante.descripcion}
-                plan={restaurante.plan_id}
+                restaurante={restaurante}
               />
             ))
             }
+            
           </div>
           <Paginacion pagina={pagina} setPagina={setPagina} maximo={maximo}/>
     </section>

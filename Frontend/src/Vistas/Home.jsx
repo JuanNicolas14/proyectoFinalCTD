@@ -62,7 +62,7 @@ const Home = () => {
     <main className='home'>
         <Searchbar/>
         <section className='categorias'>
-          <h2 className='titulo'>Restaurantes habiles por plan</h2>
+          <h2 className='titulo'>Restaurantes por plan</h2>
           <div className='listado-categorias'>
             {planes.map((planes,key) => (              
               <Categoria 
