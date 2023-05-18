@@ -7,6 +7,7 @@ import instagram from '../images/instagram.png'
 import linkedin from '../images/linkedin.png'
 import twitter from '../images/twitter.png'
 import facebook from '../images/facebook.png'
+import eliminar from '../images/eliminar.png'
 
 export default {
     plato1,
@@ -17,5 +18,6 @@ export default {
     instagram,
     linkedin,
     facebook,
-    twitter
+    twitter,
+    eliminar
 }
