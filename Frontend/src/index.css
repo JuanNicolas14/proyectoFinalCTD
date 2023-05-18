@@ -23,7 +23,8 @@ section{
   margin: 0 auto;
 }
 .home {
-  min-height: 90vh;
+  min-height: 110vh;
+  padding-bottom: 80px;
 }
 /* ---------------------- VISTA DETALLE -----------------------*/
 .detalle-producto {

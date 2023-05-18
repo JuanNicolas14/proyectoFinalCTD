@@ -52,7 +52,7 @@ const EliminarProducto = () => {
           <caption>Restaurantes Registrados</caption>
           <thead>
             <tr>
-              <th className="centrar">No.</th>
+              <th className="centrar opcional-id">No.</th>
               <th>Nombre</th>
               <th className="centrar">Imagen</th>
               <th className='opcional'>Plan</th>
@@ -69,7 +69,7 @@ const EliminarProducto = () => {
             ).map((productoActual,i) => {
                 return(
                 <tr key={i}>
-                    <td>{productoActual.id}</td>
+                    <td className='opcional-id'>{productoActual.id}</td>
                     <td>
                         <Link to={'/detalle/'+productoActual.id} style={{ textDecoration: 'none' }}>
                             {productoActual.nombre}

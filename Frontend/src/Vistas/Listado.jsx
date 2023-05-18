@@ -28,23 +28,25 @@ const Listado = () => {
   console.log(restaurantes)
 
   return (
-    <section className='contenedor-restaurantes'>
-        <h2>Restaurantes</h2>
-          <div className='listado-restaurantes'>
-            {restaurantes.slice(
-              (pagina - 1) * cantidadPorPagina,
-              (pagina - 1) * cantidadPorPagina + cantidadPorPagina
-            ).map((restaurante,key) => (
-              <Restaurante 
-                key={key} 
-                restaurante={restaurante}
-              />
-            ))
-            }
-            
-          </div>
-          <Paginacion pagina={pagina} setPagina={setPagina} maximo={maximo}/>
-    </section>
+    <main className="home">
+      <section className='contenedor-restaurantes'>
+          <h2>Restaurantes</h2>
+            <div className='listado-restaurantes'>
+              {restaurantes.slice(
+                (pagina - 1) * cantidadPorPagina,
+                (pagina - 1) * cantidadPorPagina + cantidadPorPagina
+              ).map((restaurante,key) => (
+                <Restaurante 
+                  key={key} 
+                  restaurante={restaurante}
+                />
+              ))
+              }
+              
+            </div>
+            <Paginacion pagina={pagina} setPagina={setPagina} maximo={maximo}/>
+      </section>
+    </main>
   )
 }
 
