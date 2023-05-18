@@ -1,5 +1,4 @@
 import React from 'react'
-import images from '../../assets/images/images'
 import { Link } from 'react-router-dom'
 import './restaurante.css'
 
