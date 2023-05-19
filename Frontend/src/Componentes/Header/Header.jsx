@@ -31,7 +31,11 @@ const Header = () => {
           </div>
 
         <div className="botones-logueo">
-          <button>Crear cuenta</button>
+          <button>
+            <Link to='/administracion' style={{ textDecoration: 'none' }}>
+              Crear cuenta
+            </Link>
+          </button>
           <button>Iniciar sesión</button>
         </div>
         {show 

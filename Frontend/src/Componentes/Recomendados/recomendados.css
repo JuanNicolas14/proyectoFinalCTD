@@ -5,12 +5,13 @@
 .listado-recomendados {
   padding: 20px;
   display: flex;
+  justify-content: space-around;
   flex-wrap: wrap;
 }
 .recomendados article{
   display: flex;
   justify-content: space-around;
-  width: 45%;
+  width: 40%;
   height: 275px;
   margin: 20px;
   border-radius:10px;
@@ -20,7 +21,7 @@
 }
 .recomendados img {
   object-fit: cover;
-  width: 45%;
+  width: 35%;
   border-radius: 10px;
 }
 .recomendados .descripcion {
@@ -42,6 +43,14 @@
 }
 .recomendados .descripcion p {
   font-size: .8rem;
+}
+.recomendados .descripcion .estrellas {
+  color: #ffbd52;
+  margin: 5px 0;
+}
+.recomendados .descripcion .estrellas svg {
+  margin-right: 5px;
+  font-size: 1.1rem;
 }
 .recomendados a {
   width: 90%;

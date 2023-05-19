@@ -1,151 +1,175 @@
 /*------------------- PAGINA LISTADO RESTAURANTES --------------------*/
-.contenedor-restaurantes {
+.restaurantes{
   max-width: 95%;
-  min-height: 100vh;
 }
-.contenedor-restaurantes .listado-restaurantes {
+  
+.listado-restaurantes {
+  padding: 20px;
   display: flex;
-  justify-content: space-around;
   flex-wrap: wrap;
+  justify-content: center;
 }
-.contenedor-restaurantes .restaurante {
-  position: relative;
-  width: 25%;
-  height: 270px;
-  margin: 60px 10px;
+.restaurantes article{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 20%;
+  height: 325px;
+  margin: 20px;
   border-radius:10px;
   -webkit-box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.47);
   -moz-box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.47);
   box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.47);
 }
-.contenedor-restaurantes .restaurante img{
-  position: absolute;
-  border-radius: 5px;
-  right: -30px;
-  top: -80px;
-  width: 50%;
+.restaurantes img {
+  object-fit: cover;
+  width: 100%;
+  height: 35%;
+  border-radius: 10px;
 }
-.contenedor-restaurantes .restaurante-descripcion {
+.restaurantes .descripcion {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+}
+.restaurantes h2 {
+  text-align: center;
+  font-size: 1.9rem;
+}
+.restaurantes .descripcion div {
+  padding-right: 12px;
+  height: 80%;
+}
+.restaurantes .descripcion p,.restaurantes .descripcion h2{
   color: var(--third-color);
 }
-.contenedor-restaurantes .restaurante-descripcion p{
-  margin-top: 20px;
+.restaurantes .descripcion h2 {
+  text-align: left;
+  font-size: 1.3rem;
+  margin: 5px 0;
 }
-  
-.contenedor-restaurantes a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 80%;
-  height: 15%;
-  margin: 0 auto;
+.restaurantes .descripcion p {
+  font-size: .8rem;
+}
+.restaurantes .descripcion .estrellas {
+  color: #ffbd52;
+  margin: 5px 0;
+}
+.restaurantes .descripcion .estrellas svg {
+  margin-right: 5px;
+  font-size: 1.1rem;
+}
+.restaurantes .descripcion .parrafo {
+  margin: 5px 0 0;
+}
+.restaurantes button a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 5px 0;
   border: none;
   border-radius: 6px;
-
   color: white;
   background-color: var(--secondary-color);
+  align-self: center;
+}
+.restaurantes button:hover {
+  cursor: pointer;
+  scale: 1.05;
+  background-color: #f3571e;
+}
+.restaurantes button {
+  width: 80%;
+  height: 20%;
+  padding: 5px 0;
+  margin: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  background-color: var(--secondary-color);
+  transition: all ease .5s;
 }
 
-@media (max-width: 1250px) {
-  .contenedor-restaurantes .restaurante{
-    margin-bottom: 60px;
-    height: 260px;
+@media (max-width: 1024px) {
+  .listado-restaurantes{
+    justify-content: center;
   }
-  .contenedor-restaurantes .restaurante img {
-    width: 60%;
-    top: -50px;
+  .restaurantes article {
+    width: 26%;
+    max-height: 275px;
   }
-  .contenedor-restaurantes .restaurante-descripcion {
-    min-height: 70%;
+  .restaurantes img {
+    object-fit: cover;
   }
-  .contenedor-restaurantes .restaurante-descripcion h2{
-    font-size: 1.2rem;
-  }
-  .contenedor-restaurantes .restaurante-descripcion p{
-    font-size: .85rem;
-  }
-  .contenedor-restaurantes .restaurante a {
-    margin: 10px auto;
-  }
-}
-
-@media (max-width:1024px) {
-  .contenedor-restaurantes .restaurante{
-    height: 255px;
-    margin-bottom: 50px;
-    padding-left:10px;
-  }
-  .contenedor-restaurantes .restaurante img {
-    width: 60%;
-    top: -55px;
-    right: -20px;
-  }
-  .contenedor-restaurantes .restaurante-descripcion{
-    min-height: 65%;
-  }
-  .contenedor-restaurantes .restaurante-descripcion h2{
+  .restaurante-info .descripcion h2{
     font-size: 1.1rem;
   }
-  .contenedor-restaurantes .restaurante-descripcion p{
-    font-size: .75rem;
+  .restaurante-info .descripcion p{
+    margin-top: 0;
+    font-size: .83rem;
   }
-  .contenedor-restaurantes .restaurante a {
-    margin: 10px auto;
+  .restaurantes button {
+    width: 70%;
+    height: 30px;
+    margin: 5px auto;
+    padding: 7px;
   }
-}
-
-@media (max-width:768px) {
-  .contenedor-restaurantes .restaurante{
-    height: 240px;
-  }
-  .contenedor-restaurantes .restaurante img {
-    top: -10%;
-  }
-  .contenedor-restaurantes .restaurante-descripcion .descripcion {
-    margin-top: 0px;
-    height: 50px;
+  .restaurantes button a {
+    margin: 0;
   }
 }
 
-@media (max-width:700px) {
-    .contenedor-restaurantes .restaurante{
-      width: 40%;
-      margin: 50px auto;
-      padding-left: 10px;
-    }
-    .contenedor-restaurantes .restaurante img {
-      top: -22%;
-    }
-    .contenedor-restaurantes .restaurante-descripcion {
-      margin: 0 auto;
-    }
-     
+@media (max-width: 768px) {
+  .listado-restaurantes{
+    padding: 0;
+  }
+  .restaurantes article{
+    width: 36%;
+    max-height: 275px;
+  }
+
+  .restaurantes button {
+    margin: 5px 22px;
+  }
 }
 
-@media (max-width:480px) {
-    .contenedor-restaurantes .restaurante{
-      width: 80%;
-      margin: 90px auto;
-      padding-left: 10px;
-    }
+@media (max-width: 480px) {
+  .listado-restaurantes{
+    padding: 0;
+    width: 100%;
+    display: flex;
+  }
+  .restaurantes article{
+    margin: 25px auto;
+    height: 275px;
+    width: 75%;
 
-    .contenedor-restaurantes .restaurante-descripcion h2{
-      font-size: 1.2rem;
-    }
-    .contenedor-restaurantes .restaurante-descripcion p{
-      font-size: .80rem;
-    }
-
-    .contenedor-restaurantes .restaurante img {
-      top: -42%;
-    }
-}
-
-@media (max-width:360px) {
-    .contenedor-restaurantes .restaurante img {
-        top: -30%;
-      }
+    flex-direction: column;
+  }
+  .restaurantes article img {
+    width: 100%;
+    height: 35%;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+  .restaurante-info .descripcion h2 {
+    font-size: 1rem;
+  }
+  .restaurante-info .descripcion p {
+    font-size: .8rem;
+    margin-bottom: 2px;
+    margin-right: 10px;
+  }
+  .restaurantes button {
+    width: 70%;
+    height: 30px;
+    margin: 5px 35px;
+    padding: 5px;
+  }
+  .restaurantes a {
+    width: 80%;
+    margin: 7px 10px 7px 0;
+  }
 }

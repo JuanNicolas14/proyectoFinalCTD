@@ -89,6 +89,7 @@ const EliminarProducto = () => {
         </table>
         <Paginacion pagina={pagina} setPagina={setPagina} maximo={maximo}/>
       </section>
+      
     </main>
   )
 }

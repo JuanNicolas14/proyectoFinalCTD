@@ -1,15 +1,15 @@
 import React from 'react'
 import  { useEffect, useState } from 'react'
-import Restaurante from '../Componentes/Restaurante/Restaurante.jsx'
 import Paginacion from '../Componentes/Paginacion/Paginacion.jsx'
-import '../index.css'
+import Restaurante from '../Componentes/Restaurante/Restaurante.jsx'
 import baseUrl from '../utils/baseUrl.json'
+import '../index.css'
 
 const Listado = () => {
 
   const [restaurantes, setRestaurantes] = useState([])
   const [pagina, setPagina] = useState(1)
-  const [cantidadPorPagina, setCantidadPorPagina] = useState(8)
+  const [cantidadPorPagina, setCantidadPorPagina] = useState(10)
 
   const url = baseUrl.url + "/restaurante"
 
@@ -29,7 +29,7 @@ const Listado = () => {
 
   return (
     <main className="home">
-      <section className='contenedor-restaurantes'>
+      <section className='restaurantes'>
           <h2>Restaurantes</h2>
             <div className='listado-restaurantes'>
               {restaurantes.slice(
@@ -44,8 +44,9 @@ const Listado = () => {
               }
               
             </div>
-            <Paginacion pagina={pagina} setPagina={setPagina} maximo={maximo}/>
+            
       </section>
+      <Paginacion pagina={pagina} setPagina={setPagina} maximo={maximo}/>
     </main>
   )
 }

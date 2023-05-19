@@ -1,7 +1,7 @@
 import React from 'react'
-import images from '../../assets/images/images'
 import { Link } from 'react-router-dom'
 import './recomendados.css'
+import {AiFillStar} from 'react-icons/ai'
 
 const RestauranteRecomendado = ({restaurante}) => {
   return (
@@ -9,7 +9,11 @@ const RestauranteRecomendado = ({restaurante}) => {
         <img src={restaurante.imagen} alt="" />
         <div className='descripcion'>
             <div>
-                <p>⭐⭐⭐⭐</p>
+                <p className='estrellas'>
+                  <AiFillStar/>
+                  <AiFillStar/>
+                  <AiFillStar/>
+                </p>
                 <h2>{restaurante.nombre}</h2>
                 <p>{restaurante.descripcion}</p>
             </div>
