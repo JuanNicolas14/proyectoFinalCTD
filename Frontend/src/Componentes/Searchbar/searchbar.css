@@ -37,7 +37,7 @@
   
 .busqueda input {
   width: 25%;
-  margin: 0 10px;
+  margin: 0 3px;
   height: 29px;
   border: none;
   border-radius: 5px;
@@ -51,7 +51,12 @@
   font-family: "Quicksand", sans-serif;
   font-weight: bold;
   color: white;
-  background-color: orangered;
+  background-color: var(--secondary-color);
+  transition: all ease-in-out .5s;
+}
+.busqueda button:hover{
+  cursor: pointer;
+  background-color: #f1551c;
 }
 
 @media (max-width: 1024px) {

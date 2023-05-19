@@ -109,7 +109,7 @@ section{
 
 /* ---------------------- VISTA ADMINISTRACION -----------------------*/
 .administracion-panel{
-  width: 100%;
+  width: 90%;
   padding: 20px;
 }
 .administracion-panel h2 {

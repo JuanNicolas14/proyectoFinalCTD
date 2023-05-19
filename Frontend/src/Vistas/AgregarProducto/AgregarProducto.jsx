@@ -87,6 +87,7 @@ const AgregarProducto = () => {
         // Maneja la respuesta exitosa
         console.log("Se guardaron los datos :)")
         console.log(response.data);
+        setError(false)
       })
       .catch((error) => {
         // Maneja el error
@@ -263,7 +264,7 @@ const AgregarProducto = () => {
             <button type="submit">Guardar</button>
           </section>
         </form>
-        {error && <div>El nombre no puede estar repetido</div>}
+        {error && <div className='texto-error'>El nombre no puede estar repetido</div>}
       </section>
     </main>
   )
