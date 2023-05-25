@@ -16,7 +16,6 @@ public class Plan {
     @Column(name = "nombre")
     private String nombre;
 
-
     @OneToMany(mappedBy = "plan")
     @JsonIgnore
     private Set<Restaurante> restaurantes= new HashSet<>();

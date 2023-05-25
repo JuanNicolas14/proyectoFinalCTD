@@ -62,6 +62,24 @@ public class RestauranteService {
     }
 
     /**
+     * Busca todos los restaurantes filtrando por plan
+     * @param plan nombre del plan
+     * @return Lista de restaurantes
+     */
+    public List<RestauranteDTO> buscarPorPlan(String plan){
+        List<Restaurante> restaurantes = restauranteRepository.findByPlan(plan);
+        List<RestauranteDTO> restaurantesDTO = new ArrayList<>();
+        logger.info("Convirtiendo restaurantes a DTO");
+        for (Restaurante restaurante:restaurantes) {
+            restaurantesDTO.add(
+                    convertirRestauranteARestauranteDTO(restaurante)
+            );
+        }
+
+        return restaurantesDTO;
+    }
+
+    /**
      * Elimina un restaurante por su id
      * @param id id del restaurante a eliminar
      */
@@ -75,7 +93,6 @@ public class RestauranteService {
      * @return restauranteDTO
      */
     private RestauranteDTO convertirRestauranteARestauranteDTO(Restaurante restaurante) {
-        logger.info("Convirtiendo restaurante a DTO");
         RestauranteDTO restauranteDTO = new RestauranteDTO();
         restauranteDTO.setId(restaurante.getId());
         restauranteDTO.setNombre(restaurante.getNombre());
