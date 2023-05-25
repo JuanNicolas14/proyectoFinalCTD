@@ -18,6 +18,8 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import Carrousel from '../../Componentes/Carrousel/Carrousel'
+import Slider from '../../Componentes/Slider/Slider'
 
 const Detalle = () => {
   const [restaurante, setRestaurante] = useState({});
@@ -25,11 +27,13 @@ const Detalle = () => {
     fechaInicio: null,
     fechaFinal: null,
   });
+  const [sliderShow, setShowSlider] = useState(false)
 
   //Obtenemos el id que trae la url por medio de useParams()
   const navigate = useNavigate()
   const { id } = useParams()
   const url = baseUrl.url + "/restaurante/" +id;
+  
 
   //Hacemos la peticion una vez se carga el componente
   useEffect(() => {
@@ -42,6 +46,13 @@ const Detalle = () => {
 
   return (
     <main className="main-detail">
+      {sliderShow && 
+        <section className='slider-imagenes'>
+          <Slider
+            setShowSlider={setShowSlider}
+          />
+        </section>      
+      }
       {restaurante &&
         <section className='informacion-relevante'>
           <div className='producto-nombre'>
@@ -83,6 +94,11 @@ const Detalle = () => {
       {restaurante &&        
         <section className="detalle-producto">
           <article>
+            <section className='carrousel'>
+              <Carrousel 
+                imagen={restaurante?.imagen}
+              />
+            </section>
             <section className="galeria-imagenes">
               <div className='imagenes'>
                 <div className='principal'>
@@ -96,7 +112,9 @@ const Detalle = () => {
                 </div>
               </div>
               <div className='buttons'>
-                <button>Ver mas</button>
+                <button
+                  onClick={() => setShowSlider(true)}
+                >Ver mas</button>
               </div>
             </section>
             
