@@ -142,9 +142,16 @@ public class RestauranteController {
      * @return ResponseEntity con la lista de restaurantes
      */
     @GetMapping
-    public List<RestauranteDTO> listarRestaurantes() {
+    public List<RestauranteDTO> listarRestaurantes(@RequestParam(name = "plan", required = false) String plan) {
         this.logger.info("Listando restaurantes");
-        List<RestauranteDTO> restaurantes = restauranteService.buscarTodosRestaurantes();
+        List<RestauranteDTO> restaurantes = null;
+        if (plan != null) {
+            this.logger.info("Filtrando por plan: " + plan);
+            restaurantes = restauranteService.buscarPorPlan(plan);
+            this.logger.info("Se encontraron " + restaurantes.size() + " restaurantes");
+            return restaurantes;
+        }
+        restaurantes = restauranteService.buscarTodosRestaurantes();
         this.logger.info("Se encontraron " + restaurantes.size() + " restaurantes");
         return restaurantes;
     }
