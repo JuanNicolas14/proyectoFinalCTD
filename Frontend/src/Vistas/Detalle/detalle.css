@@ -1,0 +1,393 @@
+.main-detail {
+    margin-bottom: 5%;
+}
+.slider-imagenes {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(128, 128, 128, 0.89);
+}
+
+.producto-nombre {
+    box-sizing: border-box;
+    background-color: var(--main-color);
+    display: flex;
+    width: 100%;
+    padding: 5px 55px;
+    justify-content: space-between;
+    text-align: start;
+    align-items: center;
+}
+.producto-nombre h2 {
+    color: white;
+}
+.producto-nombre a{
+    color: white;
+    margin-top: 10px;
+    font-size: 2.8rem;
+}
+.producto-info {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px auto;
+    width: 93%;
+}
+.producto-info .ciudad {
+    display: flex;
+    align-items: center;
+}
+.producto-info .ciudad svg {
+    font-size: 25px;
+    margin-right: 10px;
+}
+.producto-info .iconos {
+    font-size: 23px;
+    
+}
+.producto-info .iconos svg {
+    margin: 10px 25px 0 0;
+}
+.producto-info .calificacion {
+    display: flex;
+}
+.producto-info .calificacion .estrellas {
+    margin-right: 10px;
+    text-align: left;
+}
+.producto-info .estrellas p {
+    font-weight: 700;
+    margin: 16px 0 5px;
+}
+.producto-info .estrellas svg {
+    color: var(--secondary-color);
+    margin: 0 3px 0 0;
+}
+.producto-info .calificacion .numero {
+    margin-top: 12px;
+    background-color: var(--main-color);
+    color: white;
+    border-radius: 5px;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    align-items: center;
+}
+.producto-info .numero p{
+    margin: 12px;
+}
+
+.detalle-producto {
+    padding: 5px 0px;
+}
+.detalle-producto h2 {
+    color: brown;
+}
+
+.detalle-producto .carrousel {
+    width: 500px;
+    height: 280px;
+    margin: 0 auto;
+    display: none;
+}
+
+.detalle-producto .galeria-imagenes {
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.detalle-producto .galeria-imagenes .imagenes {
+    display: flex;
+    margin: 0 auto;
+    height: 430px;
+    width: 93%;
+}
+.detalle-producto .galeria-imagenes .buttons {
+    display: flex;
+    justify-content: flex-end;
+    width: 93%;
+    margin: 0 auto;
+}
+.detalle-producto .galeria-imagenes button {
+    display: block;
+    margin: 1% 4% 1% 0;
+    padding: 10px;
+    color: var(--secondary-color);
+    font-weight: bold;
+    color: white;
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 5px;
+    border-bottom: 2px solid var(--secondary-color);
+    transition: all ease-in-out .5s;
+}
+.detalle-producto .galeria-imagenes button:hover {
+    background-color: #f05d28;
+}
+.detalle-producto .galeria-imagenes div {
+    width: 50%;
+}
+.detalle-producto .galeria-imagenes .principal {
+    margin-right: 10px;
+}
+.detalle-producto .galeria-imagenes .principal img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+.detalle-producto .galeria-imagenes .secundarias img {
+    object-fit: cover;
+    border-radius: 5px;
+    width: 45%;
+    height: 48.6%;
+    margin: 0 5px 3px 5px;
+}
+.detalle-producto .galeria-imagenes .secundarias .imagen {
+    margin-bottom: 0;
+}
+.detalle-producto .galeria-imagenes img{
+    width: 80px;
+    height: 80px;
+}
+
+/* -----PRODUCTO PLAN ------*/
+.detalle-producto .producto-plan {
+    width: 100%;
+    margin-bottom: 7%;
+}
+.detalle-producto .producto-plan h2 {
+    margin-left: 4%;
+}
+.detalle-producto .producto-plan ul{
+    width: 100%;
+    list-style: none;
+    display: flex;
+    padding: 0;
+    justify-content: center;
+}
+.detalle-producto .producto-plan li {
+    box-sizing: border-box;
+    width: 20%;
+    padding: 20px;
+    margin: 0 10px;
+    border-radius: 5px;
+    border: 1px solid var(--secondary-color);
+    text-align: center;
+}
+.detalle-producto .producto-ventajas {
+    width: 100%;
+}
+.detalle-producto .producto-ventajas ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.detalle-producto .producto-ventajas li {
+    width: 20%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+.producto-ventajas li svg {
+    font-size: 1.6rem;
+}
+.producto-ventajas li p {
+    margin-left: 10px;
+}
+
+.detalle-producto .producto-ventajas div {
+    width: 100%;
+    border-bottom: 1px solid var(--secondary-color);
+}
+.detalle-producto .producto-ventajas h2 {
+    margin: 10px 3%;
+    font-size: 1.4rem;
+}
+/*------ Reservas ------*/
+.detalle-producto .reserva {
+    display: flex;
+    flex-direction: column;
+}
+.detalle-producto .reserva .titulo {
+    width: 100%;
+    border-top: 1px solid var(--secondary-color);
+}
+.detalle-producto .reserva h2 {
+    margin: 2% 0 0 3%;
+    margin-left: 3%;
+}
+.detalle-producto .reserva .formulario {
+    padding: 30px 0;
+}
+.detalle-producto .reserva .datepickers {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+.detalle-producto .datepickers div {
+    max-width: 80%;
+    margin: 10px 0;
+}
+
+.detalle-producto .reserva .button {
+    box-sizing: border-box;
+    text-align: justify;
+    color: black;
+    width: 30%;
+    padding: 20px;
+    border-radius: 5px;
+    -webkit-box-shadow: 17px 14px 10px -9px rgba(0,0,0,0.64);
+    -moz-box-shadow: 17px 14px 10px -9px rgba(0,0,0,0.64);
+    box-shadow: 17px 14px 10px -9px rgba(0,0,0,0.64);
+}
+.detalle-producto .button button {
+    display: block;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: var(--secondary-color);
+    width: 100%;
+    padding: 10px;
+}
+
+@media (max-width:1250px) {
+    .detalle-producto .galeria-imagenes {
+        width: 90%;
+    }
+    .detalle-producto .producto-plan h2 {
+        margin-left: 8%;
+    }
+
+    /* -----PRODUCTO PLAN ------*/
+    .detalle-producto .producto-plan li {
+        width: 30%;
+    }
+    .detalle-producto .producto-ventajas h2 {
+        margin: 10px 6%;
+    }
+
+
+}
+
+@media (max-width:1024px) {
+
+}
+
+@media (max-width: 768px) {
+    .producto-nombre, .producto-info {
+      padding: 5px 20px;
+    }
+    .producto-info p {
+      font-size: .96rem;
+    }
+    .producto-info .iconos {
+      font-size: 1.2rem;
+    }
+
+    .detalle-producto .galeria-imagenes {
+        display: none;
+    }
+    .detalle-producto .carrousel {
+        display: block;
+        margin-bottom: 10%;
+    }
+    
+    /* -----PRODUCTO PLAN ------*/
+    .detalle-producto .producto-plan li {
+        width: 40%;
+    }
+
+    /*------ Producto Ventajas ------*/
+    .detalle-producto .producto-ventajas ul {
+        flex-wrap:wrap ;
+        justify-content: space-around;
+        padding-left: 0;
+    }
+    .detalle-producto .producto-ventajas li{
+        width: 28%;
+        text-align:left;
+    }
+
+    .detalle-producto .reserva .datepickers {
+        text-align: center;
+        align-items: center;
+        width: 45%;
+    }
+    .detalle-producto .reserva .button {
+        padding: 0 10px 10px;
+        width: 40%;
+    }
+    .detalle-producto .reserva{
+        margin-bottom: 10%;
+    }
+}
+
+@media (max-width: 480px) {
+    .producto-info {
+        box-sizing: border-box;
+    }
+    .producto-info p {
+      font-size: .9rem;
+    }
+    .producto-info .ciudad svg {
+      font-size: 1.4rem;
+    }
+    .producto-info .ubicacion {
+      width: 43%;
+    }
+    .producto-info .calificacion p{
+      font-size: .9rem;
+    }
+    .producto-info .estrellas svg {
+      font-size: .8rem;
+    }
+
+    /* -----PRODUCTO PLAN ------*/
+    .detalle-producto .producto-plan h2 {
+        font-size: 1.3rem;
+    }
+    .detalle-producto .producto-plan ul{
+        flex-wrap: wrap;
+    }
+    .detalle-producto .producto-plan li {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+
+    /*------ Producto Ventajas ------*/
+    .detalle-producto .producto-ventajas li{
+        width: 40%;
+    }
+
+    /*------ Producto Reserva ------*/
+    .detalle-producto .reserva h2 {
+        margin: 5% 0 0 5%;
+    }
+    .detalle-producto .reserva .formulario {
+        flex-wrap: wrap;
+    }
+    .detalle-producto .reserva .datepickers {
+        text-align: center;
+        align-items: center;
+        width: 90%;
+    }
+    .detalle-producto .datepickers div {
+        width: 100%;
+    }
+    .detalle-producto .reserva .button {
+        padding: 0 10px 10px;
+        width: 70%;
+    }
+    .detalle-producto .reserva{
+        margin-bottom: 10%;
+    }
+    
+}
