@@ -6,7 +6,13 @@ import com.example.Backend.exceptions.ResourceNotFoundException;
 import com.example.Backend.models.Usuario;
 import com.example.Backend.models.UsuarioRol;
 import com.example.Backend.repository.UsuarioRepository;
+import com.example.Backend.repository.UsuarioRolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,34 +23,22 @@ import java.util.logging.Logger;
 ;
 
 @Service
-public class UsuarioService {
+public class UsuarioService implements UserDetailsService {
 
     private UsuarioRepository usuarioRepository;
+    private UsuarioRolRepository usuarioRolRepository;
 
     @Autowired
-    public UsuarioService(UsuarioRepository usuarioRepository) {
+    public UsuarioService(UsuarioRepository usuarioRepository, UsuarioRolRepository usuarioRolRepository) {
         this.usuarioRepository = usuarioRepository;
+        this.usuarioRolRepository = usuarioRolRepository;
     }
 
     private static final Logger logger = Logger.getLogger(UsuarioService.class.getName());
 
-    //@Override
-    //public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    //    Optional<Usuario> usuarioBuscado=usuarioRepository.findByEmail(username);
-    //    if (usuarioBuscado.isPresent()){
-    //        logger.info("Usuario encontrado con email= "+username);
-    //        return usuarioBuscado.get();
-    //    }
-    //    else{
-    //        logger.warning("Error. Usuario con email "+username+" no encontrado en la BD");
-    //        throw new UsernameNotFoundException("Error. Usuario con email "+username+" no encontrado en la BD");
-    //    }
-    //}
-
-
     public UsuarioDTO guardarUsuario(UsuarioDTO usuarioDTO) throws BadRequestException {
         if(usuarioDTO.getNombre() != null && usuarioDTO.getApellido() != null && usuarioDTO.getEmail() != null &&
-                usuarioDTO.getPassword() != null && usuarioDTO.getRol_id() != null) {
+                usuarioDTO.getPassword() != null && usuarioDTO.getRol() != null) {
 
             this.logger.info("Guardando usuario: " + usuarioDTO.toString());
             Usuario usuario = convertirUsuarioDTOaUsuario(usuarioDTO);
@@ -91,17 +85,32 @@ public class UsuarioService {
 
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
+
+        List<GrantedAuthority> autorizaciones = new ArrayList<>();
+        GrantedAuthority autorizacion = null;
+
+        autorizacion = new SimpleGrantedAuthority(usuario.get().getUsuarioRol().getRol());
+        autorizaciones.add(autorizacion);
+
+        org.springframework.security.core.userdetails.User userDetail = new org.springframework.security.core.userdetails.User(usuario.get().getEmail(),"{noop}" + usuario.get().getPassword(),true, true, true,true,autorizaciones);
+        return userDetail;
+
+    }
+
     private Usuario convertirUsuarioDTOaUsuario(UsuarioDTO usuarioDTO){
         Usuario usuario = new Usuario();
-        UsuarioRol usuarioRol = new UsuarioRol();
+        Optional<UsuarioRol> usuarioRolBuscado;
 
         usuario.setId(usuarioDTO.getId());
         usuario.setNombre(usuarioDTO.getNombre());
         usuario.setApellido(usuarioDTO.getApellido());
         usuario.setEmail(usuarioDTO.getEmail());
         usuario.setPassword(usuarioDTO.getPassword());
-        usuarioRol.setId(usuarioDTO.getRol_id());
-        usuario.setUsuarioRol(usuarioRol);
+        usuarioRolBuscado = usuarioRolRepository.findByRol(usuarioDTO.getRol());
+        usuario.setUsuarioRol(usuarioRolBuscado.get());
 
         return usuario;
     }
@@ -114,8 +123,8 @@ public class UsuarioService {
         usuarioDTO.setApellido(usuario.getApellido());
         usuarioDTO.setEmail(usuario.getEmail());
         usuarioDTO.setPassword(usuario.getPassword());
-        usuarioDTO.setRol_id(usuario.getUsuarioRol().getId());
-
+        usuarioDTO.setRol(usuario.getUsuarioRol().getRol());
         return usuarioDTO;
     }
+
 }
