@@ -3,10 +3,14 @@ package com.example.Backend.controllers;
 import com.example.Backend.dto.UsuarioDTO;
 import com.example.Backend.exceptions.BadRequestException;
 import com.example.Backend.exceptions.ResourceNotFoundException;
+import com.example.Backend.models.Usuario;
+import com.example.Backend.repository.UsuarioRepository;
 import com.example.Backend.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
@@ -19,17 +23,18 @@ import java.util.logging.Logger;
 @CrossOrigin(origins = "*")
 public class UsuarioController {
     private UsuarioService usuarioService;
+    private UsuarioRepository usuarioRepository;
 
     @Autowired
-    public UsuarioController(UsuarioService usuarioService) {
+    public UsuarioController(UsuarioService usuarioService,UsuarioRepository usuarioRepository ) {
         this.usuarioService = usuarioService;
+        this.usuarioRepository = usuarioRepository;
     }
 
     private Logger logger = Logger.getLogger(UsuarioController.class.getName());
 
-    @PostMapping
+    @PostMapping("/registrar")
     public ResponseEntity<UsuarioDTO> guardarUsuario(@RequestBody UsuarioDTO usuarioDTO) throws BadRequestException {
-
         return ResponseEntity.ok(usuarioService.guardarUsuario(usuarioDTO));
     }
 
@@ -59,6 +64,24 @@ public class UsuarioController {
         return ResponseEntity.ok("Se eliminó el usuario con id: " + id);
     }
 
+    @GetMapping("/detalle")
+    public ResponseEntity<UsuarioDTO> user() throws Exception{
+
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        UsuarioDTO usuario = new UsuarioDTO();
+        usuario.setEmail(userDetails.getUsername());
+
+        Optional<Usuario> usuarioEncontrado = usuarioRepository.findByEmail(userDetails.getUsername());
+
+        usuario.setId(usuarioEncontrado.get().getId());
+        usuario.setNombre(usuarioEncontrado.get().getNombre());
+        usuario.setApellido(usuarioEncontrado.get().getApellido());
+        usuario.setRol(usuarioEncontrado.get().getUsuarioRol().getRol());
+
+        return ResponseEntity.ok(usuario);
+    }
+
 
     /**
      * Maneja la excepción SQLException y retorna un ResponseEntity con el mensaje de error
@@ -79,6 +102,5 @@ public class UsuarioController {
     public ResponseEntity<String> handleResourceNotFoundException(ResourceNotFoundException exc) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exc.getMessage());
     }
-
 
 }

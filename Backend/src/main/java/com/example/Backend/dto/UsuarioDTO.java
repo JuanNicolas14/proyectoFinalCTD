@@ -7,14 +7,14 @@ public class UsuarioDTO {
     private String apellido;
     private String email;
     private String password;
-    private Long rol_id;
+    private String rol;
 
-    public UsuarioDTO(String nombre, String apellido, String email, String password, Long rol_id) {
+    public UsuarioDTO(String nombre, String apellido, String email, String password, String rol) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.password = password;
-        this.rol_id = rol_id;
+        this.rol = rol;
     }
 
     public UsuarioDTO() {
@@ -60,12 +60,12 @@ public class UsuarioDTO {
         this.password = password;
     }
 
-    public Long getRol_id() {
-        return rol_id;
+    public String getRol() {
+        return rol;
     }
 
-    public void setRol_id(Long rol_id) {
-        this.rol_id = rol_id;
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 
     @Override
@@ -75,7 +75,7 @@ public class UsuarioDTO {
                 ", apellido='" + apellido + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", rol_id=" + rol_id +
+                ", rol=" + rol +
                 '}';
     }
 }
