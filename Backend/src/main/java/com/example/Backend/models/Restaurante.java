@@ -1,6 +1,7 @@
 package com.example.Backend.models;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "restaurante")
@@ -15,8 +16,9 @@ public class Restaurante {
     @Column(name = "descripcion")
     private String descripcion;
 
-    @Column(name = "imagen")
-    private String imagen;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "restaurante_id")
+    private Set<Imagen> imagen;
 
     @Column(name = "precio")
     private double precio;
@@ -32,7 +34,7 @@ public class Restaurante {
     // Constructor
 
 
-    public Restaurante(String nombre, String descripcion, String imagen, double precio, Domicilio domicilio, Plan plan) {
+    public Restaurante(String nombre, String descripcion, Set<Imagen> imagen, double precio, Domicilio domicilio, Plan plan) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.imagen = imagen;
@@ -45,6 +47,7 @@ public class Restaurante {
     }
 
     // Getters and setters
+
 
     public Long getId() {
         return id;
@@ -70,20 +73,12 @@ public class Restaurante {
         this.descripcion = descripcion;
     }
 
-    public String getImagen() {
+    public Set<Imagen> getImagen() {
         return imagen;
     }
 
-    public void setImagen(String imagen) {
+    public void setImagen(Set<Imagen> imagen) {
         this.imagen = imagen;
-    }
-
-    public Domicilio getDomicilio() {
-        return domicilio;
-    }
-
-    public void setDomicilio(Domicilio domicilio) {
-        this.domicilio = domicilio;
     }
 
     public double getPrecio() {
@@ -94,6 +89,14 @@ public class Restaurante {
         this.precio = precio;
     }
 
+    public Domicilio getDomicilio() {
+        return domicilio;
+    }
+
+    public void setDomicilio(Domicilio domicilio) {
+        this.domicilio = domicilio;
+    }
+
     public Plan getPlan() {
         return plan;
     }
@@ -102,19 +105,16 @@ public class Restaurante {
         this.plan = plan;
     }
 
-    // toString method
-
-    /**
-     * Retorna una representación en string del objeto
-     * @return representación del objeto
-     */
     @Override
     public String toString() {
         return "Restaurante{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
-                ", descripción='" + descripcion + '\'' +
-                ", imagen='" + imagen + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", imagen=" + imagen +
+                ", precio=" + precio +
+                ", domicilio=" + domicilio +
+                ", plan=" + plan +
                 '}';
     }
 }

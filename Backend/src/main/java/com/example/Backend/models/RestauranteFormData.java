@@ -2,9 +2,11 @@ package com.example.Backend.models;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 public class RestauranteFormData {
     private String nombre;
-    private MultipartFile imagen;
+    private List<MultipartFile> imagenes;
     private Long plan_id;
     private String descripcion;
     private double precio;
@@ -14,8 +16,9 @@ public class RestauranteFormData {
     private String ciudad;
     private Long pais_id;
 
-    public RestauranteFormData(String nombre, Long plan_id, String descripcion, double precio, String calle, String numero, String localidad, String ciudad, Long pais_id) {
+    public RestauranteFormData(String nombre, List<MultipartFile> imagenes, Long plan_id, String descripcion, double precio, String calle, String numero, String localidad, String ciudad, Long pais_id) {
         this.nombre = nombre;
+        this.imagenes = imagenes;
         this.plan_id = plan_id;
         this.descripcion = descripcion;
         this.precio = precio;
@@ -30,13 +33,14 @@ public class RestauranteFormData {
     public String toString() {
         return "RestauranteFormData{" +
                 "nombre='" + nombre + '\'' +
+                ", imagenes=" + imagenes +
                 ", plan_id=" + plan_id +
                 ", descripcion='" + descripcion + '\'' +
                 ", precio=" + precio +
-                ", calle=" + calle +
-                ", numero=" + numero +
-                ", localidad=" + localidad +
-                ", ciudad=" + ciudad +
+                ", calle='" + calle + '\'' +
+                ", numero='" + numero + '\'' +
+                ", localidad='" + localidad + '\'' +
+                ", ciudad='" + ciudad + '\'' +
                 ", pais_id=" + pais_id +
                 '}';
     }
@@ -49,12 +53,12 @@ public class RestauranteFormData {
         this.nombre = nombre;
     }
 
-    public MultipartFile getImagen() {
-        return imagen;
+    public List<MultipartFile> getImagenes() {
+        return imagenes;
     }
 
-    public void setImagen(MultipartFile imagen) {
-        this.imagen = imagen;
+    public void setImagenes(List<MultipartFile> imagenes) {
+        this.imagenes = imagenes;
     }
 
     public Long getPlan_id() {

@@ -1,0 +1,36 @@
+package com.example.Backend.models;
+
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "imagen")
+public class Imagen {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @Column(name = "url")
+    private String url;
+
+    public Imagen(String url) {
+        this.url = url;
+    }
+    public Imagen() {};
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+}

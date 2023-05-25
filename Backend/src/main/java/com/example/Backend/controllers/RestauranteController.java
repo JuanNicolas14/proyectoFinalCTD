@@ -4,6 +4,7 @@
 package com.example.Backend.controllers;
 
 import com.amazonaws.services.s3.AmazonS3;
+import com.example.Backend.dto.RestauranteDTO;
 import com.example.Backend.exceptions.ResourceNotFoundException;
 import com.example.Backend.models.*;
 import com.example.Backend.service.DomicilioService;
@@ -20,9 +21,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 
 /**
@@ -63,25 +64,28 @@ public class RestauranteController {
 
     /**
      * Endpoint para guardar un restaurante
-     * @param imagen imagen del restaurante
+     * @param imagenes imagenes del restaurante
      * @param restauranteFormData datos del restaurante
      * @return ResponseEntity con el restaurante guardado
      */
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Restaurante> guardarRestaurante(@RequestParam("imagen") MultipartFile imagen, @ModelAttribute RestauranteFormData restauranteFormData) {
+    public ResponseEntity<Restaurante> guardarRestaurante(@RequestPart("imagenes") List<MultipartFile> imagenes, @ModelAttribute RestauranteFormData restauranteFormData) {
         // TODO: Se debe validar que el restaurante no exista con el mismo nombre
         this.logger.info("Guardando restaurante: " + restauranteFormData.toString());
         // Subir la imagen a s3
-        File file = null;
-        try {
-            file = File.createTempFile("temp", null);
-            imagen.transferTo(file);
-        } catch (Exception e) {
-            this.logger.warning("Error al subir la imagen: " + e.getMessage());
+        Set<Imagen> imagenesGuardadas = new HashSet<>();
+        for(MultipartFile imagen : imagenes) {
+            try {
+                File file = File.createTempFile("temp", null);
+                imagen.transferTo(file);
+                clienteS3.putObject(bucketName, imagen.getOriginalFilename(), file);
+                String imagenUrl = "https://" + bucketName + ".s3." + region + ".amazonaws.com/" + imagen.getOriginalFilename();
+                imagenesGuardadas.add(new Imagen(imagenUrl));
+            } catch (Exception e) {
+                this.logger.warning("Error al subir la imagen: " + e.getMessage());
+            }
         }
-        clienteS3.putObject(bucketName, imagen.getOriginalFilename(), file);
-        String imagenUrl  = "https://" + bucketName + ".s3." + region + ".amazonaws.com/" + imagen.getOriginalFilename();
 
         // TODO: Levantar excepción si no se encuentra el pais
         Pais pais = paisService.buscarPais(restauranteFormData.getPais_id());
@@ -101,7 +105,7 @@ public class RestauranteController {
         Restaurante restaurante = new Restaurante(
                 restauranteFormData.getNombre(),
                 restauranteFormData.getDescripcion(),
-                imagenUrl,
+                imagenesGuardadas,
                 restauranteFormData.getPrecio(),
                 domicilio,
                 plan
@@ -121,25 +125,26 @@ public class RestauranteController {
      * @throws ResourceNotFoundException si no se encuentra el restaurante
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Restaurante> buscarRestaurante(@PathVariable Long id) throws ResourceNotFoundException {
+    public ResponseEntity<RestauranteDTO> buscarRestaurante(@PathVariable Long id) throws ResourceNotFoundException {
         this.logger.info("Buscando restaurante con id: " + id);
-        Optional<Restaurante> restauranteBuscado = restauranteService.buscarRestaurante(id);
+        Optional<RestauranteDTO> restauranteBuscado = restauranteService.buscarRestaurante(id);
         if (restauranteBuscado.isEmpty()) {
             this.logger.warning("No se encontró el restaurante con id: " + id);
             throw new ResourceNotFoundException("No se encontró el restaurante con id: " + id);
         }
-        this.logger.info("Se encontró el restaurante: " + restauranteBuscado);
+        this.logger.info("Se encontró el restaurante: " + restauranteBuscado.get().toString());
         return ResponseEntity.ok(restauranteBuscado.get());
     }
+
 
     /**
      * Endpoint para listar todos los restaurantes
      * @return ResponseEntity con la lista de restaurantes
      */
     @GetMapping
-    public List<Restaurante> listarRestaurantes() {
+    public List<RestauranteDTO> listarRestaurantes() {
         this.logger.info("Listando restaurantes");
-        List<Restaurante> restaurantes = restauranteService.buscarTodosRestaurantes();
+        List<RestauranteDTO> restaurantes = restauranteService.buscarTodosRestaurantes();
         this.logger.info("Se encontraron " + restaurantes.size() + " restaurantes");
         return restaurantes;
     }
@@ -152,7 +157,7 @@ public class RestauranteController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminarRestaurante(@PathVariable Long id) throws ResourceNotFoundException {
         this.logger.info("Eliminando restaurante con id: " + id);
-        Optional<Restaurante> restauranteBuscado = restauranteService.buscarRestaurante(id);
+        Optional<RestauranteDTO> restauranteBuscado = restauranteService.buscarRestaurante(id);
         if (restauranteBuscado.isEmpty()) {
             this.logger.warning("No se encontró el restaurante con id: " + id);
             throw new ResourceNotFoundException("No se encontró el restaurante con id: " + id);

@@ -1,6 +1,7 @@
 package com.example.Backend.models;
 
 import javax.persistence.*;
+
 @Entity
 @Table(name = "pais")
 public class Pais {
