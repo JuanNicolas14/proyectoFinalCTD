@@ -1,0 +1,67 @@
+.slideStyles {
+    position: absolute;
+    top: 25%;
+    right: 10%;
+    left: 10%;
+    width: 80%;
+    height: 50%;
+    border-radius: 10px;
+    background-size:cover;
+    background-position: center;
+}
+.leftArrowStyles {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    left: 32px;
+    font-size: 45px;
+    color: var(--main-color);
+    z-index: 1;
+    cursor: pointer;
+}
+.rightArrowStyles {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    right: 32px;
+    font-size: 45px;
+    color: var(--main-color);
+    z-index: 1;
+    cursor: pointer;
+}
+.sliderStyles {
+    position: relative;
+    height: 100%;
+}
+.sliderStyles button {
+    position: absolute;
+    right: 10%;
+    top: 5%;
+    display: block;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: var(--secondary-color);
+    padding: 10px 20px;
+}
+.dotsContainerStyles {
+    position: absolute;
+    bottom: 20%;
+    right: 20%;
+    left: 20%;
+    display: flex;
+    justify-content: center;
+}
+
+.dotStyle {
+    margin: 0 3px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+@media (max-width:480px) {
+    .slideStyles {
+        left: 10%;
+        height: 50%;
+    }
+}

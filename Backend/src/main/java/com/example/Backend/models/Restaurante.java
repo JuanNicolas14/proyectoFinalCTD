@@ -1,8 +1,6 @@
 package com.example.Backend.models;
 
 import javax.persistence.*;
-
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
