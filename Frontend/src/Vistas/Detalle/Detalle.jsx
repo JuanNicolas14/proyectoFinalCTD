@@ -129,7 +129,7 @@ const Detalle = () => {
                 <li>
                   <h3>Descripción:</h3>
                   <p>
-                  |{restaurante?.descripcion}
+                  {restaurante?.descripcion}
                   </p>
                 </li>
                 

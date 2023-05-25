@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Paginacion from '../../Componentes/Paginacion/Paginacion.jsx'
+/*Url para hacer las peticiones */
 import baseUrl from '../../utils/baseUrl.json'
+/*Herramientas */
 import {TiDelete} from 'react-icons/ti'
+import Swal from 'sweetalert2';
+/*Hoja de estilos */
 import './eliminarProducto.css'
 
 const EliminarProducto = () => {
@@ -33,8 +37,22 @@ const EliminarProducto = () => {
         }).then(response => {
             if (response.ok) {
               console.log('El producto se eliminó correctamente');
+              Swal.fire(
+                {
+                  title: 'Producto Eliminado',
+                  text: `Producto con ID: ${id} ha sido eliminado.`,
+                  icon: 'success',
+                  showCancelButton: false,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Aceptar',
+                }
+              ).then((result) => {
+                if (result.isConfirmed) {
+                  window.location.reload();
+                }
+              })
               // Realizar alguna acción adicional después de eliminar el producto
-              window.location.reload();
             } else {
               console.error('Error al eliminar el producto');
               console.log(response)

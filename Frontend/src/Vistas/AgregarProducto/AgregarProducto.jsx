@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import './agregarProducto.css'
 import baseUrl from '../../utils/baseUrl.json'
+/*Herramientas */
+import Swal from 'sweetalert2';
 
 const AgregarProducto = () => {
-
   const url = baseUrl.url + "/restaurante"
   let confirmador = false;
 
@@ -61,13 +62,54 @@ const AgregarProducto = () => {
 
     productos.map((productoActual) => {
       if(productoActual.nombre.toLowerCase() === producto.nombre.toLowerCase()){
-        setError(true)
         confirmador = true;
       }
     })
 
     if(confirmador){
-      console.log("Nombre repetido en la base datos.")
+      Swal.fire(
+        {
+          title: 'Nombre Repetido',
+          text: `Restaurante ${producto.nombre.toLowerCase()} No se puede guardar ya que existe uno con el mismo nombre.`,
+          icon: 'error',
+          showCancelButton: false,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Aceptar',
+        }
+      ).then((result) => {
+        if (result.isConfirmed) {
+          setProducto({
+            nombre: '',
+            descripcion: '',
+            imagen: null,
+            precio: 0,
+            plan_id: '',
+            calle: 0,
+            numero: 0,
+            localidad:'',
+            ciudad:'',
+            pais_id:''
+          })
+          window.location.reload()
+        }
+      })
+      
+      setProducto({
+        nombre: '',
+        descripcion: '',
+        imagen: null,
+        precio: 0,
+        plan_id: '',
+        calle: 0,
+        numero: 0,
+        localidad:'',
+        ciudad:'',
+        pais_id:''
+      })
+
+      return
+
     }else{
       const formData = new FormData()
       formData.append('nombre', producto.nombre)
@@ -86,26 +128,41 @@ const AgregarProducto = () => {
       .then((response) => {
         // Maneja la respuesta exitosa
         console.log("Se guardaron los datos :)")
-        console.log(response.data);
-        setError(false)
+        Swal.fire(
+          {
+            title: 'Restaurante Guardado',
+            text: `Restaurante ${producto.nombre} ha sido guardado con exito.`,
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Aceptar',
+          }
+        ).then((result) => {
+          if (result.isConfirmed) {
+            setError(false)
+            setProducto({
+              nombre: '',
+              descripcion: '',
+              imagen: null,
+              precio: 0,
+              plan_id: '',
+              calle: 0,
+              numero: 0,
+              localidad:'',
+              ciudad:'',
+              pais_id:''
+            })
+            window.location.reload()
+          }
+        })
       })
       .catch((error) => {
         // Maneja el error
         console.error(error);
       });
   
-      setProducto({
-        nombre: '',
-        descripcion: '',
-        imagen: null,
-        precio: 0,
-        plan_id: '',
-        calle: 0,
-        numero: 0,
-        localidad:'',
-        ciudad:'',
-        pais_id:''
-      })
+      
     }  
   }
 
