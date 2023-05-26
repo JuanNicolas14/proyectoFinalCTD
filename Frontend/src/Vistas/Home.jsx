@@ -22,6 +22,12 @@ const Home = () => {
       dias: 30,
       descripcion: 'Un almuerzo por dia, durante 30 dias.'
     },
+    {
+      nombre: 'Trimestral',
+      dias: 90,
+      descripcion: 'Un almuerzo por dia, durante 90 dias.'
+    },
+
   ]
 
   const [restaurantes, setRestaurantes] = useState([])
@@ -46,8 +52,6 @@ const Home = () => {
   }, [url]);
   
   console.log(restaurantes);
-  
-  console.log(url);
   
   function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
