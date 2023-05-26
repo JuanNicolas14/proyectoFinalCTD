@@ -1,6 +1,8 @@
 package com.example.Backend.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.persistence.*;
 
 import java.util.HashSet;
@@ -16,12 +18,20 @@ public class Plan {
     @Column(name = "nombre")
     private String nombre;
 
+    @Column(name = "descripcion")
+    private String descripcion;
+
+    @Column(name = "imagen")
+    private String imagen;
+
     @OneToMany(mappedBy = "plan")
     @JsonIgnore
     private Set<Restaurante> restaurantes= new HashSet<>();
 
-    public Plan(String nombre) {
+    public Plan(String nombre, String descripcion, String imagen) {
         this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.imagen = imagen;
     }
 
     public Plan() {
@@ -43,4 +53,38 @@ public class Plan {
         this.nombre = nombre;
     }
 
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public Set<Restaurante> getRestaurantes() {
+        return restaurantes;
+    }
+
+    public void setRestaurantes(Set<Restaurante> restaurantes) {
+        this.restaurantes = restaurantes;
+    }
+
+    @Override
+    public String toString() {
+        return "Plan{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", imagen='" + imagen + '\'' +
+                ", restaurantes=" + restaurantes +
+                '}';
+    }
 }
