@@ -6,7 +6,7 @@ import {AiFillStar} from 'react-icons/ai'
 const Restaurante = ({restaurante}) => {
   return (
     <article className='restaurante-info'>
-        <img src={restaurante.imagen} alt="" />
+        <img src={restaurante.imagenes[0]} alt="imagen principal del restaurante" />
         <div className='descripcion'>
             <div>
                 <p className='estrellas'>
