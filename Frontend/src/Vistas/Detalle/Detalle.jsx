@@ -42,15 +42,17 @@ const Detalle = () => {
       .then((data) => setRestaurante(data));
   }, []);
 
-  {console.log(restaurante)}
-
+  console.log(restaurante.imagenes)
   return (
     <main className="main-detail">
       {sliderShow && 
         <section className='slider-imagenes'>
-          <Slider
-            setShowSlider={setShowSlider}
-          />
+          {restaurante.imagenes &&
+            <Slider
+              imagenes={restaurante.imagenes}
+              setShowSlider={setShowSlider}
+            />
+          }
         </section>      
       }
       {restaurante &&
@@ -68,7 +70,7 @@ const Detalle = () => {
             <div className='ubicacion'>
               <div className='ciudad'>
                 <MdPlace/>
-                <p>{restaurante?.domicilio?.ciudad}, {restaurante?.domicilio?.pais.nombre}</p>
+                <p>{restaurante?.ciudad}, {restaurante?.pais}</p>
               </div>
               <div className='iconos'>
                 <HiOutlineShare/>
@@ -91,24 +93,24 @@ const Detalle = () => {
           </div>
         </section>
       }
-      {restaurante &&        
+      {restaurante.imagenes &&        
         <section className="detalle-producto">
           <article>
             <section className='carrousel'>
               <Carrousel 
-                imagen={restaurante?.imagen}
+                imagenes={restaurante.imagenes}
               />
             </section>
             <section className="galeria-imagenes">
               <div className='imagenes'>
                 <div className='principal'>
-                  <img src={restaurante?.imagen} alt="img-detalle-producto" />
+                  <img src={restaurante?.imagenes[0]} alt="img-detalle-producto" />
                 </div>
                 <div className='secundarias'>
-                  <img src={restaurante?.imagen} alt="img-detalle-producto" />
-                  <img src={restaurante?.imagen} alt="img-detalle-producto" />
-                  <img src={restaurante?.imagen} alt="img-detalle-producto" className='imagen' />                
-                  <img src={restaurante?.imagen} alt="img-detalle-producto" className='imagen'/>               
+                  <img src={restaurante?.imagenes[1]} alt="img-detalle-producto" />
+                  <img src={restaurante?.imagenes[2]} alt="img-detalle-producto" />
+                  <img src={restaurante?.imagenes[3]} alt="img-detalle-producto" className='imagen' />                
+                  <img src={restaurante?.imagenes[4]} alt="img-detalle-producto" className='imagen'/>               
                 </div>
               </div>
               <div className='buttons'>
@@ -123,7 +125,7 @@ const Detalle = () => {
               <ul>
                 <li>
                   <h3>Plan:</h3>
-                  <p> {restaurante?.plan?.nombre}</p>
+                  <p> {restaurante?.plan}</p>
                 </li>
                 
                 <li>

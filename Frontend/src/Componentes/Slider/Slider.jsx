@@ -1,26 +1,17 @@
 import React, { useState } from 'react'
-import images from '../../assets/images/images'
 import './slider.css'
   
 
-const Slider = ({setShowSlider}) => {
-
-    const slides = [
-        { url: images.plato1, title: "beach" },
-        { url: images.plato2, title: "boat" },
-        { url: images.plato3, title: "forest" },
-        { url: images.plato4, title: "city" },
-        { url: images.plato1, title: "italy" },
-      ];
+const Slider = ({imagenes,setShowSlider}) => {
 
     const [currentIndex, setCurrentIndex] = useState(0);
     const goToPrevious = () => {
         const isFirstSlide = currentIndex === 0;
-        const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
+        const newIndex = isFirstSlide ? imagenes.length - 1 : currentIndex - 1;
         setCurrentIndex(newIndex);
     };
     const goToNext = () => {
-        const isLastSlide = currentIndex === slides.length - 1;
+        const isLastSlide = currentIndex === imagenes.length - 1;
         const newIndex = isLastSlide ? 0 : currentIndex + 1;
         setCurrentIndex(newIndex);
     };
@@ -28,7 +19,7 @@ const Slider = ({setShowSlider}) => {
         setCurrentIndex(slideIndex);
     };
     const slideStylesWidthBackground = {
-        backgroundImage: `url(${slides[currentIndex].url})`,
+        backgroundImage: `url(${imagenes[currentIndex]})`,
     };
 
 
@@ -48,7 +39,7 @@ const Slider = ({setShowSlider}) => {
             </div>
             <div className='slideStyles' style={slideStylesWidthBackground}></div>
             <div className="dotsContainerStyles">
-                {slides.map((slide, slideIndex) => (
+                {imagenes.map((imagen, slideIndex) => (
                 <div
                     className="dotStyle"
                     key={slideIndex}

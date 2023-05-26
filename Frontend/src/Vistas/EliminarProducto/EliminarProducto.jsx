@@ -94,12 +94,12 @@ const EliminarProducto = () => {
                         </Link>
                     </td>
                     <td className='imagen-table'>
-                        <img src={productoActual.imagen} alt="" />
+                        <img src={productoActual.imagenes[0]} alt="" />
                     </td>
-                    <td className='opcional'>{productoActual.plan.nombre}</td>
+                    <td className='opcional'>{productoActual.plan}</td>
                     <td className='opcional'>{productoActual.precio}</td>
-                    <td>{productoActual.domicilio.ciudad}</td>
-                    <td className='opcional'>{productoActual.domicilio.pais.nombre}</td>
+                    <td>{productoActual.ciudad}</td>
+                    <td className='opcional'>{productoActual.pais}</td>
                     <td onClick={() => eliminarProducto(productoActual.id)} className='button'><button><TiDelete/></button></td>
                 </tr>)
             })}
