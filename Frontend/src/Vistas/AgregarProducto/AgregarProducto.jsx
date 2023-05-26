@@ -32,12 +32,11 @@ const AgregarProducto = () => {
     return formattedNumber;
   } */
 
-  const [error, setError] = useState(false)
   const [productos, setProductos] = useState([])
   const [producto, setProducto] = useState({
     nombre: '',
     descripcion: '',
-    imagen: null,
+    imagenes: [],
     precio: 0,
     plan_id: '',
     calle: 0,
@@ -54,7 +53,6 @@ const AgregarProducto = () => {
       .catch((err) => console.log(err));
     
   }, []);
-
 
   const handleSubmit = async (e) => {
 
@@ -82,7 +80,7 @@ const AgregarProducto = () => {
           setProducto({
             nombre: '',
             descripcion: '',
-            imagen: null,
+            imagenes: [],
             precio: 0,
             plan_id: '',
             calle: 0,
@@ -98,7 +96,7 @@ const AgregarProducto = () => {
       setProducto({
         nombre: '',
         descripcion: '',
-        imagen: null,
+        imagenes: [],
         precio: 0,
         plan_id: '',
         calle: 0,
@@ -112,16 +110,20 @@ const AgregarProducto = () => {
 
     }else{
       const formData = new FormData()
+
       formData.append('nombre', producto.nombre)
-      formData.append('descripcion', producto.descripcion)
-      formData.append('imagen', producto.imagen)
-      formData.append('precio', producto.precio)
+      // Agrega las imágenes seleccionadas al formulario
+      for (let i = 0; i < producto.imagenes.length; i++) {
+        formData.append('imagenes', producto.imagenes[i]);
+      }
       formData.append('plan_id', producto.plan_id)
+      formData.append('descripcion', producto.descripcion)
+      formData.append('precio', producto.precio)
       formData.append('calle', producto.calle)
       formData.append('numero', producto.numero)
       formData.append('localidad', producto.localidad)
-      formData.append('ciudad', producto.ciudad)
       formData.append('pais_id', producto.pais_id)
+      formData.append('ciudad', producto.ciudad)
       console.log("se creo el formData y se enviaran los datos !!!!")
 
       axios.post(url,formData)
@@ -140,11 +142,10 @@ const AgregarProducto = () => {
           }
         ).then((result) => {
           if (result.isConfirmed) {
-            setError(false)
             setProducto({
               nombre: '',
               descripcion: '',
-              imagen: null,
+              imagenes: [],
               precio: 0,
               plan_id: '',
               calle: 0,
@@ -166,6 +167,30 @@ const AgregarProducto = () => {
     }  
   }
 
+  const handleImages = (e) => {
+    setProducto({...producto, imagenes: [...producto.imagenes, e.target.files[0]]})
+  }
+
+ /*  const eliminarImagen = nombre => {
+    let nuevaLista = producto.imagenes.filter(imagen => imagen.name != nombre )
+    setProducto({...producto, imagenes: nuevaLista})
+  } */
+
+  const eliminarImagen = posicion => {
+
+    let posicionNumber = Number(posicion)
+    let nuevaLista = [];
+    let contador = 0;
+
+    producto.imagenes.map(imagen => {
+      if(contador !== posicionNumber){
+        nuevaLista.push(imagen)
+      }
+      contador++;
+    })
+    setProducto({...producto, imagenes: nuevaLista})
+  }
+
   return (
     <main className="form-add-product">
       <section className="form">
@@ -183,20 +208,33 @@ const AgregarProducto = () => {
               />
             </p>
 
-            <p className="carga-imagen">
+            <div className="carga-imagen">
               <span>Imagen:</span>
               <input 
                 type="file"
                 className="input-imagen" 
                 name="imagen" id="imagen" 
-                placeholder="imagen" accept="image/*" 
-                onChange={(e)=> setProducto({...producto, imagen: e.target.files[0]})}
+                placeholder="imagen 1" accept="image/*" 
+                onChange={e => handleImages(e)}
                 required
               />
+              {producto?.imagenes?.length > 0 &&
+                <div className='imagenes-selectas'>
+                  <ul>
+
+                  {producto.imagenes.map((imagen,index) => {
+                    return <li key={index}> {imagen.name} <span onClick={()=> eliminarImagen(index)}>X</span></li>
+                  })}
+                  </ul>
+                </div>
+              }
+              
               <label className="label-imagen" htmlFor="imagen">
                 <span className="input-imagen_input-imagen-nombre">
-                  {producto.imagen != null 
-                  ? producto.imagen.name
+                {producto.imagenes?.length > 0 
+                  ? `${producto.imagenes.length} ${producto.imagenes.length > 1 
+                    ? "archivos seleccionados" 
+                    : "archivo seleccionado"}`
                   : "Ningún archivo seleccionado"
                   }
                 </span>
@@ -204,7 +242,7 @@ const AgregarProducto = () => {
                   Seleccionar archivo
                 </span>
               </label>
-            </p>
+            </div>
 
             <fieldset className="tipo-plan">
               <legend>Tipo de Plan</legend>
@@ -229,6 +267,13 @@ const AgregarProducto = () => {
                 onChange={(e)=> setProducto({...producto, plan_id: e.target.value})}
                 required/>
               <label htmlFor="plan_3">Mensual</label>
+
+              <input
+                type="radio" name="plan" 
+                id="plan_4" value="4" 
+                onChange={(e)=> setProducto({...producto, plan_id: e.target.value})}
+                required/>
+              <label htmlFor="plan_4">Trimestral</label>
             </fieldset>
             <p className="descripcion">
               <label htmlFor="descripcion">Descripción:</label>
@@ -321,7 +366,6 @@ const AgregarProducto = () => {
             <button type="submit">Guardar</button>
           </section>
         </form>
-        {error && <div className='texto-error'>El nombre no puede estar repetido</div>}
       </section>
     </main>
   )

@@ -83,6 +83,7 @@
     padding: 5px 0px;
 }
 .detalle-producto h2 {
+    text-align: center;
     color: brown;
 }
 
@@ -161,8 +162,7 @@
     margin-bottom: 7%;
 }
 .detalle-producto .producto-plan h2 {
-    margin-top: 2%;
-    margin-left: 6%;
+    margin: 2% auto;
 }
 .detalle-producto .producto-plan ul{
     width: 100%;
@@ -209,8 +209,7 @@
     border-bottom: 1px solid var(--secondary-color);
 }
 .detalle-producto .producto-ventajas h2 {
-    margin: 10px 3%;
-    font-size: 1.4rem;
+    margin: 1.2% auto;
 }
 /*------ Reservas ------*/
 .detalle-producto .reserva {
@@ -222,7 +221,7 @@
     border-top: 1px solid var(--secondary-color);
 }
 .detalle-producto .reserva .titulo  h2 {
-    margin: 8% 0 0 8%;
+    margin: 5% auto 2%;
 }
 .detalle-producto .reserva .formulario {
     padding: 30px 0;
@@ -262,18 +261,11 @@
     .detalle-producto .galeria-imagenes {
         width: 90%;
     }
-    .detalle-producto .producto-plan h2 {
-        margin-left: 8%;
-    }
 
     /* -----PRODUCTO PLAN ------*/
     .detalle-producto .producto-plan li {
         width: 30%;
     }
-    .detalle-producto .producto-ventajas h2 {
-        margin: 10px 6%;
-    }
-
 
 }
 

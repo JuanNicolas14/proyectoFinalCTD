@@ -16,7 +16,9 @@
     box-shadow: 0 0 30px rgba(165, 42, 42, 0.25);
     margin: 40px 0 10px 0;
   }
-  
+  section.form {
+    max-width: 80%;
+  }
   .form-add-product form {
     padding: 1em;
     border: 2px solid rgba(255, 69, 0, 0.25);
@@ -26,10 +28,13 @@
     backdrop-filter: blur(20px);
     box-shadow: 0 0 30px rgba(165, 42, 42, 0.25);
     display: flex;
+    flex-wrap: wrap;
   }
   
   /*-----*/
-  
+  .carga-imagen {
+    margin: 0px auto 20px;
+  }
   .carga-imagen span {
     font-size: 1em;
     font-weight: 800;
@@ -69,12 +74,37 @@
   }
   
   .label-imagen span {
+    display: flex;
     font-size: medium;
     font-weight: 500;
   }
-  
+
+  .imagenes-selectas {
+    width: 100%;
+    height: auto;
+    margin: 10px auto;
+    color:black
+  }
+  .imagenes-selectas ul {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    list-style: none;
+  }
+  .imagenes-selectas li {
+    background-color: var(--main-color);
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+    margin: 5px 10px;
+    font-size: .7rem;
+  }
+
+
   /*-----*/
-  
+  .form .form-parte-A {
+    width: 45%;
+  }
   .form-add-product .form form fieldset {
     border: 2px solid rgba(255, 69, 0, 0.25);
     border-radius: 0.33em;
@@ -161,6 +191,7 @@
   }
   
   .form .form-parte-B {
+    width: 45%;
     margin-left: 20px;
   }
   
@@ -168,6 +199,9 @@
     margin: 10px 0 10px 0;
   }
   
+  .form .form-parte-C {
+    width: 100%;
+  }
   .form form button {
     width: 100%;
     margin: 30px auto;
@@ -179,9 +213,6 @@
     font-size: 1.125em;
     color: white;
     background-color: brown;
-    position: absolute;
-    top: 440px;
-    right: 0;
     box-shadow: 0 0 30px rgba(165, 42, 42, 0.5);
     cursor: pointer;
   }
@@ -206,6 +237,9 @@
     .form form input {
       width: 90%;
     }
+    .tipo-plan {
+      flex-wrap: wrap;
+    }
     
   }
 
@@ -215,30 +249,42 @@
       justify-content: center;
       align-items: center;
     }
-    .form-parte-A {
+    .form .form-parte-A {
       width: 80%;
     }
-    .form-parte-B {
+    .form .form-parte-B {
       width: 80%;
       margin: 10px 30px;
     }
     .form form button {
       position: initial;
     }
+
+    .tipo-plan {
+      
+      justify-content: start;
+    }
   }
 
   @media (max-width:480px) {
+    section.form {
+      width: 90%;
+    }
     .form-add-product form {
       width:  99%;
       padding: 0;
     }
-    .form-parte-B {
-      margin: 0;
-      margin-left: 0px;
+    section.form-parte-B {
+      width: 70%;
+      margin: 0 30px;
     }
     .tipo-plan {
       display: flex;
       flex-direction: column;
       text-align: start;
+    }
+    .form .form-parte-C button {
+      width: 80%;
+      margin: 25px;
     }
   }

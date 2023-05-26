@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import images from '../../assets/images/images'
 
 const slideStyles = {
     width: "100%",
@@ -47,26 +46,19 @@ const slideStyles = {
     fontSize: "20px",
   };
 
-const Carrousel = ({imagen}) => {
+const Carrousel = ({imagenes}) => {
 
-    const slides = [
-        { url: images.plato1, title: "beach" },
-        { url: images.plato2, title: "boat" },
-        { url: images.plato3, title: "forest" },
-        { url: images.plato4, title: "city" },
-        { url: images.plato1, title: "italy" },
-      ];
 
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const goToPrevious = () => {
         const isFirstSlide = currentIndex === 0;
-        const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
+        const newIndex = isFirstSlide ? imagenes.length - 1 : currentIndex - 1;
         setCurrentIndex(newIndex);
     };
 
     const goToNext = () => {
-        const isLastSlide = currentIndex === slides.length - 1;
+        const isLastSlide = currentIndex === imagenes.length - 1;
         const newIndex = isLastSlide ? 0 : currentIndex + 1;
         setCurrentIndex(newIndex);
     };
@@ -78,7 +70,7 @@ const Carrousel = ({imagen}) => {
 
     const slideStylesWidthBackground = {
         ...slideStyles,
-        backgroundImage: `url(${slides[currentIndex].url})`,
+        backgroundImage: `url(${imagenes[currentIndex]})`,
     };
 
 
@@ -95,7 +87,7 @@ const Carrousel = ({imagen}) => {
             </div>
             <div style={slideStylesWidthBackground}></div>
             <div style={dotsContainerStyles}>
-                {slides.map((slide, slideIndex) => (
+                {imagenes.map((imagen, slideIndex) => (
                 <div
                     style={dotStyle}
                     key={slideIndex}
