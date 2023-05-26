@@ -19,4 +19,10 @@ public class PlanService {
         return planRepository.findById(id).orElse(null);
     }
 
+    public Plan registrarPlan(Plan plan) {
+        return planRepository.save(plan);
+    }
+    public void eliminarPlan(Long id) {
+        planRepository.deleteById(id);
+    }
 }

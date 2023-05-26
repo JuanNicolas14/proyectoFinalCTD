@@ -15,6 +15,7 @@ public class RestauranteDTO {
     private String ciudad;
     private String pais;
     private String plan;
+    private double precio;
 
     // Constructor
     public RestauranteDTO() {}
@@ -71,6 +72,14 @@ public class RestauranteDTO {
         }
     }
 
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
     public String getPlan() {
         return plan;
     }
@@ -80,6 +89,7 @@ public class RestauranteDTO {
     }
 
     // Metodos
+
 
     @Override
     public String toString() {
@@ -91,6 +101,7 @@ public class RestauranteDTO {
                 ", ciudad='" + ciudad + '\'' +
                 ", pais='" + pais + '\'' +
                 ", plan='" + plan + '\'' +
+                ", precio=" + precio +
                 '}';
     }
 }

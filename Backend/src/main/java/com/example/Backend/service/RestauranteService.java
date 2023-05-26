@@ -105,6 +105,7 @@ public class RestauranteService {
         restauranteDTO.setCiudad(restaurante.getDomicilio().getCiudad());
         restauranteDTO.setPais(restaurante.getDomicilio().getPais().getNombre());
         restauranteDTO.setPlan(restaurante.getPlan().getNombre());
+        restauranteDTO.setPrecio(restaurante.getPrecio());
 
         return restauranteDTO;
     }
