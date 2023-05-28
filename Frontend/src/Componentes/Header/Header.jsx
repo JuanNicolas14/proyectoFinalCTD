@@ -32,12 +32,20 @@ const Header = () => {
 
         <div className="botones-logueo">
           <button>
-            <Link to='/administracion' style={{ textDecoration: 'none' }}>
+            <Link to='/usuario/registrar' style={{ textDecoration: 'none' }}>
               Crear cuenta
             </Link>
           </button>
+
+          <button>
+            <Link to='/administracion' style={{ textDecoration: 'none' }}>
+              Modulo Admin
+            </Link>
+          </button>
+
           <button>Iniciar sesión</button>
         </div>
+
         {show 
         ? <div className='menu-movil'>
             <div className="menu">
