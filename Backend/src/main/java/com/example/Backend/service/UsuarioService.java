@@ -13,6 +13,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -38,11 +39,20 @@ public class UsuarioService implements UserDetailsService {
 
     public UsuarioDTO guardarUsuario(UsuarioDTO usuarioDTO) throws BadRequestException {
         if(usuarioDTO.getNombre() != null && usuarioDTO.getApellido() != null && usuarioDTO.getEmail() != null &&
-                usuarioDTO.getPassword() != null && usuarioDTO.getRol() != null) {
+                usuarioDTO.getPassword() != null) {
 
-            this.logger.info("Guardando usuario: " + usuarioDTO.toString());
-            Usuario usuario = convertirUsuarioDTOaUsuario(usuarioDTO);
-            return convertirUsuarioaUsuarioDTO(usuarioRepository.save(usuario));
+            BCryptPasswordEncoder cifradorContraseña= new BCryptPasswordEncoder();
+            usuarioDTO.setPassword(cifradorContraseña.encode(usuarioDTO.getPassword()));
+            usuarioDTO.setRol("USER");
+
+            Optional<Usuario> usuarioExistente = usuarioRepository.findByEmail(usuarioDTO.getEmail());
+            if (usuarioExistente.isPresent()) {
+                throw new BadRequestException("Error. El email ya está registrado.");
+            } else{
+                Usuario usuario = convertirUsuarioDTOaUsuario(usuarioDTO);
+                this.logger.info("Guardando usuario: " + usuarioDTO.toString());
+                return convertirUsuarioaUsuarioDTO(usuarioRepository.save(usuario));
+            }
 
         } else {
             logger.warning("Error. No se pudo guardar el usuario. Alguno de los campos de registro del usuario está incompleto");
@@ -89,15 +99,14 @@ public class UsuarioService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
 
-        List<GrantedAuthority> autorizaciones = new ArrayList<>();
-        GrantedAuthority autorizacion = null;
+        if (usuario.isPresent()){
 
-        autorizacion = new SimpleGrantedAuthority(usuario.get().getUsuarioRol().getRol());
-        autorizaciones.add(autorizacion);
-
-        org.springframework.security.core.userdetails.User userDetail = new org.springframework.security.core.userdetails.User(usuario.get().getEmail(),"{noop}" + usuario.get().getPassword(),true, true, true,true,autorizaciones);
-        return userDetail;
-
+            return usuario.get();
+        }
+        else{
+            logger.warning("Error. Usuario con email "+email+" no encontrado en la BD");
+            throw new UsernameNotFoundException("Error. Usuario con email "+email+" no encontrado en la BD");
+        }
     }
 
     private Usuario convertirUsuarioDTOaUsuario(UsuarioDTO usuarioDTO){
