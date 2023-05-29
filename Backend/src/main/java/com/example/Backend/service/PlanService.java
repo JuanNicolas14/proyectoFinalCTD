@@ -5,6 +5,8 @@ import com.example.Backend.repository.PlanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PlanService {
 
@@ -24,5 +26,9 @@ public class PlanService {
     }
     public void eliminarPlan(Long id) {
         planRepository.deleteById(id);
+    }
+
+    public List<Plan> buscarTodosPlanes() {
+        return planRepository.findAll();
     }
 }

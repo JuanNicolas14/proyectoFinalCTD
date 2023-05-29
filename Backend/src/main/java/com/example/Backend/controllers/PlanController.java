@@ -1,6 +1,7 @@
 package com.example.Backend.controllers;
 
 import com.amazonaws.services.s3.AmazonS3;
+import com.example.Backend.exceptions.ResourceNotFoundException;
 import com.example.Backend.models.*;
 import com.example.Backend.service.PlanService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.io.File;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Logger;
 
 @RestController
@@ -75,5 +78,36 @@ public class PlanController {
         return ResponseEntity.ok("Plan eliminado");
     }
 
+    /**
+     * Endpoint para listar todas las categorias
+     * @return Lista de planes
+     */
+    @GetMapping
+    public List<Plan> listarPlanes () {
+        this.logger.info("Listando planes");
+        List<Plan> planes = planService.buscarTodosPlanes();
+        this.logger.info("Se encontraron " + planes.size() + " planes");
+        return planes;
+    }
+
+    /**
+     * Maneja la excepción SQLException y retorna un ResponseEntity con el mensaje de error
+     * @param exc instancia de SQLException
+     * @return ResponseEntity con el mensaje de error
+     */
+    @ExceptionHandler(SQLException.class)
+    public ResponseEntity<String> handleSQLException(SQLException exc) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exc.getMessage());
+    }
+
+    /**
+     * Maneja la excepción ResourceNotFoundException y retorna un ResponseEntity con el mensaje de error
+     * @param exc instancia de ResourceNotFoundException
+     * @return ResponseEntity con el mensaje de error
+     */
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<String> handleResourceNotFoundException(ResourceNotFoundException exc) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exc.getMessage());
+    }
 }
 
