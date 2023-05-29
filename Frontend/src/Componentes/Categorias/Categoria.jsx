@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import {FaMedal} from 'react-icons/fa'
 import './categoria.css'
-import images from '../../assets/images/images'
 
 const Categoria = ({nombre, dias, descripcion}) => {
   return (
@@ -29,7 +28,7 @@ const Categoria = ({nombre, dias, descripcion}) => {
           </div>
         </div>
         <div className='descripcion-button'>
-          <Link to='/restaurantes' style={{ textDecoration: 'none' }}>
+          <Link to={'/restaurantes/'+nombre.toLowerCase()} style={{ textDecoration: 'none' }}>
             <button>Ver restaurantes</button>
           </Link>
         </div>
