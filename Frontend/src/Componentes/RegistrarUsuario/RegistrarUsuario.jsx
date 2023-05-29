@@ -1,6 +1,8 @@
 import React from 'react'
 import { useState } from 'react';
 import axios from 'axios';
+import './RegistrarUsuario.css'
+import baseUrl from '../../utils/baseUrl.json'
 
 const RegistrarUsuario = () => {
     const [registroData, setRegistroData] = useState({
@@ -70,8 +72,10 @@ const RegistrarUsuario = () => {
         }
     };
 
+    const url = baseUrl.url + "/usuario/registrar"
+
     const enviarRegistro = (data) => {
-        axios.post('usuario/registrar', data)
+        axios.post(url, data)
             .then((response) => {
                 // La solicitud se completó con éxito
                 console.log(response.data);
@@ -83,8 +87,10 @@ const RegistrarUsuario = () => {
     };
 
     return (
-        <div>
+        <div className='contenedorGrande'>
             <h2>Formulario de Registro</h2>
+        <div className='contenedorFormulario'>
+            
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="nombre">Nombre:</label>
@@ -143,7 +149,6 @@ const RegistrarUsuario = () => {
                         onChange={handleInputChange}
                     >
                         <option value="USER">Usuario</option>
-                        <option value="ADMIN">Administrador</option>
                     </select>
                 </div>
 
@@ -151,6 +156,7 @@ const RegistrarUsuario = () => {
                     <button type="submit">Registrarse</button>
                 </div>
             </form>
+        </div>
         </div>
     );
 }
