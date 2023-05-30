@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import {FaMedal} from 'react-icons/fa'
+import {FaMedal,FaTrophy} from 'react-icons/fa'
 import './categoria.css'
 
 const Categoria = ({nombre, dias, descripcion}) => {
@@ -10,19 +10,24 @@ const Categoria = ({nombre, dias, descripcion}) => {
           <div className="wrap">
             <h2>{nombre}</h2>
             <p className='descripcion'>{descripcion}</p>
-            {dias === 7 && 
+            {nombre === 'Semanal' && 
               <p className='medalla'>
                 <FaMedal style={{ color: '#CD7F32'}}/>
               </p>
             }
-            {dias === 15 && 
+            {nombre === 'Quincenal' && 
               <p className='medalla'>
                 <FaMedal style={{ color: '#BEBEBE'}}/>
               </p>
             }
-            {dias === 30 && 
+            {nombre === 'Mensual' && 
               <p className='medalla'>
                 <FaMedal style={{ color: 'yellow'}}/>
+              </p>
+            }
+            {nombre === 'Trimestral' && 
+              <p className='medalla'>
+                <FaTrophy style={{ color: 'yellow'}}/>
               </p>
             }
           </div>
