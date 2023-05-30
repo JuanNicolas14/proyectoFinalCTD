@@ -10,6 +10,7 @@ import AgregarProducto from './Vistas/AgregarProducto/AgregarProducto'
 import EliminarProducto from './Vistas/EliminarProducto/EliminarProducto'
 import ListaPorPlan from './Vistas/ListaPorPlan/ListaPorPlan'
 import AgregarPlan from './Vistas/AgregarPlan/AgregarPlan'
+import Login from './Vistas/Login/Login'
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Navigate to='/home' replace/>}/>
         <Route path='/home' element={<Home/>}/>
+        <Route path='/login' element={<Login/>}/>
         <Route path='/restaurantes' element={<Listado/>} />
         <Route path='/detalle/:id' element={<Detalle/>}/>
         <Route path='/restaurantes' element={<Listado/>}/>
