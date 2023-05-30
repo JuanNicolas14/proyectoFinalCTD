@@ -20,7 +20,7 @@ header {
     justify-content: space-between;
   }
   .imagotipo{
-    width: 70%;
+    width: 60%;
     padding: 5px;
   }
   .imagotipo a{
@@ -60,10 +60,13 @@ header {
   }
   
   .botones-logueo {
-    width: 30%;
+    width: 40%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+  .botones-logueo button {
+    margin: auto 5px;
   }
   .botones-logueo button a {
     display: flex;
