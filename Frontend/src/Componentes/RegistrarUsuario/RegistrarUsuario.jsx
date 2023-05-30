@@ -11,15 +11,21 @@ const RegistrarUsuario = () => {
       email: '',
       password: ''
     });
+
+    const [confirmarPassword, setConfirmarPassword] = useState('');
   
     const [errors, setErrors] = useState({});
   
     const handleInputChange = (event) => {
       const { name, value } = event.target;
-      setRegistroData((prevData) => ({
-        ...prevData,
-        [name]: value
-      }));
+      if (name=== 'confirmarPassword'){
+        setConfirmarPassword(value);
+      }else{
+        setRegistroData((prevData) => ({
+          ...prevData,
+          [name]: value
+        }));
+      }
     };
   
     const validateForm = () => {
@@ -52,6 +58,8 @@ const RegistrarUsuario = () => {
         validationErrors.password = 'Ingrese una contraseña';
       } else if (registroData.password.length < 5) {
         validationErrors.password = 'La contraseña debe tener al menos 5 caracteres';
+      } else if (confirmarPassword !== registroData.password){
+        validationErrors.confirmarPassword = 'Las contraseñas no coinciden';
       }
   
       setErrors(validationErrors);
@@ -134,6 +142,18 @@ const RegistrarUsuario = () => {
                 onChange={handleInputChange}
               />
               {errors.password && <span>{errors.password}</span>}
+            </div>
+
+            <div>
+              <label htmlFor="confirmarPassword">Confirmar contraseña: </label>
+              <input
+                type="password"
+                id="confirmarPassword"
+                name="confirmarPassword"
+                value={confirmarPassword}
+                onChange={handleInputChange}
+              />
+              {errors.confirmarPassword && <span>{errors.confirmarPassword}</span>}
             </div>
   
             <div>
