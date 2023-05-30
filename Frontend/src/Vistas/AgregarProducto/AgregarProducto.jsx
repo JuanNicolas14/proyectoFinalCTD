@@ -33,7 +33,7 @@ const AgregarProducto = () => {
     return formattedNumber;
   } */
 
-  const [planes, setPlanes]= useState([])
+  const [planesdb, setPlanesdb]= useState([])
   const [productos, setProductos] = useState([])
   const [producto, setProducto] = useState({
     nombre: '',
@@ -61,28 +61,30 @@ const AgregarProducto = () => {
       const fetchData = async () => {
         console.log("realizando las dos peticiones")
         try {
-          // Realizar la primera petición sin JWT (por ejemplo, un GET)
-          const response1 = await fetch(urlRestaurantes)
-          const data1 = await response1.json();
-          console.log('Response 1:', data1);
-  
+
           // Obtener el token JWT (por ejemplo, desde el almacenamiento local)
           const token = localStorage.getItem('jwtToken');
           //const tokenActual = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJleHAiOjE2ODU0NTE2MDgsImlhdCI6MTY4NTQ0ODAwOH0.TbwImTm2vHw7_TcKiO6lVEBUketJrKzCeCeoJR4Ucx4"
-          console.log(token)
   
-          // Realizar la segunda petición con JWT (por ejemplo, un POST con autenticación)
-          const response2 = await fetch(urlPlanes, {
+          // Realiza la primera petición con JWT (POST con autenticación)
+          const fetchPlanes = await fetch(urlPlanes, {
             headers: {
               'Authorization': `Bearer ${token}`,
             },
           });
-          if(response2.ok){
-            const data2 = await response2.json();
-            console.log('Response 2:', data2);
-          }else {
-            console.error('Error:', response2.status);
-          }
+          const planes = await fetchPlanes.json();
+          setPlanesdb(planes)
+          console.log(planesdb)
+
+
+
+          // Realiza la segunda petición de los productos sin JWT.
+          const fetchProductos = await fetch(urlRestaurantes)
+          const productos = await fetchProductos.json();
+          setProductos(productos)
+  
+          
+          
         } catch (error) {
           console.error('Error:', error);
         }
@@ -163,7 +165,7 @@ const AgregarProducto = () => {
       formData.append('ciudad', producto.ciudad)
       console.log("se creo el formData y se enviaran los datos !!!!")
 
-      axios.post(url,formData)
+      axios.post(urlRestaurantes,formData)
       .then((response) => {
         // Maneja la respuesta exitosa
         console.log("Se guardaron los datos :)")
@@ -228,7 +230,7 @@ const AgregarProducto = () => {
     setProducto({...producto, imagenes: nuevaLista})
   }
 
-  return (
+  return (         
     <main className="form-add-product">
       <section className="form">
         <h2>Agregar Restaurante</h2>
@@ -283,12 +285,15 @@ const AgregarProducto = () => {
 
             <fieldset className="tipo-plan">
               <legend>Tipo de Plan</legend>
-              <select 
+              <select
+                className='select-categorias'
                 value={producto.plan_id} 
-                onChange={(e)=> setUsuario({...producto, plan_id: e.target.value})}
+                onChange={(e)=> setProducto({...producto, plan_id: e.target.value})}
               >
                 <option value="">Selecciona una opción</option>
-
+                {planesdb.map(plan => {
+                  return <option key={plan.id} value={plan.id}>{plan.nombre}</option>
+                })}
                 
               </select>
             </fieldset>
