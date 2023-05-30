@@ -9,8 +9,7 @@ const RegistrarUsuario = () => {
         nombre: '',
         apellido: '',
         email: '',
-        password: '',
-        rol: 'USER'
+        password: ''
     });
 
     const [errors, setErrors] = useState({});
@@ -141,20 +140,9 @@ const RegistrarUsuario = () => {
                 </div>
 
                 <div>
-                    <label htmlFor="rol">Rol:</label>
-                    <select
-                        id="rol"
-                        name="rol"
-                        value={registroData.rol}
-                        onChange={handleInputChange}
-                    >
-                        <option value="USER">Usuario</option>
-                    </select>
-                </div>
-
-                <div>
                     <button type="submit">Registrarse</button>
                 </div>
+                
             </form>
         </div>
         </div>
