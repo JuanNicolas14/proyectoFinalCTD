@@ -40,6 +40,22 @@ footer section div img {
   gap: 20px;
 }
 
+/* --- Media Queries Footer --- */
+
+@media (max-width: 768px) {
+  .copyright h4 {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .social-media {
+    display: none;
+  }
+}
+
+/* --- Media Queries que estaban antes --- */
+
 /* @media (max-width: 768px) {
     .social-media {
       justify-content: center;
@@ -95,15 +111,3 @@ footer section div img {
     height: 17px;
   }  
 } */
-
-@media (max-width: 768px) {
-  .copyright h4 {
-    display: none;
-  }
-}
-
-@media (max-width: 480px) {
-  .social-media {
-    display: none;
-  }
-}
