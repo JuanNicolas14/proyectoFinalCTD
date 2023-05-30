@@ -41,8 +41,7 @@ const Detalle = () => {
       .then((res) => res.json())
       .then((data) => setRestaurante(data));
   }, []);
-
-  console.log(restaurante.imagenes)
+  
   return (
     <main className="main-detail">
       {sliderShow && 

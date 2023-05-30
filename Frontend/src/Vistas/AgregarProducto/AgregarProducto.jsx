@@ -214,7 +214,7 @@ const AgregarProducto = () => {
                 type="file"
                 className="input-imagen" 
                 name="imagen" id="imagen" 
-                placeholder="imagen 1" accept="image/*" 
+                placeholder="imagen" accept="image/*" 
                 onChange={e => handleImages(e)}
                 required
               />
