@@ -3,9 +3,12 @@ import { useState } from 'react';
 import axios from 'axios';
 import './RegistrarUsuario.css'
 import baseUrl from '../../utils/baseUrl.json'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+/*Herramienta alertas */
+import Swal from 'sweetalert2';
 
 const RegistrarUsuario = () => {
+    const navigate = useNavigate();
     const [registroData, setRegistroData] = useState({
       nombre: '',
       apellido: '',
@@ -23,8 +26,8 @@ const RegistrarUsuario = () => {
         setConfirmarPassword(value);
       }else{
         setRegistroData((prevData) => ({
-          ...prevData,
-          [name]: value
+          ...prevData,          
+         [name]: value       
         }));
       }
     };
@@ -74,6 +77,28 @@ const RegistrarUsuario = () => {
       if (validateForm()) {
         // Enviar los datos de registro al servidor
         enviarRegistro(registroData);
+        Swal.fire(
+          {
+            title: 'Registro exitoso',
+            text: `Usuario: ${registroData.nombre}, ha sido registrado con exito.`,
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Aceptar',
+          }
+        ).then((result) => {
+          if (result.isConfirmed) {
+            setRegistroData({
+              nombre: '',
+              apellido: '',
+              email: '',
+              password: ''
+            })
+            setConfirmarPassword('')
+            navigate('/')
+          }
+        })
       }
     };
   

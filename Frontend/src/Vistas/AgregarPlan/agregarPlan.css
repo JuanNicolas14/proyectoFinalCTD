@@ -8,6 +8,21 @@
 }
 .form-plan {
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.form-plan h2 {
+    width: 30%;
+    text-align: center;
+    padding: 0.25em 0.5em 0.25em 0.5em;
+    border: 2px solid rgba(255, 69, 0, 0.25);
+    border-radius: 0.5em;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(165, 42, 42, 0.25);
+    margin: 40px 0 10px 0;
 }
 .form-plan form{
     display: flex;
@@ -15,7 +30,6 @@
     flex-direction: column;
     justify-content: space-between;
     width: 30%;
-    margin: 10% auto;
     padding: 1em;
     border: 2px solid rgba(255, 69, 0, 0.25);
     border-radius: 0.75em;
@@ -76,10 +90,16 @@
     .form-plan form {
         width: 40%;
     }
+    .form-plan h2 {
+        width: 40%;
+    }
 }
 
 @media (max-width:1024px) {
     .form-plan form {
+        width: 50%;
+    }
+    .form-plan h2 {
         width: 50%;
     }
 }
@@ -88,10 +108,16 @@
     .form-plan form {
         width: 70%;
     }
+    .form-plan h2 {
+        width: 70%;
+    }
 }
 
 @media (max-width:480px) {
     .form-plan form {
+        width: 80%;
+    }
+    .form-plan h2 {
         width: 80%;
     }
     .form-plan form .label-imagen{
