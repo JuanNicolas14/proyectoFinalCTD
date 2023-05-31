@@ -11,9 +11,9 @@
 }
   
 .categorias article {
-  width: 25.5%;
+  width: 20%;
   height: 300px;
-  margin: 10px 40px 30px;
+  margin: 10px 30px 30px;
   border-radius: 5%;
   -webkit-box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.47);
   -moz-box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.47);
