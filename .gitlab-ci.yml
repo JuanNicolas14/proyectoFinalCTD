@@ -1,0 +1,103 @@
+stages:
+  - build
+  - test
+  - deploy
+
+before_script:
+  - apt-get update -y
+  - apt-get install -y openjdk-17-jdk maven
+
+build_backend:
+  image: ubuntu:latest
+  stage: build
+  script:
+    - cd Backend
+    - echo "Compiling the code..."
+    - mvn clean package
+    - echo "Compile complete."
+  artifacts:
+    paths:
+      - Backend/target/Backend-0.0.1-SNAPSHOT.jar
+  rules:
+    - changes:
+        - Backend/**/*
+
+build_frontend:
+  image: node:latest
+  stage: build
+  script:
+    - cd Frontend
+    - npm install
+    - echo "Compiling the code..."
+    - npm run build
+    - echo "Compile complete."
+  artifacts:
+    paths:
+      - Frontend/dist
+  rules:
+    - changes:
+        - Frontend/**/*
+
+test_backend:
+  stage: test
+  script:
+    - cd Backend
+    - echo "Running unit tests... This will take about 60 seconds."
+    - mvn test
+    - echo "Finished testing the app."
+  rules:
+    - changes:
+        - Backend/**/*
+
+test_frontend:
+  stage: test
+  script:
+    - cd Frontend
+    - echo "Running unit tests... This will take about 60 seconds."
+#    - npm test
+    - echo "Finished testing the app."
+  rules:
+    - changes:
+        - Frontend/**/*
+
+deploy_backend:
+  stage: deploy
+  needs: [build_backend]
+  script:
+    - apt-get update -y
+    - export DEBIAN_FRONTEND=noninteractive
+    - apt-get install -y awscli openjdk-17-jre-headless
+    - apt install -y openssh-client
+    - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+    - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+    - aws configure set region $AWS_REGION
+    - chmod +x Backend/deploy.sh
+    - mkdir -p ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ./Backend/deploy.sh
+    - echo "Application successfully deployed."
+  only:
+    - develop
+  rules:
+    - changes:
+        - Backend/**/*
+
+
+deploy_frontend:
+  stage: deploy
+  needs: [build_frontend]
+  script:
+    - apt-get update -y
+    - apt-get install -y awscli
+    - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+    - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+    - aws configure set region $AWS_REGION
+    - echo "Deploying application..."
+    - aws s3 sync Frontend/dist s3://bukinfood/
+    - echo "Application successfully deployed."
+  only:
+    - develop
+  rules:
+    - changes:
+        - Frontend/**/*
