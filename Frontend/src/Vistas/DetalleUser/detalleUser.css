@@ -1,0 +1,50 @@
+section.detalle-usuario {
+    width: 30%;
+    text-align: center;
+    border: 1px solid var(--secondary-color);
+    margin: 3% auto;
+}
+
+section.detalle-usuario h2 {
+    border-bottom: 1px solid var(--secondary-color);
+    margin-top: 2%;
+}
+
+.detalle-usuario .usuario-datos {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin: 10px 20px;
+}
+
+.detalle-usuario .usuario-datos p {
+    font-weight: bold;
+}
+.detalle-usuario .usuario-datos span {
+    font-weight: 400;
+    color: var(--secondary-color);
+}
+
+@media (max-width:1250px) {
+    section.detalle-usuario {
+        width: 30%;
+    }
+}
+
+@media (max-width:1024px) {
+    section.detalle-usuario {
+        width: 40%;
+    }
+}
+
+@media (max-width:768px) {
+    section.detalle-usuario {
+        width: 60%;
+    }
+}
+
+@media (max-width:480px) {
+    section.detalle-usuario {
+        width: 80%;
+    }
+}

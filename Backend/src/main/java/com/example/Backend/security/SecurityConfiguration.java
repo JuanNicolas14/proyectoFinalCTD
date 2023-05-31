@@ -32,10 +32,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/login","/restaurante","/restaurante/{id}","/usuario/registrar", "/plan").permitAll()
+                .antMatchers("/login","/restaurante","/restaurante/{id}","/usuario/registrar", "/plan", "/usuario/detalle").permitAll()
                 .antMatchers("/plan/registrar","/plan/{id}").hasAnyAuthority("ADMIN")
                 //.antMatchers("/usuario/detalle").permitAll()
-                .antMatchers("/usuario/detalle").hasAnyAuthority("USER","ADMIN")
+                //.antMatchers("/usuario/detalle").hasAnyAuthority("USER","ADMIN")
                 //.antMatchers("/usuario", "/usuario/{id}").permitAll()
                 .antMatchers("/usuario", "/usuario/{id}").hasAuthority("ADMIN")
                 .anyRequest().authenticated()

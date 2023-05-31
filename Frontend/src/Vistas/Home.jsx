@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Searchbar from '../Componentes/Searchbar/Searchbar'
 import Categoria from '../Componentes/Categorias/Categoria'
 import RestauranteRecomendado from '../Componentes/Recomendados/RestauranteRecomendado'
@@ -41,7 +41,7 @@ const Home = () => {
 
     fetchData();
   }, [urlRestaurantes]);
-  console.log(planesdb)
+
   function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));

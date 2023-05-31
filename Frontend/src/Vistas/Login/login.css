@@ -1,247 +1,155 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Quicksand", sans-serif;
+main.form-login {
+    margin: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 86vh;
+    background-image: radial-gradient(#A52A2A 0.5px, transparent 0.5px), radial-gradient(#A52A2A 0.5px, rgba(196, 196, 196, .2) 0.5px);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+    overflow: hidden;
 }
-
-html {
-  line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
-}
-
-body {
-  color: brown;
-}
-
-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  width: 100%;
-  height: 8vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: white;
-  box-shadow: 0px 0px 10px rgba(165, 42, 42, 0.5);
-}
-
-header .nav-container {
-  width: 95%;
-  margin: 0 auto;
-  overflow: hidden;
-  padding: 0;
-  height: 75%;
-  display: flex;
-  justify-content: space-between;
-}
-
-header .imagotipo {
-  width: 300px;
-  height: 100%;
-  display: flex;
-  cursor: pointer;
-}
-
-header .imagotipo img {
-  height: 95%;
-}
-
-header .texto-logo {
-  margin-left: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-header h1 {
-  color: orangered;
-  margin: 0;
-}
-
-header h3 {
-  color: brown;
-  font-weight: 600;
-  font-size: 1em;
-  margin: 0;
-}
-
-.boton-logueo {
-  width: 180px;
-  height: 85%;
-  font-family: "Quicksand", sans-serif;
-  font-weight: bold;
-  color: orangered;
-  background-color: white;
-  border: solid 1.5px orangered;
-  border-radius: 7.5px;
-  cursor: pointer;
-  align-self: center;
-}
-
-/*--Hasta aquí los estilos del header--*/
-/*--Ahora los estilos del main--*/
-
-main {
-  margin: auto;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 86vh;
-  background-image: radial-gradient(#A52A2A 0.5px, transparent 0.5px), radial-gradient(#A52A2A 0.5px, rgba(196, 196, 196, .2) 0.5px);
-  background-size: 20px 20px;
-  background-position: 0 0, 10px 10px;
-  overflow: hidden;
-}
-
-/*--Hasta aquí los estilos del main--*/
-/*---Ahora los estilos del form de registro de usuario---*/
 
 main .form-container {
-  display: flex;
-  flex-flow: wrap column;
-  padding: 1.5em;
-  width: 500px;
-  backdrop-filter: blur(5px);
-  background-color: transparent;
-  border-radius: .75em;
-  box-shadow: 1px 1px 10px rgba(165, 42, 42, .25);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 1.5em;
+    width: 500px;
+    backdrop-filter: blur(5px);
+    background-color: transparent;
+    border-radius: .75em;
+    box-shadow: 1px 1px 10px rgba(165, 42, 42, .25);
 }
-
+  
 .form-container h2 {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  color: orangered;
-  margin-bottom: 1.25em;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+    color: orangered;
+    margin-bottom: 1.25em;
 }
-
+  
 .form-container form {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
-
+  
 .form-container .input-box {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
-
+  
 .form-container label {
-  font-weight: bold;
-  font-size: small;
-  margin-bottom: 2.5px;
+    font-weight: bold;
+    font-size: small;
+    margin-bottom: 2.5px;
 }
-
+  
 .form-container input {
-  margin-bottom: 1.25em;
-  border: none;
-  height: 2.5em;
-  border-radius: .5em;
-  box-shadow: 0px 1px 5px rgba(0, 0, 0, .125);
-  color: orangered;
-  padding-left: 10px;
-  font-weight: 500;
-  letter-spacing: 1.5px;
+    margin-bottom: 1.25em;
+    border: none;
+    height: 2.5em;
+    border-radius: .5em;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, .125);
+    color: orangered;
+    padding-left: 10px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
 }
-
+  
 .form-container input[type=email] {
-  text-transform: lowercase;
+    text-transform: lowercase;
 }
-
+  
 .form-container input[type=password] {
-  letter-spacing: 5px;
-  font-weight: bold;
+    letter-spacing: 5px;
+    font-weight: bold;
 }
-
+  
 .form-container .icono {
-  position: absolute;
-  right: 40px;
-  top: 170px;
-  font-size: 1.25em;
-  cursor: pointer;
-  padding: 5px;
+    position: absolute;
+    right: 40px;
+    top: 170px;
+    font-size: 1.25em;
+    cursor: pointer;
+    padding: 5px;
 }
-
+  
 .form-container button {
-  align-self: center;
-  width: 50%;
-  padding: 10px;
-  border: none;
-  border-radius: .5em;
-  font-family: "Quicksand", sans-serif;
-  font-size: .85em;
-  font-weight: bold;
-  color: white;
-  background-color: orangered;
-  cursor: pointer;
-  margin: 1em 0 1em 0;
+    align-self: center;
+    width: 50%;
+    padding: 10px;
+    border: none;
+    border-radius: .5em;
+    font-family: "Quicksand", sans-serif;
+    font-size: .85em;
+    font-weight: bold;
+    color: white;
+    background-color: orangered;
+    cursor: pointer;
+    margin: 1em 0 1em 0;
 }
-
+  
 .form-container p {
-  align-self: center;
-  font-weight: bold;
-  font-size: .75em;
+    align-self: center;
+    font-weight: bold;
+    font-size: .75em;
 }
-
+  
 .form-container p span {
-  color: #4285F4;
-  cursor: pointer;
+    color: #4285F4;
+    cursor: pointer;
 }
-
+  
 .form-container p span:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
-/*--Hasta aquí los estilos del form de inicio de sesión--*/
-/*---Ahora las media queries---*/
+.form-container .link-registro a {
+    text-decoration: none;
+    color: black;
+}
+
 
 @media (max-width: 768px) {
-  header .texto-logo {
-    display: none;
+    main .form-container {
+      width: 400px;
+    }
+    .form-container h2 {
+      margin-bottom: 2.5em;
+    }
+    .form-container input {
+      margin-bottom: 1.5em;
+      height: 3em;
+    }
+    .form-container button {
+      width: 85%;
+      margin: 3em 0 1em 0;
+    }
+    .form-container .icono {
+      top: 212px;
+    }
   }
-  header .boton-logueo {
-    width: 160px;
+  
+  @media (max-width: 480px) {
+    .form-login .form-container {
+        padding:15px;
+        width: 80%;
+    }
+    .form-container h2 {
+      margin-bottom: 3rem;
+    }
+    .form-container button {
+      width: 100%;
+      height: 3em;
+      margin: 1em 0 1em 0;
+    }
+    .form-container .icono {
+      right: 30px;
+      top: 260px;
+    }
   }
-  main .form-container {
-    width: 400px;
-  }
-  .form-container h2 {
-    margin-bottom: 2.5em;
-  }
-  .form-container input {
-    margin-bottom: 1.5em;
-    height: 3em;
-  }
-  .form-container button {
-    width: 85%;
-    margin: 3em 0 1em 0;
-  }
-  .form-container .icono {
-    top: 212px;
-  }
-}
-
-@media (max-width: 480px) {
-  header .boton-logueo {
-    display: none;
-  }
-  .form-container h2 {
-    margin-bottom: 3.5em;
-  }
-  .form-container button {
-    width: 100%;
-    height: 3em;
-    margin: 1em 0 1em 0;
-  }
-  main .form-container {
-    padding: 3em 1em;
-    width: 350px;
-  }
-  .form-container .icono {
-    right: 30px;
-    top: 260px;
-  }
-}
+  
