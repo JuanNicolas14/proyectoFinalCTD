@@ -1,11 +1,15 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import { Link } from 'react-router-dom'
 import images from '../../assets/images/images'
 import {HiMenu} from 'react-icons/hi'
 import {GrClose} from 'react-icons/gr'
 import './header.css'
+import { AppContext } from '../../utils/EstadoGlobal'
 
 const Header = () => {
+
+  //Estado global
+  const {userJwt, setUserJwt} = useContext(AppContext)
 
   const [show, setShow] = useState(false)
 
@@ -30,7 +34,67 @@ const Header = () => {
             </Link>
           </div>
 
-        <div className="botones-logueo">
+        {userJwt?.nombre.length > 1 
+        ? userJwt.rol == "ADMIN" 
+          ? 
+            <div className='botones-logueo'>
+              <div className='avatar-user'>
+                <span>{userJwt.nombre.charAt(0)}</span>
+                <span>{userJwt.apellido.charAt(0)}</span>
+              </div>
+
+              <div className='usuario-nombre'>
+                <p>{userJwt.nombre} {userJwt.apellido}</p>
+              </div>
+
+              <button>
+                <Link to='/administracion' style={{ textDecoration: 'none' }}>
+                  Modulo Admin
+                </Link>
+              </button>
+
+              <button>
+                <Link to='/login' style={{ textDecoration: 'none' }}>
+                  Cerrar sesión
+                </Link>
+              </button>
+
+            </div>
+          : <div className='botones-logueo'>
+              <div className='avatar-user'>
+                <span>{userJwt.nombre.charAt(0)}</span>
+                <span>{userJwt.apellido.charAt(0)}</span>
+              </div>
+              <div className='usuario-nombre'>
+                <p>{userJwt.nombre} {userJwt.apellido}</p>
+              </div>
+              <button>
+                <Link to='/login' style={{ textDecoration: 'none' }}>
+                  Cerrar sesión
+                </Link>
+              </button>
+              
+              
+            </div>
+        
+        : (
+          <div className="botones-logueo">
+            <button>
+              <Link to='/usuario/registrar' style={{ textDecoration: 'none' }}>
+                Crear cuenta
+              </Link>
+            </button>
+
+            <button>
+              <Link to='/login' style={{ textDecoration: 'none' }}>
+                Iniciar sesión
+              </Link>
+            </button>
+          </div>
+          )
+        }  
+
+        {/* <div className="botones-logueo">
           <button>
             <Link to='/usuario/registrar' style={{ textDecoration: 'none' }}>
               Crear cuenta
@@ -43,8 +107,12 @@ const Header = () => {
             </Link>
           </button>
 
-          <button>Iniciar sesión</button>
-        </div>
+          <button>
+            <Link to='/login' style={{ textDecoration: 'none' }}>
+              Iniciar sesión
+            </Link>
+          </button>
+        </div> */}
 
         {show 
         ? <div className='menu-movil'>

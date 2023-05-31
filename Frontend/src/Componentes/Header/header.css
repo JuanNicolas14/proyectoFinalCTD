@@ -62,8 +62,12 @@ header {
   .botones-logueo {
     width: 40%;
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
     align-items: center;
+  }
+  .botones-logueo .usuario-nombre {
+    margin: 0 2%;
+    font-weight: bold;
   }
   .botones-logueo button {
     margin: auto 5px;
@@ -173,6 +177,14 @@ header {
     margin: 10px auto;
     background-color: var(--main-color);
   }
+
+  .botones-logueo .avatar-user {
+    background-color: var(--main-color);
+    color: white;
+    font-weight: bold;
+    border-radius: 45%;
+    padding: 10px;
+  }
   
   
   /*-------------------------------------------- MEDIA QUERIES ---------------------------------*/
@@ -219,8 +231,6 @@ header {
     }
     header .imagotipo {
       width: 70%;
-    }
-    header .imagotipo a {
     }
     header .imagotipo img{
       width: 40px;
