@@ -1,9 +1,18 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
+import "./login.css";
+import { Link, useNavigate } from "react-router-dom";
+import {AppContext} from '../../utils/EstadoGlobal'
+/*Herramientas */
+import Swal from 'sweetalert2';
 
 const Login = () => {
+    const navigate = useNavigate();
+    //Estado global
+    const {userJwt, setUserJwt} = useContext(AppContext)
+
+    //State datos del form
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [token, setToken] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -17,38 +26,64 @@ const Login = () => {
         });
 
         if (response.ok) {
-        const data = await response.json();
-        const { token } = data;
-        console.log(data)
-        setToken(token);
+          const data = await response.json();
+          //Guardamos el jwt en el estado global
+          setUserJwt({...userJwt, jwt: data.jwt})
+          Swal.fire(
+            {
+              title: 'Inicio de Sesión',
+              text: `Inicio de Sesión realizado con exito, Presionar aceptar para ir a la pagina de detalle`,
+              icon: 'success',
+              showCancelButton: false,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Aceptar',
+            }
+          ).then((result) => {
+            navigate('/usuario/detalle')
+          })
+          
         } else {
-        console.log('Error al hacer login');
+          console.log('Error al hacer login');
         }
     };
+
+
   return (
-    <main className=''>
-    <section className='formulario-login'>
-      <h1>Login</h1>
+    <main className='form-login'>
+    <section className='form-container'>
+      <h2>Iniciar Sesión</h2>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email:</label>
+        <div className='input-box'>
+          <label htmlFor='email'>Correo electrónico:</label>
           <input
             type="email"
+            id='email'
+            name='email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
         </div>
-        <div>
-          <label>Password:</label>
+        <div className='input-box'>
+          <label htmlFor="password">Contraseña:</label>
           <input
             type="password"
+            id="password"
+            name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit">Ingresar</button>
+        <p>
+          ¿Aún no tienes cuenta?{" "}
+          <span className='link-registro'>
+            <Link to="/usuario/registrar">Regístrate</Link>
+          </span>
+        </p>
       </form>
-      {token && <p>Token: {token}</p>}
     </section>
 
     </main>
