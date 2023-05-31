@@ -3,12 +3,8 @@ stages:
   - test
   - deploy
 
-before_script:
-  - apt-get update -y
-  - apt-get install -y openjdk-17-jdk maven
-
 build_backend:
-  image: ubuntu:latest
+  image: maven:3.8.6-openjdk-18
   stage: build
   script:
     - cd Backend
@@ -40,6 +36,7 @@ build_frontend:
 
 test_backend:
   stage: test
+  image: maven:3.8.6-openjdk-18
   script:
     - cd Backend
     - echo "Running unit tests... This will take about 60 seconds."
@@ -51,6 +48,7 @@ test_backend:
 
 test_frontend:
   stage: test
+  image: node:latest
   script:
     - cd Frontend
     - echo "Running unit tests... This will take about 60 seconds."
@@ -62,32 +60,33 @@ test_frontend:
 
 deploy_backend:
   stage: deploy
-  #needs: [build_backend]
+  # needs: [build_backend]
+  image: amazoncorretto:17-alpine
   script:
-    - apt-get update -y
-    - export DEBIAN_FRONTEND=noninteractive
-    - apt-get install -y awscli openjdk-17-jre-headless
-    - apt install -y openssh-client
-    - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-    - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-    - aws configure set region $AWS_REGION
+    - apk add --no-cache aws-cli openjdk11 openssh-client
+    - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+    - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+    - export AWS_DEFAULT_REGION=$AWS_REGION
     - chmod +x Backend/deploy.sh
     - mkdir -p ~/.ssh
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
     - ./Backend/deploy.sh
     - echo "Application successfully deployed."
+
   #rules:
-  #  - changes:
+  #  - exists:
   #      - Backend/**/*
+  #    changes:
+  #      - develop
 
 
 deploy_frontend:
   stage: deploy
   #needs: [build_frontend]
+  image: python:latest
   script:
-    - apt-get update -y
-    - apt-get install -y awscli
+    - pip install awscli
     - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
     - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
     - aws configure set region $AWS_REGION
@@ -95,5 +94,7 @@ deploy_frontend:
     - aws s3 sync Frontend/dist s3://bukinfood/
     - echo "Application successfully deployed."
   #rules:
-  #  - changes:
+  #  - exists:
   #      - Frontend/**/*
+  #    changes:
+  #      - develop
