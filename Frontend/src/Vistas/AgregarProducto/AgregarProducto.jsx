@@ -6,7 +6,8 @@ import baseUrl from '../../utils/baseUrl.json'
 import Swal from 'sweetalert2';
 
 const AgregarProducto = () => {
-  const url = baseUrl.url + "/restaurante"
+  const urlRestaurantes = baseUrl.url + "/restaurante"
+  const urlPlanes = baseUrl.url + "/plan"
   let confirmador = false;
 
   /*-----*/
@@ -32,6 +33,7 @@ const AgregarProducto = () => {
     return formattedNumber;
   } */
 
+  const [planesdb, setPlanesdb]= useState([])
   const [productos, setProductos] = useState([])
   const [producto, setProducto] = useState({
     nombre: '',
@@ -47,11 +49,48 @@ const AgregarProducto = () => {
   })
 
   useEffect(() => {
-    fetch( url)
+    /* fetch( urlRestaurantes)
       .then((res) => res.json())
       .then((data) => setProductos(data))
       .catch((err) => console.log(err));
-    
+
+    fetch(urlPlanes)
+      .then((res) => res.json())
+      .then((data) => setPlanes(data))
+      .catch((err) => console.log(err)); */
+      const fetchData = async () => {
+        console.log("realizando las dos peticiones")
+        try {
+
+          // Obtener el token JWT (por ejemplo, desde el almacenamiento local)
+          const token = localStorage.getItem('jwtToken');
+          //const tokenActual = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJleHAiOjE2ODU0NTE2MDgsImlhdCI6MTY4NTQ0ODAwOH0.TbwImTm2vHw7_TcKiO6lVEBUketJrKzCeCeoJR4Ucx4"
+  
+          // Realiza la primera petición con JWT (POST con autenticación)
+          const fetchPlanes = await fetch(urlPlanes, {
+            headers: {
+              'Authorization': `Bearer ${token}`,
+            },
+          });
+          const planes = await fetchPlanes.json();
+          setPlanesdb(planes)
+          console.log(planesdb)
+
+
+
+          // Realiza la segunda petición de los productos sin JWT.
+          const fetchProductos = await fetch(urlRestaurantes)
+          const productos = await fetchProductos.json();
+          setProductos(productos)
+  
+          
+          
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      };
+  
+      fetchData();
   }, []);
 
   const handleSubmit = async (e) => {
@@ -126,7 +165,7 @@ const AgregarProducto = () => {
       formData.append('ciudad', producto.ciudad)
       console.log("se creo el formData y se enviaran los datos !!!!")
 
-      axios.post(url,formData)
+      axios.post(urlRestaurantes,formData)
       .then((response) => {
         // Maneja la respuesta exitosa
         console.log("Se guardaron los datos :)")
@@ -191,7 +230,7 @@ const AgregarProducto = () => {
     setProducto({...producto, imagenes: nuevaLista})
   }
 
-  return (
+  return (         
     <main className="form-add-product">
       <section className="form">
         <h2>Agregar Restaurante</h2>
@@ -246,34 +285,17 @@ const AgregarProducto = () => {
 
             <fieldset className="tipo-plan">
               <legend>Tipo de Plan</legend>
-
-              <input 
-                type="radio" name="plan" 
-                id="plan_1" value="1" 
+              <select
+                className='select-categorias'
+                value={producto.plan_id} 
                 onChange={(e)=> setProducto({...producto, plan_id: e.target.value})}
-                required/>
-              <label htmlFor="plan_1">Semanal</label>
-
-              <input 
-                type="radio" name="plan" 
-                id="plan_2" value="2" 
-                onChange={(e)=> setProducto({...producto, plan_id: e.target.value})}
-                required/>
-              <label htmlFor="plan_2">Quincenal</label>
-
-              <input
-                type="radio" name="plan" 
-                id="plan_3" value="3" 
-                onChange={(e)=> setProducto({...producto, plan_id: e.target.value})}
-                required/>
-              <label htmlFor="plan_3">Mensual</label>
-
-              <input
-                type="radio" name="plan" 
-                id="plan_4" value="4" 
-                onChange={(e)=> setProducto({...producto, plan_id: e.target.value})}
-                required/>
-              <label htmlFor="plan_4">Trimestral</label>
+              >
+                <option value="">Selecciona una opción</option>
+                {planesdb.map(plan => {
+                  return <option key={plan.id} value={plan.id}>{plan.nombre}</option>
+                })}
+                
+              </select>
             </fieldset>
             <p className="descripcion">
               <label htmlFor="descripcion">Descripción:</label>

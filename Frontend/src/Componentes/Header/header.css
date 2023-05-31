@@ -81,166 +81,106 @@ header {
     color: var(--secondary-color) ;
   }
 
-  .botones-logueo button:hover {
-    cursor: pointer;
-  }
-  
-  .menu-icono {
+/*---------- HEADER - MENU MOVIL ---------*/
+.menu-movil {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 20%;
+  bottom: 0%;
+  background-color: white;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: right;
+}
+.menu-movil ul {
+  padding: 0px 15px 0 5px;
+  list-style: none;
+  color: var(--third-color);
+}
+.menu-movil li {
+  font-weight: 500;
+  margin: 20px 10px;
+}
+.menu-movil li:last-child {
+  padding-top: 20px;
+  margin-right: 10px;
+  border-top: 1px solid black;
+}
+.menu-movil .menu {
+  height: 50%;
+}
+.menu-movil .menu-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 40%;
+  justify-content: flex-end;
+  background-color: var(--main-color);
+  color: white;
+}
+.menu-movil .menu-container button {
+  position: absolute;
+  top: 0;
+  margin: 10px;
+  border: none;
+  background-color: var(--main-color);
+  font-size: 1.5rem;
+  color: white;
+}
+.menu-movil h2 {
+  margin: 10px;
+  padding: 0px 15px 0 5px;
+}
+.redes-menu {
+  width: 100%;
+  height: 53.51563px;
+  display: flex;
+  justify-content: space-around;
+  background-color: var(--main-color);
+}
+.redes-menu img {
+  width: 12%;
+  margin: 10px auto;
+  background-color: var(--main-color);
+}
+
+/*-------------------------------------------- MEDIA QUERIES ---------------------------------*/
+/*DESKTOP*/
+@media (max-width: 1250px) {
+}
+
+/*TABLETS Y PORTATILES*/
+@media (max-width: 1024px) {
+}
+
+/*TABLETS Y TELEFONOS MAS GRANDES*/
+@media (max-width: 768px) {
+  /*------------------- HEADER -------------------*/
+  header .texto-logo {
     display: none;
   }
+  header .botones-logueo button {
+    font-size: 0.75rem;
+  }
+}
+
+/*BREAKPOINT INTERMEDIO*/
+@media (max-width: 700px) {
+}
+
+/* TELEFONOS PEQUEÑOS */
+@media (max-width: 480px) {
+  /*-------------------- HEADER ---------------------*/
   
-  .menu-icono button {
-    border: none;
-    margin: 7px auto;
-    font-size: 2rem;
-    color: #FF4500;
+  header .botones-logueo {
+    display: none;
   }
-  
-  .botones-logueo button {
-    width: 47.5%;
-    height: 75%;
-    font-family: "Quicksand", sans-serif;
-    font-weight: bold;
-    color: orangered;
-    background-color: white;
-    border: solid 1.5px orangered;
-    border-radius: 7.5px;
+  .menu-icono {
+    margin: 0 15px;
+    display: block;
   }
-  
-  /*-------------------- HEADER - MENU MOVIL ---------------------*/
-  .menu-movil{
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 20%;
-    bottom: 0%;
-    background-color: white;
-    z-index: 1000;
-  
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    text-align: right;
-  }
-  .menu-movil ul {
-    padding: 0px 15px 0 5px;
-    list-style: none;
-    color: var(--third-color);
-  }
-  .menu-movil li {
-    font-weight: 500;
-    margin: 20px 10px;
-  }
-  .menu-movil li:last-child{
-    padding-top: 20px;
-    margin-right: 10px;
-    border-top: 1px solid black;
-  }
-  .menu-movil .menu {
-    height: 50%;
-  }
-  .menu-movil .menu-container {
-    position: relative;
-  
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 40%;
-    justify-content: flex-end;
-  
-    background-color: var(--main-color);
-    color: white;
-  }
-  .menu-movil .menu-container button {
-    position: absolute;
-    top: 0;
-    margin: 10px;
-  
-    border: none;
-    background-color: var(--main-color);
-    font-size: 1.5rem;
-    color: white;
-  }
-  .menu-movil h2 {
-    margin: 10px;
-    padding: 0px 15px 0 5px;
-  }
-  .redes-menu{
-    width: 100%;
-    height: 53.51563px;
-    display: flex;
-    justify-content: space-around;
-    background-color: var(--main-color);
-  }
-  .redes-menu img {
-    width: 12%;
-    margin: 10px auto;
-    background-color: var(--main-color);
-  }
-  
-  
-  /*-------------------------------------------- MEDIA QUERIES ---------------------------------*/
-  /*DESKTOP*/
-  @media (max-width: 1250px) {
-  
-  }
-  
-  /*TABLETS Y PORTATILES*/
-  @media (max-width: 1024px) {
-    header .texto-logo h1 {
-      font-size: 1.3rem;
-    }
-    header .texto-logo h3 {
-      font-size: 1rem;
-    }
-  }
-  
-  /*TABLETS Y TELEFONOS MAS GRANDES*/
-  @media (max-width: 768px) {
-    /*------------------- HEADER -------------------*/
-    header .texto-logo h1 {
-      font-size: 1.1rem;
-    }
-    header .texto-logo h3 {
-      font-size: .8rem;
-    }
-    
-    .botones-logueo button{
-      font-size: .7rem;
-    }
-  }
-  
-  /*BREAKPOINT INTERMEDIO*/
-  @media (max-width:700px) {
-  
-  }
-  
-  /* TELEFONOS PEQUEÑOS */
-  @media (max-width: 480px) {
-    /*-------------------- HEADER ---------------------*/
-    header {
-      height: 60px;
-    }
-    header .imagotipo {
-      width: 70%;
-    }
-    header .imagotipo a {
-    }
-    header .imagotipo img{
-      width: 40px;
-    }
-    header .texto-logo h1 {
-      font-size: 1rem;
-    }
-    header .texto-logo h3 {
-      font-size: .7rem;
-    }
-    .botones-logueo {
-      display: none;
-    }
-  
-    .menu-icono {
-      margin: 0 15px;
-      display: block;
-    }
-  }
+}
