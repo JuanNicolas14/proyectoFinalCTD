@@ -15,9 +15,9 @@ const Footer = () => {
             src={images.facebook}
             alt="icono-facebook"
           />
-          <img src={images.linkedin} alt="icono-linkedin" />
+          <img className='logo' src={images.linkedin} alt="icono-linkedin" />
           <img src={images.twitter} alt="icono-twitter" />
-          <img src={images.instagram} alt="icono-instagram" />
+          <img className='logo' src={images.instagram} alt="icono-instagram" />
         </div>
       </section>
     </footer>

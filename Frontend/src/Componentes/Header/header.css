@@ -4,19 +4,13 @@ header {
     top: 0;
     z-index: 100;
     width: 100%;
-
-    /* padding: 10px 0; */
-
-    max-height: 60px;
-
+    padding: 10px 0;
+    max-height: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: white;
-
-    /* border-bottom: 1px solid brown; */
-
-    box-shadow: 0px 0px 10px rgba(165, 42, 42, 0.5);
+    border-bottom: 1px solid brown;
   }
   
   header section {
@@ -26,7 +20,7 @@ header {
     justify-content: space-between;
   }
   .imagotipo{
-    width: 70%;
+    width: 60%;
     padding: 5px;
   }
   .imagotipo a{
@@ -39,6 +33,8 @@ header {
   
   .imagotipo img {
     width: 45px;
+  }
+  .imagotipo img {
     cursor: pointer;
   }
   
@@ -60,15 +56,17 @@ header {
   header h3 {
     color: brown;
     font-weight: lighter;
-    font-size: medium;
     margin: 0;
   }
   
   .botones-logueo {
-    width: 30%;
+    width: 40%;
     display: flex;
-    justify-content: right;
+    justify-content: space-between;
     align-items: center;
+  }
+  .botones-logueo button {
+    margin: auto 5px;
   }
   .botones-logueo button a {
     display: flex;
@@ -79,86 +77,11 @@ header {
     color: var(--secondary-color) ;
   }
 
-/*---------- HEADER - MENU MOVIL ---------*/
-.menu-movil {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 20%;
-  bottom: 0%;
-  background-color: white;
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  text-align: right;
-}
-.menu-movil ul {
-  padding: 0px 15px 0 5px;
-  list-style: none;
-  color: var(--third-color);
-}
-.menu-movil li {
-  font-weight: 500;
-  margin: 20px 10px;
-}
-.menu-movil li:last-child {
-  padding-top: 20px;
-  margin-right: 10px;
-  border-top: 1px solid black;
-}
-.menu-movil .menu {
-  height: 50%;
-}
-.menu-movil .menu-container {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 40%;
-  justify-content: flex-end;
-  background-color: var(--main-color);
-  color: white;
-}
-.menu-movil .menu-container button {
-  position: absolute;
-  top: 0;
-  margin: 10px;
-  border: none;
-  background-color: var(--main-color);
-  font-size: 1.5rem;
-  color: white;
-}
-.menu-movil h2 {
-  margin: 10px;
-  padding: 0px 15px 0 5px;
-}
-.redes-menu {
-  width: 100%;
-  height: 53.51563px;
-  display: flex;
-  justify-content: space-around;
-  background-color: var(--main-color);
-}
-.redes-menu img {
-  width: 12%;
-  margin: 10px auto;
-  background-color: var(--main-color);
-}
-
-/*-------------------------------------------- MEDIA QUERIES ---------------------------------*/
-/*DESKTOP*/
-@media (max-width: 1250px) {
-}
-
-/*TABLETS Y PORTATILES*/
-@media (max-width: 1024px) {
-}
-
-/*TABLETS Y TELEFONOS MAS GRANDES*/
-@media (max-width: 768px) {
-  /*------------------- HEADER -------------------*/
-  header .texto-logo {
+  .botones-logueo button:hover {
+    cursor: pointer;
+  }
+  
+  .menu-icono {
     display: none;
   }
   
@@ -250,14 +173,6 @@ header {
     margin: 10px auto;
     background-color: var(--main-color);
   }
-
-  .botones-logueo .avatar-user {
-    background-color: var(--main-color);
-    color: white;
-    font-weight: bold;
-    border-radius: 45%;
-    padding: 10px;
-  }
   
   
   /*-------------------------------------------- MEDIA QUERIES ---------------------------------*/
@@ -275,22 +190,25 @@ header {
       font-size: 1rem;
     }
   }
-}
-
-/*BREAKPOINT INTERMEDIO*/
-@media (max-width: 700px) {
-}
-
-/* TELEFONOS PEQUEÑOS */
-@media (max-width: 480px) {
-  /*-------------------- HEADER ---------------------*/
   
-  header .botones-logueo {
-    display: none;
+  /*TABLETS Y TELEFONOS MAS GRANDES*/
+  @media (max-width: 768px) {
+    /*------------------- HEADER -------------------*/
+    header .texto-logo h1 {
+      font-size: 1.1rem;
+    }
+    header .texto-logo h3 {
+      font-size: .8rem;
+    }
+    
+    .botones-logueo button{
+      font-size: .7rem;
+    }
   }
-  .menu-icono {
-    margin: 0 15px;
-    display: block;
+  
+  /*BREAKPOINT INTERMEDIO*/
+  @media (max-width:700px) {
+  
   }
   
   /* TELEFONOS PEQUEÑOS */
@@ -301,6 +219,8 @@ header {
     }
     header .imagotipo {
       width: 70%;
+    }
+    header .imagotipo a {
     }
     header .imagotipo img{
       width: 40px;

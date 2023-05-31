@@ -1,19 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import './agregarProducto.css'
 import baseUrl from '../../utils/baseUrl.json'
 /*Herramientas */
 import Swal from 'sweetalert2';
-//estado global
-import { AppContext } from '../../utils/EstadoGlobal';
 
 const AgregarProducto = () => {
   const urlRestaurantes = baseUrl.url + "/restaurante"
   const urlPlanes = baseUrl.url + "/plan"
   let confirmador = false;
-  //Estado global
-  const {userJwt, setUserJwt} = useContext(AppContext)
-  console.log(userJwt)
 
   /*-----*/
 
@@ -54,13 +49,27 @@ const AgregarProducto = () => {
   })
 
   useEffect(() => {
+    /* fetch( urlRestaurantes)
+      .then((res) => res.json())
+      .then((data) => setProductos(data))
+      .catch((err) => console.log(err));
+
+    fetch(urlPlanes)
+      .then((res) => res.json())
+      .then((data) => setPlanes(data))
+      .catch((err) => console.log(err)); */
       const fetchData = async () => {
         console.log("realizando las dos peticiones")
         try {
+
+          // Obtener el token JWT (por ejemplo, desde el almacenamiento local)
+          const token = localStorage.getItem('jwtToken');
+          //const tokenActual = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJleHAiOjE2ODU0NTE2MDgsImlhdCI6MTY4NTQ0ODAwOH0.TbwImTm2vHw7_TcKiO6lVEBUketJrKzCeCeoJR4Ucx4"
+  
           // Realiza la primera petición con JWT (POST con autenticación)
           const fetchPlanes = await fetch(urlPlanes, {
             headers: {
-              'Authorization': `Bearer ${userJwt.jwt}`,
+              'Authorization': `Bearer ${token}`,
             },
           });
           const planes = await fetchPlanes.json();
