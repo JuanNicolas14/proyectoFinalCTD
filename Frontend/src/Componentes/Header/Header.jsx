@@ -72,11 +72,9 @@ const Header = () => {
                   Cerrar sesión
                 </Link>
               </button>
-              
-              
             </div>
         
-        : (
+        : 
           <div className="botones-logueo">
             <button>
               <Link to='/usuario/registrar' style={{ textDecoration: 'none' }}>
@@ -90,29 +88,10 @@ const Header = () => {
               </Link>
             </button>
           </div>
-          )
         }  
 
-        {/* <div className="botones-logueo">
-          <button>
-            <Link to="/usuario/registrar" style={{ textDecoration: "none" }}>
-              Crear cuenta
-            </Link>
-          </button>
-          <button>
-            <Link to="/login" style={{ textDecoration: "none" }}>
-              Iniciar sesión
-            </Link>
-          </button>
 
-          <button>
-            <Link to='/login' style={{ textDecoration: 'none' }}>
-              Iniciar sesión
-            </Link>
-          </button>
-        </div> */}
-
-        {show 
+        {show
         ? <div className='menu-movil'>
             <div className="menu">
               <div className="menu-container">
@@ -141,13 +120,13 @@ const Header = () => {
               />
             </div>
           </div>
-        ) : (
+        : 
           <div className="menu-icono">
             <button onClick={showMenu}>
               <HiMenu />
             </button>
           </div>
-        )}
+        }
       </section>
     </header>
   );
