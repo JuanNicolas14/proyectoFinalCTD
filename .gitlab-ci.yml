@@ -62,7 +62,7 @@ test_frontend:
 
 deploy_backend:
   stage: deploy
-  needs: [build_backend]
+  #needs: [build_backend]
   script:
     - apt-get update -y
     - export DEBIAN_FRONTEND=noninteractive
@@ -84,7 +84,7 @@ deploy_backend:
 
 deploy_frontend:
   stage: deploy
-  needs: [build_frontend]
+  #needs: [build_frontend]
   script:
     - apt-get update -y
     - apt-get install -y awscli
