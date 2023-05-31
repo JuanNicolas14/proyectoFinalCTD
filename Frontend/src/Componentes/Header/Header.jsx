@@ -18,7 +18,7 @@ const Header = () => {
   }
   return (
     <header>
-      <section className='nav-container'>
+      <section>
         <div className="imagotipo">
           <Link to="/home" style={{ textDecoration: "none" }}>
             <img src={images.logoBukinFood} alt="icon-logo" />
@@ -35,20 +35,12 @@ const Header = () => {
               Crear cuenta
             </Link>
           </button>
-
-          <button>
-            <Link to="/administracion" style={{ textDecoration: "none" }}>
-              Modulo Admin
-            </Link>
-          </button>
-
           <button>
             <Link to="/login" style={{ textDecoration: "none" }}>
               Iniciar sesión
             </Link>
           </button>
         </div>
-
         {show ? (
           <div className="menu-movil">
             <div className="menu">

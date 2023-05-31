@@ -1,91 +1,85 @@
 /*-------------------- HEADER ---------------------*/
 header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  width: 100%;
-  height: 8vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: white;
-  box-shadow: 0px 0px 10px rgba(165, 42, 42, 0.5);
-}
-header .nav-container {
-  width: 95%;
-  height: 75%;
-  display: flex;
-  justify-content: space-between;
-  margin: 0 auto;
-  overflow: hidden;
-  padding: 0;
-}
-header .imagotipo {
-  width: 300px;
-  height: 100%;
-  display: flex;
-  cursor: pointer;
-}
-header .imagotipo a {
-  max-width: 100%;
-  display: flex;
-}
-header .imagotipo img {
-  height: 95%;
-}
-header .texto-logo {
-  margin-left: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-header h1 {
-  color: orangered;
-  margin: 0;
-}
-header h3 {
-  color: brown;
-  font-weight: 600;
-  font-size: 1em;
-  margin: 0;
-}
-header .botones-logueo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-header .botones-logueo button {
-  height: 85%;
-  font-family: "Quicksand", sans-serif;
-  font-weight: bold;
-  color: orangered;
-  background-color: white;
-  border: solid 1.5px orangered;
-  border-radius: 7.5px;
-  cursor: pointer;
-  padding: 10px;
-}
-header .botones-logueo button:hover {
-  background-color: rgba(255, 215, 0, .15);
-  border: none;
-}
-header .botones-logueo button a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  color: var(--secondary-color);
-}
-.menu-icono {
-  display: none;
-}
-.menu-icono button {
-  border: none;
-  margin: 7px auto;
-  font-size: 2rem;
-  color: #ff4500;
-}
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+
+    /* padding: 10px 0; */
+
+    max-height: 60px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+
+    /* border-bottom: 1px solid brown; */
+
+    box-shadow: 0px 0px 10px rgba(165, 42, 42, 0.5);
+  }
+  
+  header section {
+    width: 95%;
+    height: 75%;
+    display: flex;
+    justify-content: space-between;
+  }
+  .imagotipo{
+    /* width: 70%;
+    padding: 5px; */
+    width: 20%;
+    display: flex;
+  }
+  .imagotipo a{
+    max-width: 100%;
+    display: flex;
+  }
+  .imagotipo a:hover {
+    cursor: auto;
+  }
+  
+  .imagotipo img {
+    width: 45px;
+    cursor: pointer;
+  }
+  
+  .texto-logo {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .texto-logo:hover {
+    cursor: pointer;
+  }
+  
+  h1 {
+    color: orangered;
+    margin: 0;
+  }
+  
+  header h3 {
+    color: brown;
+    font-weight: lighter;
+    font-size: medium;
+    margin: 0;
+  }
+  
+  .botones-logueo {
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .botones-logueo button a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    color: var(--secondary-color) ;
+  }
 
 /*---------- HEADER - MENU MOVIL ---------*/
 .menu-movil {
