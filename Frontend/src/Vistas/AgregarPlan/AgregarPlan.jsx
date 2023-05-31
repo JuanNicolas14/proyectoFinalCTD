@@ -18,7 +18,7 @@ const AgregarPlan = () => {
         formData.append('imagenPlan', imagen);
 
         try {
-            const response = await fetch('http://localhost:8080/plan/registrar', {
+            const response = await fetch('http://3.19.61.55:8080/plan/registrar', {
                 method: 'POST',
                 body: formData
             });

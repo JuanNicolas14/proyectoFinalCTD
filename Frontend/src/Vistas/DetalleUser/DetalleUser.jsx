@@ -19,7 +19,7 @@ const DetalleUser = () => {
             };
     
             // Realiza la solicitud HTTP para obtener los detalles del usuario
-            const response = await fetch('http://localhost:8080/usuario/detalle', config)
+            const response = await fetch('http://3.19.61.55:8080/usuario/detalle', config)
             if(response.ok){
                 const data = await response.json();
                 setUserJwt({...userJwt,
