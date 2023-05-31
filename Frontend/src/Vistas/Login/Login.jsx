@@ -44,7 +44,19 @@ const Login = () => {
           })
           
         } else {
-          console.log('Error al hacer login');
+          Swal.fire(
+            {
+              title: 'Error de Inicio de Sesión',
+              text: `Inicio de Sesión realizado rechazado, email o password incorrecto`,
+              icon: 'error',
+              showCancelButton: false,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Aceptar',
+            }
+          ).then((result) => {
+            window.location.reload();
+          })
         }
     };
 

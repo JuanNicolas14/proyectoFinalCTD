@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { AppContext } from '../../utils/EstadoGlobal';
-import baseUrl from '../../utils/baseUrl.json'
+import './detalleUser.css'
 
 const DetalleUser = () => {
     //Estado global
@@ -47,12 +47,23 @@ const DetalleUser = () => {
     
       return (
         <main>
-            <section className='detalle-usuario'>
-                <h2>Detalles del Usuario</h2>
-                <p>Nombre: {userJwt.nombre}</p>
-                <p>Apellido: {userJwt.apellido}</p>
-                <p>Email: {userJwt.email}</p>
+            {userJwt.nombre.length > 3 
+            ?(
+                <section className='detalle-usuario'>
+                    <h2>Detalles del Usuario</h2>
+                    <div className='usuario-datos'>
+                        <p>Nombre: <span>{userJwt.nombre}</span></p>
+                        <p>Apellido: <span>{userJwt.apellido}</span></p>
+                        <p>Email: <span>{userJwt.email}</span></p>
+                        <p>Rol: <span>{userJwt.rol}</span></p>
+                    </div>
+                </section>
+            )
+            : <section className='no-user'>
+                <h2>No hay un usuario con sesión activa.</h2>
             </section>
+            }
+            
         </main>
       );
 }
