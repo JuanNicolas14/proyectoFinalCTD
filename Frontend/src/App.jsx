@@ -12,13 +12,13 @@ import RegistrarUsuario from './Componentes/RegistrarUsuario/RegistrarUsuario'
 import ListaPorPlan from './Vistas/ListaPorPlan/ListaPorPlan'
 import AgregarPlan from './Vistas/AgregarPlan/AgregarPlan'
 import Login from './Vistas/Login/Login'
-import {AppProvider} from './utils/EstadoGlobal'
 import DetalleUser from './Vistas/DetalleUser/DetalleUser'
+import AuthContextProvider from './utils/AuthContext'
 
 function App() {
 
   return (
-    <AppProvider>
+    <AuthContextProvider>
       <Header/>
       <Routes>
         <Route path='/' element={<Navigate to='/home' replace/>}/>
@@ -36,7 +36,7 @@ function App() {
         <Route path='/plan/registrar' element={<AgregarPlan/>}/>
       </Routes>
       <Footer/>
-    </AppProvider>
+    </AuthContextProvider>
   )
 }
 

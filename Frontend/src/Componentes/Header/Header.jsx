@@ -1,17 +1,48 @@
 import React, {useContext, useState} from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import images from '../../assets/images/images'
 import {HiMenu} from 'react-icons/hi'
 import {GrClose} from 'react-icons/gr'
 import './header.css'
-import { AppContext } from '../../utils/EstadoGlobal'
+import { AuthContext } from '../../utils/AuthContext'
+/*Herramienta Alertas */
+import Swal from 'sweetalert2';
 
 const Header = () => {
-
-  //Estado global
-  const {userJwt, setUserJwt} = useContext(AppContext)
+  const navigate = useNavigate();
+  const {dispatch} = useContext(AuthContext)
+  const user = JSON.parse(localStorage.getItem("user"))
 
   const [show, setShow] = useState(false)
+
+  const capitalizeFirstLetter = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+
+  const cerrarSesion = () => {
+    Swal.fire(
+      {
+        title: 'Sesión finalizada',
+        text: `Sesión finalizada con exito, Presionar aceptar para ir al home.`,
+        icon: 'success',
+        showCancelButton: false,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Aceptar',
+      }
+    ).then(() => {
+      dispatch({type:"LOGOUT"})
+      if(show == false){
+        navigate('/home')
+      }else {
+        showMenu()
+        navigate('/home')
+      }
+      
+    })
+
+    
+  }
 
   const showMenu = ()=> {
     if(show){
@@ -20,6 +51,7 @@ const Header = () => {
       setShow(true)
     }
   }
+
   return (
     <header>
       <section>
@@ -34,17 +66,17 @@ const Header = () => {
             </Link>
           </div>
 
-        {userJwt?.nombre.length > 1 
-        ? userJwt.rol == "ADMIN" 
+        {user?.nombre.length > 3
+        ? user.rol == "ADMIN" 
           ? 
             <div className='botones-logueo'>
               <div className='avatar-user'>
-                <span>{userJwt.nombre.charAt(0)}</span>
-                <span>{userJwt.apellido.charAt(0)}</span>
+                <span>{user.nombre.charAt(0).toUpperCase()}</span>
+                <span>{user.apellido.charAt(0).toUpperCase()}</span>
               </div>
 
               <div className='usuario-nombre'>
-                <p>{userJwt.nombre} {userJwt.apellido}</p>
+                <p>{capitalizeFirstLetter(user.nombre)} {capitalizeFirstLetter(user.apellido)}</p>
               </div>
 
               <button>
@@ -53,8 +85,8 @@ const Header = () => {
                 </Link>
               </button>
 
-              <button>
-                <Link to='/login' style={{ textDecoration: 'none' }}>
+              <button onClick={cerrarSesion}>
+                <Link style={{ textDecoration: 'none' }}>
                   Cerrar sesión
                 </Link>
               </button>
@@ -62,14 +94,14 @@ const Header = () => {
             </div>
           : <div className='botones-logueo'>
               <div className='avatar-user'>
-                <span>{userJwt.nombre.charAt(0)}</span>
-                <span>{userJwt.apellido.charAt(0)}</span>
+                <span>{user.nombre.charAt(0).toUpperCase()}</span>
+                <span>{user.apellido.charAt(0).toUpperCase()}</span>
               </div>
               <div className='usuario-nombre'>
-                <p>{userJwt.nombre} {userJwt.apellido}</p>
+                <p>{capitalizeFirstLetter(user.nombre)} {capitalizeFirstLetter(user.apellido)}</p>
               </div>
-              <button>
-                <Link to='/login' style={{ textDecoration: 'none' }}>
+              <button onClick={cerrarSesion}>
+                <Link style={{ textDecoration: 'none' }}>
                   Cerrar sesión
                 </Link>
               </button>
@@ -92,27 +124,7 @@ const Header = () => {
             </button>
           </div>
           )
-        }  
-
-        {/* <div className="botones-logueo">
-          <button>
-            <Link to='/usuario/registrar' style={{ textDecoration: 'none' }}>
-              Crear cuenta
-            </Link>
-          </button>
-
-          <button>
-            <Link to='/administracion' style={{ textDecoration: 'none' }}>
-              Modulo Admin
-            </Link>
-          </button>
-
-          <button>
-            <Link to='/login' style={{ textDecoration: 'none' }}>
-              Iniciar sesión
-            </Link>
-          </button>
-        </div> */}
+        }
 
         {show 
         ? <div className='menu-movil'>
@@ -121,10 +133,47 @@ const Header = () => {
                 <button onClick={showMenu}><GrClose/></button>
                 <h2>Menú</h2>
               </div>
-              <ul>
-                <li>Crear cuenta</li>
-                <li>Iniciar sesión</li>
-              </ul>
+              
+                {user 
+                ? user.rol == "ADMIN" ?
+                (
+                  <ul>
+                    <li onClick={showMenu}>
+                      <Link to='/administracion' style={{ textDecoration: 'none' }}>
+                        Modulo Admin
+                      </Link>
+                    </li>
+                    <li onClick={cerrarSesion}>
+                      <Link style={{ textDecoration: 'none' }}>
+                        Cerrar sesión
+                      </Link>
+                    </li>
+                  </ul>
+                ):(
+                <ul>
+                  <li onClick={cerrarSesion}>
+                    <Link style={{ textDecoration: 'none' }}>
+                      Cerrar sesión
+                    </Link>
+                  </li>
+                </ul>)
+                :(
+                  <ul>
+                    <li onClick={showMenu}>
+                      <Link to='/login' style={{ textDecoration: 'none' }}>
+                        Iniciar Sesión
+                      </Link>
+                    </li>
+                    <li onClick={showMenu}>
+                      <Link to='/usuario/registrar' style={{ textDecoration: 'none' }}>
+                        Crear cuenta
+                      </Link>
+                    </li>
+                  </ul>
+                )
+                }
+                
+      
             </div>
             <div className="redes-menu">
               <img

@@ -4,16 +4,14 @@ import './agregarProducto.css'
 import baseUrl from '../../utils/baseUrl.json'
 /*Herramientas */
 import Swal from 'sweetalert2';
-//estado global
-import { AppContext } from '../../utils/EstadoGlobal';
+import { AuthContext } from '../../utils/AuthContext';
 
 const AgregarProducto = () => {
   const urlRestaurantes = baseUrl.url + "/restaurante"
   const urlPlanes = baseUrl.url + "/plan"
   let confirmador = false;
   //Estado global
-  const {userJwt, setUserJwt} = useContext(AppContext)
-  console.log(userJwt)
+  const {user,token} = useContext(AuthContext)
 
   /*-----*/
 
@@ -55,17 +53,15 @@ const AgregarProducto = () => {
 
   useEffect(() => {
       const fetchData = async () => {
-        console.log("realizando las dos peticiones")
         try {
           // Realiza la primera petición con JWT (POST con autenticación)
           const fetchPlanes = await fetch(urlPlanes, {
             headers: {
-              'Authorization': `Bearer ${userJwt.jwt}`,
+              'Authorization': `Bearer ${token}`,
             },
           });
           const planes = await fetchPlanes.json();
           setPlanesdb(planes)
-          console.log(planesdb)
 
 
 

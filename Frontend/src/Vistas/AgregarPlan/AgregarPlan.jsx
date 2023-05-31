@@ -56,47 +56,48 @@ const AgregarPlan = () => {
   return (
     <main className="form-add-plan">
         <section className="form-plan">
+            <h2>Agregar Plan</h2>
 
             <form onSubmit={handleSubmit}>
-            <div>
-                <label htmlFor="nombre">Nombre:</label>
-                <input
-                type="text"
-                id="nombre"
-                value={nombre}
-                onChange={(event) => setNombre(event.target.value)}
-                />
-            </div>
-            <div>
-                <label htmlFor="descripcion">Descripción:</label>
-                <textarea
-                id="descripcion"
-                value={descripcion}
-                onChange={(event) => setDescripcion(event.target.value)}
-                ></textarea>
-            </div>
-            <div>
-                <span className='span-imagen'>Imagen:</span>
-                <input
-                className='input-imagen'
-                type="file"
-                id="imagen"
-                accept="image/*"
-                onChange={e => setImagen(e.target.files[0])}
-                />
-                <label className="label-imagen" htmlFor="imagen">
-                <span className="imagen-select input-imagen_input-imagen-nombre">
-                {imagen != null 
-                  ? `${imagen.name}`
-                  : "Ningún archivo seleccionado"
-                  }
-                </span>
-                <span className="input-imagen input-imagen_input-imagen-boton">
-                  Seleccionar archivo
-                </span>
-              </label>
-            </div>
-            <button type="submit">Enviar</button>
+              <div>
+                  <label htmlFor="nombre">Nombre:</label>
+                  <input
+                  type="text"
+                  id="nombre"
+                  value={nombre}
+                  onChange={(event) => setNombre(event.target.value)}
+                  />
+              </div>
+              <div>
+                  <label htmlFor="descripcion">Descripción:</label>
+                  <textarea
+                  id="descripcion"
+                  value={descripcion}
+                  onChange={(event) => setDescripcion(event.target.value)}
+                  ></textarea>
+              </div>
+              <div>
+                  <span className='span-imagen'>Imagen:</span>
+                  <input
+                  className='input-imagen'
+                  type="file"
+                  id="imagen"
+                  accept="image/*"
+                  onChange={e => setImagen(e.target.files[0])}
+                  />
+                  <label className="label-imagen" htmlFor="imagen">
+                  <span className="imagen-select input-imagen_input-imagen-nombre">
+                  {imagen != null 
+                    ? `${imagen.name}`
+                    : "Ningún archivo seleccionado"
+                    }
+                  </span>
+                  <span className="input-imagen input-imagen_input-imagen-boton">
+                    Seleccionar archivo
+                  </span>
+                </label>
+              </div>
+              <button type="submit">Enviar</button>
             </form>
         </section>
     </main>

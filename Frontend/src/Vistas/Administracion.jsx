@@ -18,6 +18,11 @@ const Administracion = () => {
                         <span>Eliminar Producto</span>
                         </Link>
                     </li>
+                    <li>
+                        <Link to="/plan/registrar" style={{ textDecoration: 'none' }}>
+                        <span>Agregar Plan</span>
+                        </Link>
+                    </li>
                 </ul>
             </div>
         </section>

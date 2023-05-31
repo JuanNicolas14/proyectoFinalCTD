@@ -1,18 +1,50 @@
 import React, {useContext, useState} from 'react'
 import "./login.css";
 import { Link, useNavigate } from "react-router-dom";
-import {AppContext} from '../../utils/EstadoGlobal'
-/*Herramientas */
+import { AuthContext } from '../../utils/AuthContext';
+/*Herramienta Alertas */
 import Swal from 'sweetalert2';
 
 const Login = () => {
     const navigate = useNavigate();
     //Estado global
-    const {userJwt, setUserJwt} = useContext(AppContext)
+    const {dispatch} = useContext(AuthContext)
 
     //State datos del form
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+
+    const traerDetallesUsuario = async (jwt) => {
+      try { 
+
+        // Configura el encabezado de la solicitud HTTP con el token JWT
+        const config = {
+          headers: {
+            'Authorization': `Bearer ${jwt}`
+          }
+        };
+
+        // Realiza la solicitud HTTP para obtener los detalles del usuario
+        const response = await fetch('http://3.19.61.55:8080/usuario/detalle', config)
+        if(response.ok){
+            const data = await response.json();
+            console.log(data)
+            let resUser = {
+              id:data.id,
+              nombre:data.nombre,
+              apellido:data.apellido,
+              email:data.email,
+              rol:data.rol
+            }
+            dispatch({type:"LOGIN", payload: {user:resUser, accessToken:jwt}})
+        }
+        
+      } catch (error) {
+        // Maneja el error
+        console.error('Error al obtener los detalles del usuario:', error);
+      }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -27,8 +59,10 @@ const Login = () => {
 
         if (response.ok) {
           const data = await response.json();
-          //Guardamos el jwt en el estado global
-          setUserJwt({...userJwt, jwt: data.jwt})
+          //Guardamos el jwt 
+          const jwt = data.jwt
+          traerDetallesUsuario(jwt)
+          
           Swal.fire(
             {
               title: 'Inicio de Sesión',
@@ -39,7 +73,7 @@ const Login = () => {
               cancelButtonColor: '#d33',
               confirmButtonText: 'Aceptar',
             }
-          ).then((result) => {
+          ).then(() => {
             navigate('/usuario/detalle')
           })
           
@@ -54,7 +88,7 @@ const Login = () => {
               cancelButtonColor: '#d33',
               confirmButtonText: 'Aceptar',
             }
-          ).then((result) => {
+          ).then(() => {
             window.location.reload();
           })
         }
