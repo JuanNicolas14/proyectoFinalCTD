@@ -18,9 +18,9 @@ build_backend:
   artifacts:
     paths:
       - Backend/target/Backend-0.0.1-SNAPSHOT.jar
-  rules:
-    - changes:
-        - Backend/**/*
+  #rules:
+  #  - changes:
+  #      - Backend/**/*
 
 build_frontend:
   image: node:latest
@@ -34,9 +34,9 @@ build_frontend:
   artifacts:
     paths:
       - Frontend/dist
-  rules:
-    - changes:
-        - Frontend/**/*
+  #rules:
+  #  - changes:
+  #      - Frontend/**/*
 
 test_backend:
   stage: test
@@ -45,9 +45,9 @@ test_backend:
     - echo "Running unit tests... This will take about 60 seconds."
     - mvn test
     - echo "Finished testing the app."
-  rules:
-    - changes:
-        - Backend/**/*
+  #rules:
+  #  - changes:
+  #      - Backend/**/*
 
 test_frontend:
   stage: test
@@ -56,9 +56,9 @@ test_frontend:
     - echo "Running unit tests... This will take about 60 seconds."
 #    - npm test
     - echo "Finished testing the app."
-  rules:
-    - changes:
-        - Frontend/**/*
+  #rules:
+  #  - changes:
+  #      - Frontend/**/*
 
 deploy_backend:
   stage: deploy
@@ -77,9 +77,9 @@ deploy_backend:
     - chmod 600 ~/.ssh/id_rsa
     - ./Backend/deploy.sh
     - echo "Application successfully deployed."
-  rules:
-    - changes:
-        - Backend/**/*
+  #rules:
+  #  - changes:
+  #      - Backend/**/*
 
 
 deploy_frontend:
@@ -94,6 +94,6 @@ deploy_frontend:
     - echo "Deploying application..."
     - aws s3 sync Frontend/dist s3://bukinfood/
     - echo "Application successfully deployed."
-  rules:
-    - changes:
-        - Frontend/**/*
+  #rules:
+  #  - changes:
+  #      - Frontend/**/*
