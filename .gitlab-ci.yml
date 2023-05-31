@@ -77,8 +77,6 @@ deploy_backend:
     - chmod 600 ~/.ssh/id_rsa
     - ./Backend/deploy.sh
     - echo "Application successfully deployed."
-  only:
-    - develop
   rules:
     - changes:
         - Backend/**/*
@@ -96,8 +94,6 @@ deploy_frontend:
     - echo "Deploying application..."
     - aws s3 sync Frontend/dist s3://bukinfood/
     - echo "Application successfully deployed."
-  only:
-    - develop
   rules:
     - changes:
         - Frontend/**/*
