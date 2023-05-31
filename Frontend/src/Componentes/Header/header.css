@@ -26,10 +26,8 @@ header {
     justify-content: space-between;
   }
   .imagotipo{
-    /* width: 70%;
-    padding: 5px; */
-    width: 20%;
-    display: flex;
+    width: 70%;
+    padding: 5px;
   }
   .imagotipo a{
     max-width: 100%;
@@ -71,13 +69,6 @@ header {
     display: flex;
     justify-content: right;
     align-items: center;
-  }
-  .botones-logueo .usuario-nombre {
-    margin: 0 2%;
-    font-weight: bold;
-  }
-  .botones-logueo button {
-    margin: auto 5px;
   }
   .botones-logueo button a {
     display: flex;

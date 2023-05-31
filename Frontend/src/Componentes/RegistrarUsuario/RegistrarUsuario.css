@@ -41,7 +41,7 @@ main .form-container {
   letter-spacing: .05em;
 }
 
-.form-container form {
+form {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -94,10 +94,7 @@ main .form-container {
   font-weight: bold;
 }
 
-.form-container .mensaje-error {
-  color: crimson;
-  text-align: right;
-  font-size: small;
+label {
   font-weight: bold;
   font-style: italic;
 }
@@ -111,10 +108,18 @@ main .form-container {
   height: 30px;
 }
 
-.form-container button {
-  align-self: center;
-  width: 50%;
+input,
+select {
+  width: 100%;
   padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ff0000;
+}
+
+button[type="submit"] {
+  background-color: #ff4500;
+  color: #ffffff;
   border: none;
   border-radius: .5em;
   font-family: "Quicksand", sans-serif;
@@ -138,68 +143,13 @@ main .form-container {
   cursor: pointer;
 }
 
-.form-container p span:hover {
-  text-decoration: underline;
+button[type="submit"]:hover {
+  background-color: #ff6347;
 }
 
-/*--Hasta aquí los estilos del form de registro de usuario--*/
-/*---Ahora las media queries---*/
-
-@media (max-width: 768px) {
-  header .texto-logo {
-    display: none;
-  }
-  header .boton-logueo {
-    width: 160px;
-  }
-  main .form-container {
-    width: 400px;
-  }
-  .form-container h2 {
-    margin-bottom: 2.5em;
-  }
-  .form-container .inputs-nombre-y-apellido {
-    display: block;
-  }
-  .form-container input[id="nombre"],
-  .form-container input[id="apellido"] {
-    width: 100%;
-  }
-  .form-container input {
-    margin-bottom: 1.5em;
-    height: 3em;
-  }
-  .form-container button {
-    width: 85%;
-    margin: 3em 0 1em 0;
-  }
-  .form-container .icono {
-    top: 372px;
-  }
-}
-
-@media (max-width: 480px) {
-  header .boton-logueo {
-    display: none;
-  }
-  .form-container h2 {
-    margin-bottom: 0.5em;
-  }
-  .form-container button {
-    width: 100%;
-    height: 3em;
-    margin: 1em 0 1em 0;
-  }
-  .form-container input {
-    margin-bottom: 1em;
-    height: 2.75em;
-  }
-  main .form-container {
-    padding: 1em;
-    width: 350px;
-  }
-  .form-container .icono {
-    right: 30px;
-    top: 284px;
-  }
+/* Estilos para mensajes de error */
+span {
+  color: #ff0000;
+  font-size: 14px;
+  margin-top: 5px;
 }
