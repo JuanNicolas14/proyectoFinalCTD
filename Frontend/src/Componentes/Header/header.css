@@ -22,10 +22,17 @@ header {
   .imagotipo{
     width: 60%;
     padding: 5px;
-  }
-  .imagotipo a{
-    max-width: 100%;
     display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .imagotipo a {
+    display: flex;
+    text-decoration: none;
+    margin: 10px 10px 10px 0;
+  }
+  .imagotipo a .texto-logo {
+    margin: 0;
   }
   .imagotipo a:hover {
     cursor: auto;
@@ -33,6 +40,7 @@ header {
   
   .imagotipo img {
     width: 45px;
+
   }
   .imagotipo img {
     cursor: pointer;
@@ -40,7 +48,7 @@ header {
   
   .texto-logo {
     margin-left: 10px;
-    display: flex;
+    display: inline;
     flex-direction: column;
     justify-content: center;
   }
@@ -80,6 +88,10 @@ header {
     height: 100%;
     color: var(--secondary-color) ;
   }
+  .botones-logueo a {
+    text-decoration: none;
+    color: var(--main-color);
+  }
 
   .botones-logueo button:hover {
     cursor: pointer;
@@ -87,6 +99,17 @@ header {
   
   .menu-icono {
     display: none;
+    text-align: center;
+    align-items: center;
+  }
+  .menu-icono a {
+    text-decoration: none;
+    color: var(--main-color);
+    
+  }
+  .menu-icono .usuario-nombre {
+    font-size: .9rem;
+    margin-left: .5rem;
   }
   
   .menu-icono button {
@@ -94,6 +117,7 @@ header {
     margin: 7px auto;
     font-size: 2rem;
     color: #FF4500;
+    background-color: white;
   }
   
   .botones-logueo button {
@@ -181,43 +205,54 @@ header {
     background-color: var(--main-color);
   }
   /*Fin menu movil*/
-  .botones-logueo .avatar-user {
+  .botones-logueo .avatar-user, .menu-icono .avatar-user {
+    text-decoration: none;
     background-color: var(--main-color);
     color: white;
     font-weight: bold;
     border-radius: 45%;
     padding: 10px;
   }
+
   
   
   /*-------------------------------------------- MEDIA QUERIES ---------------------------------*/
   /*DESKTOP*/
   @media (max-width: 1250px) {
-  
+    header .imagotipo {
+      display: flex;
+    }
   }
   
   /*TABLETS Y PORTATILES*/
   @media (max-width: 1024px) {
     header .texto-logo h1 {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
     }
     header .texto-logo h3 {
-      font-size: 1rem;
+      font-size: .95rem;
     }
+    .imagotipo{
+      width: 60%;
+    }
+    
   }
   
   /*TABLETS Y TELEFONOS MAS GRANDES*/
   @media (max-width: 768px) {
     /*------------------- HEADER -------------------*/
     header .texto-logo h1 {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
     }
     header .texto-logo h3 {
-      font-size: .8rem;
+      font-size: .75rem;
     }
     
     .botones-logueo button{
       font-size: .7rem;
+    }
+    .imagotipo{
+      width: 80%;
     }
   }
   
@@ -230,7 +265,8 @@ header {
   @media (max-width: 480px) {
     /*-------------------- HEADER ---------------------*/
     header {
-      height: 60px;
+      padding: 0;
+      height: 8vh;
     }
     header .imagotipo {
       width: 70%;
@@ -239,10 +275,10 @@ header {
       width: 40px;
     }
     header .texto-logo h1 {
-      font-size: 1rem;
+      font-size: .85rem;
     }
     header .texto-logo h3 {
-      font-size: .7rem;
+      font-size: .68rem;
     }
     .botones-logueo {
       display: none;
@@ -250,6 +286,36 @@ header {
   
     .menu-icono {
       margin: 0 15px;
-      display: block;
+      display: flex;
+    }
+    .menu-icono .usuario-nombre {
+      font-weight: bold;
+    }
+    .menu-icono svg {
+      margin-top: 10px;
+      margin-left: 10px;
+    }
+    .imagotipo{
+      width: 100%;
+    }
+    
+  }
+
+  @media (max-width: 400px) {
+    /*-------------------- HEADER ---------------------*/
+    header {
+      height: 10vh;
+    }
+    header .imagotipo {
+      margin-top: 5px;
+    }
+    header .imagotipo h1 {
+      font-size: .8rem;
+    }
+    header .imagotipo h3 {
+      font-size: .68rem;
+    }
+    .menu-icono .usuario-nombre {
+      display: none;
     }
   }

@@ -10,8 +10,7 @@ import Swal from 'sweetalert2';
 
 const Header = () => {
   const navigate = useNavigate();
-  const {dispatch} = useContext(AuthContext)
-  const user = JSON.parse(localStorage.getItem("user"))
+  const {user,dispatch} = useContext(AuthContext)
 
   const [show, setShow] = useState(false)
 
@@ -57,8 +56,10 @@ const Header = () => {
       <section>
           <div className="imagotipo">
             <Link to='/home' style={{ textDecoration: 'none' }}>
-            
+
               <img src={images.logoBukinFood} alt="icon-logo" />
+            </Link>
+            <Link to='/home' style={{ textDecoration: 'none' }}>
               <div className="texto-logo">
                 <h1>La forma más fácil </h1>
                 <h3>De tener almuerzos deliciosos</h3>
@@ -66,18 +67,18 @@ const Header = () => {
             </Link>
           </div>
 
-        {user?.nombre.length > 3
+        {user?.nombre?.length > 3
         ? user.rol == "ADMIN" 
           ? 
             <div className='botones-logueo'>
-              <div className='avatar-user'>
+              <Link to='/usuario/detalle' className='avatar-user'>
                 <span>{user.nombre.charAt(0).toUpperCase()}</span>
                 <span>{user.apellido.charAt(0).toUpperCase()}</span>
-              </div>
+              </Link>
 
-              <div className='usuario-nombre'>
-                <p>{capitalizeFirstLetter(user.nombre)} {capitalizeFirstLetter(user.apellido)}</p>
-              </div>
+              <Link to='/usuario/detalle' className='usuario-nombre'>
+                <span>{capitalizeFirstLetter(user.nombre)} {capitalizeFirstLetter(user.apellido)}</span>
+              </Link>
 
               <button>
                 <Link to='/administracion' style={{ textDecoration: 'none' }}>
@@ -93,13 +94,13 @@ const Header = () => {
 
             </div>
           : <div className='botones-logueo'>
-              <div className='avatar-user'>
+              <Link to='/usuario/detalle' className='avatar-user'>
                 <span>{user.nombre.charAt(0).toUpperCase()}</span>
                 <span>{user.apellido.charAt(0).toUpperCase()}</span>
-              </div>
-              <div className='usuario-nombre'>
+              </Link>
+              <Link to='/usuario/detalle' className='usuario-nombre'>
                 <p>{capitalizeFirstLetter(user.nombre)} {capitalizeFirstLetter(user.apellido)}</p>
-              </div>
+              </Link>
               <button onClick={cerrarSesion}>
                 <Link style={{ textDecoration: 'none' }}>
                   Cerrar sesión
@@ -185,8 +186,22 @@ const Header = () => {
               <img className='logo' src={images.instagram} alt="icono-instagram" />
             </div>
           </div>
+        : user?.nombre?.length > 3 
+        ? (
+          <div className='menu-icono'>
+            <Link to='/usuario/detalle' className='avatar-user'>
+              <span>{user?.nombre?.charAt(0).toUpperCase()}</span>
+              <span>{user?.apellido?.charAt(0).toUpperCase()}</span>
+            </Link>
+            <Link to='/usuario/detalle' className='usuario-nombre'>
+              <span>{capitalizeFirstLetter(user.nombre)} {capitalizeFirstLetter(user.apellido)}</span>
+            </Link>
+            <button onClick={showMenu}><HiMenu /></button>
+          </div>
+        )
         : (
           <div className='menu-icono'>
+            
             <button onClick={showMenu}><HiMenu /></button>
           </div>
         )

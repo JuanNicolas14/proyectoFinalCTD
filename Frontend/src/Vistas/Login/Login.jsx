@@ -74,7 +74,7 @@ const Login = () => {
               confirmButtonText: 'Aceptar',
             }
           ).then(() => {
-            navigate('/usuario/detalle')
+            navigate('/home')
           })
           
         } else {
