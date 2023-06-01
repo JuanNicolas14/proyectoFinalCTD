@@ -25,8 +25,6 @@ public class CargadoraDeDatos implements ApplicationRunner {
     }
 
     @Autowired
-
-
     @Override
     public void run(ApplicationArguments args) {
         BCryptPasswordEncoder cifrador= new BCryptPasswordEncoder();

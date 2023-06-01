@@ -16,7 +16,7 @@ public class Restaurante {
     @Column(name = "descripcion")
     private String descripcion;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "restaurante_id")
     private Set<Imagen> imagen;
 
@@ -24,11 +24,11 @@ public class Restaurante {
     private double precio;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "domicilio_id",referencedColumnName = "id")
+    @JoinColumn(name = "domicilio_id", referencedColumnName = "id")
     private Domicilio domicilio;
 
     @ManyToOne
-    @JoinColumn(name = "plan_id",referencedColumnName = "id")
+    @JoinColumn(name = "plan_id", referencedColumnName = "id")
     private Plan plan;
 
     // Constructor
