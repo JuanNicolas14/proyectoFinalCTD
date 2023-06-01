@@ -135,8 +135,7 @@ const Header = () => {
                 <h2>Menú</h2>
               </div>
               
-                {user 
-                ? user.rol == "ADMIN" ?
+                {user?.rol == "ADMIN" ?
                 (
                   <ul>
                     <li onClick={showMenu}>
@@ -150,14 +149,16 @@ const Header = () => {
                       </Link>
                     </li>
                   </ul>
-                ):(
-                <ul>
-                  <li onClick={cerrarSesion}>
-                    <Link style={{ textDecoration: 'none' }}>
-                      Cerrar sesión
-                    </Link>
-                  </li>
-                </ul>)
+                ):user.rol == "USER" 
+                ? (
+                  <ul>
+                    <li onClick={cerrarSesion}>
+                      <Link style={{ textDecoration: 'none' }}>
+                        Cerrar sesión
+                      </Link>
+                    </li>
+                  </ul>
+                )
                 :(
                   <ul>
                     <li onClick={showMenu}>
