@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { AuthContext } from '../../utils/AuthContext'
 import './detalleUser.css'
+import ErrorPage from '../../Componentes/ErrorPage/ErrorPage'
+
 
 const DetalleUser = () => {
-  const user = JSON.parse(localStorage.getItem("user"))  
+    const {user} = useContext(AuthContext)
     
   return (
     <main>
-        {user.nombre.length > 3 
+        {user?.nombre?.length > 3 
         ?(
             <section className='detalle-usuario'>
                 <h2>Detalles del Usuario</h2>
@@ -14,13 +17,13 @@ const DetalleUser = () => {
                     <p>Nombre: <span>{user.nombre}</span></p>
                     <p>Apellido: <span>{user.apellido}</span></p>
                     <p>Email: <span>{user.email}</span></p>
-                    <p>Rol: <span>{user.rol}</span></p>
+                    <p>Rol: <span>{user.rol == "ADMIN" ? "Administrador": "Usuario"}</span></p>
                 </div>
             </section>
         )
-        : <section className='no-user'>
-            <h2>No hay un usuario con sesión activa.</h2>
-        </section>
+        : (
+            <ErrorPage mensaje="No hay un usuario con sesión iniciada."/>
+        )
         }
         
     </main>

@@ -6,13 +6,13 @@ const Paginacion = ({pagina, setPagina, maximo}) => {
   const [paginaActual, setPaginaActual] = useState(1)
 
   const nextPage = () => {
-    setPaginaActual(paginaActual + 1)
-    setPagina(pagina + 1)
+    setPaginaActual(parseInt(paginaActual) + 1)
+    setPagina(parseInt(pagina) + 1)
   }
 
   const previousPage = () => {
-    setPaginaActual(paginaActual - 1)
-    setPagina(pagina - 1)
+    setPaginaActual(parseInt(paginaActual) - 1)
+    setPagina(parseInt(pagina) - 1)
   }
 
   const onKeyDown = e => {
@@ -47,7 +47,7 @@ const Paginacion = ({pagina, setPagina, maximo}) => {
           name="page"
           value={paginaActual} 
         />
-        <p>de {maximo.toFixed(0)}</p>
+        <p>de {Math.ceil(maximo)}</p>
         <button 
           disabled={pagina === Math.ceil(maximo) || pagina > Math.ceil(maximo)}
           onClick={nextPage}

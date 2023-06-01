@@ -1,10 +1,12 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import './agregarPlan.css'
 /*Herramientas */
 import Swal from 'sweetalert2';
+import ErrorPage from '../../Componentes/ErrorPage/ErrorPage';
+import { AuthContext } from '../../utils/AuthContext';
 
 const AgregarPlan = () => {
-
+    const {user} = useContext(AuthContext)
     const [nombre, setNombre] = useState('');
     const [descripcion, setDescripcion] = useState('');
     const [imagen, setImagen] = useState(null);
@@ -55,7 +57,9 @@ const AgregarPlan = () => {
 
   return (
     <main className="form-add-plan">
-        <section className="form-plan">
+        {user.rol == "ADMIN"
+        ? (
+          <section className="form-plan">
             <h2>Agregar Plan</h2>
 
             <form onSubmit={handleSubmit}>
@@ -99,7 +103,10 @@ const AgregarPlan = () => {
               </div>
               <button type="submit">Enviar</button>
             </form>
-        </section>
+          </section>
+        )
+        : <ErrorPage mensaje="No cuentas con los permisos necesarios para ingresar a esta pagina." />
+        }
     </main>
   )
 }

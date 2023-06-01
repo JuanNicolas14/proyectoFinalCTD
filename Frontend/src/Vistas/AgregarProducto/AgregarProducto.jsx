@@ -5,6 +5,7 @@ import baseUrl from '../../utils/baseUrl.json'
 /*Herramientas */
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../utils/AuthContext';
+import ErrorPage from '../../Componentes/ErrorPage/ErrorPage';
 
 const AgregarProducto = () => {
   const urlRestaurantes = baseUrl.url + "/restaurante"
@@ -219,163 +220,169 @@ const AgregarProducto = () => {
 
   return (         
     <main className="form-add-product">
-      <section className="form">
-        <h2>Agregar Restaurante</h2>
-        <form onSubmit={(e) => handleSubmit(e)} encType='multipart/form-data'>
-          <section className="form-parte-A">
-            <p>
-              <label htmlFor="nombre">Nombre:</label>
-              <input 
-                type="text" 
-                id="nombre"
-                value={producto.nombre}
-                onChange={(e)=> setProducto({...producto, nombre: e.target.value})}
-                required
-              />
-            </p>
+      {user?.rol == "ADMIN"
+      ? (
+        <section className="form">
+            <h2>Agregar Restaurante</h2>
+            <form onSubmit={(e) => handleSubmit(e)} encType='multipart/form-data'>
+              <section className="form-parte-A">
+                <p>
+                  <label htmlFor="nombre">Nombre:</label>
+                  <input 
+                    type="text" 
+                    id="nombre"
+                    value={producto.nombre}
+                    onChange={(e)=> setProducto({...producto, nombre: e.target.value})}
+                    required
+                  />
+                </p>
 
-            <div className="carga-imagen">
-              <span>Imagen:</span>
-              <input 
-                type="file"
-                className="input-imagen" 
-                name="imagen" id="imagen" 
-                placeholder="imagen" accept="image/*" 
-                onChange={e => handleImages(e)}
-                required
-              />
-              {producto?.imagenes?.length > 0 &&
-                <div className='imagenes-selectas'>
-                  <ul>
+                <div className="carga-imagen">
+                  <span>Imagen:</span>
+                  <input 
+                    type="file"
+                    className="input-imagen" 
+                    name="imagen" id="imagen" 
+                    placeholder="imagen" accept="image/*" 
+                    onChange={e => handleImages(e)}
+                    required
+                  />
+                  {producto?.imagenes?.length > 0 &&
+                    <div className='imagenes-selectas'>
+                      <ul>
 
-                  {producto.imagenes.map((imagen,index) => {
-                    return <li key={index}> {imagen.name} <span onClick={()=> eliminarImagen(index)}>X</span></li>
-                  })}
-                  </ul>
-                </div>
-              }
-              
-              <label className="label-imagen" htmlFor="imagen">
-                <span className="input-imagen_input-imagen-nombre">
-                {producto.imagenes?.length > 0 
-                  ? `${producto.imagenes.length} ${producto.imagenes.length > 1 
-                    ? "archivos seleccionados" 
-                    : "archivo seleccionado"}`
-                  : "Ningún archivo seleccionado"
+                      {producto.imagenes.map((imagen,index) => {
+                        return <li key={index}> {imagen.name} <span onClick={()=> eliminarImagen(index)}>X</span></li>
+                      })}
+                      </ul>
+                    </div>
                   }
-                </span>
-                <span className="input-imagen_input-imagen-boton">
-                  Seleccionar archivo
-                </span>
-              </label>
-            </div>
+                  
+                  <label className="label-imagen" htmlFor="imagen">
+                    <span className="input-imagen_input-imagen-nombre">
+                    {producto.imagenes?.length > 0 
+                      ? `${producto.imagenes.length} ${producto.imagenes.length > 1 
+                        ? "archivos seleccionados" 
+                        : "archivo seleccionado"}`
+                      : "Ningún archivo seleccionado"
+                      }
+                    </span>
+                    <span className="input-imagen_input-imagen-boton">
+                      Seleccionar archivo
+                    </span>
+                  </label>
+                </div>
 
-            <fieldset className="tipo-plan">
-              <legend>Tipo de Plan</legend>
-              <select
-                className='select-categorias'
-                value={producto.plan_id} 
-                onChange={(e)=> setProducto({...producto, plan_id: e.target.value})}
-              >
-                <option value="">Selecciona una opción</option>
-                {planesdb.map(plan => {
-                  return <option key={plan.id} value={plan.id}>{plan.nombre}</option>
-                })}
-                
-              </select>
-            </fieldset>
-            <p className="descripcion">
-              <label htmlFor="descripcion">Descripción:</label>
-              <textarea 
-                value={producto.descripcion}
-                id="descripcion" 
-                cols="30" rows="5" maxLength="250" 
-                onChange={(e)=> setProducto({...producto, descripcion: e.target.value})}
-                required
-              ></textarea>
-            </p>
+                <fieldset className="tipo-plan">
+                  <legend>Tipo de Plan</legend>
+                  <select
+                    className='select-categorias'
+                    value={producto.plan_id} 
+                    onChange={(e)=> setProducto({...producto, plan_id: e.target.value})}
+                  >
+                    <option value="">Selecciona una opción</option>
+                    {planesdb.map(plan => {
+                      return <option key={plan.id} value={plan.id}>{plan.nombre}</option>
+                    })}
+                    
+                  </select>
+                </fieldset>
+                <p className="descripcion">
+                  <label htmlFor="descripcion">Descripción:</label>
+                  <textarea 
+                    value={producto.descripcion}
+                    id="descripcion" 
+                    cols="30" rows="5" maxLength="250" 
+                    onChange={(e)=> setProducto({...producto, descripcion: e.target.value})}
+                    required
+                  ></textarea>
+                </p>
 
-            <p className="precio">
-              <label htmlFor="precio">Precio:</label>
-              <input 
-                value={producto.precio}
-                type='number' id="precio" 
-                name="precio"  placeholder="$ 0,00" step="any"  
-                onChange={(e)=> setProducto({...producto, precio: e.target.value})}
-                required/>
-            </p>
-          </section>
-          
-          <section className="form-parte-B">
-            <div className="direccion">
-              <h3>--Direccion--</h3>
-              <p>
-                <label htmlFor="calle">Calle:</label>
-                <input 
-                  value={producto.calle}
-                  type="number" id="calle"
-                  onChange={(e)=> setProducto({...producto, calle: e.target.value})}
-                  required
-                />
-              </p>
-              <p>
-                <label htmlFor="numero">Número:</label>
-                <input 
-                  value={producto.numero}
-                  type="number" id="numero" 
-                  onChange={(e)=> setProducto({...producto, numero: e.target.value})}
-                  required
-                />
-              </p>
-              <p>
-                <label htmlFor="localidad">Localidad:</label>
-                <input 
-                  value={producto.localidad}
-                  type="text" id="localidad"
-                  onChange={(e)=> setProducto({...producto, localidad: e.target.value})} 
-                  required/>
-              </p>
-              <p>
-                <label htmlFor="ciudad">Ciudad:</label>
-                <input 
-                  value={producto.ciudad}
-                  type="text" id="ciudad"
-                  onChange={(e)=> setProducto({...producto, ciudad: e.target.value})} 
-                  required
-                />
-              </p>
+                <p className="precio">
+                  <label htmlFor="precio">Precio:</label>
+                  <input 
+                    value={producto.precio}
+                    type='number' id="precio" 
+                    name="precio"  placeholder="$ 0,00" step="any"  
+                    onChange={(e)=> setProducto({...producto, precio: e.target.value})}
+                    required/>
+                </p>
+              </section>
               
-              <fieldset className="tipo-plan">
-                <legend>Pais</legend>
+              <section className="form-parte-B">
+                <div className="direccion">
+                  <h3>--Direccion--</h3>
+                  <p>
+                    <label htmlFor="calle">Calle:</label>
+                    <input 
+                      value={producto.calle}
+                      type="number" id="calle"
+                      onChange={(e)=> setProducto({...producto, calle: e.target.value})}
+                      required
+                    />
+                  </p>
+                  <p>
+                    <label htmlFor="numero">Número:</label>
+                    <input 
+                      value={producto.numero}
+                      type="number" id="numero" 
+                      onChange={(e)=> setProducto({...producto, numero: e.target.value})}
+                      required
+                    />
+                  </p>
+                  <p>
+                    <label htmlFor="localidad">Localidad:</label>
+                    <input 
+                      value={producto.localidad}
+                      type="text" id="localidad"
+                      onChange={(e)=> setProducto({...producto, localidad: e.target.value})} 
+                      required/>
+                  </p>
+                  <p>
+                    <label htmlFor="ciudad">Ciudad:</label>
+                    <input 
+                      value={producto.ciudad}
+                      type="text" id="ciudad"
+                      onChange={(e)=> setProducto({...producto, ciudad: e.target.value})} 
+                      required
+                    />
+                  </p>
+                  
+                  <fieldset className="tipo-plan">
+                    <legend>Pais</legend>
 
-                <input 
-                  type="radio" name="pais" 
-                  id="plan_1" value="1" 
-                  onChange={(e)=> setProducto({...producto, pais_id: e.target.value})}
-                  required/>
-                <label htmlFor="plan_1">Colombia</label>
+                    <input 
+                      type="radio" name="pais" 
+                      id="plan_1" value="1" 
+                      onChange={(e)=> setProducto({...producto, pais_id: e.target.value})}
+                      required/>
+                    <label htmlFor="plan_1">Colombia</label>
 
-                <input 
-                  type="radio" name="pais" 
-                  id="plan_2" value="2" 
-                  onChange={(e)=> setProducto({...producto, pais_id: e.target.value})}
-                  required/>
-                <label htmlFor="plan_2">Argentina</label>
+                    <input 
+                      type="radio" name="pais" 
+                      id="plan_2" value="2" 
+                      onChange={(e)=> setProducto({...producto, pais_id: e.target.value})}
+                      required/>
+                    <label htmlFor="plan_2">Argentina</label>
 
-                <input 
-                  type="radio" name="pais" 
-                  id="plan_3" value="3" 
-                  onChange={(e)=> setProducto({...producto, pais_id: e.target.value})}
-                  required/>
-                <label htmlFor="plan_3">Brasil</label>
-              </fieldset>
-            </div>
-          </section>
-          <section className="form-parte-C">
-            <button type="submit">Guardar</button>
-          </section>
-        </form>
-      </section>
+                    <input 
+                      type="radio" name="pais" 
+                      id="plan_3" value="3" 
+                      onChange={(e)=> setProducto({...producto, pais_id: e.target.value})}
+                      required/>
+                    <label htmlFor="plan_3">Brasil</label>
+                  </fieldset>
+                </div>
+              </section>
+              <section className="form-parte-C">
+                <button type="submit">Guardar</button>
+              </section>
+            </form>
+        </section>
+      )
+      : <ErrorPage mensaje="No cuentas con los permisos necesarios para ingresar a esta pagina."/>
+      }
+      
     </main>
   )
 }

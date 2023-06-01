@@ -131,6 +131,9 @@ header {
     font-weight: 500;
     margin: 20px 10px;
   }
+  .menu-movil li a {
+    color: var(--main-color);
+  }
   .menu-movil li:last-child{
     padding-top: 20px;
     margin-right: 10px;
@@ -177,7 +180,7 @@ header {
     margin: 10px auto;
     background-color: var(--main-color);
   }
-
+  /*Fin menu movil*/
   .botones-logueo .avatar-user {
     background-color: var(--main-color);
     color: white;

@@ -1,0 +1,30 @@
+section.error-page{
+    width: 100%;
+
+}
+section.error-page h2 {
+    margin: 20px;
+    font-size: 1.2rem;
+}
+section.error-page div {
+    box-sizing: border-box;
+    background-color: var(--main-color);
+    height: 5vh;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding: 1rem;
+}
+section.error-page div a {
+    display: flex;
+    color: white;
+    font-size: 2rem;
+}
+
+@media (max-width:480px) {
+
+    section.error-page h2 {
+        margin: 20px;
+        font-size: 1.0rem;
+    }
+}
