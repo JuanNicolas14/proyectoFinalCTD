@@ -94,13 +94,13 @@ const Header = () => {
 
             </div>
           : <div className='botones-logueo'>
-              <div className='avatar-user'>
+              <Link to='/usuario/detalle' className='avatar-user'>
                 <span>{user.nombre.charAt(0).toUpperCase()}</span>
                 <span>{user.apellido.charAt(0).toUpperCase()}</span>
-              </div>
-              <div className='usuario-nombre'>
+              </Link>
+              <Link to='/usuario/detalle' className='usuario-nombre'>
                 <p>{capitalizeFirstLetter(user.nombre)} {capitalizeFirstLetter(user.apellido)}</p>
-              </div>
+              </Link>
               <button onClick={cerrarSesion}>
                 <Link style={{ textDecoration: 'none' }}>
                   Cerrar sesión
