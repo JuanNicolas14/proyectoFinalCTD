@@ -24,9 +24,6 @@ public class Plan {
     @Column(name = "imagen")
     private String imagen;
 
-    @OneToMany(mappedBy = "plan")
-    @JsonIgnore
-    private Set<Restaurante> restaurantes= new HashSet<>();
 
     public Plan(String nombre, String descripcion, String imagen) {
         this.nombre = nombre;
@@ -69,13 +66,6 @@ public class Plan {
         this.imagen = imagen;
     }
 
-    public Set<Restaurante> getRestaurantes() {
-        return restaurantes;
-    }
-
-    public void setRestaurantes(Set<Restaurante> restaurantes) {
-        this.restaurantes = restaurantes;
-    }
 
     @Override
     public String toString() {
@@ -84,7 +74,6 @@ public class Plan {
                 ", nombre='" + nombre + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 ", imagen='" + imagen + '\'' +
-                ", restaurantes=" + restaurantes +
                 '}';
     }
 }

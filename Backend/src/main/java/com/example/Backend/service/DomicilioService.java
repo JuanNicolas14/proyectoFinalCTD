@@ -18,7 +18,4 @@ public class DomicilioService {
     public Domicilio guardarDomicilio(Domicilio domicilio) {
         return domicilioRepository.save(domicilio);
     }
-
-
-
 }

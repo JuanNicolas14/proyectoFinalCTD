@@ -38,7 +38,7 @@ public class RestauranteService {
      */
     public Optional<RestauranteDTO> buscarRestaurante(Long id) {
         Optional<Restaurante> restaurante = restauranteRepository.findById(id);
-        if (restaurante == null) {
+        if (restaurante.isEmpty()) {
             return Optional.empty();
         }
         RestauranteDTO restauranteDTO = convertirRestauranteARestauranteDTO(restaurante.get());
