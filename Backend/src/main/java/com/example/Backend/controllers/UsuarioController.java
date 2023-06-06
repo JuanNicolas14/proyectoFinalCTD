@@ -1,18 +1,24 @@
 package com.example.Backend.controllers;
 
 import com.example.Backend.dto.UsuarioDTO;
+import com.example.Backend.enums.MailEnum;
 import com.example.Backend.exceptions.BadRequestException;
+import com.example.Backend.exceptions.MailSenderException;
 import com.example.Backend.exceptions.ResourceNotFoundException;
 import com.example.Backend.models.Usuario;
 import com.example.Backend.repository.UsuarioRepository;
+import com.example.Backend.service.MailService;
 import com.example.Backend.service.UsuarioService;
+import com.example.Backend.utils.MailUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -22,20 +28,35 @@ import java.util.logging.Logger;
 @RequestMapping("/usuario")
 @CrossOrigin(origins = "*")
 public class UsuarioController {
-    private UsuarioService usuarioService;
-    private UsuarioRepository usuarioRepository;
+    @Value("${frontend.url}")
+    private String frontendUrl;
+
+    private final UsuarioService usuarioService;
+    private final UsuarioRepository usuarioRepository;
+    private final MailService mailService;
+
+    private final MailUtil mailUtil = new MailUtil();
 
     @Autowired
-    public UsuarioController(UsuarioService usuarioService,UsuarioRepository usuarioRepository ) {
+    public UsuarioController(UsuarioService usuarioService,UsuarioRepository usuarioRepository, MailService mailService ) {
         this.usuarioService = usuarioService;
         this.usuarioRepository = usuarioRepository;
+        this.mailService = mailService;
     }
 
-    private Logger logger = Logger.getLogger(UsuarioController.class.getName());
+    private final Logger logger = Logger.getLogger(UsuarioController.class.getName());
 
     @PostMapping("/registrar")
-    public ResponseEntity<UsuarioDTO> guardarUsuario(@RequestBody UsuarioDTO usuarioDTO) throws BadRequestException {
-        return ResponseEntity.ok(usuarioService.guardarUsuario(usuarioDTO));
+    public ResponseEntity<UsuarioDTO> guardarUsuario(@RequestBody UsuarioDTO usuarioDTO) throws BadRequestException, MailSenderException, IOException {
+        // Almacenamos el usuario
+        UsuarioDTO usuarioGuardado = usuarioService.guardarUsuario(usuarioDTO);
+
+        // Enviamos el correo de validación de cuenta
+        String url = frontendUrl + "/usuario/validar/" + usuarioGuardado.getId();
+        String body = mailUtil.correoValidacion(url, usuarioGuardado.getNombre() + " " + usuarioGuardado.getApellido());
+        mailService.sendMail(usuarioGuardado.getEmail(), MailEnum.VALIDACION_CUENTA.toString(), body);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioGuardado);
     }
 
     @GetMapping("/{id}")
@@ -65,7 +86,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/detalle")
-    public ResponseEntity<UsuarioDTO> user() throws Exception{
+    public ResponseEntity<UsuarioDTO> user() throws Exception {
 
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -103,4 +124,13 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exc.getMessage());
     }
 
+    /**
+     * Maneja la excepción MailSenderException y retorna un ResponseEntity con el mensaje de error
+     * @param exc Mensaje de la excepción
+     * @return ResponseEntity con el mensaje de error
+     */
+    @ExceptionHandler(MailSenderException.class)
+    public ResponseEntity<String> handleMailSenderException(String exc) {
+        return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(exc);
+    }
 }

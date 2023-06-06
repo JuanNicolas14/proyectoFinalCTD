@@ -41,16 +41,16 @@ public class UsuarioService implements UserDetailsService {
         if(usuarioDTO.getNombre() != null && usuarioDTO.getApellido() != null && usuarioDTO.getEmail() != null &&
                 usuarioDTO.getPassword() != null) {
 
-            BCryptPasswordEncoder cifradorContraseña= new BCryptPasswordEncoder();
-            usuarioDTO.setPassword(cifradorContraseña.encode(usuarioDTO.getPassword()));
+            BCryptPasswordEncoder cifradorContrasena= new BCryptPasswordEncoder();
+            usuarioDTO.setPassword(cifradorContrasena.encode(usuarioDTO.getPassword()));
             usuarioDTO.setRol("USER");
 
             Optional<Usuario> usuarioExistente = usuarioRepository.findByEmail(usuarioDTO.getEmail());
             if (usuarioExistente.isPresent()) {
                 throw new BadRequestException("Error. El email ya está registrado.");
-            } else{
+            } else {
                 Usuario usuario = convertirUsuarioDTOaUsuario(usuarioDTO);
-                this.logger.info("Guardando usuario: " + usuarioDTO.toString());
+                logger.info("Guardando usuario: " + usuarioDTO.toString());
                 return convertirUsuarioaUsuarioDTO(usuarioRepository.save(usuario));
             }
 
