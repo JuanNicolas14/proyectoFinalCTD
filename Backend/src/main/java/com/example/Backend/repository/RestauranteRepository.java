@@ -13,4 +13,13 @@ public interface RestauranteRepository extends JpaRepository<Restaurante, Long> 
 
     @Query(value = "SELECT r.* FROM restaurante r JOIN plan p ON p.id = r.plan_id WHERE p.nombre = :plan", nativeQuery = true)
     List<Restaurante> findByPlan(@Param("plan") String plan);
+
+    // Método personalizado para buscar productos por categoría y ciudad
+    @Query( value = "SELECT r.* " +
+            "FROM restaurante r " +
+            "JOIN domicilio d ON d.id = r.domicilio_id " +
+            "JOIN plan p on p.id = r.plan_id " +
+            "where d.ciudad = :ciudad " +
+            " and p.nombre = :plan", nativeQuery = true)
+    List<Restaurante> findByCiudadAndPlan(String ciudad, String plan);
 }
