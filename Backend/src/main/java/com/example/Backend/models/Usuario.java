@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Set;
 
 @Entity
 @Table(name="usuario")
@@ -28,6 +29,10 @@ public class Usuario implements UserDetails {
     @ManyToOne
     @JoinColumn(name = "rol_id" ,referencedColumnName = "id")
     private UsuarioRol usuarioRol;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id")
+    private Set<Puntuacion> puntuaciones;
 
     public Usuario(String nombre, String apellido, String email, String password, UsuarioRol usuarioRol) {
         this.nombre = nombre;
