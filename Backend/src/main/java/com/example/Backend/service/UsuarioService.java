@@ -8,8 +8,6 @@ import com.example.Backend.models.UsuarioRol;
 import com.example.Backend.repository.UsuarioRepository;
 import com.example.Backend.repository.UsuarioRolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,13 +19,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-;
-
 @Service
 public class UsuarioService implements UserDetailsService {
 
-    private UsuarioRepository usuarioRepository;
-    private UsuarioRolRepository usuarioRolRepository;
+    private final UsuarioRepository usuarioRepository;
+    private final UsuarioRolRepository usuarioRolRepository;
 
     @Autowired
     public UsuarioService(UsuarioRepository usuarioRepository, UsuarioRolRepository usuarioRolRepository) {
@@ -50,7 +46,7 @@ public class UsuarioService implements UserDetailsService {
                 throw new BadRequestException("Error. El email ya está registrado.");
             } else {
                 Usuario usuario = convertirUsuarioDTOaUsuario(usuarioDTO);
-                logger.info("Guardando usuario: " + usuarioDTO.toString());
+                logger.info("Guardando usuario: " + usuarioDTO);
                 return convertirUsuarioaUsuarioDTO(usuarioRepository.save(usuario));
             }
 
@@ -109,6 +105,23 @@ public class UsuarioService implements UserDetailsService {
         }
     }
 
+    /**
+     * Método para actualizar un usuario
+     * @param usuarioDTO UsuarioDTO con los datos a actualizar
+     */
+    public UsuarioDTO actualizarUsuario(UsuarioDTO usuarioDTO) throws ResourceNotFoundException {
+        Optional<Usuario> usuarioBuscado = usuarioRepository.findById(usuarioDTO.getId());
+        if (usuarioBuscado.isPresent()){
+            Usuario usuario = convertirUsuarioDTOaUsuario(usuarioDTO);
+            logger.info("Actualizando usuario: " + usuarioDTO.toString());
+            return convertirUsuarioaUsuarioDTO(usuarioRepository.save(usuario));
+        }else{
+            logger.warning("No se pudo actualizar usuario con Id= "+usuarioDTO.getId());
+            throw new ResourceNotFoundException("Error. No existe el usuario con id= "+usuarioDTO.getId());
+        }
+    }
+
+
     private Usuario convertirUsuarioDTOaUsuario(UsuarioDTO usuarioDTO){
         Usuario usuario = new Usuario();
         Optional<UsuarioRol> usuarioRolBuscado;
@@ -120,6 +133,7 @@ public class UsuarioService implements UserDetailsService {
         usuario.setPassword(usuarioDTO.getPassword());
         usuarioRolBuscado = usuarioRolRepository.findByRol(usuarioDTO.getRol());
         usuario.setUsuarioRol(usuarioRolBuscado.get());
+        usuario.setValidado(usuarioDTO.getValidado());
 
         return usuario;
     }
@@ -133,6 +147,8 @@ public class UsuarioService implements UserDetailsService {
         usuarioDTO.setEmail(usuario.getEmail());
         usuarioDTO.setPassword(usuario.getPassword());
         usuarioDTO.setRol(usuario.getUsuarioRol().getRol());
+        usuarioDTO.setValidado(usuario.getValidado());
+
         return usuarioDTO;
     }
 

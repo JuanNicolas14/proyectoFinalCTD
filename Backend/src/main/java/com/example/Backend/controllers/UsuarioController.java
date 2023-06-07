@@ -103,6 +103,37 @@ public class UsuarioController {
         return ResponseEntity.ok(usuario);
     }
 
+    /**
+     * Válida la cuenta de un usuario
+     * @param id id del usuario
+     * @return ResponseEntity con el mensaje de éxito
+     */
+    @PutMapping("/validar/{id}")
+    public ResponseEntity<String> validarCuenta(@PathVariable Long id) throws Exception {
+        // Checamos si existe el usuario
+        Optional<UsuarioDTO> usuario = usuarioService.buscarUsuario(id);
+        if (usuario.isEmpty()) {
+            throw new ResourceNotFoundException("No se encontró el usuario con id: " + id);
+        }
+
+        // Checamos si la cuenta ya está validada
+        logger.info("Validando cuenta del usuario: " + usuario.get());
+        if (usuario.get().getValidado() != null && usuario.get().getValidado()) {
+            throw new BadRequestException("La cuenta ya está validada");
+        }
+
+        // Actualizamos el campo de validación de la cuenta en la base de datos
+        UsuarioDTO usuarioDTO = usuario.get();
+        usuarioDTO.setValidado(true);
+        usuarioDTO = usuarioService.actualizarUsuario(usuarioDTO);
+        logger.info("Se validó la cuenta del usuario: " + usuarioDTO);
+
+        // Enviamos correo de bienvenida
+        String body = mailUtil.correoBienvenida(usuario.get().getNombre() + " " + usuario.get().getApellido());
+        mailService.sendMail(usuario.get().getEmail(), MailEnum.BIENVENIDA.toString(), body);
+
+        return ResponseEntity.ok("Se validó la cuenta del usuario con id: " + id);
+    }
 
     /**
      * Maneja la excepción SQLException y retorna un ResponseEntity con el mensaje de error
@@ -132,5 +163,15 @@ public class UsuarioController {
     @ExceptionHandler(MailSenderException.class)
     public ResponseEntity<String> handleMailSenderException(String exc) {
         return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(exc);
+    }
+
+    /**
+     * Maneja la excepción IOException y retorna un ResponseEntity con el mensaje de error
+     * @param exc Mensaje de la excepción
+     * @return ResponseEntity con el mensaje de error
+     */
+    @ExceptionHandler(IOException.class)
+    public ResponseEntity<String> handleIOException(String exc) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exc);
     }
 }

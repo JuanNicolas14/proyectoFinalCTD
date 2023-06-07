@@ -33,13 +33,31 @@ public class MailUtil {
         if (mainTitle == null) {
             throw new IOException("No se ha encontrado el elemento con id main-title");
         }
-        mainTitle.after("<p>¡Hola " + user + "!</p>");
+        mainTitle.after("<h2>¡Hola " + user + "!</h2>");
 
         Element validateLink = doc.getElementById("validate-link");
         if (validateLink == null) {
             throw new IOException("No se ha encontrado el elemento con id validate-link");
         }
         validateLink.attr("href", url);
+
+        return doc.toString();
+    }
+
+    /**
+     * Método que genera el correo de bienvenida
+     * @param user Usuario al que se le envía el correo
+     * @return Cuerpo del correo de bienvenida
+     */
+    public String correoBienvenida(String user) throws IOException {
+        File template = new File("src/main/resources/templates/bienvenida.html");
+        Document doc = Jsoup.parse(template, "UTF-8");
+
+        Element mainTitle = doc.getElementById("main-title");
+        if (mainTitle == null) {
+            throw new IOException("No se ha encontrado el elemento con id main-title");
+        }
+        mainTitle.after("<h2>¡Hola " + user + "!</h2>");
 
         return doc.toString();
     }

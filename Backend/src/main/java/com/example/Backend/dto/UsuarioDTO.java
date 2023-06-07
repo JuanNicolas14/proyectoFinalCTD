@@ -8,13 +8,15 @@ public class UsuarioDTO {
     private String email;
     private String password;
     private String rol;
+    private Boolean validado;
 
-    public UsuarioDTO(String nombre, String apellido, String email, String password, String rol) {
+    public UsuarioDTO(String nombre, String apellido, String email, String password, String rol, Boolean validado) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.password = password;
         this.rol = rol;
+        this.validado = validado;
     }
 
     public UsuarioDTO() {
@@ -68,14 +70,24 @@ public class UsuarioDTO {
         this.rol = rol;
     }
 
+    public Boolean getValidado() {
+        return validado;
+    }
+
+    public void setValidado(Boolean validado) {
+        this.validado = validado;
+    }
+
     @Override
     public String toString() {
         return "UsuarioDTO{" +
-                "nombre='" + nombre + '\'' +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", rol=" + rol +
+                ", rol='" + rol + '\'' +
+                ", validado=" + validado +
                 '}';
     }
 }

@@ -30,7 +30,7 @@ public class MailService {
      * Envía un correo electrónico
      * @param to Correo electrónico del destinatario
      * @param subject Asunto del correo
-     * @param body Cuerpo del correo
+     * @param body Cuerpo del correo en html
      * @throws MailSenderException Excepción en caso de que no se pueda enviar el correo
      */
     @Async
