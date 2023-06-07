@@ -109,4 +109,23 @@ public class RestauranteService {
 
         return restauranteDTO;
     }
+
+    /**
+     * Busca todos los restaurantes filtrando por ciudad y categoria
+     * @param ciudad nombre de la ciudad
+     * @param plan nombre de la categoria
+     * @return Lista de restaurantes
+     */
+    public List<RestauranteDTO> buscarPorCiudadYPlan(String ciudad, String plan){
+        List<Restaurante> restaurantes = restauranteRepository.findByCiudadAndPlan(ciudad, plan);
+        List<RestauranteDTO> restaurantesDTO = new ArrayList<>();
+        logger.info("Convirtiendo restaurantes filtrado por ciudad y plan a DTO");
+        for (Restaurante restaurante:restaurantes) {
+            restaurantesDTO.add(
+                    convertirRestauranteARestauranteDTO(restaurante)
+            );
+        }
+
+        return restaurantesDTO;
+    }
 }

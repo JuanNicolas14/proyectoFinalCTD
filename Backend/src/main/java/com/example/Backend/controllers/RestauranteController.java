@@ -194,4 +194,15 @@ public class RestauranteController {
     public ResponseEntity<String> handleResourceNotFoundException(ResourceNotFoundException exc) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exc.getMessage());
     }
+
+    /**
+     * Endpoint para listar los restaurantes por ciudad y plan
+     * @param ciudad ciudad de los restaurantes a buscar
+     * @param categoria plan de los restaurantes a buscar
+     * @return Una lista de restaurantes DTO con los restaurantes encontrados
+     */
+    @GetMapping("/{categoria}/{ciudad}")
+    public List<RestauranteDTO> listarRestaurantesPorCiudadYPlan(@PathVariable String ciudad, @PathVariable String categoria){
+        return restauranteService.buscarPorCiudadYPlan(ciudad, categoria);
+    }
 }
