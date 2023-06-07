@@ -1,7 +1,5 @@
 package com.example.Tests.configs;
 
-import com.example.Backend.security.CargadoraDeDatos;
-import com.example.Backend.service.RestauranteService;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

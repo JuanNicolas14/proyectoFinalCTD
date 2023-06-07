@@ -35,6 +35,12 @@ public class Restaurante {
     @JoinColumn(name = "restaurante_id")
     private Set<Puntuacion> puntuaciones;
 
+    @Column(name = "puntuacion_promedio")
+    private double puntuacionPromedio;
+
+    @Column(name = "numero_valoraciones")
+    private int numeroValoraciones;
+
     // Constructor
 
 
@@ -48,6 +54,22 @@ public class Restaurante {
     }
 
     public Restaurante() {
+    }
+
+    //Calificacion Promedio
+    public double calcularPromedioCalificaciones() {
+        if (puntuaciones.isEmpty()) {
+            return 0.0; // Retorna 0 si no hay puntuaciones
+        }
+
+        int totalPuntuaciones = puntuaciones.size();
+        int sumaPuntuaciones = 0;
+
+        for (Puntuacion puntuacion : puntuaciones) {
+            sumaPuntuaciones += puntuacion.getPuntuacion();
+        }
+
+        return (double) sumaPuntuaciones / totalPuntuaciones;
     }
 
     // Getters and setters
@@ -117,6 +139,22 @@ public class Restaurante {
         this.puntuaciones = puntuaciones;
     }
 
+    public double getPuntuacionPromedio() {
+        return puntuacionPromedio;
+    }
+
+    public void setPuntuacionPromedio(double puntuacionPromedio) {
+        this.puntuacionPromedio = puntuacionPromedio;
+    }
+
+    public int getNumeroValoraciones() {
+        return numeroValoraciones;
+    }
+
+    public void setNumeroValoraciones(int numeroValoraciones) {
+        this.numeroValoraciones = numeroValoraciones;
+    }
+
     @Override
     public String toString() {
         return "Restaurante{" +
@@ -127,6 +165,8 @@ public class Restaurante {
                 ", precio=" + precio +
                 ", domicilio=" + domicilio +
                 ", plan=" + plan +
+                ", puntuaciónPromedio=" + puntuacionPromedio +
+                ", numeroValoraciones=" + numeroValoraciones +
                 '}';
     }
 }

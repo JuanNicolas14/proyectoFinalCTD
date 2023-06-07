@@ -43,7 +43,8 @@ public class PuntuacionService {
 
             Puntuacion puntuacion = puntuacionRepository.save(convertirPuntuacionDTOAPuntuacion(puntuacionDTO));
 
-
+            restauranteBuscado.get().setPuntuacionPromedio(restauranteBuscado.get().calcularPromedioCalificaciones());
+            restauranteBuscado.get().setNumeroValoraciones(restauranteBuscado.get().getPuntuaciones().size());
             restauranteRepository.save(restauranteBuscado.get());
 
             return convertirPuntuacionAPuntuacionDTO(puntuacion);
