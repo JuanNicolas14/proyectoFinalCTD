@@ -10,10 +10,10 @@ import org.springframework.context.annotation.Profile;
 @Configuration
 public class TestConfig {
 
-    @Bean
-    @Primary
-    public CargadoraDeDatos cargadoraDeDatos() {
-        return Mockito.mock(CargadoraDeDatos.class);
-    }
+    //@Bean
+    //@Primary
+    //public CargadoraDeDatos cargadoraDeDatos() {
+    //    return Mockito.mock(CargadoraDeDatos.class);
+    //}
 
 }
