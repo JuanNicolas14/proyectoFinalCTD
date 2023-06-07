@@ -31,6 +31,10 @@ public class Restaurante {
     @JoinColumn(name = "plan_id", referencedColumnName = "id")
     private Plan plan;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurante_id")
+    private Set<Puntuacion> puntuaciones;
+
     // Constructor
 
 
@@ -103,6 +107,14 @@ public class Restaurante {
 
     public void setPlan(Plan plan) {
         this.plan = plan;
+    }
+
+    public Set<Puntuacion> getPuntuaciones() {
+        return puntuaciones;
+    }
+
+    public void setPuntuaciones(Set<Puntuacion> puntuaciones) {
+        this.puntuaciones = puntuaciones;
     }
 
     @Override
