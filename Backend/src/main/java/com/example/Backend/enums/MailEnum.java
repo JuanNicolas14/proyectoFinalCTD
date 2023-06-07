@@ -4,7 +4,8 @@ package com.example.Backend.enums;
  * Enum relacionado con el envío de correos electrónicos
  */
 public enum MailEnum {
-    VALIDACION_CUENTA("Validación de cuenta");
+    VALIDACION_CUENTA("Validación de cuenta"),
+    BIENVENIDA("Bienvenido a la aplicación");
 
     private final String asunto;
 

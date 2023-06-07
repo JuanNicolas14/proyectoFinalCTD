@@ -23,6 +23,8 @@ public class Usuario implements UserDetails {
     private String email;
     @Column
     private String password;
+    @Column
+    private Boolean validado;
     @ManyToOne
     @JoinColumn(name = "rol_id" ,referencedColumnName = "id")
     private UsuarioRol usuarioRol;
@@ -107,6 +109,14 @@ public class Usuario implements UserDetails {
         return true;
     }
 
+    public Boolean getValidado() {
+        return validado;
+    }
+
+    public void setValidado(Boolean validado) {
+        this.validado = validado;
+    }
+
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
@@ -120,11 +130,13 @@ public class Usuario implements UserDetails {
     @Override
     public String toString() {
         return "Usuario{" +
-                "nombre='" + nombre + '\'' +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", rol=" + usuarioRol +
+                ", validado=" + validado +
+                ", usuarioRol=" + usuarioRol +
                 '}';
     }
 }
