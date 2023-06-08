@@ -29,7 +29,7 @@ const ListaPorFiltros = () => {
         ?(
         <>
           <section className='restaurantes'>
-            <h2>{`Restaurantes con plan ${plan} en la ciudad de ${primerLetraMayuscula(ciudad)}`}</h2>
+            <h2>{`Restaurantes con plan ${plan} en ${primerLetraMayuscula(ciudad)}`}</h2>
             <div className='listado-restaurantes'>
               {restaurantesFiltradosGuardados.slice(
                 (pagina - 1) * cantidadPorPagina,
