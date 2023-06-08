@@ -36,10 +36,7 @@ public class PuntuacionService {
     public PuntuacionDTO guardarPuntuacion(PuntuacionDTO puntuacionDTO) throws BadRequestException {
         if(puntuacionDTO.getPuntuacion() >= 1 && puntuacionDTO.getPuntuacion()<=5){
             Optional<Restaurante> restauranteBuscado = restauranteRepository.findById(puntuacionDTO.getRestaurante_id());
-            puntuacionDTO.setRestaurante_id(restauranteBuscado.get().getId());
-
             Optional<Usuario> usuarioBuscado = usuarioRepository.findById(puntuacionDTO.getUsuario_id());
-            puntuacionDTO.setUsuario_id(restauranteBuscado.get().getId());
 
             Puntuacion puntuacion = puntuacionRepository.save(convertirPuntuacionDTOAPuntuacion(puntuacionDTO));
 
