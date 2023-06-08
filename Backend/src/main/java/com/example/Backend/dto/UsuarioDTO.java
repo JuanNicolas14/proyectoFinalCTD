@@ -1,5 +1,7 @@
 package com.example.Backend.dto;
 
+import java.util.Date;
+
 public class UsuarioDTO {
 
     private Long id;
@@ -9,14 +11,24 @@ public class UsuarioDTO {
     private String password;
     private String rol;
     private Boolean validado;
+    private Date fechaCreacion;
 
-    public UsuarioDTO(String nombre, String apellido, String email, String password, String rol, Boolean validado) {
+    public UsuarioDTO(String nombre, String apellido, String email, String password, String rol, Boolean validado, Date fechaCreacion) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.password = password;
         this.rol = rol;
         this.validado = validado;
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public Date getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(Date fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
     }
 
     public UsuarioDTO() {
@@ -88,6 +100,7 @@ public class UsuarioDTO {
                 ", password='" + password + '\'' +
                 ", rol='" + rol + '\'' +
                 ", validado=" + validado +
+                ", fechaCreacion=" + fechaCreacion +
                 '}';
     }
 }

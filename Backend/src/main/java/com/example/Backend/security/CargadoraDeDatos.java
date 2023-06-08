@@ -33,7 +33,7 @@ public class CargadoraDeDatos implements ApplicationRunner {
 
 
         Optional<UsuarioRol> usuarioRol = usuarioRolRepository.findByRol("ADMIN");
-        Usuario admin= new Usuario("Maria","Perez", "admin@gmail.com",passCifradaAdmin, usuarioRol.get());
+        Usuario admin= new Usuario("Maria","Perez", "admin@gmail.com",passCifradaAdmin, usuarioRol.get(), null, null);
 
         Optional<Usuario> usuarioEncontrado = usuarioRepository.findByEmail(admin.getEmail());
 
