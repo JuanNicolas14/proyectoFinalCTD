@@ -107,6 +107,14 @@ public class RestauranteService {
         restauranteDTO.setPlan(restaurante.getPlan().getNombre());
         restauranteDTO.setPrecio(restaurante.getPrecio());
 
+        if (restaurante.getPuntuaciones() != null) {
+            restauranteDTO.setNumeroValoraciones(restaurante.getPuntuaciones().size());
+            restauranteDTO.setPuntuacionPromedio(restaurante.getPuntuacionPromedio());
+        } else {
+            restauranteDTO.setNumeroValoraciones(0);
+            restauranteDTO.setPuntuacionPromedio(0);
+        }
+
         return restauranteDTO;
     }
 
