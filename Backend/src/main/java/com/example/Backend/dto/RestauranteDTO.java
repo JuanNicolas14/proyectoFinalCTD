@@ -17,6 +17,10 @@ public class RestauranteDTO {
     private String plan;
     private double precio;
 
+    private double puntuacionPromedio;
+
+    private int numeroValoraciones;
+
     // Constructor
     public RestauranteDTO() {}
 
@@ -88,7 +92,21 @@ public class RestauranteDTO {
         this.plan = plan;
     }
 
-    // Metodos
+    public double getPuntuacionPromedio() {
+        return puntuacionPromedio;
+    }
+
+    public void setPuntuacionPromedio(double puntuacionPromedio) {
+        this.puntuacionPromedio = puntuacionPromedio;
+    }
+
+    public int getNumeroValoraciones() {
+        return numeroValoraciones;
+    }
+
+    public void setNumeroValoraciones(int numeroValoraciones) {
+        this.numeroValoraciones = numeroValoraciones;
+    }
 
 
     @Override
@@ -102,6 +120,8 @@ public class RestauranteDTO {
                 ", pais='" + pais + '\'' +
                 ", plan='" + plan + '\'' +
                 ", precio=" + precio +
+                ", puntuacionPromedio=" + puntuacionPromedio +
+                ", numeroValoraciones=" + numeroValoraciones+
                 '}';
     }
 }
