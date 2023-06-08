@@ -12,7 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
-
+/*
 @Component
 public class CargadoraDeDatos implements ApplicationRunner {
     private UsuarioRepository usuarioRepository;
@@ -24,7 +24,7 @@ public class CargadoraDeDatos implements ApplicationRunner {
         this.usuarioRolRepository = usuarioRolRepository;
     }
 
-    @Autowired
+
     @Override
     public void run(ApplicationArguments args) {
         BCryptPasswordEncoder cifrador= new BCryptPasswordEncoder();
@@ -43,4 +43,4 @@ public class CargadoraDeDatos implements ApplicationRunner {
 
     }
 }
-
+*/
