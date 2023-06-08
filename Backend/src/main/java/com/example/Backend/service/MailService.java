@@ -70,4 +70,14 @@ public class MailService {
         String body = mailUtil.correoValidacion(url, usuarioDTO.getNombre() + " " + usuarioDTO.getApellido());
         sendMail(usuarioDTO.getEmail(), MailEnum.VALIDACION_CUENTA.toString(), body);
     }
+
+    /**
+     * Envía correo de bienvenida al usuario
+     * @param usuarioDTO Usuario al que se le enviará el correo
+     * @throws Exception Excepción en caso de que no se pueda enviar el correo
+     */
+    public void enviarCorreoBienvenida(UsuarioDTO usuarioDTO) throws Exception {
+        String body = mailUtil.correoBienvenida(usuarioDTO.getNombre() + " " + usuarioDTO.getApellido());
+        sendMail(usuarioDTO.getEmail(), MailEnum.BIENVENIDA.toString(), body);
+    }
 }
