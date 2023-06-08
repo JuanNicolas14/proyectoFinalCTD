@@ -69,8 +69,10 @@ public class Restaurante {
             sumaPuntuaciones += puntuacion.getPuntuacion();
         }
 
-        return (double) sumaPuntuaciones / totalPuntuaciones;
+        double promedio = (double) sumaPuntuaciones / totalPuntuaciones;
+        return Math.round(promedio * 10.0) / 10.0; // Redondea el resultado a un decimal
     }
+
 
     // Getters and setters
 
