@@ -1,7 +1,6 @@
 package com.example.Backend.controllers;
 
 import com.example.Backend.dto.UsuarioDTO;
-import com.example.Backend.enums.MailEnum;
 import com.example.Backend.exceptions.BadRequestException;
 import com.example.Backend.exceptions.MailSenderException;
 import com.example.Backend.exceptions.ResourceNotFoundException;
@@ -9,7 +8,6 @@ import com.example.Backend.models.Usuario;
 import com.example.Backend.repository.UsuarioRepository;
 import com.example.Backend.service.MailService;
 import com.example.Backend.service.UsuarioService;
-import com.example.Backend.utils.MailUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -34,8 +32,6 @@ public class UsuarioController {
     private final UsuarioService usuarioService;
     private final UsuarioRepository usuarioRepository;
     private final MailService mailService;
-
-    private final MailUtil mailUtil = new MailUtil();
 
     @Autowired
     public UsuarioController(UsuarioService usuarioService,UsuarioRepository usuarioRepository, MailService mailService ) {
@@ -92,13 +88,20 @@ public class UsuarioController {
         usuario.setEmail(userDetails.getUsername());
 
         Optional<Usuario> usuarioEncontrado = usuarioRepository.findByEmail(userDetails.getUsername());
+        if (usuarioEncontrado.isEmpty()) {
+            throw new ResourceNotFoundException("No se encontró el usuario con email: " + userDetails.getUsername());
+        }
+
+        logger.info("Se encontró el usuario: " + usuarioEncontrado.get());
 
         usuario.setId(usuarioEncontrado.get().getId());
         usuario.setNombre(usuarioEncontrado.get().getNombre());
         usuario.setApellido(usuarioEncontrado.get().getApellido());
         usuario.setRol(usuarioEncontrado.get().getUsuarioRol().getRol());
+        usuario.setValidado(usuarioEncontrado.get().getValidado());
+        usuario.setFechaCreacion(usuarioEncontrado.get().getFechaCreacion());
 
-        return ResponseEntity.ok(usuario);
+        return ResponseEntity.status(HttpStatus.OK).body(usuario);
     }
 
     /**
@@ -124,11 +127,10 @@ public class UsuarioController {
         UsuarioDTO usuarioDTO = usuario.get();
         usuarioDTO.setValidado(true);
         usuarioDTO = usuarioService.actualizarUsuario(usuarioDTO);
-        logger.info("Se validó la cuenta del usuario: " + usuarioDTO);
+        logger.info("Se validó la cuenta del usuario");
 
         // Enviamos correo de bienvenida
-        String body = mailUtil.correoBienvenida(usuario.get().getNombre() + " " + usuario.get().getApellido());
-        mailService.sendMail(usuario.get().getEmail(), MailEnum.BIENVENIDA.toString(), body);
+        mailService.enviarCorreoBienvenida(usuarioDTO);
 
         return ResponseEntity.ok("Se validó la cuenta del usuario con id: " + id);
     }

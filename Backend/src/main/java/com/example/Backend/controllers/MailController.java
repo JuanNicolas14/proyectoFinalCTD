@@ -40,6 +40,21 @@ public class MailController {
     }
 
     /**
+     * Envía un correo de bienvenida al usuario
+     * @param id ID del usuario
+     * @throws Exception Si el usuario no existe o cualquier otro error
+     */
+    @GetMapping("/bienvenida/{id}")
+    public void enviarCorreoBienvenida(@PathVariable Long id) throws Exception {
+        Optional<UsuarioDTO> usuario = usuarioService.buscarUsuario(id);
+        if (usuario.isEmpty()) {
+            throw new BadRequestException("Usuario no encontrado");
+        }
+
+        mailService.enviarCorreoBienvenida(usuario.get());
+    }
+
+    /**
      * Maneja la excepción BadRequestException
      * @param exc Excepción
      * @return ResponseEntity con el mensaje de error
