@@ -26,6 +26,7 @@
   
 .busqueda .formulario {
   width: 100%;
+  position: relative;
 }
   
 .busqueda form {
@@ -34,8 +35,32 @@
   justify-content: center;
   align-items: center;
 }
+.busqueda .sugerencias {
+  list-style: none;
+  box-sizing: border-box;
+  border-radius: 5px;
+  width: 23%;
+  position: absolute;
+  padding: 10px;
+  font-size: .8rem;
+  left: 13%;
+  bottom: -80px;
+  color: black;
+  background-color: white;
+  -webkit-box-shadow: 10px 10px 12px -4px rgba(0,0,0,0.75);
+-moz-box-shadow: 10px 10px 12px -4px rgba(0,0,0,0.75);
+box-shadow: 10px 10px 12px -4px rgba(0,0,0,0.75);
+}
+.busqueda .sugerencias:empty {
+  display: none;
+}
+.busqueda .sugerencias li{
+  margin: 5px auto;
+}
   
-.busqueda input {
+.busqueda input, .busqueda select {
+  box-sizing: border-box;
+  color: gray;
   width: 25%;
   margin: 0 3px;
   height: 29px;
@@ -59,11 +84,21 @@
   background-color: #f1551c;
 }
 
-@media (max-width: 1024px) {
-  .busqueda input {
-    width: 33%;
+@media (max-width:1370px) {
+  .busqueda .sugerencias {
+    bottom: -80px;
   }
 }
+@media (max-width: 1024px) {
+  .busqueda input, .busqueda select {
+    width: 33%;
+  }
+  .busqueda .sugerencias{
+    width: 30%;
+    left: 40px;
+  }
+}
+
 
 @media (max-width: 768px) {
   .busqueda {
@@ -77,12 +112,16 @@
   .busqueda form {
     flex-wrap: wrap;
   }
-  .busqueda input {
+  .busqueda input, .busqueda select {
     width: 36%;
     margin-bottom: 10px;
   }
   .busqueda button {
     margin-bottom: 10px;
+  }
+  .busqueda .sugerencias {
+    margin-left: -3%;
+    bottom: -70px;
   }
 }
 
@@ -98,12 +137,17 @@
   .busqueda form {
     flex-direction: column;
   }
-  .busqueda input {
+  .busqueda input, .busqueda select {
     width: 75%;
   }
   .busqueda button {
     width: 75%;
     height: 40px;
+  }
+  .busqueda .sugerencias {
+    bottom: 17px;
+    width: 70%;
+    left: 15.5%;
   }
 }
 
@@ -116,11 +160,15 @@
   .busqueda div {
     width: 100%;
   }
-  .busqueda input {
+  .busqueda input, .busqueda select {
     width: 90%;
     margin-bottom: 10px;
   }
   .busqueda button {
     width: 90%;
+  }
+  .busqueda .sugerencias {
+    width: 85%;
+    left: 35px;
   }
 }

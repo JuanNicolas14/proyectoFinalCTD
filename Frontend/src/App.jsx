@@ -14,28 +14,33 @@ import AgregarPlan from './Vistas/AgregarPlan/AgregarPlan'
 import Login from './Vistas/Login/Login'
 import DetalleUser from './Vistas/DetalleUser/DetalleUser'
 import AuthContextProvider from './utils/AuthContext'
+import FilterContextProvider from './utils/FilterContext'
+import ListaPorFiltros from './Vistas/ListaPorFiltros/ListaPorFiltros'
 
 function App() {
 
   return (
     <AuthContextProvider>
-      <Header/>
-      <Routes>
-        <Route path='/' element={<Navigate to='/home' replace/>}/>
-        <Route path='/home' element={<Home/>}/>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/restaurantes' element={<Listado/>} />
-        <Route path='/detalle/:id' element={<Detalle/>}/>
-        <Route path='/restaurantes' element={<Listado/>}/>
-        <Route path='/restaurantes/:plan' element={<ListaPorPlan/>}/>
-        <Route path='/administracion' element={<Administracion/>}/>
-        <Route path='/administracion/agregarProducto' element={<AgregarProducto/>}/>
-        <Route path='/administracion/eliminarProducto' element={<EliminarProducto/>}/>
-        <Route path='/usuario/detalle' element={<DetalleUser/>}/>
-        <Route path='/usuario/registrar' element={<RegistrarUsuario/>}/>
-        <Route path='/plan/registrar' element={<AgregarPlan/>}/>
-      </Routes>
-      <Footer/>
+      <FilterContextProvider>
+        <Header/>
+        <Routes>
+          <Route path='/' element={<Navigate to='/home' replace/>}/>
+          <Route path='/home' element={<Home/>}/>
+          <Route path='/login' element={<Login/>}/>
+          <Route path='/restaurantes' element={<Listado/>} />
+          <Route path='/detalle/:id' element={<Detalle/>}/>
+          <Route path='/restaurantes' element={<Listado/>}/>
+          <Route path='/restaurantes/:plan' element={<ListaPorPlan/>}/>
+          <Route path='/administracion' element={<Administracion/>}/>
+          <Route path='/administracion/agregarProducto' element={<AgregarProducto/>}/>
+          <Route path='/administracion/eliminarProducto' element={<EliminarProducto/>}/>
+          <Route path='/usuario/detalle' element={<DetalleUser/>}/>
+          <Route path='/usuario/registrar' element={<RegistrarUsuario/>}/>
+          <Route path='/plan/registrar' element={<AgregarPlan/>}/>
+          <Route path='/restaurantes/ciudad-y-plan' element={<ListaPorFiltros/>}/>
+        </Routes>
+        <Footer/>
+      </FilterContextProvider>
     </AuthContextProvider>
   )
 }
