@@ -13,19 +13,21 @@ public class Domicilio {
     private String numero;
     @Column
     private String localidad;
-    @Column
-    private String ciudad;
 
     @OneToOne
     @JoinColumn(name = "pais_id",referencedColumnName = "id")
     private Pais pais;
 
-    public Domicilio(String calle, String numero, String localidad, String ciudad, Pais pais) {
+    @ManyToOne
+    @JoinColumn(name= "ciudad_id", referencedColumnName="id")
+    private Ciudad ciudad;
+
+    public Domicilio(String calle, String numero, String localidad, Pais pais, Ciudad ciudad) {
         this.calle = calle;
         this.numero = numero;
         this.localidad = localidad;
-        this.ciudad = ciudad;
         this.pais = pais;
+        this.ciudad = ciudad;
     }
 
     public Domicilio() {
@@ -55,12 +57,19 @@ public class Domicilio {
         this.numero = numero;
     }
 
+    public String getLocalidad() {
+        return localidad;
+    }
 
-    public String getCiudad() {
+    public void setLocalidad(String localidad) {
+        this.localidad = localidad;
+    }
+
+    public Ciudad getCiudad() {
         return ciudad;
     }
 
-    public void setCiudad(String ciudad) {
+    public void setCiudad(Ciudad ciudad) {
         this.ciudad = ciudad;
     }
 

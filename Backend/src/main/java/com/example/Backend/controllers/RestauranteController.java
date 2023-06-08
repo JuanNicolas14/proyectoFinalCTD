@@ -7,10 +7,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.example.Backend.dto.RestauranteDTO;
 import com.example.Backend.exceptions.ResourceNotFoundException;
 import com.example.Backend.models.*;
-import com.example.Backend.service.DomicilioService;
-import com.example.Backend.service.PaisService;
-import com.example.Backend.service.PlanService;
-import com.example.Backend.service.RestauranteService;
+import com.example.Backend.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -45,6 +42,9 @@ public class RestauranteController {
     private DomicilioService domicilioService;
     private PaisService paisService;
     private PlanService planService;
+    private CiudadService ciudadService;
+
+
 
     /**
      * Constructor de RestauranteController
@@ -52,13 +52,13 @@ public class RestauranteController {
      * @param domicilioService servicio de Domicilio
      * @param paisService servicio de Pais
      */
-
     @Autowired
-    public RestauranteController(RestauranteService restauranteService, DomicilioService domicilioService, PaisService paisService, PlanService planService){
+    public RestauranteController(RestauranteService restauranteService, DomicilioService domicilioService, PaisService paisService, PlanService planService, CiudadService ciudadService) {
         this.restauranteService = restauranteService;
         this.domicilioService = domicilioService;
         this.paisService = paisService;
         this.planService = planService;
+        this.ciudadService = ciudadService;
     }
 
 
@@ -89,13 +89,14 @@ public class RestauranteController {
 
         // TODO: Levantar excepción si no se encuentra el pais
         Pais pais = paisService.buscarPais(restauranteFormData.getPais_id());
+        Optional <Ciudad> ciudad= ciudadService.buscarCiudad(restauranteFormData.getCiudad_id());
 
         Domicilio domicilio = new Domicilio(
                 restauranteFormData.getCalle(),
                 restauranteFormData.getNumero(),
                 restauranteFormData.getLocalidad(),
-                restauranteFormData.getCiudad(),
-                pais
+                pais,
+                ciudad.get()
         );
         domicilioService.guardarDomicilio(domicilio);
 

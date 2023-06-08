@@ -13,10 +13,10 @@ public class RestauranteFormData {
     private String calle;
     private String numero;
     private String localidad;
-    private String ciudad;
+    private Long ciudad_id;
     private Long pais_id;
 
-    public RestauranteFormData(String nombre, List<MultipartFile> imagenes, Long plan_id, String descripcion, double precio, String calle, String numero, String localidad, String ciudad, Long pais_id) {
+    public RestauranteFormData(String nombre, List<MultipartFile> imagenes, Long plan_id, String descripcion, double precio, String calle, String numero, String localidad, Long ciudad_id, Long pais_id) {
         this.nombre = nombre;
         this.imagenes = imagenes;
         this.plan_id = plan_id;
@@ -25,7 +25,7 @@ public class RestauranteFormData {
         this.calle = calle;
         this.numero = numero;
         this.localidad = localidad;
-        this.ciudad = ciudad;
+        this.ciudad_id = ciudad_id;
         this.pais_id = pais_id;
     }
 
@@ -40,7 +40,7 @@ public class RestauranteFormData {
                 ", calle='" + calle + '\'' +
                 ", numero='" + numero + '\'' +
                 ", localidad='" + localidad + '\'' +
-                ", ciudad='" + ciudad + '\'' +
+                ", ciudad='" + ciudad_id + '\'' +
                 ", pais_id=" + pais_id +
                 '}';
     }
@@ -109,12 +109,12 @@ public class RestauranteFormData {
         this.localidad = localidad;
     }
 
-    public String getCiudad() {
-        return ciudad;
+    public Long getCiudad_id() {
+        return ciudad_id;
     }
 
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
+    public void setCiudad_id(Long ciudad_id) {
+        this.ciudad_id = ciudad_id;
     }
 
     public Long getPais_id() {
