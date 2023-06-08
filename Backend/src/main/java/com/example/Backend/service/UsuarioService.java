@@ -134,6 +134,7 @@ public class UsuarioService implements UserDetailsService {
         usuarioRolBuscado = usuarioRolRepository.findByRol(usuarioDTO.getRol());
         usuario.setUsuarioRol(usuarioRolBuscado.get());
         usuario.setValidado(usuarioDTO.getValidado());
+        usuario.setFechaCreacion(usuarioDTO.getFechaCreacion());
 
         return usuario;
     }
@@ -148,6 +149,7 @@ public class UsuarioService implements UserDetailsService {
         usuarioDTO.setPassword(usuario.getPassword());
         usuarioDTO.setRol(usuario.getUsuarioRol().getRol());
         usuarioDTO.setValidado(usuario.getValidado());
+        usuarioDTO.setFechaCreacion(usuario.getFechaCreacion());
 
         return usuarioDTO;
     }

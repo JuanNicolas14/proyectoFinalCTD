@@ -1,5 +1,7 @@
 package com.example.Backend.models;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.joda.time.DateTime;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -8,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -26,6 +29,9 @@ public class Usuario implements UserDetails {
     private String password;
     @Column
     private Boolean validado;
+    @Column( name = "fecha_creacion")
+    @CreationTimestamp
+    private Date fechaCreacion;
     @ManyToOne
     @JoinColumn(name = "rol_id" ,referencedColumnName = "id")
     private UsuarioRol usuarioRol;
@@ -34,12 +40,14 @@ public class Usuario implements UserDetails {
     @JoinColumn(name = "usuario_id")
     private Set<Puntuacion> puntuaciones;
 
-    public Usuario(String nombre, String apellido, String email, String password, UsuarioRol usuarioRol) {
+    public Usuario(String nombre, String apellido, String email, String password, UsuarioRol usuarioRol, Boolean validado, Date fechaCreacion) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.password = password;
         this.usuarioRol = usuarioRol;
+        this.validado = validado;
+        this.fechaCreacion = fechaCreacion;
     }
 
     public Usuario() {
@@ -122,6 +130,14 @@ public class Usuario implements UserDetails {
         this.validado = validado;
     }
 
+    public Date getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(Date fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
@@ -141,6 +157,7 @@ public class Usuario implements UserDetails {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", validado=" + validado +
+                ", fechaCreacion=" + fechaCreacion +
                 ", usuarioRol=" + usuarioRol +
                 '}';
     }

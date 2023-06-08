@@ -47,14 +47,12 @@ public class UsuarioController {
     private final Logger logger = Logger.getLogger(UsuarioController.class.getName());
 
     @PostMapping("/registrar")
-    public ResponseEntity<UsuarioDTO> guardarUsuario(@RequestBody UsuarioDTO usuarioDTO) throws BadRequestException, MailSenderException, IOException {
+    public ResponseEntity<UsuarioDTO> guardarUsuario(@RequestBody UsuarioDTO usuarioDTO) throws Exception {
         // Almacenamos el usuario
         UsuarioDTO usuarioGuardado = usuarioService.guardarUsuario(usuarioDTO);
 
         // Enviamos el correo de validación de cuenta
-        String url = frontendUrl + "/usuario/validar/" + usuarioGuardado.getId();
-        String body = mailUtil.correoValidacion(url, usuarioGuardado.getNombre() + " " + usuarioGuardado.getApellido());
-        mailService.sendMail(usuarioGuardado.getEmail(), MailEnum.VALIDACION_CUENTA.toString(), body);
+        mailService.enviarCorreoValidacion(usuarioGuardado);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioGuardado);
     }

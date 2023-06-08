@@ -1,6 +1,10 @@
 package com.example.Backend.service;
 
 import java.util.logging.Logger;
+
+import com.example.Backend.dto.UsuarioDTO;
+import com.example.Backend.enums.MailEnum;
+import com.example.Backend.utils.MailUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -26,6 +30,11 @@ public class MailService {
     @Value("${spring.mail.username}")
     private String username;
 
+    @Value("${frontend.url}")
+    private String frontendUrl;
+
+    private final MailUtil mailUtil = new MailUtil();
+
     /**
      * Envía un correo electrónico
      * @param to Correo electrónico del destinatario
@@ -49,5 +58,16 @@ public class MailService {
         } finally {
             logger.info("End sendMail");
         }
+    }
+
+    /**
+     * Envía un correo de validación de cuenta
+     * @param usuarioDTO Usuario al que se le enviará el correo
+     * @throws Exception Excepción en caso de que no se pueda enviar el correo
+     */
+    public void enviarCorreoValidacion(UsuarioDTO usuarioDTO) throws Exception {
+        String url = frontendUrl + "/usuario/validar/" + usuarioDTO.getId();
+        String body = mailUtil.correoValidacion(url, usuarioDTO.getNombre() + " " + usuarioDTO.getApellido());
+        sendMail(usuarioDTO.getEmail(), MailEnum.VALIDACION_CUENTA.toString(), body);
     }
 }
