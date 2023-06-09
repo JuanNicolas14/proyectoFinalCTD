@@ -49,7 +49,10 @@ const AgregarProducto = () => {
     numero: 0,
     localidad:'',
     ciudad:'',
-    pais_id:''
+    pais_id:'',
+    reglas:'',
+    saludYseguridad:'',
+    politicas:'',
   })
 
   useEffect(() => {
@@ -151,6 +154,9 @@ const AgregarProducto = () => {
       formData.append('localidad', producto.localidad)
       formData.append('pais_id', producto.pais_id)
       formData.append('ciudad', producto.ciudad)
+      formData.append('reglas', producto.reglas)
+      formData.append('saludYseguridad', producto.saludYseguridad)
+      formData.append('politicas', producto.politicas)
       console.log("se creo el formData y se enviaran los datos !!!!")
 
       axios.post(urlRestaurantes,formData)
@@ -307,9 +313,39 @@ const AgregarProducto = () => {
                     onChange={(e)=> setProducto({...producto, precio: e.target.value})}
                     required/>
                 </p>
+                <p className="descripcion">
+                  <label htmlFor="politicas">Politicas del restaurante:</label>
+                  <textarea 
+                    value={producto.politicas}
+                    id="politicas" 
+                    cols="30" rows="5" maxLength="250" 
+                    onChange={(e)=> setProducto({...producto, politicas: e.target.value})}
+                    required
+                  ></textarea>
+                </p>
               </section>
               
               <section className="form-parte-B">
+                <p className="descripcion">
+                  <label htmlFor="reglas">Reglas del restaurante:</label>
+                  <textarea 
+                    value={producto.reglas}
+                    id="reglas" 
+                    cols="30" rows="5" maxLength="250" 
+                    onChange={(e)=> setProducto({...producto, reglas: e.target.value})}
+                    required
+                  ></textarea>
+                </p>
+                <p className="descripcion">
+                  <label htmlFor="saludYseguridad">Medidas de salud y seguridad:</label>
+                  <textarea 
+                    value={producto.saludYseguridad}
+                    id="saludYseguridad" 
+                    cols="30" rows="5" maxLength="250" 
+                    onChange={(e)=> setProducto({...producto, saludYseguridad: e.target.value})}
+                    required
+                  ></textarea>
+                </p>
                 <div className="direccion">
                   <h3>--Direccion--</h3>
                   <p>

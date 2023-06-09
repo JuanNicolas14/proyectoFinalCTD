@@ -62,7 +62,7 @@ public class RestauranteServiceTest {
 
         Domicilio domicilio = new Domicilio("Calle 1", "123", "Bogota", "Bogota", paisService.buscarPais(paisId));
 
-        Restaurante restauranteAGuardar = new Restaurante("Sabor Saludable","Disfruta los mejores sabores",null, 130000,domicilio,planService.buscarPlan(planId));
+        Restaurante restauranteAGuardar = new Restaurante("Sabor Saludable","Disfruta los mejores sabores",null, 130000,domicilio,planService.buscarPlan(planId),"Reglas del restaurante","Salud y seguridad en restaurante","Politicas que maneja el restaurante");
 
         Restaurante restauranteGuardado = restauranteService.guardarRestaurante(restauranteAGuardar);
 

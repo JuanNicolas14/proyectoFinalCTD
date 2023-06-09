@@ -41,16 +41,28 @@ public class Restaurante {
     @Column(name = "numero_valoraciones")
     private int numeroValoraciones;
 
+    @Column(name = "reglas_restaurante")
+    private String reglas;
+
+    @Column(name = "salud_seguridad")
+    private String saludYseguridad;
+
+    @Column(name = "politicas")
+    private String politicas;
+
     // Constructor
 
 
-    public Restaurante(String nombre, String descripcion, Set<Imagen> imagen, double precio, Domicilio domicilio, Plan plan) {
+    public Restaurante(String nombre, String descripcion, Set<Imagen> imagen, double precio, Domicilio domicilio, Plan plan, String reglas, String saludYseguridad, String politicas) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.imagen = imagen;
         this.precio = precio;
         this.domicilio = domicilio;
         this.plan = plan;
+        this.reglas = reglas;
+        this.saludYseguridad = saludYseguridad;
+        this.politicas = politicas;
     }
 
     public Restaurante() {
@@ -69,8 +81,10 @@ public class Restaurante {
             sumaPuntuaciones += puntuacion.getPuntuacion();
         }
 
-        return (double) sumaPuntuaciones / totalPuntuaciones;
+        double promedio = (double) sumaPuntuaciones / totalPuntuaciones;
+        return Math.round(promedio * 10.0) / 10.0; // Redondea el resultado a un decimal
     }
+
 
     // Getters and setters
 
@@ -155,6 +169,30 @@ public class Restaurante {
         this.numeroValoraciones = numeroValoraciones;
     }
 
+    public String getReglas() {
+        return reglas;
+    }
+
+    public void setReglas(String reglas) {
+        this.reglas = reglas;
+    }
+
+    public String getSaludYseguridad() {
+        return saludYseguridad;
+    }
+
+    public void setSaludYseguridad(String saludYseguridad) {
+        this.saludYseguridad = saludYseguridad;
+    }
+
+    public String getPoliticas() {
+        return politicas;
+    }
+
+    public void setPoliticas(String politicas) {
+        this.politicas = politicas;
+    }
+
     @Override
     public String toString() {
         return "Restaurante{" +
@@ -165,8 +203,12 @@ public class Restaurante {
                 ", precio=" + precio +
                 ", domicilio=" + domicilio +
                 ", plan=" + plan +
-                ", puntuaciónPromedio=" + puntuacionPromedio +
+                ", puntuaciones=" + puntuaciones +
+                ", puntuacionPromedio=" + puntuacionPromedio +
                 ", numeroValoraciones=" + numeroValoraciones +
+                ", reglas='" + reglas + '\'' +
+                ", saludYseguridad='" + saludYseguridad + '\'' +
+                ", politicas='" + politicas + '\'' +
                 '}';
     }
 }
