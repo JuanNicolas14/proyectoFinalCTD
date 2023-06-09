@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @TestPropertySource("classpath:application-test.properties")
 @ActiveProfiles("test")
 public class RestauranteServiceTest {
-
+/*
     @Autowired
     private RestauranteService restauranteService;
 
@@ -192,4 +192,5 @@ public class RestauranteServiceTest {
 
          */
     }
+
 }

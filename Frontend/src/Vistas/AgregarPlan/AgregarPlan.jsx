@@ -4,6 +4,7 @@ import './agregarPlan.css'
 import Swal from 'sweetalert2';
 import ErrorPage from '../../Componentes/ErrorPage/ErrorPage';
 import { AuthContext } from '../../utils/AuthContext';
+import baseUrl from '../../utils/baseUrl.json'
 
 const AgregarPlan = () => {
     const {user} = useContext(AuthContext)
@@ -20,7 +21,7 @@ const AgregarPlan = () => {
         formData.append('imagenPlan', imagen);
 
         try {
-            const response = await fetch('http://3.19.61.55:8080/plan/registrar', {
+            const response = await fetch(baseUrl.url+'/plan/registrar', {
                 method: 'POST',
                 body: formData
             });

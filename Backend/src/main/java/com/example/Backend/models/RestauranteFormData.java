@@ -2,6 +2,7 @@ package com.example.Backend.models;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class RestauranteFormData {
@@ -15,8 +16,10 @@ public class RestauranteFormData {
     private String localidad;
     private Long ciudad_id;
     private Long pais_id;
+    private BigDecimal longitud;
+    private BigDecimal latitud;
 
-    public RestauranteFormData(String nombre, List<MultipartFile> imagenes, Long plan_id, String descripcion, double precio, String calle, String numero, String localidad, Long ciudad_id, Long pais_id) {
+    public RestauranteFormData(BigDecimal latitud, BigDecimal longitud, String nombre, List<MultipartFile> imagenes, Long plan_id, String descripcion, double precio, String calle, String numero, String localidad, Long ciudad_id, Long pais_id) {
         this.nombre = nombre;
         this.imagenes = imagenes;
         this.plan_id = plan_id;
@@ -27,6 +30,8 @@ public class RestauranteFormData {
         this.localidad = localidad;
         this.ciudad_id = ciudad_id;
         this.pais_id = pais_id;
+        this.latitud = latitud;
+        this.longitud = longitud;
     }
 
     @Override
@@ -40,9 +45,27 @@ public class RestauranteFormData {
                 ", calle='" + calle + '\'' +
                 ", numero='" + numero + '\'' +
                 ", localidad='" + localidad + '\'' +
-                ", ciudad='" + ciudad_id + '\'' +
+                ", ciudad_id=" + ciudad_id +
                 ", pais_id=" + pais_id +
+                ", longitud=" + longitud +
+                ", latitud=" + latitud +
                 '}';
+    }
+
+    public BigDecimal getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(BigDecimal longitud) {
+        this.longitud = longitud;
+    }
+
+    public BigDecimal getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(BigDecimal latitud) {
+        this.latitud = latitud;
     }
 
     public String getNombre() {

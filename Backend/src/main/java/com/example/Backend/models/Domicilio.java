@@ -1,6 +1,7 @@
 package com.example.Backend.models;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 @Entity
 @Table(name = "domicilio")
 public class Domicilio {
@@ -13,6 +14,10 @@ public class Domicilio {
     private String numero;
     @Column
     private String localidad;
+    @Column
+    private BigDecimal latitud;
+    @Column
+    private BigDecimal longitud;
 
     @OneToOne
     @JoinColumn(name = "pais_id",referencedColumnName = "id")
@@ -22,10 +27,12 @@ public class Domicilio {
     @JoinColumn(name= "ciudad_id", referencedColumnName="id")
     private Ciudad ciudad;
 
-    public Domicilio(String calle, String numero, String localidad, Pais pais, Ciudad ciudad) {
+    public Domicilio(String calle, String numero, String localidad, BigDecimal latitud, BigDecimal longitud, Pais pais, Ciudad ciudad) {
         this.calle = calle;
         this.numero = numero;
         this.localidad = localidad;
+        this.latitud = latitud;
+        this.longitud = longitud;
         this.pais = pais;
         this.ciudad = ciudad;
     }

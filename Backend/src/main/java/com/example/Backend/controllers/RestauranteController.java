@@ -95,6 +95,8 @@ public class RestauranteController {
                 restauranteFormData.getCalle(),
                 restauranteFormData.getNumero(),
                 restauranteFormData.getLocalidad(),
+                restauranteFormData.getLatitud(),
+                restauranteFormData.getLongitud(),
                 pais,
                 ciudad.get()
         );

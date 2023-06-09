@@ -1,298 +1,303 @@
 .form-add-product {
-    background: url('../../assets/images/fondo-add-product.jpeg') no-repeat;
-    background-size: cover;
-    background-position: center;
-    min-height: 90vh;
-    padding-bottom:120px;
-    display: flex;
+  background: url('../../assets/images/fondo-add-product.jpeg') no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 90vh;
+  padding-bottom:120px;
+  display: flex;
+}
+
+.form-add-product h2 {
+  padding: 0.25em 0.5em 0.25em 0.5em;
+  border: 2px solid rgba(255, 69, 0, 0.25);
+  border-radius: 0.5em;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 30px rgba(165, 42, 42, 0.25);
+  margin: 40px 0 10px 0;
+}
+section.form {
+  max-width: 80%;
+}
+.form-add-product form {
+  padding: 1em;
+  border: 2px solid rgba(255, 69, 0, 0.25);
+  border-radius: 0.75em;
+  margin-bottom: 30px;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 30px rgba(165, 42, 42, 0.25);
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/*-----*/
+.carga-imagen {
+  margin: 0px auto 20px;
+}
+.carga-imagen span {
+  font-size: 1em;
+  font-weight: 800;
+}
+
+.input-imagen { 
+  display: none;
+}
+
+.input-imagen + label {
+  display: flex;
+  align-items: center;
+}
+
+.input-imagen_input-imagen-nombre,
+.input-imagen_input-imagen-boton {
+  padding: 5px 10px;
+}
+
+.input-imagen_input-imagen-nombre {
+  background-color: rgba(255, 255, 255, .5);
+  border: 2px solid rgba(255, 69, 0, 0.25);
+  border-radius: 5px 0 0 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.input-imagen_input-imagen-boton {
+  background: rgba(165, 42, 42, 0.5) url('../../assets/images/icono-de-imagen.png') 4px center/20px no-repeat;
+  border: 2px solid rgba(255, 69, 0, 0.125);
+  border-radius: 0 5px 5px 0;
+  color: white;
+  white-space: nowrap;
+  cursor: pointer;
+  padding-left: 30px;
+}
+
+.label-imagen span {
+  display: flex;
+  font-size: medium;
+  font-weight: 500;
+}
+
+.imagenes-selectas {
+  width: 100%;
+  height: auto;
+  margin: 10px auto;
+  color:black
+}
+.imagenes-selectas ul {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  list-style: none;
+}
+.imagenes-selectas li {
+  background-color: var(--main-color);
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+  margin: 5px 10px;
+  font-size: .7rem;
+}
+
+.select-categorias {
+  border: 2px solid rgba(255, 69, 0, 0.125);
+  border-radius: 5px;
+  background-color: rgba(165, 42, 42, 0.5);
+  padding: 10px;
+  color: white;
+}
+
+
+/*-----*/
+.form .form-parte-A {
+  width: 45%;
+}
+.form-add-product .form form fieldset {
+  border: 2px solid rgba(255, 69, 0, 0.25);
+  border-radius: 0.33em;
+}
+
+.form-add-product label {
+  font-size: 1em;
+  font-weight: 800;
+}
+
+.form-add-product fieldset legend {
+  font-size: 1em;
+  font-weight: 800;
+}
+
+.form .titulo-tipo-plan {
+  font-size: 1em;
+  font-weight: 800;
+}
+
+.form-add-product .tipo-plan {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background: rgba(255, 255, 255, 1);
+  padding: 5px;
+}
+
+.form-add-product .tipo-plan label {
+  font-size: 1em;
+  font-weight: 500;
+  color: orangered;
+}
+.form-add-product .tipo-plan select {
+  background-color: white;
+  color: var(--main-color);
+  border: 2px solid rgba(255, 69, 0, 0.25);
+}
+
+.form-add-product .tipo-plan input[type="radio"] {
+  appearance: none;
+  cursor: pointer;
+  background-color: transparent;
+  width: 15px;
+  height: 15px;
+  border: 1px solid brown;
+  transition: 0.3s ease-in-out;
+}
+
+.form-add-product .tipo-plan input[type="radio"]:checked {
+  background-color: brown;
+}
+
+.form-add-product input {
+  width: 95%;
+  height: 30px;
+  border: 2px solid rgba(255, 69, 0, 0.25);
+  outline: none;
+  font-size: 1em;
+  font-weight: 500;
+  padding-left: 15px;
+  color: orangered;
+  border-radius: 5px;
+}
+
+.form-add-product .descripcion {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-add-product textarea {
+  resize: none;
+  border: 2px solid rgba(255, 69, 0, 0.25);
+  border-radius: 0.5em;
+  padding: 5px;
+  font-family: 'Quicksand';
+  color: brown;
+  font-size: medium;
+}
+
+.form-add-product textarea:focus {
+  outline-style: none;
+  border: 2px solid rgba(165, 42, 42, 0.75);
+}
+
+.form-add-product .precio ::placeholder {
+  color: orangered;
+  text-align: right;
+}
+
+.form .form-parte-B {
+  width: 45%;
+  margin-left: 20px;
+}
+
+.form .form-parte-B .direccion p {
+  margin: 10px 0 10px 0;
+}
+
+.form .form-parte-C {
+  width: 100%;
+}
+.form form button {
+  width: 100%;
+  margin: 30px auto;
+  height: 40px;
+  border: none;
+  border-radius: 0.5em;
+  font-family: "Quicksand", sans-serif;
+  font-weight: bold;
+  font-size: 1.125em;
+  color: white;
+  background-color: brown;
+  box-shadow: 0 0 30px rgba(165, 42, 42, 0.5);
+  cursor: pointer;
+}
+
+.texto-error {
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  background-color: red;
+  color: white;
+}
+
+@media (max-width:1024px) {
+  .form-add-product .form {
+    width: 80%;
+  }
+  .form-parte-A, .form-parte-B {
+    width: 45%;
+  }
+  .form form input {
+    width: 90%;
+  }
+  .tipo-plan {
+    flex-wrap: wrap;
   }
   
-  .form-add-product h2 {
-    padding: 0.25em 0.5em 0.25em 0.5em;
-    border: 2px solid rgba(255, 69, 0, 0.25);
-    border-radius: 0.5em;
-    background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(20px);
-    box-shadow: 0 0 30px rgba(165, 42, 42, 0.25);
-    margin: 40px 0 10px 0;
-  }
-  section.form {
-    max-width: 80%;
-  }
+}
+
+@media (max-width:800px) {
   .form-add-product form {
-    padding: 1em;
-    border: 2px solid rgba(255, 69, 0, 0.25);
-    border-radius: 0.75em;
-    margin-bottom: 30px;
-    background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(20px);
-    box-shadow: 0 0 30px rgba(165, 42, 42, 0.25);
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  /*-----*/
-  .carga-imagen {
-    margin: 0px auto 20px;
-  }
-  .carga-imagen span {
-    font-size: 1em;
-    font-weight: 800;
-  }
-  
-  .input-imagen { 
-    display: none;
-  }
-  
-  .input-imagen + label {
-    display: flex;
-    align-items: center;
-  }
-  
-  .input-imagen_input-imagen-nombre,
-  .input-imagen_input-imagen-boton {
-    padding: 5px 10px;
-  }
-  
-  .input-imagen_input-imagen-nombre {
-    background-color: rgba(255, 255, 255, .5);
-    border: 2px solid rgba(255, 69, 0, 0.25);
-    border-radius: 5px 0 0 5px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  
-  .input-imagen_input-imagen-boton {
-    background: rgba(165, 42, 42, 0.5) url('../../assets/images/icono-de-imagen.png') 4px center/20px no-repeat;
-    border: 2px solid rgba(255, 69, 0, 0.125);
-    border-radius: 0 5px 5px 0;
-    color: white;
-    white-space: nowrap;
-    cursor: pointer;
-    padding-left: 30px;
-  }
-  
-  .label-imagen span {
-    display: flex;
-    font-size: medium;
-    font-weight: 500;
-  }
-
-  .imagenes-selectas {
-    width: 100%;
-    height: auto;
-    margin: 10px auto;
-    color:black
-  }
-  .imagenes-selectas ul {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 0;
-    list-style: none;
-  }
-  .imagenes-selectas li {
-    background-color: var(--main-color);
-    padding: 5px;
-    border-radius: 5px;
-    color: white;
-    margin: 5px 10px;
-    font-size: .7rem;
-  }
-
-  .select-categorias {
-    border: 2px solid rgba(255, 69, 0, 0.125);
-    border-radius: 5px;
-    background-color: rgba(165, 42, 42, 0.5);
-    padding: 10px;
-    color: white;
-  }
-
-
-  /*-----*/
-  .form .form-parte-A {
-    width: 45%;
-  }
-  .form-add-product .form form fieldset {
-    border: 2px solid rgba(255, 69, 0, 0.25);
-    border-radius: 0.33em;
-  }
-  
-  .form-add-product label {
-    font-size: 1em;
-    font-weight: 800;
-  }
-  
-  .form-add-product fieldset legend {
-    font-size: 1em;
-    font-weight: 800;
-  }
-  
-  .form .titulo-tipo-plan {
-    font-size: 1em;
-    font-weight: 800;
-  }
-  
-  .form-add-product .tipo-plan {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    background: rgba(255, 255, 255, 1);
-    padding: 5px;
-  }
-  
-  .form-add-product .tipo-plan label {
-    font-size: 1em;
-    font-weight: 500;
-    color: orangered;
-  }
-  
-  .form-add-product .tipo-plan input[type="radio"] {
-    appearance: none;
-    cursor: pointer;
-    background-color: transparent;
-    width: 15px;
-    height: 15px;
-    border: 1px solid brown;
-    transition: 0.3s ease-in-out;
-  }
-  
-  .form-add-product .tipo-plan input[type="radio"]:checked {
-    background-color: brown;
-  }
-  
-  .form-add-product input {
-    width: 95%;
-    height: 30px;
-    border: 2px solid rgba(255, 69, 0, 0.25);
-    outline: none;
-    font-size: 1em;
-    font-weight: 500;
-    padding-left: 15px;
-    color: orangered;
-    border-radius: 5px;
-  }
-  
-  .form-add-product .descripcion {
-    display: flex;
     flex-direction: column;
-  }
-  
-  .form-add-product textarea {
-    resize: none;
-    border: 2px solid rgba(255, 69, 0, 0.25);
-    border-radius: 0.5em;
-    padding: 5px;
-    font-family: 'Quicksand';
-    color: brown;
-    font-size: medium;
-  }
-  
-  .form-add-product textarea:focus {
-    outline-style: none;
-    border: 2px solid rgba(165, 42, 42, 0.75);
-  }
-  
-  .form-add-product .precio ::placeholder {
-    color: orangered;
-    text-align: right;
-  }
-  
-  .form .form-parte-B {
-    width: 45%;
-    margin-left: 20px;
-  }
-  
-  .form .form-parte-B .direccion p {
-    margin: 10px 0 10px 0;
-  }
-  
-  .form .form-parte-C {
-    width: 100%;
-  }
-  .form form button {
-    width: 100%;
-    margin: 30px auto;
-    height: 40px;
-    border: none;
-    border-radius: 0.5em;
-    font-family: "Quicksand", sans-serif;
-    font-weight: bold;
-    font-size: 1.125em;
-    color: white;
-    background-color: brown;
-    box-shadow: 0 0 30px rgba(165, 42, 42, 0.5);
-    cursor: pointer;
-  }
-
-  .texto-error {
-    height: 40px;
-    display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 5px;
-    background-color: red;
-    color: white;
+  }
+  .form .form-parte-A {
+    width: 80%;
+  }
+  .form .form-parte-B {
+    width: 80%;
+    margin: 10px 30px;
+  }
+  .form form button {
+    position: initial;
   }
 
-  @media (max-width:1024px) {
-    .form-add-product .form {
-      width: 80%;
-    }
-    .form-parte-A, .form-parte-B {
-      width: 45%;
-    }
-    .form form input {
-      width: 90%;
-    }
-    .tipo-plan {
-      flex-wrap: wrap;
-    }
+  .tipo-plan {
     
+    justify-content: start;
   }
+}
 
-  @media (max-width:800px) {
-    .form-add-product form {
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-    .form .form-parte-A {
-      width: 80%;
-    }
-    .form .form-parte-B {
-      width: 80%;
-      margin: 10px 30px;
-    }
-    .form form button {
-      position: initial;
-    }
-
-    .tipo-plan {
-      
-      justify-content: start;
-    }
+@media (max-width:480px) {
+  section.form {
+    width: 90%;
   }
-
-  @media (max-width:480px) {
-    section.form {
-      width: 90%;
-    }
-    .form-add-product form {
-      width:  99%;
-      padding: 0;
-    }
-    section.form-parte-B {
-      width: 70%;
-      margin: 0 30px;
-    }
-    .tipo-plan {
-      display: flex;
-      flex-direction: column;
-      text-align: start;
-    }
-    .form .form-parte-C button {
-      width: 80%;
-      margin: 25px;
-    }
+  .form-add-product form {
+    width:  99%;
+    padding: 0;
   }
+  section.form-parte-B {
+    width: 70%;
+    margin: 0 30px;
+  }
+  .tipo-plan {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+  }
+  .form .form-parte-C button {
+    width: 80%;
+    margin: 25px;
+  }
+}

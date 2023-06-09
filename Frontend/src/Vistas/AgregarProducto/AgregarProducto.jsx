@@ -6,6 +6,8 @@ import baseUrl from '../../utils/baseUrl.json'
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../utils/AuthContext';
 import ErrorPage from '../../Componentes/ErrorPage/ErrorPage';
+import Map from '../../Componentes/Maps/Map';
+
 
 const AgregarProducto = () => {
   const urlRestaurantes = baseUrl.url + "/restaurante"
@@ -36,6 +38,28 @@ const AgregarProducto = () => {
 
     return formattedNumber;
   } */
+  //estado para mapas
+  const [markerPosition, setMarkerPosition] = useState({ lat: 9.0, lng: -74.0 });
+  const [latitude, setLatitude] = useState(markerPosition.lat);
+  const [longitude, setLongitude] = useState(markerPosition.lng);
+
+  const handleMarkerPositionChange = (position) => {
+    setMarkerPosition(position);
+    setLatitude(position.lat);
+    setLongitude(position.lng);
+  };
+
+  const handleLatitudeChange = (e) => {
+    const newLatitude = parseFloat(e.target.value);
+    setLatitude(newLatitude);
+    setMarkerPosition({ ...markerPosition, lat: newLatitude });
+  };
+
+  const handleLongitudeChange = (e) => {
+    const newLongitude = parseFloat(e.target.value);
+    setLongitude(newLongitude);
+    setMarkerPosition({ ...markerPosition, lng: newLongitude });
+  };
 
   const [planesdb, setPlanesdb]= useState([])
   const [productos, setProductos] = useState([])
@@ -49,7 +73,10 @@ const AgregarProducto = () => {
     numero: 0,
     localidad:'',
     ciudad:'',
-    pais_id:''
+    pais_id:'',
+    reglas:'',
+    saludYseguridad:'',
+    politicas:'',
   })
 
   useEffect(() => {
@@ -151,6 +178,9 @@ const AgregarProducto = () => {
       formData.append('localidad', producto.localidad)
       formData.append('pais_id', producto.pais_id)
       formData.append('ciudad', producto.ciudad)
+      formData.append('reglas', producto.reglas)
+      formData.append('saludYseguridad', producto.saludYseguridad)
+      formData.append('politicas', producto.politicas)
       console.log("se creo el formData y se enviaran los datos !!!!")
 
       axios.post(urlRestaurantes,formData)
@@ -197,6 +227,15 @@ const AgregarProducto = () => {
   const handleImages = (e) => {
     setProducto({...producto, imagenes: [...producto.imagenes, e.target.files[0]]})
   }
+
+  //HANDLE PARA EL CAMBIO DE MARCADOR
+  const handleMarkerDragEnd = (event) => {
+    const latLng = event.latLng;
+    const lat = latLng.lat();
+    const lng = latLng.lng();
+
+    setMarkerPosition({ lat, lng });
+  };
 
  /*  const eliminarImagen = nombre => {
     let nuevaLista = producto.imagenes.filter(imagen => imagen.name != nombre )
@@ -246,6 +285,7 @@ const AgregarProducto = () => {
                     placeholder="imagen" accept="image/*" 
                     onChange={e => handleImages(e)}
                     required
+                    multiple
                   />
                   {producto?.imagenes?.length > 0 &&
                     <div className='imagenes-selectas'>
@@ -307,9 +347,41 @@ const AgregarProducto = () => {
                     onChange={(e)=> setProducto({...producto, precio: e.target.value})}
                     required/>
                 </p>
+                <p className="descripcion">
+                  <label htmlFor="politicas">Politicas del restaurante:</label>
+                  <textarea 
+                    value={producto.politicas}
+                    id="politicas" 
+                    cols="30" rows="5" maxLength="250" 
+                    onChange={(e)=> setProducto({...producto, politicas: e.target.value})}
+                    required
+                  ></textarea>
+                </p>
               </section>
               
               <section className="form-parte-B">
+              <p className="descripcion">
+                  <label htmlFor="reglas">Reglas del restaurante:</label>
+                  <textarea 
+                    value={producto.reglas}
+                    id="reglas" 
+                    cols="30" rows="5" maxLength="250" 
+                    onChange={(e)=> setProducto({...producto, reglas: e.target.value})}
+                    required
+                  ></textarea>
+                </p>
+
+                <p className="descripcion">
+                  <label htmlFor="saludYseguridad">Medidas de salud y seguridad:</label>
+                  <textarea 
+                    value={producto.saludYseguridad}
+                    id="saludYseguridad" 
+                    cols="30" rows="5" maxLength="250" 
+                    onChange={(e)=> setProducto({...producto, saludYseguridad: e.target.value})}
+                    required
+                  ></textarea>
+                </p>
+                
                 <div className="direccion">
                   <h3>--Direccion--</h3>
                   <p>
@@ -374,6 +446,22 @@ const AgregarProducto = () => {
                   </fieldset>
                 </div>
               </section>
+              <div id="map">
+              <div>
+                  <label>Latitud:</label>
+                  <input type="number" value={latitude} onChange={handleLatitudeChange} />
+                </div>
+                <div>
+                  <label>Longitud:</label>
+                  <input type="number" value={longitude} onChange={handleLongitudeChange} />
+                </div>
+                
+                <Map onMarkerPositionChange={handleMarkerPositionChange} />
+                
+
+              </div>
+
+
               <section className="form-parte-C">
                 <button type="submit">Guardar</button>
               </section>
