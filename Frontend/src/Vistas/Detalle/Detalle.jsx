@@ -192,7 +192,7 @@ const Detalle = () => {
               <div className='contenedor'>
                 <div>
                   <h3>Normas de la casa</h3>
-                  {restaurante.reglas.length > 1
+                  {restaurante?.reglas?.length > 1
                   ?<p>{restaurante.reglas}</p>
                   :(
                   <>
@@ -205,7 +205,7 @@ const Detalle = () => {
                 </div>
                 <div>
                   <h3>Salud y seguridad</h3>
-                  {restaurante.saludYseguridad.length > 1
+                  {restaurante?.saludYseguridad?.length > 1
                   ?<p>{restaurante.saludYseguridad}</p>
                   :(
                   <>
@@ -225,7 +225,7 @@ const Detalle = () => {
                 </div>
                 <div>
                   <h3>Política de cancelación</h3>
-                  {restaurante.politicas.length > 1
+                  {restaurante?.politicas?.length > 1
                   ?<p>{restaurante.politicas}</p>
                   :(
                   <>
