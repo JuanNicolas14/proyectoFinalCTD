@@ -192,29 +192,49 @@ const Detalle = () => {
               <div className='contenedor'>
                 <div>
                   <h3>Normas de la casa</h3>
-                  <p>Check-out:10:00</p>
-                  <p>No se permiten fiestas</p>
-                  <p>No fumar</p>
+                  {restaurante.reglas.length > 1
+                  ?<p>{restaurante.reglas}</p>
+                  :(
+                  <>
+                    <p>Check-out:10:00</p>
+                    <p>No se permiten fiestas</p>
+                    <p>No fumar</p>
+                  </>
+                  )}
+                  
                 </div>
                 <div>
                   <h3>Salud y seguridad</h3>
-                  <p>
+                  {restaurante.saludYseguridad.length > 1
+                  ?<p>{restaurante.saludYseguridad}</p>
+                  :(
+                  <>
+                    <p>
                     Se aplican las pautas de distanciamiento social y otras normas
                     relacionadas con el coronavirus.
-                  </p>
-                  <p>
-                    Detector de humo
-                  </p>
-                  <p>
-                    Deposito de seguridad
-                  </p>
+                    </p>
+                    <p>
+                      Detector de humo
+                    </p>
+                    <p>
+                      Deposito de seguridad
+                    </p>
+                  </>
+                  )}
+                  
                 </div>
                 <div>
                   <h3>Política de cancelación</h3>
-                  <p>
-                    Agrega las fechas de tu viaje para obtener los detalles de cancelacion
-                    de esa estadia.
-                  </p>
+                  {restaurante.politicas.length > 1
+                  ?<p>{restaurante.politicas}</p>
+                  :(
+                  <>
+                    <p>
+                      Agrega las fechas de tu viaje para obtener los detalles de cancelacion
+                      de esa estadia.
+                    </p>
+                  </>
+                  )}
                 </div>
               </div>
             </section>
