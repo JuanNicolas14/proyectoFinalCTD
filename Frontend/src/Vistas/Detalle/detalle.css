@@ -1,5 +1,5 @@
 .main-detail {
-    margin-bottom: 5%;
+    margin-bottom: 6%;
 }
 .slider-imagenes {
     position: fixed;
@@ -257,6 +257,38 @@
     padding: 10px;
 }
 
+/*------ Politicas ------*/
+.detalle-producto .politicas .contenedor{
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+}
+.detalle-producto .politicas .titulo {
+    border-bottom: 1px solid var(--secondary-color);
+}
+.detalle-producto .politicas h2 {
+    text-align: start;
+    margin: 20px 0 10px 4%;
+    
+}
+.detalle-producto .politicas .contenedor div{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    margin: 20px 10px 10px 4%;
+    flex-wrap: wrap;
+    color: black;
+    font-weight: 500;
+}
+.detalle-producto .politicas .contenedor h3 {
+    color: var(--main-color);
+    margin: 10px 0;
+}
+.detalle-producto .politicas p {
+    margin: 10px 0;
+}
+
+
 @media (max-width:1250px) {
     .detalle-producto .galeria-imagenes {
         width: 90%;
@@ -271,9 +303,16 @@
 
 @media (max-width:1024px) {
 
+    /*------- Politicas ------*/
+    .detalle-producto .politicas .contenedor div{
+        width: 25%;
+    }
 }
 
 @media (max-width: 768px) {
+    .main-detail{
+        margin-bottom: 10%;
+    }
     .producto-nombre, .producto-info {
       padding: 5px 20px;
     }
@@ -320,9 +359,21 @@
     .detalle-producto .reserva{
         margin-bottom: 10%;
     }
+
+    /*------- Politicas ------*/
+    .detalle-producto .politicas .contenedor div{
+        width: 43%;
+    }
+    .detalle-producto .politicas .contenedor h3 {
+        margin: 5px 0;
+    }
 }
 
 @media (max-width: 480px) {
+    .main-detail{
+        margin-bottom: 12%;
+    }
+
     .producto-info {
         box-sizing: border-box;
     }
@@ -383,5 +434,10 @@
     .detalle-producto .reserva{
         margin-bottom: 10%;
     }
-    
+
+    /*------- Politicas ------*/
+    .detalle-producto .politicas .contenedor div{
+        width: 80%;
+    }
+        
 }

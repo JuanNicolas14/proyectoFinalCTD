@@ -111,7 +111,10 @@ public class RestauranteController {
                 imagenesGuardadas,
                 restauranteFormData.getPrecio(),
                 domicilio,
-                plan
+                plan,
+                restauranteFormData.getReglas(),
+                restauranteFormData.getSaludYseguridad(),
+                restauranteFormData.getPoliticas()
         );
         Restaurante restauranteGuardado = restauranteService.guardarRestaurante(restaurante);
 

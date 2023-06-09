@@ -133,6 +133,10 @@ const Detalle = () => {
                   {restaurante?.descripcion}
                   </p>
                 </li>
+                <li>
+                  <h3>Precio:</h3>
+                  <p> {restaurante?.precio}$</p>
+                </li>
                 
               </ul>
             </section>
@@ -180,6 +184,59 @@ const Detalle = () => {
                   <button>Iniciar Reserva</button>
                 </div>
               </section>
+            </section>
+            <section className='politicas'>
+              <div className='titulo'>
+                <h2>Que necesitas saber</h2>
+              </div>
+              <div className='contenedor'>
+                <div>
+                  <h3>Normas de la casa</h3>
+                  {restaurante?.reglas?.length > 1
+                  ?<p>{restaurante.reglas}</p>
+                  :(
+                  <>
+                    <p>Check-out:10:00</p>
+                    <p>No se permiten fiestas</p>
+                    <p>No fumar</p>
+                  </>
+                  )}
+                  
+                </div>
+                <div>
+                  <h3>Salud y seguridad</h3>
+                  {restaurante?.saludYseguridad?.length > 1
+                  ?<p>{restaurante.saludYseguridad}</p>
+                  :(
+                  <>
+                    <p>
+                    Se aplican las pautas de distanciamiento social y otras normas
+                    relacionadas con el coronavirus.
+                    </p>
+                    <p>
+                      Detector de humo
+                    </p>
+                    <p>
+                      Deposito de seguridad
+                    </p>
+                  </>
+                  )}
+                  
+                </div>
+                <div>
+                  <h3>Política de cancelación</h3>
+                  {restaurante?.politicas?.length > 1
+                  ?<p>{restaurante.politicas}</p>
+                  :(
+                  <>
+                    <p>
+                      Agrega las fechas de tu viaje para obtener los detalles de cancelacion
+                      de esa estadia.
+                    </p>
+                  </>
+                  )}
+                </div>
+              </div>
             </section>
           </article>
       </section>

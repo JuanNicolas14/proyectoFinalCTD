@@ -3,6 +3,7 @@ package com.example.Backend.models;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
+import javax.persistence.Column;
 import java.util.List;
 
 public class RestauranteFormData {
@@ -18,8 +19,12 @@ public class RestauranteFormData {
     private Long pais_id;
     private BigDecimal longitud;
     private BigDecimal latitud;
+    private String reglas;
+    private String saludYseguridad;
+    private String politicas;
 
-    public RestauranteFormData(BigDecimal latitud, BigDecimal longitud, String nombre, List<MultipartFile> imagenes, Long plan_id, String descripcion, double precio, String calle, String numero, String localidad, Long ciudad_id, Long pais_id) {
+
+    public RestauranteFormData(String nombre, List<MultipartFile> imagenes, Long plan_id, String descripcion, double precio, String calle, String numero, String localidad, Long ciudad_id, Long pais_id,String reglas,String saludYseguridad, String politicas) {
         this.nombre = nombre;
         this.imagenes = imagenes;
         this.plan_id = plan_id;
@@ -32,6 +37,9 @@ public class RestauranteFormData {
         this.pais_id = pais_id;
         this.latitud = latitud;
         this.longitud = longitud;
+        this.reglas = reglas;
+        this.saludYseguridad = saludYseguridad;
+        this.politicas = politicas;
     }
 
     @Override
@@ -49,6 +57,11 @@ public class RestauranteFormData {
                 ", pais_id=" + pais_id +
                 ", longitud=" + longitud +
                 ", latitud=" + latitud +
+                ", ciudad='" + ciudad_id + '\'' +
+                ", pais_id=" + pais_id + '\'' +
+                ", reglas=" + reglas + '\'' +
+                ", saludYseguridad=" + saludYseguridad + '\'' +
+                ", politicas=" + politicas +
                 '}';
     }
 
@@ -146,5 +159,29 @@ public class RestauranteFormData {
 
     public void setPais_id(Long pais_id) {
         this.pais_id = pais_id;
+    }
+
+    public String getReglas() {
+        return reglas;
+    }
+
+    public void setReglas(String reglas) {
+        this.reglas = reglas;
+    }
+
+    public String getSaludYseguridad() {
+        return saludYseguridad;
+    }
+
+    public void setSaludYseguridad(String saludYseguridad) {
+        this.saludYseguridad = saludYseguridad;
+    }
+
+    public String getPoliticas() {
+        return politicas;
+    }
+
+    public void setPoliticas(String politicas) {
+        this.politicas = politicas;
     }
 }

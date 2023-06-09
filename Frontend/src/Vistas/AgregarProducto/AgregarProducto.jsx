@@ -77,6 +77,10 @@ const AgregarProducto = () => {
     reglas:'',
     saludYseguridad:'',
     politicas:'',
+    pais_id:'',
+    reglas:'',
+    saludYseguridad:'',
+    politicas:'',
   })
 
   useEffect(() => {
@@ -178,6 +182,9 @@ const AgregarProducto = () => {
       formData.append('localidad', producto.localidad)
       formData.append('pais_id', producto.pais_id)
       formData.append('ciudad', producto.ciudad)
+      formData.append('reglas', producto.reglas)
+      formData.append('saludYseguridad', producto.saludYseguridad)
+      formData.append('politicas', producto.politicas)
       formData.append('reglas', producto.reglas)
       formData.append('saludYseguridad', producto.saludYseguridad)
       formData.append('politicas', producto.politicas)
@@ -357,6 +364,16 @@ const AgregarProducto = () => {
                     required
                   ></textarea>
                 </p>
+                <p className="descripcion">
+                  <label htmlFor="politicas">Politicas del restaurante:</label>
+                  <textarea 
+                    value={producto.politicas}
+                    id="politicas" 
+                    cols="30" rows="5" maxLength="250" 
+                    onChange={(e)=> setProducto({...producto, politicas: e.target.value})}
+                    required
+                  ></textarea>
+                </p>
               </section>
               
               <section className="form-parte-B">
@@ -370,7 +387,6 @@ const AgregarProducto = () => {
                     required
                   ></textarea>
                 </p>
-
                 <p className="descripcion">
                   <label htmlFor="saludYseguridad">Medidas de salud y seguridad:</label>
                   <textarea 
