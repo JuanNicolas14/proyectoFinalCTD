@@ -114,6 +114,9 @@ public class RestauranteService {
             restauranteDTO.setNumeroValoraciones(0);
             restauranteDTO.setPuntuacionPromedio(0);
         }
+        restauranteDTO.setReglas(restaurante.getReglas());
+        restauranteDTO.setSaludYseguridad(restaurante.getSaludYseguridad());
+        restauranteDTO.setPoliticas(restaurante.getPoliticas());
 
         return restauranteDTO;
     }

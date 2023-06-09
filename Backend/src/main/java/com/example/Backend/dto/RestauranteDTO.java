@@ -16,10 +16,11 @@ public class RestauranteDTO {
     private String pais;
     private String plan;
     private double precio;
-
     private double puntuacionPromedio;
-
     private int numeroValoraciones;
+    private String reglas;
+    private String saludYseguridad;
+    private String politicas;
 
     // Constructor
     public RestauranteDTO() {}
@@ -108,6 +109,29 @@ public class RestauranteDTO {
         this.numeroValoraciones = numeroValoraciones;
     }
 
+    public String getReglas() {
+        return reglas;
+    }
+
+    public void setReglas(String reglas) {
+        this.reglas = reglas;
+    }
+
+    public String getSaludYseguridad() {
+        return saludYseguridad;
+    }
+
+    public void setSaludYseguridad(String saludYseguridad) {
+        this.saludYseguridad = saludYseguridad;
+    }
+
+    public String getPoliticas() {
+        return politicas;
+    }
+
+    public void setPoliticas(String politicas) {
+        this.politicas = politicas;
+    }
 
     @Override
     public String toString() {
@@ -121,7 +145,10 @@ public class RestauranteDTO {
                 ", plan='" + plan + '\'' +
                 ", precio=" + precio +
                 ", puntuacionPromedio=" + puntuacionPromedio +
-                ", numeroValoraciones=" + numeroValoraciones+
+                ", numeroValoraciones=" + numeroValoraciones +
+                ", reglas='" + reglas + '\'' +
+                ", saludYseguridad='" + saludYseguridad + '\'' +
+                ", politicas='" + politicas + '\'' +
                 '}';
     }
 }
