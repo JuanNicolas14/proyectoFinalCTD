@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router";
 
 import baseUrl from '../../utils/baseUrl.json'
 
-import './ValidarUsuario.css'
+import './validarUsuario.css'
 
 import Swal from "sweetalert2";
 import { red } from "@mui/material/colors";
