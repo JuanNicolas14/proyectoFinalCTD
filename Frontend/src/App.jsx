@@ -16,9 +16,9 @@ import DetalleUser from './Vistas/DetalleUser/DetalleUser'
 import AuthContextProvider from './utils/AuthContext'
 import FilterContextProvider from './utils/FilterContext'
 import ListaPorFiltros from './Vistas/ListaPorFiltros/ListaPorFiltros'
+import ValidarUsuario from './Vistas/ValidarUsuario/ValidarUsuario'
 
 function App() {
-
   return (
     <AuthContextProvider>
       <FilterContextProvider>
@@ -36,6 +36,7 @@ function App() {
           <Route path='/administracion/eliminarProducto' element={<EliminarProducto/>}/>
           <Route path='/usuario/detalle' element={<DetalleUser/>}/>
           <Route path='/usuario/registrar' element={<RegistrarUsuario/>}/>
+          <Route path='/usuario/validar/:id' element={<ValidarUsuario/>}/>
           <Route path='/plan/registrar' element={<AgregarPlan/>}/>
           <Route path='/restaurantes/ciudad-y-plan' element={<ListaPorFiltros/>}/>
         </Routes>
