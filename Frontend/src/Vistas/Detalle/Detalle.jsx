@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 //Iconos
 import {BiArrowBack} from 'react-icons/bi'
-import {AiFillStar} from 'react-icons/ai'
+import {AiFillStar, AiOutlineStar} from 'react-icons/ai'
 import {MdPlace} from 'react-icons/md'
 import {HiOutlineShare} from 'react-icons/hi'
 import {FiHeart} from 'react-icons/fi'
@@ -20,14 +20,19 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import Carrousel from '../../Componentes/Carrousel/Carrousel'
 import Slider from '../../Componentes/Slider/Slider'
+import { AuthContext } from '../../utils/AuthContext'
+import Puntuacion from '../../Componentes/Puntuacion/Puntuacion'
 
 const Detalle = () => {
+
+  const {user} = useContext(AuthContext)
   const [restaurante, setRestaurante] = useState({});
   const [reserva, setReserva] = useState({
     fechaInicio: null,
     fechaFinal: null,
   });
   const [sliderShow, setShowSlider] = useState(false)
+  const [ratingWindowShow, setRatingWindowShow] = useState(false)
 
   //Obtenemos el id que trae la url por medio de useParams()
   const navigate = useNavigate()
@@ -54,6 +59,16 @@ const Detalle = () => {
           }
         </section>      
       }
+
+      {ratingWindowShow && 
+        <section className='slider-imagenes'>
+            <Puntuacion
+              setRatingWindowShow={setRatingWindowShow}
+              restaurante={restaurante}
+            />
+        </section>      
+      }
+
       {restaurante &&
         <section className='informacion-relevante'>
           <div className='producto-nombre'>
@@ -76,22 +91,102 @@ const Detalle = () => {
                 <FiHeart/>
               </div>
             </div>
+
             <div className='calificacion'>
               <div className='estrellas'>
-                <p>Muy Bueno</p>
-                <AiFillStar/>
-                <AiFillStar/>
-                <AiFillStar/>
-                <AiFillStar/>
-                <AiFillStar/>
+                {restaurante?.puntuacionPromedio < 1 && (           
+                  <>
+                    <p className='adjetivo-descripcion'>Nuevo</p>
+                    <div>
+                      <AiOutlineStar/>
+                      <AiOutlineStar/>
+                      <AiOutlineStar/>
+                      <AiOutlineStar/>
+                      <AiOutlineStar/>
+                    </div>               
+                  </>
+                )}
+                {restaurante?.puntuacionPromedio >= 1 && restaurante?.puntuacionPromedio < 2 && (           
+                  <>
+                    <p className='adjetivo-descripcion'>Malo</p>
+                    <div>
+                      <AiFillStar/>
+                      <AiOutlineStar/>
+                      <AiOutlineStar/>
+                      <AiOutlineStar/>
+                      <AiOutlineStar/>
+                    </div>
+                  </>
+                )}
+                {restaurante?.puntuacionPromedio >= 2 && restaurante?.puntuacionPromedio < 3 && (           
+                  <>
+                    <p className='adjetivo-descripcion'>Malo</p>
+                    <div>
+                      <AiFillStar/>
+                      <AiFillStar/>
+                      <AiOutlineStar/>
+                      <AiOutlineStar/>
+                      <AiOutlineStar/>
+                    </div>
+                  </>
+                )}
+                {restaurante?.puntuacionPromedio >= 3 && restaurante?.puntuacionPromedio < 4 && (           
+                  <>
+                    <p className='adjetivo-descripcion'>Regular</p>
+                    <div>
+                      <AiFillStar/>
+                      <AiFillStar/>
+                      <AiFillStar/>
+                      <AiOutlineStar/>
+                      <AiOutlineStar/>
+                    </div>
+                  </>
+                )}
+                {restaurante?.puntuacionPromedio >= 4 && restaurante?.puntuacionPromedio < 4.5 && (           
+                  <>
+                    <p className='adjetivo-descripcion'>Bueno</p>
+                    <div>
+                      <AiFillStar/>
+                      <AiFillStar/>
+                      <AiFillStar/>
+                      <AiFillStar/>
+                      <AiOutlineStar/>
+                    </div>
+                  </>
+                )}
+                {restaurante?.puntuacionPromedio >= 4.5 && (            
+                  <>
+                    <p className='adjetivo-descripcion'>Muy Bueno</p>
+                    <div>
+                      <AiFillStar/>
+                      <AiFillStar/>
+                      <AiFillStar/>
+                      <AiFillStar/>
+                      <AiFillStar/>
+                    </div>
+                  </>
+                )}
+
+                <p className='numero-valoraciones'>{restaurante.numeroValoraciones} valoraciones</p>
+
+                {user.rol && (
+                  <div className='boton-puntuacion'>
+                    <button className='boton-dar-puntuacion' onClick={() => setRatingWindowShow(true)}>
+                      Califica
+                    </button>
+                  </div>          
+                )}
               </div>
+
               <div className='numero'>
-                <p>8</p>
+                <p>{restaurante?.puntuacionPromedio}</p>
               </div>
+
             </div>
           </div>
         </section>
       }
+      
       {restaurante.imagenes &&        
         <section className="detalle-producto">
           <article>

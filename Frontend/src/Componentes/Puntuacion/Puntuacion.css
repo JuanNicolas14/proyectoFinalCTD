@@ -1,0 +1,96 @@
+.ratingWindowStyles {
+    height: 100%;
+}
+
+.ratingWindowStyles .modal{
+    width: 350px;
+    height: 200px;
+    max-width: 80%;
+    margin: 0 auto;
+    margin-top: 150px;
+    border: 2px var(--main-color) solid;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    
+}
+
+.ratingWindowStyles h2{
+    text-align: center; 
+}
+
+.ratingWindowStyles .estrellas-modal {
+    text-align: left;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+.ratingWindowStyles .estrellas-modal p {
+    font-weight: 700;
+    margin: 16px 0 5px;
+}
+
+
+.ratingWindowStyles .estrellas-modal svg {
+    color: #ffbd52;
+    font-size: 32px;
+    margin: 0 3px 0 0;
+}
+
+.ratingWindowStyles .estrellas-modal svg:hover {
+    cursor: pointer;
+}
+
+.ratingWindowStyles .botones-puntuar{
+    width: 200px;
+    display: flex;
+    justify-content: space-evenly;
+}
+.ratingWindowStyles .boton-puntuacion-enviar {
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: var(--secondary-color);
+    padding: 10px 20px;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.ratingWindowStyles .boton-puntuacion-cancelar {
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: var(--secondary-color);
+    padding: 10px 20px;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.ratingWindowStyles .alerta{
+    width: 350px;
+    height: 60px;
+    max-width: 80%;
+    margin: 0 auto;
+    margin-top: 10px;
+    border: 2px var(--main-color) solid;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+}
+
+.ratingWindowStyles .alerta p{
+    width: 90%;
+    text-align: center;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.ratingWindowStyles  button:hover {
+    background-color: #f05d28;
+    cursor: pointer;
+}
+
+
