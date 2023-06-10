@@ -23,7 +23,7 @@ build_frontend:
   stage: build
   script:
     - cd Frontend
-    - npm install
+    - npm install --force
     - echo "Compiling the code..."
     - npm run build
     - echo "Compile complete."
