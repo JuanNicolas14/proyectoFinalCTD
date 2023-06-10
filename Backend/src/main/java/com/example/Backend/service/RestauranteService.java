@@ -102,7 +102,7 @@ public class RestauranteService {
         } else {
             restauranteDTO.setImagenes(null);
         }
-        restauranteDTO.setCiudad(restaurante.getDomicilio().getCiudad());
+        restauranteDTO.setCiudad(restaurante.getDomicilio().getCiudad().getNombreCiudad());
         restauranteDTO.setPais(restaurante.getDomicilio().getPais().getNombre());
         restauranteDTO.setPlan(restaurante.getPlan().getNombre());
         restauranteDTO.setPrecio(restaurante.getPrecio());

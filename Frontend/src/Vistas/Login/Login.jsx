@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from '../../utils/AuthContext';
 /*Herramienta Alertas */
 import Swal from 'sweetalert2';
+import baseUrl from '../../utils/baseUrl.json'
 
 const Login = () => {
     const navigate = useNavigate();
@@ -26,7 +27,7 @@ const Login = () => {
         };
 
         // Realiza la solicitud HTTP para obtener los detalles del usuario
-        const response = await fetch('http://3.19.61.55:8080/usuario/detalle', config)
+        const response = await fetch(baseUrl.url+ '/usuario/detalle', config)
         if(response.ok){
             const data = await response.json();
             console.log(data)
