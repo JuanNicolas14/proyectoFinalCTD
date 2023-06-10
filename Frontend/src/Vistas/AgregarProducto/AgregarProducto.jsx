@@ -72,7 +72,7 @@ const AgregarProducto = () => {
     calle: 0,
     numero: 0,
     localidad:'',
-    ciudad:'',
+    ciudad_id:'',
     pais_id:'',
     reglas:'',
     saludYseguridad:'',
@@ -80,7 +80,7 @@ const AgregarProducto = () => {
     pais_id:'',
     reglas:'',
     saludYseguridad:'',
-    politicas:'',
+    politicas:''
   })
 
   useEffect(() => {
@@ -144,8 +144,11 @@ const AgregarProducto = () => {
             calle: 0,
             numero: 0,
             localidad:'',
-            ciudad:'',
-            pais_id:''
+            ciudad_id:'',
+            pais_id:'',
+            reglas:'',
+            politicas: '',
+            saludYseguridad: ''
           })
           window.location.reload()
         }
@@ -160,8 +163,12 @@ const AgregarProducto = () => {
         calle: 0,
         numero: 0,
         localidad:'',
-        ciudad:'',
-        pais_id:''
+        ciudad_id:'',
+        pais_id:'',
+        reglas:'',
+        politicas: '',
+        saludYseguridad: ''
+
       })
 
       return
@@ -181,13 +188,13 @@ const AgregarProducto = () => {
       formData.append('numero', producto.numero)
       formData.append('localidad', producto.localidad)
       formData.append('pais_id', producto.pais_id)
-      formData.append('ciudad', producto.ciudad)
+      formData.append('ciudad_id', producto.ciudad_id)
       formData.append('reglas', producto.reglas)
-      formData.append('saludYseguridad', producto.saludYseguridad)
       formData.append('politicas', producto.politicas)
-      formData.append('reglas', producto.reglas)
       formData.append('saludYseguridad', producto.saludYseguridad)
-      formData.append('politicas', producto.politicas)
+      formData.append('longitud', longitude)
+      formData.append('latitud', latitude)
+      
       console.log("se creo el formData y se enviaran los datos !!!!")
 
       axios.post(urlRestaurantes,formData)
@@ -215,8 +222,11 @@ const AgregarProducto = () => {
               calle: 0,
               numero: 0,
               localidad:'',
-              ciudad:'',
-              pais_id:''
+              ciudad_id:'',
+              pais_id:'',
+              reglas:'',
+              politicas: '',
+              saludYseguridad: ''
             })
             window.location.reload()
           }
@@ -364,16 +374,6 @@ const AgregarProducto = () => {
                     required
                   ></textarea>
                 </p>
-                <p className="descripcion">
-                  <label htmlFor="politicas">Politicas del restaurante:</label>
-                  <textarea 
-                    value={producto.politicas}
-                    id="politicas" 
-                    cols="30" rows="5" maxLength="250" 
-                    onChange={(e)=> setProducto({...producto, politicas: e.target.value})}
-                    required
-                  ></textarea>
-                </p>
               </section>
               
               <section className="form-parte-B">
@@ -429,9 +429,9 @@ const AgregarProducto = () => {
                   <p>
                     <label htmlFor="ciudad">Ciudad:</label>
                     <input 
-                      value={producto.ciudad}
+                      value={producto.ciudad_id}
                       type="text" id="ciudad"
-                      onChange={(e)=> setProducto({...producto, ciudad: e.target.value})} 
+                      onChange={(e)=> setProducto({...producto, ciudad_id: e.target.value})} 
                       required
                     />
                   </p>
@@ -469,7 +469,8 @@ const AgregarProducto = () => {
                 </div>
                 <div>
                   <label>Longitud:</label>
-                  <input type="number" value={longitude} onChange={handleLongitudeChange} />
+                  <input type="number" value={longitude} onChange={handleLongitudeChange} 
+                  />
                 </div>
                 
                 <Map onMarkerPositionChange={handleMarkerPositionChange} />
