@@ -18,7 +18,6 @@ import FilterContextProvider from './utils/FilterContext'
 import ListaPorFiltros from './Vistas/ListaPorFiltros/ListaPorFiltros'
 
 function App() {
-
   return (
     <AuthContextProvider>
       <FilterContextProvider>
