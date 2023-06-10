@@ -1,26 +1,24 @@
-import ReactDomServer from 'react-dom/server';
 import baseUrl from '../../utils/baseUrl.json';
 import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
-import errorDemasiadosIntentos from './errorDemasiadosIntentos';
 
-const infoValidacionCuenta = (data, setRegistroData, retriesData) => {
-  let { retries, initialTime } = retriesData;
-
-  const errorToast = () => {
+const infoValidacionCuenta = (data, setRegistroData) => {
+  const errorToast = (error = null) => {
     Swal.fire({
       title: 'Error',
-      text: 'Ha ocurrido un error al reenviar el correo de validación.',
+      text: error ? error : 'Ha ocurrido un error al reenviar el correo de validación.',
       icon: 'error',
-      confirmButtonText: 'Cerrar',
-      confirmButtonColor: '#d33',
+      showConfirmButton: false,
       toast: true,
       position: 'top-end',
       timer: 5000,
       timerProgressBar: true,
     })
 
-    return false;
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(true);
+      }, 5000);
+    });
   }
 
   const html = `
@@ -44,27 +42,15 @@ const infoValidacionCuenta = (data, setRegistroData, retriesData) => {
     position: 'center',
     preConfirm: async () => {
       try {
-        // Evitamos mas de 3 re-envios en menos de 1 minuto
-        const diff = (Date.now() - initialTime) / 1000;
-        if (retries >= 3 && diff < 60) {
-          return errorDemasiadosIntentos(data, setRegistroData, { retries, initialTime });
-        } else if (diff > 60) {
-          initialTime = Date.now();
-          retries = 0;
-        }
-
         // Reenviamos el correo
-        try {
-          await fetch(baseUrl.url + `/mail/validacion/${data.id}`)
-          retries++;
-        } catch (error) {
-          errorToast();
-          return infoValidacionCuenta(data, setRegistroData, { retries, initialTime });
-        }
+        const response = await fetch(baseUrl.url + `/mail/validacion/${data.id}`);
+        if (response.status !== 200) {
+          throw await response.text();
+        };
         return false
       } catch (error) {
-        errorToast();
-        return infoValidacionCuenta(data, setRegistroData, { retries, initialTime });
+        await errorToast(error);
+        return infoValidacionCuenta(data, setRegistroData);
       }
     }
   })
@@ -84,8 +70,8 @@ const infoValidacionCuenta = (data, setRegistroData, retriesData) => {
         window.location.href = '/login';
       }
     })
-    .catch((err) => {
-      errorToast();
+    .catch(async (err) => {
+      await errorToast();
       return infoValidacionCuenta(data, setRegistroData, { retries, initialTime });
     })
 
