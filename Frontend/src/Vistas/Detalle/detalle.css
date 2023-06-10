@@ -55,30 +55,60 @@
 }
 .producto-info .calificacion .estrellas {
     margin-right: 10px;
+    margin-left: 10px;
     text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
 }
 .producto-info .estrellas p {
     font-weight: 700;
     margin: 16px 0 5px;
 }
+.producto-info .estrellas .adjetivo-descripcion{
+    margin-right: 2px;
+}
 .producto-info .estrellas svg {
     color: var(--secondary-color);
     margin: 0 3px 0 0;
 }
+.producto-info .estrellas .numero-valoraciones {
+    margin-top: 0px;
+    font-size: 14px;
+}
 .producto-info .calificacion .numero {
-    margin-top: 12px;
+    margin-top: 18px;
     background-color: var(--main-color);
     color: white;
+    font-weight: 700;
     border-radius: 5px;
     width: 40px;
     height: 40px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
     align-items: center;
 }
 .producto-info .numero p{
     margin: 12px;
 }
-
+.producto-info .boton-puntuacion {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+.producto-info .boton-puntuacion .boton-dar-puntuacion {
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: var(--secondary-color);
+    padding: 10px 5px;
+    width: 80px;
+    font-weight: bold;
+    margin: 5px 0px;
+}
+.producto-info .boton-puntuacion button:hover {
+    cursor: pointer;
+}
 .detalle-producto {
     padding: 5px 0px;
 }
@@ -322,7 +352,18 @@
     .producto-info .iconos {
       font-size: 1.2rem;
     }
-
+    .producto-info .estrellas .numero-valoraciones {
+        font-size: 13px;
+    }
+    .producto-info .boton-puntuacion .boton-dar-puntuacion {
+        width: 70px;
+        padding: 8px 5px;
+        font-size: .8rem;
+    }
+    .producto-info .calificacion .numero{
+        width: 35px;
+        height: 35px;
+    }
     .detalle-producto .galeria-imagenes {
         display: none;
     }
@@ -391,6 +432,10 @@
     }
     .producto-info .estrellas svg {
       font-size: .8rem;
+    }
+    .producto-info .calificacion .numero{
+        width: 30px;
+        height: 30px;
     }
 
     /* -----PRODUCTO PLAN ------*/
