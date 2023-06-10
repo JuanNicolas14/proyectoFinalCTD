@@ -27,10 +27,9 @@ const Login = () => {
         };
 
         // Realiza la solicitud HTTP para obtener los detalles del usuario
-        const response = await fetch(baseUrl.url+ '/usuario/detalle', config)
+        const response = await fetch(baseUrl.url + '/usuario/detalle', config)
         if(response.ok){
             const data = await response.json();
-            console.log(data)
             let resUser = {
               id:data.id,
               nombre:data.nombre,
@@ -50,7 +49,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const response = await fetch('http://3.19.61.55:8080/login', {
+        const response = await fetch(baseUrl.url + '/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
