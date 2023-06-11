@@ -12,6 +12,8 @@ import Map from '../../Componentes/Maps/Map';
 const AgregarProducto = () => {
   const urlRestaurantes = baseUrl.url + "/restaurante"
   const urlPlanes = baseUrl.url + "/plan"
+  const urlCiudades = baseUrl.url + "/ciudades"
+  const urlPaises = baseUrl.url + "/paises"
   let confirmador = false;
   //Estado global
   const {user,token} = useContext(AuthContext)
@@ -61,6 +63,9 @@ const AgregarProducto = () => {
     setMarkerPosition({ ...markerPosition, lng: newLongitude });
   };
 
+
+  const [paisesdb,setPaisesdb] = useState([])
+  const [ciudadesdb,setCiudadesdb] = useState([])
   const [planesdb, setPlanesdb]= useState([])
   const [productos, setProductos] = useState([])
   const [producto, setProducto] = useState({
@@ -72,7 +77,7 @@ const AgregarProducto = () => {
     calle: 0,
     numero: 0,
     localidad:'',
-    ciudad_id:'',
+    ciudad_id: 0,
     pais_id:'',
     reglas:'',
     saludYseguridad:'',
@@ -99,6 +104,15 @@ const AgregarProducto = () => {
           const productos = await fetchProductos.json();
           setProductos(productos)
   
+          //Realiza la tercer peticion de las ciudades
+          const fetchCiudades = await fetch(urlCiudades)
+          const ciudades = await fetchCiudades.json();
+          setCiudadesdb(ciudades)
+
+          //Realiza la tercer peticion de las ciudades
+          const fetchPaises = await fetch(urlPaises)
+          const paises = await fetchPaises.json();
+          setPaisesdb(paises)
           
           
         } catch (error) {
@@ -141,7 +155,7 @@ const AgregarProducto = () => {
             calle: 0,
             numero: 0,
             localidad:'',
-            ciudad_id:'',
+            ciudad_id: 0,
             pais_id:'',
             reglas:'',
             politicas: '',
@@ -160,7 +174,7 @@ const AgregarProducto = () => {
         calle: 0,
         numero: 0,
         localidad:'',
-        ciudad_id:'',
+        ciudad_id: 0,
         pais_id:'',
         reglas:'',
         politicas: '',
@@ -219,7 +233,7 @@ const AgregarProducto = () => {
               calle: 0,
               numero: 0,
               localidad:'',
-              ciudad_id:'',
+              ciudad_id: 0,
               pais_id:'',
               reglas:'',
               politicas: '',
@@ -423,39 +437,34 @@ const AgregarProducto = () => {
                       onChange={(e)=> setProducto({...producto, localidad: e.target.value})} 
                       required/>
                   </p>
-                  <p>
-                    <label htmlFor="ciudad">Ciudad:</label>
-                    <input 
-                      value={producto.ciudad_id}
-                      type="text" id="ciudad"
-                      onChange={(e)=> setProducto({...producto, ciudad_id: e.target.value})} 
-                      required
-                    />
-                  </p>
+                  <fieldset className="tipo-plan">
+                    <legend>Ciudad</legend>
+                    <select
+                      className='select-categorias'
+                      value={producto.ciudad_id} 
+                      onChange={(e)=> setProducto({...producto, ciudad_id: e.target.value})}
+                    >
+                      <option value="">Selecciona una ciudad</option>
+                      {ciudadesdb?.map(ciudad => {
+                        return <option key={ciudad.id} value={ciudad.id}>{ciudad.nombreCiudad}</option>
+                      })}
+                      
+                    </select>
+                  </fieldset>
                   
                   <fieldset className="tipo-plan">
                     <legend>Pais</legend>
-
-                    <input 
-                      type="radio" name="pais" 
-                      id="plan_1" value="1" 
+                    <select
+                      className='select-categorias'
+                      value={producto.pais_id} 
                       onChange={(e)=> setProducto({...producto, pais_id: e.target.value})}
-                      required/>
-                    <label htmlFor="plan_1">Colombia</label>
-
-                    <input 
-                      type="radio" name="pais" 
-                      id="plan_2" value="2" 
-                      onChange={(e)=> setProducto({...producto, pais_id: e.target.value})}
-                      required/>
-                    <label htmlFor="plan_2">Argentina</label>
-
-                    <input 
-                      type="radio" name="pais" 
-                      id="plan_3" value="3" 
-                      onChange={(e)=> setProducto({...producto, pais_id: e.target.value})}
-                      required/>
-                    <label htmlFor="plan_3">Brasil</label>
+                    >
+                      <option value="">Selecciona un pais</option>
+                      {paisesdb?.map(pais => {
+                        return <option key={pais.id} value={pais.id}>{pais.nombre}</option>
+                      })}
+                      
+                    </select>
                   </fieldset>
                 </div>
               </section>
