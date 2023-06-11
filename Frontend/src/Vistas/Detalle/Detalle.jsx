@@ -38,7 +38,6 @@ const Detalle = () => {
   const navigate = useNavigate()
   const { id } = useParams()
   const url = baseUrl.url + "/restaurante/" +id;
-  
 
   //Hacemos la peticion una vez se carga el componente
   useEffect(() => {
@@ -46,6 +45,42 @@ const Detalle = () => {
       .then((res) => res.json())
       .then((data) => setRestaurante(data));
   }, []);
+
+  //Puntuación del producto
+  const puntuacionPromedio = restaurante?.puntuacionPromedio
+  let calidad = ''
+  let numEstrellas = 0
+
+  if (puntuacionPromedio < 1) {
+    calidad = 'Nuevo'
+    numEstrellas = 0
+  } else if (puntuacionPromedio < 2) {
+    calidad = 'Malo'
+    numEstrellas = 1
+  } else if (puntuacionPromedio < 3) {
+    calidad = 'Malo'
+    numEstrellas = 2
+  } else if (puntuacionPromedio < 4) {
+    calidad = 'Regular'
+    numEstrellas = 3
+  } else if (puntuacionPromedio < 4.5) {
+    calidad = 'Bueno'
+    numEstrellas = 4
+  } else {
+    calidad = 'Muy Bueno'
+    numEstrellas = 5
+  }
+
+  const generarEstrellas = () => {
+    const estrellas = []
+    for (let i = 0; i < numEstrellas; i++) {
+      estrellas.push(<AiFillStar key={i} />)
+    }
+    for (let i = numEstrellas; i < 5; i++) {
+      estrellas.push(<AiOutlineStar key={i} />)
+    }
+    return estrellas
+  }
   
   return (
     <main className="main-detail">
@@ -94,92 +129,30 @@ const Detalle = () => {
 
             <div className='calificacion'>
               <div className='estrellas'>
-                {restaurante?.puntuacionPromedio < 1 && (           
-                  <>
-                    <p className='adjetivo-descripcion'>Nuevo</p>
-                    <div>
-                      <AiOutlineStar/>
-                      <AiOutlineStar/>
-                      <AiOutlineStar/>
-                      <AiOutlineStar/>
-                      <AiOutlineStar/>
-                    </div>               
-                  </>
-                )}
-                {restaurante?.puntuacionPromedio >= 1 && restaurante?.puntuacionPromedio < 2 && (           
-                  <>
-                    <p className='adjetivo-descripcion'>Malo</p>
-                    <div>
-                      <AiFillStar/>
-                      <AiOutlineStar/>
-                      <AiOutlineStar/>
-                      <AiOutlineStar/>
-                      <AiOutlineStar/>
-                    </div>
-                  </>
-                )}
-                {restaurante?.puntuacionPromedio >= 2 && restaurante?.puntuacionPromedio < 3 && (           
-                  <>
-                    <p className='adjetivo-descripcion'>Malo</p>
-                    <div>
-                      <AiFillStar/>
-                      <AiFillStar/>
-                      <AiOutlineStar/>
-                      <AiOutlineStar/>
-                      <AiOutlineStar/>
-                    </div>
-                  </>
-                )}
-                {restaurante?.puntuacionPromedio >= 3 && restaurante?.puntuacionPromedio < 4 && (           
-                  <>
-                    <p className='adjetivo-descripcion'>Regular</p>
-                    <div>
-                      <AiFillStar/>
-                      <AiFillStar/>
-                      <AiFillStar/>
-                      <AiOutlineStar/>
-                      <AiOutlineStar/>
-                    </div>
-                  </>
-                )}
-                {restaurante?.puntuacionPromedio >= 4 && restaurante?.puntuacionPromedio < 4.5 && (           
-                  <>
-                    <p className='adjetivo-descripcion'>Bueno</p>
-                    <div>
-                      <AiFillStar/>
-                      <AiFillStar/>
-                      <AiFillStar/>
-                      <AiFillStar/>
-                      <AiOutlineStar/>
-                    </div>
-                  </>
-                )}
-                {restaurante?.puntuacionPromedio >= 4.5 && (            
-                  <>
-                    <p className='adjetivo-descripcion'>Muy Bueno</p>
-                    <div>
-                      <AiFillStar/>
-                      <AiFillStar/>
-                      <AiFillStar/>
-                      <AiFillStar/>
-                      <AiFillStar/>
-                    </div>
-                  </>
-                )}
+                <p className='adjetivo-descripcion'>{calidad}</p>
+                <div>{generarEstrellas()}</div>
 
                 <p className='numero-valoraciones'>{restaurante.numeroValoraciones} valoraciones</p>
 
-                {user.rol && (
+                
                   <div className='boton-puntuacion'>
-                    <button className='boton-dar-puntuacion' onClick={() => setRatingWindowShow(true)}>
-                      Califica
-                    </button>
-                  </div>          
-                )}
+                    {user.rol ? (
+                      <button className='boton-dar-puntuacion' onClick={() => setRatingWindowShow(true)}>
+                        Califica
+                      </button>
+                    ) : (
+                      <button className='boton-dar-puntuacion'>
+                        <Link to="/login" style={{ textDecoration: 'none', color: 'white'}}>
+                          Califica
+                        </Link>
+                      </button>
+                    )}
+                  </div>
+        
               </div>
 
               <div className='numero'>
-                <p>{restaurante?.puntuacionPromedio}</p>
+                <p>{restaurante?.puntuacionPromedio*2}</p>
               </div>
 
             </div>
