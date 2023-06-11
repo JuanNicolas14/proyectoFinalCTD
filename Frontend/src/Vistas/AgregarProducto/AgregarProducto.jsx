@@ -77,10 +77,7 @@ const AgregarProducto = () => {
     reglas:'',
     saludYseguridad:'',
     politicas:'',
-    pais_id:'',
-    reglas:'',
-    saludYseguridad:'',
-    politicas:''
+    
   })
 
   useEffect(() => {
