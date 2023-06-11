@@ -69,7 +69,7 @@
     margin-right: 2px;
 }
 .producto-info .estrellas svg {
-    color: var(--secondary-color);
+    color: #ffbd52;
     margin: 0 3px 0 0;
 }
 .producto-info .estrellas .numero-valoraciones {
