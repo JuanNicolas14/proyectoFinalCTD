@@ -92,12 +92,12 @@ const RestauranteRecomendado = ({restaurante}) => {
                     <span>Regular</span>
                   </>
                 )}
-                {restaurante?.puntuacionPromedio >= 4 && restaurante?.puntuacionPromedio < 5 && (           
+                {restaurante?.puntuacionPromedio >= 4 && restaurante?.puntuacionPromedio < 4.5 && (           
                   <>
                     <span>Bueno</span>
                   </>
                 )}
-                {restaurante?.puntuacionPromedio == 5 && (            
+                {restaurante?.puntuacionPromedio >= 4.5 && restaurante?.puntuacionPromedio <= 5 &&(            
                   <>
                     <span>Muy Bueno</span>
                   </>
