@@ -4,6 +4,7 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng
 } from 'react-places-autocomplete';
+import './mapa.css'
 
 const libraries = ['places'];
 
@@ -56,7 +57,7 @@ function Map({ onMarkerPositionChange }) {
   }
 
   return (
-    <div>
+    <div className='componente-mapa'>
       <PlacesAutocomplete value={address} onChange={setAddress} onSelect={handleSelect}>
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div>
@@ -86,8 +87,8 @@ function Map({ onMarkerPositionChange }) {
       >
         {markerPosition && <Marker position={markerPosition} />}
       </GoogleMap>
-      {markerPosition && (
-        <div>
+      {address && (
+        <div className='info-direccion'>
           <h2>Dirección seleccionada:</h2>
           <p>{address}</p>
         </div>

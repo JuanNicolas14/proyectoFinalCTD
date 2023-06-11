@@ -140,7 +140,12 @@ section.form {
   background: rgba(255, 255, 255, 1);
   padding: 5px;
 }
-
+.form-add-product .mapa legend{
+  font-size: 1.2rem;
+}
+.form-add-product .mapa label {
+  font-size: .9rem;
+}
 .form-add-product .tipo-plan label {
   font-size: 1em;
   font-weight: 500;
@@ -206,6 +211,19 @@ section.form {
 .form .form-parte-B {
   width: 45%;
   margin-left: 20px;
+}
+form div.map {
+  width: 95%;
+  margin: 30px auto 0;
+  text-align: center;
+}
+form div.map label,form div.map div, form div.map input {
+  box-sizing: border-box;
+  width: 100%;
+} 
+
+form div.map input {
+  width: 100%;
 }
 
 .form .form-parte-B .direccion p {
