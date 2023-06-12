@@ -1,0 +1,14 @@
+.fav-icon {
+  position: absolute;
+  z-index: 1;
+  left: 10px;
+  top: 10px;
+  font-size: 25px;
+  cursor: pointer;
+  transition: all .3s ease;
+  color: white;
+}
+
+.fav-icon:hover{
+  color: orange;
+}
