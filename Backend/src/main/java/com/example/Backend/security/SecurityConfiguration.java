@@ -45,7 +45,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     "/puntuacion/{id}",
                     "/restaurante/**",
                     "/usuario/validar/{id}",
-                    "/mail/**","/ciudades/**","/paises/**"
+                    "/mail/**","/ciudades/**","/paises/**",
+                    "/favoritos/**"
                 ).permitAll()
                 .antMatchers("/plan/{id}").hasAnyAuthority("ADMIN")
                 //.antMatchers("/usuario/detalle").permitAll()

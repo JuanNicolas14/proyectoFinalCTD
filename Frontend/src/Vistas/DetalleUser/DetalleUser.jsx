@@ -9,23 +9,34 @@ const DetalleUser = () => {
     
   return (
     <main>
-        {user?.nombre?.length > 3 
-        ?(
-            <section className='detalle-usuario'>
-                <h2>Detalles del Usuario</h2>
-                <div className='usuario-datos'>
-                    <p>Nombre: <span>{user.nombre}</span></p>
-                    <p>Apellido: <span>{user.apellido}</span></p>
-                    <p>Email: <span>{user.email}</span></p>
-                    <p>Rol: <span>{user.rol == "ADMIN" ? "Administrador": "Usuario"}</span></p>
-                </div>
-            </section>
-        )
-        : (
-            <ErrorPage mensaje="No hay un usuario con sesión iniciada."/>
-        )
-        }
-        
+      {user?.nombre?.length > 3 ? (
+        <section className="detalle-usuario">
+          <h2>Detalles del Usuario</h2>
+          <div className="usuario-datos">
+            <p>
+              Nombre: <span>{user.nombre}</span>
+            </p>
+            <p>
+              Apellido: <span>{user.apellido}</span>
+            </p>
+            <p>
+              Email: <span>{user.email}</span>
+            </p>
+            <p>
+              Rol:{" "}
+              <span>{user.rol == "ADMIN" ? "Administrador" : "Usuario"}</span>
+            </p>
+            <p>
+              Mis Favoritos:{" "}
+              <span>
+                <a href={`/favoritos/${user.id}`}>Ir a mis favoritos</a>
+              </span>
+            </p>
+          </div>
+        </section>
+      ) : (
+        <ErrorPage mensaje="No hay un usuario con sesión iniciada." />
+      )}
     </main>
   ); 
       

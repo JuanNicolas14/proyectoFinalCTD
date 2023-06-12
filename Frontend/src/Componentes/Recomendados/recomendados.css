@@ -1,6 +1,10 @@
 .recomendados{
   max-width: 95%;
 }
+
+.article-recomendados {
+  position: relative;
+}
   
 .listado-recomendados {
   padding: 20px;
