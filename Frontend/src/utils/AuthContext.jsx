@@ -3,8 +3,8 @@ import { createContext, useReducer } from "react";
 export const AuthContext = createContext();
 
 const initialState = {
-  user: JSON.parse(localStorage.getItem("user")) || {} ,
-  accessToken: localStorage.getItem("token") || "" ,
+  user: JSON.parse(localStorage.getItem("user")) || null ,
+  accessToken: localStorage.getItem("token") || null ,
 };
 
 const authReducer = (state, action) => {
@@ -24,8 +24,8 @@ const authReducer = (state, action) => {
       console.log("Ejecutando LOGOUT del context")
       return {
         ...state,
-        user: {},
-        accessToken: "",
+        user: null,
+        accessToken: null,
       };
 
     default:

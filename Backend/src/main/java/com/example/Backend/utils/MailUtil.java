@@ -33,7 +33,7 @@ public class MailUtil {
         if (mainTitle == null) {
             throw new IOException("No se ha encontrado el elemento con id main-title");
         }
-        mainTitle.after("<h2>¡Hola " + user + "!</h2>");
+        mainTitle.after("<h2 style='font-size: 30px'>¡Hola " + user + "!</h2>");
 
         Element validateLink = doc.getElementById("validate-link");
         if (validateLink == null) {
@@ -57,7 +57,7 @@ public class MailUtil {
         if (mainTitle == null) {
             throw new IOException("No se ha encontrado el elemento con id main-title");
         }
-        mainTitle.after("<h2>¡Hola " + user + "!</h2>");
+        mainTitle.after("<h2 style='font-size: 30px'>¡Hola " + user + "!</h2>");
 
         return doc.toString();
     }

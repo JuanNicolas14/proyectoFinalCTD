@@ -24,14 +24,13 @@ public class UsuarioService implements UserDetailsService {
 
     private final UsuarioRepository usuarioRepository;
     private final UsuarioRolRepository usuarioRolRepository;
+    private static final Logger logger = Logger.getLogger(UsuarioService.class.getName());
 
     @Autowired
     public UsuarioService(UsuarioRepository usuarioRepository, UsuarioRolRepository usuarioRolRepository) {
         this.usuarioRepository = usuarioRepository;
         this.usuarioRolRepository = usuarioRolRepository;
     }
-
-    private static final Logger logger = Logger.getLogger(UsuarioService.class.getName());
 
     public UsuarioDTO guardarUsuario(UsuarioDTO usuarioDTO) throws BadRequestException {
         if(usuarioDTO.getNombre() != null && usuarioDTO.getApellido() != null && usuarioDTO.getEmail() != null &&
@@ -93,15 +92,15 @@ public class UsuarioService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        logger.info("Buscando usuario con email: " + email);
         Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
-
         if (usuario.isPresent()){
-
+            logger.info("Usuario encontrado: " + usuario.get());
             return usuario.get();
         }
         else{
-            logger.warning("Error. Usuario con email "+email+" no encontrado en la BD");
-            throw new UsernameNotFoundException("Error. Usuario con email "+email+" no encontrado en la BD");
+            logger.warning("Error. Usuario no encontrado en la BD");
+            throw new UsernameNotFoundException("Error. Usuario no encontrado en la BD");
         }
     }
 
