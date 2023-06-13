@@ -77,11 +77,11 @@ const Detalle = () => {
             setDistanciaUser(distanciaEntre)
           },
           (error) => {
-            setError(error.message);
+            console.log(error.message);
           }
         );
       } else {
-        setError('Geolocation is not supported by this browser.');
+        console.log('Geolocation is not supported by this browser.');
       }
     };
 
