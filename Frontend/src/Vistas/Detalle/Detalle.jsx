@@ -24,6 +24,7 @@ import { AuthContext } from '../../utils/AuthContext'
 import Puntuacion from '../../Componentes/Puntuacion/Puntuacion'
 
 const Detalle = () => {
+  const [distanciaUser, setDistanciaUser] = useState(0)
 
   const {user} = useContext(AuthContext)
   const [restaurante, setRestaurante] = useState({});
@@ -41,9 +42,67 @@ const Detalle = () => {
 
   //Hacemos la peticion una vez se carga el componente
   useEffect(() => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => setRestaurante(data));
+    
+    function calcularDistancia(lat1, lon1, lat2, lon2) {
+      const radioTierra = 6371; // Radio promedio de la Tierra en kilómetros
+
+      // Convertir las latitudes y longitudes de grados a radianes
+      const latitud1 = (lat1 * Math.PI) / 180;
+      const longitud1 = (lon1 * Math.PI) / 180;
+      const latitud2 = (lat2 * Math.PI) / 180;
+      const longitud2 = (lon2 * Math.PI) / 180;
+
+      // Calcular la diferencia entre las latitudes y longitudes
+      const diferenciaLatitud = latitud2 - latitud1;
+      const diferenciaLongitud = longitud2 - longitud1;
+
+      // Calcular la distancia utilizando la fórmula del haversine
+      const a =
+        Math.sin(diferenciaLatitud / 2) * Math.sin(diferenciaLatitud / 2) +
+        Math.cos(latitud1) *
+        Math.cos(latitud2) *
+        Math.sin(diferenciaLongitud / 2) *
+        Math.sin(diferenciaLongitud / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      const distancia = radioTierra * c;
+
+      return distancia;
+    }
+
+    const getLocation = (restauranteParams) => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            let distanciaEntre = calcularDistancia(restauranteParams.latitud, restauranteParams.longitud, position.coords.latitude, position.coords.longitude).toFixed(1)
+            setDistanciaUser(distanciaEntre)
+          },
+          (error) => {
+            setError(error.message);
+          }
+        );
+      } else {
+        setError('Geolocation is not supported by this browser.');
+      }
+    };
+
+
+    const fetchData = async () => {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error('Error al obtener los datos');
+        }
+        const data = await response.json();
+        setRestaurante(data)
+        getLocation(data);
+
+      } catch (error) {
+        throw Error;
+      }
+    };
+
+    fetchData()
+
   }, []);
 
   //Puntuación del producto
@@ -119,7 +178,7 @@ const Detalle = () => {
             <div className='ubicacion'>
               <div className='ciudad'>
                 <MdPlace/>
-                <p>{restaurante?.ciudad}, {restaurante?.pais}</p>
+                <p>{restaurante?.ciudad}, {restaurante?.pais}, {distanciaUser > 1 && `estas a ${distanciaUser} km de distancia`}</p>
               </div>
               <div className='iconos'>
                 <HiOutlineShare/>
