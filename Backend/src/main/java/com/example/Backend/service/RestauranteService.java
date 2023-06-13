@@ -103,6 +103,8 @@ public class RestauranteService {
             restauranteDTO.setImagenes(null);
         }
         restauranteDTO.setCiudad(restaurante.getDomicilio().getCiudad().getNombreCiudad());
+        restauranteDTO.setLatitud(restaurante.getDomicilio().getLatitud());
+        restauranteDTO.setLongitud(restaurante.getDomicilio().getLongitud());
         restauranteDTO.setPais(restaurante.getDomicilio().getPais().getNombre());
         restauranteDTO.setPlan(restaurante.getPlan().getNombre());
         restauranteDTO.setPrecio(restaurante.getPrecio());
