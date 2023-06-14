@@ -135,7 +135,7 @@ const Header = () => {
                 <h2>Menú</h2>
               </div>
               
-                {user?.rol == "ADMIN" || user.permisos.includes("ACCESO PANEL ADMINISTRACIÓN") ? 
+                {user?.rol == "ADMIN" || user?.permisos.includes("ACCESO PANEL ADMINISTRACIÓN") ? 
                 (
                   <ul>
                     <li onClick={showMenu}>
@@ -149,7 +149,7 @@ const Header = () => {
                       </Link>
                     </li>
                   </ul>
-                ):user.rol == "USER" 
+                ):user?.rol == "USER" 
                 ? (
                   <ul>
                     <li onClick={cerrarSesion}>
