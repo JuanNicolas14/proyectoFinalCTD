@@ -3,6 +3,7 @@ package com.example.Backend.service;
 import com.example.Backend.dto.UsuarioDTO;
 import com.example.Backend.exceptions.BadRequestException;
 import com.example.Backend.exceptions.ResourceNotFoundException;
+import com.example.Backend.models.Permiso;
 import com.example.Backend.models.Usuario;
 import com.example.Backend.models.UsuarioRol;
 import com.example.Backend.repository.UsuarioRepository;
@@ -59,23 +60,35 @@ public class UsuarioService implements UserDetailsService {
     public Optional<UsuarioDTO> buscarUsuario (Long id) throws ResourceNotFoundException {
         Optional<Usuario> usuarioABuscar=usuarioRepository.findById(id);
         if (usuarioABuscar.isPresent()){
-            return  Optional.of(convertirUsuarioaUsuarioDTO(usuarioABuscar.get()));
+            Optional<UsuarioDTO> usuarioDTO = Optional.of(convertirUsuarioaUsuarioDTO(usuarioABuscar.get()));
+            UsuarioRol usuarioRolEncontrado = usuarioRolRepository.findById(usuarioABuscar.get().getUsuarioRol().getId()).get();
+            List<String> permisosParaUsuarioDTO = new ArrayList<>();
+            for (Permiso permiso: usuarioRolEncontrado.getPermisos()) {
+                permisosParaUsuarioDTO.add(permiso.getNombre());
+            }
+            usuarioDTO.get().setPermisos(permisosParaUsuarioDTO);
+            return usuarioDTO;
         }else {
             throw new ResourceNotFoundException("No se encontró el usuario con id: " + id);
         }
-
     }
 
     public List<UsuarioDTO> buscarTodosUsuarios() {
         List<Usuario> listaUsuarios = usuarioRepository.findAll();
         List<UsuarioDTO> listaUsuariosDTO = new ArrayList<>();
         for (Usuario listaUsuario : listaUsuarios) {
-            listaUsuariosDTO.add(convertirUsuarioaUsuarioDTO(listaUsuario));
+            Optional<UsuarioDTO> usuarioDTO = Optional.of(convertirUsuarioaUsuarioDTO(listaUsuario));
+            UsuarioRol usuarioRolEncontrado = usuarioRolRepository.findById(listaUsuario.getUsuarioRol().getId()).get();
+            List<String> permisosParaUsuarioDTO = new ArrayList<>();
+            for (Permiso permiso: usuarioRolEncontrado.getPermisos()) {
+                permisosParaUsuarioDTO.add(permiso.getNombre());
+            }
+            usuarioDTO.get().setPermisos(permisosParaUsuarioDTO);
+            listaUsuariosDTO.add(usuarioDTO.get());
         }
         logger.info("Listando todos los usuarios");
 
         return listaUsuariosDTO;
-
     }
 
 

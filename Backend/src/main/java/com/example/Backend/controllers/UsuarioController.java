@@ -1,5 +1,6 @@
 package com.example.Backend.controllers;
 
+import com.example.Backend.dto.RolDTO;
 import com.example.Backend.dto.UsuarioDTO;
 import com.example.Backend.exceptions.BadRequestException;
 import com.example.Backend.exceptions.MailSenderException;
@@ -7,6 +8,7 @@ import com.example.Backend.exceptions.ResourceNotFoundException;
 import com.example.Backend.models.Usuario;
 import com.example.Backend.repository.UsuarioRepository;
 import com.example.Backend.service.MailService;
+import com.example.Backend.service.RolService;
 import com.example.Backend.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,12 +34,14 @@ public class UsuarioController {
     private final UsuarioService usuarioService;
     private final UsuarioRepository usuarioRepository;
     private final MailService mailService;
+    private final RolService rolService;
 
     @Autowired
-    public UsuarioController(UsuarioService usuarioService,UsuarioRepository usuarioRepository, MailService mailService ) {
+    public UsuarioController(UsuarioService usuarioService,UsuarioRepository usuarioRepository, MailService mailService, RolService rolService ) {
         this.usuarioService = usuarioService;
         this.usuarioRepository = usuarioRepository;
         this.mailService = mailService;
+        this.rolService = rolService;
     }
 
     private final Logger logger = Logger.getLogger(UsuarioController.class.getName());
@@ -85,6 +89,7 @@ public class UsuarioController {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         UsuarioDTO usuario = new UsuarioDTO();
+        RolDTO rolDTO = new RolDTO();
         usuario.setEmail(userDetails.getUsername());
 
         Optional<Usuario> usuarioEncontrado = usuarioRepository.findByEmail(userDetails.getUsername());
@@ -100,6 +105,8 @@ public class UsuarioController {
         usuario.setRol(usuarioEncontrado.get().getUsuarioRol().getRol());
         usuario.setValidado(usuarioEncontrado.get().getValidado());
         usuario.setFechaCreacion(usuarioEncontrado.get().getFechaCreacion());
+        rolDTO = rolService.buscarRol(usuarioEncontrado.get().getUsuarioRol().getId()).get();
+        usuario.setPermisos(rolDTO.getPermisos());
 
         return ResponseEntity.status(HttpStatus.OK).body(usuario);
     }
@@ -133,6 +140,26 @@ public class UsuarioController {
         mailService.enviarCorreoBienvenida(usuarioDTO);
 
         return ResponseEntity.ok("Se validó la cuenta del usuario con id: " + id);
+    }
+
+    /**
+     * Actualizar un usuario
+     * @param id id del usuario
+     * @return ResponseEntity con el usuarioDTO
+     */
+    @PutMapping("/actualizar/{id}")
+    public ResponseEntity<UsuarioDTO> actualizarUsuario(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO) throws Exception {
+        // Checamos si existe el usuario
+        Optional<UsuarioDTO> usuario = usuarioService.buscarUsuario(id);
+        //Traer datos que no se envían desde el formulario de actualizar
+        usuarioDTO.setPassword(usuario.get().getPassword());
+        usuarioDTO.setFechaCreacion(usuario.get().getFechaCreacion());
+        usuarioDTO.setValidado(usuario.get().getValidado());
+        if (usuario.isEmpty()) {
+            throw new ResourceNotFoundException("No se encontró el usuario con id: " + id);
+        }
+
+        return ResponseEntity.ok(usuarioService.actualizarUsuario(usuarioDTO));
     }
 
     /**

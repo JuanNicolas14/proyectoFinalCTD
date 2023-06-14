@@ -1,6 +1,7 @@
 package com.example.Backend.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class UsuarioDTO {
 
@@ -12,8 +13,9 @@ public class UsuarioDTO {
     private String rol;
     private Boolean validado;
     private Date fechaCreacion;
+    private List<String> permisos;
 
-    public UsuarioDTO(String nombre, String apellido, String email, String password, String rol, Boolean validado, Date fechaCreacion) {
+    public UsuarioDTO(String nombre, String apellido, String email, String password, String rol, Boolean validado, Date fechaCreacion, List<String> permisos) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
@@ -21,6 +23,7 @@ public class UsuarioDTO {
         this.rol = rol;
         this.validado = validado;
         this.fechaCreacion = fechaCreacion;
+        this.permisos = permisos;
     }
 
     public Date getFechaCreacion() {
@@ -90,6 +93,14 @@ public class UsuarioDTO {
         this.validado = validado;
     }
 
+    public List<String> getPermisos() {
+        return permisos;
+    }
+
+    public void setPermisos(List<String> permisos) {
+        this.permisos = permisos;
+    }
+
     @Override
     public String toString() {
         return "UsuarioDTO{" +
@@ -101,6 +112,7 @@ public class UsuarioDTO {
                 ", rol='" + rol + '\'' +
                 ", validado=" + validado +
                 ", fechaCreacion=" + fechaCreacion +
+                ", permisos=" + permisos +
                 '}';
     }
 }
