@@ -14,8 +14,18 @@ public class UsuarioRol {
     @OneToMany(mappedBy = "usuarioRol")
     private List<Usuario> usuarios;
 
-    public UsuarioRol(String rol) {
+    @ManyToMany
+    @JoinTable(
+            name = "rol_permiso",
+            joinColumns = @JoinColumn(name = "rol_id"),
+            inverseJoinColumns = @JoinColumn(name = "permiso_id")
+    )
+    private List<Permiso> permisos;
+
+    public UsuarioRol(Long id, String rol, List<Permiso> permisos) {
+        this.id = id;
         this.rol = rol;
+        this.permisos = permisos;
     }
 
     public UsuarioRol() {
@@ -35,5 +45,21 @@ public class UsuarioRol {
 
     public void setRol(String rol) {
         this.rol = rol;
+    }
+
+    public List<Permiso> getPermisos() {
+        return permisos;
+    }
+
+    public void setPermisos(List<Permiso> permisos) {
+        this.permisos = permisos;
+    }
+
+    @Override
+    public String toString() {
+        return "UsuarioRol{" +
+                "id=" + id +
+                ", rol='" + rol + '\'' +
+                '}';
     }
 }
