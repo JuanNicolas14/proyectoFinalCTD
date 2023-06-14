@@ -1,5 +1,6 @@
 package com.example.Backend.dto;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -21,6 +22,9 @@ public class RestauranteDTO {
     private String reglas;
     private String saludYseguridad;
     private String politicas;
+
+    private BigDecimal latitud;
+    private BigDecimal longitud;
 
     // Constructor
     public RestauranteDTO() {}
@@ -131,6 +135,22 @@ public class RestauranteDTO {
 
     public void setPoliticas(String politicas) {
         this.politicas = politicas;
+    }
+
+    public BigDecimal getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(BigDecimal latitud) {
+        this.latitud = latitud;
+    }
+
+    public BigDecimal getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(BigDecimal longitud) {
+        this.longitud = longitud;
     }
 
     @Override

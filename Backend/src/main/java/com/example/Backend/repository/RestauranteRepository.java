@@ -19,7 +19,8 @@ public interface RestauranteRepository extends JpaRepository<Restaurante, Long> 
             "FROM restaurante r " +
             "JOIN domicilio d ON d.id = r.domicilio_id " +
             "JOIN plan p on p.id = r.plan_id " +
-            "where d.ciudad = :ciudad " +
+            "JOIN ciudad c on d.ciudad_id = c.id " +
+            "where c.nombre_ciudad = :ciudad " +
             " and p.nombre = :plan", nativeQuery = true)
     List<Restaurante> findByCiudadAndPlan(String ciudad, String plan);
 }

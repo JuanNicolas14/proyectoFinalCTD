@@ -1,5 +1,8 @@
 package com.example.Backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,6 +16,7 @@ import java.util.Set;
 
 @Entity
 @Table(name="usuario")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Usuario implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,6 +41,25 @@ public class Usuario implements UserDetails {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id")
     private Set<Puntuacion> puntuaciones;
+
+    //Relación muchos a muchos entre usuario y restaurante
+    //con la tabla intermedia: favoritos
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(
+            name = "favoritos",
+            joinColumns = @JoinColumn(name = "id_restaurante"),
+            inverseJoinColumns = @JoinColumn(name = "id_usuario")
+    )
+    private Set<Restaurante> restaurantesFavoritos;
+
+    public void agregarRestauranteFavorito(Restaurante restaurante) {
+        restaurantesFavoritos.add(restaurante);
+    }
+
+    public void eliminarRestauranteFavorito(Restaurante restaurante) {
+        restaurantesFavoritos.remove(restaurante);
+    }
 
     public Usuario(String nombre, String apellido, String email, String password, UsuarioRol usuarioRol, Boolean validado, Date fechaCreacion) {
         this.nombre = nombre;
@@ -144,6 +167,14 @@ public class Usuario implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public Set<Restaurante> getRestaurantesFavoritos() {
+        return restaurantesFavoritos;
+    }
+
+    public void setRestaurantesFavoritos(Set<Restaurante> restaurantesFavoritos) {
+        this.restaurantesFavoritos = restaurantesFavoritos;
     }
 
     @Override

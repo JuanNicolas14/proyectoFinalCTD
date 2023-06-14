@@ -1,10 +1,15 @@
 package com.example.Backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Table(name = "restaurante")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Restaurante {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,6 +54,10 @@ public class Restaurante {
 
     @Column(name = "politicas")
     private String politicas;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "restaurantesFavoritos")
+    private Set<Usuario> usuariosFavoritos;
 
     // Constructor
 

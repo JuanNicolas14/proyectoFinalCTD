@@ -1,0 +1,31 @@
+.restaurantes-favoritos h2 {
+  text-align: center;
+}
+
+
+.restaurantes-favoritos tbody td:nth-child(1),
+.restaurantes-favoritos tbody td:nth-child(6),
+.restaurantes-favoritos tbody td:nth-child(7){
+  text-align: center;
+}
+
+.restaurantes-favoritos tbody td:nth-child(1) {
+  font-weight: bold;
+}
+
+.restaurantes-favoritos tbody td:nth-child(5) {
+  text-align: right;
+}
+
+.restaurantes-favoritos tbody td:nth-child(5)::before {
+  content: "$";
+  float: left;
+}
+
+.restaurantes-favoritos tbody td:nth-child(5)::after {
+  content: " COP";
+}
+
+.restaurantes-favoritos .fa-trash {
+  cursor: pointer;
+}

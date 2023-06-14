@@ -39,30 +39,62 @@
   font-size: 1.9rem;
 }
 .restaurantes .descripcion div {
-  padding-right: 12px;
   height: 80%;
 }
-.restaurantes .descripcion p,.restaurantes .descripcion h2{
+.restaurantes .descripcion .restaurante-descripcion,.restaurantes .descripcion h2{
   color: var(--third-color);
 }
 .restaurantes .descripcion h2 {
   text-align: left;
   font-size: 1.3rem;
   margin: 5px 0;
+  width: 90%;
 }
 .restaurantes .descripcion p {
   font-size: .8rem;
 }
+.restaurantes .descripcion .puntuaciones-encontrados {
+  margin: 0px 14px 5px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 25px;
+}
 .restaurantes .descripcion .estrellas {
   color: #ffbd52;
-  margin: 5px 0;
 }
 .restaurantes .descripcion .estrellas svg {
-  margin-right: 5px;
-  font-size: 1.1rem;
+  margin-right: 0px;
+  font-size: 1.0rem;
 }
-.restaurantes .descripcion .parrafo {
-  margin: 5px 0 0;
+.restaurantes .descripcion .restaurante-descripcion {
+  margin: 5px 12px 0px 0px;
+}
+.restaurantes .descripcion .puntuaciones-encontrados .contenedor-calidad-promedio{
+  display: flex;
+  height: 25px;
+  margin-right: 1px;
+}
+.restaurantes .descripcion .puntuaciones-encontrados .contenedor-calidad-promedio .calidad-encontrados{
+  font-weight: 700;
+  font-size: .70rem;
+  height: 25px;
+  margin-right: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  text-align: right;
+}
+.restaurantes .descripcion .puntuaciones-encontrados .contenedor-calidad-promedio .puntuacion-promedio-encontrados{
+  font-weight: 700;
+  background-color: var(--main-color);
+  color: white;
+  border-radius: 5px;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .restaurantes button a {
   display: block;
@@ -106,8 +138,13 @@
   .restaurante-info .descripcion h2{
     font-size: 1.1rem;
   }
+  .restaurantes .descripcion .restaurante-descripcion {
+    margin: 5px 10px 0px 0px;
+  }
+  .restaurantes .descripcion .puntuaciones-encontrados .contenedor-calidad-promedio .calidad-encontrados{
+    width: 40px;
+  }
   .restaurante-info .descripcion p{
-    margin-top: 0;
     font-size: .83rem;
   }
   .restaurantes button {
@@ -129,7 +166,6 @@
     width: 36%;
     max-height: 275px;
   }
-
   .restaurantes button {
     margin: 5px 22px;
   }
@@ -157,10 +193,21 @@
   .restaurante-info .descripcion h2 {
     font-size: 1rem;
   }
-  .restaurante-info .descripcion p {
+  .restaurante-info .descripcion .restaurante-descripcion {
     font-size: .8rem;
     margin-bottom: 2px;
     margin-right: 10px;
+  }
+  .restaurantes .descripcion .estrellas svg {
+    margin-right: 2px;
+  }
+  .restaurantes .descripcion .puntuaciones-encontrados .contenedor-calidad-promedio{
+    margin-right: 8px;
+  }
+  .restaurantes .descripcion .puntuaciones-encontrados .contenedor-calidad-promedio .calidad-encontrados{
+    width: 70px;
+    font-size: 0.8rem;
+    margin-right: 5px;
   }
   .restaurantes button {
     width: 70%;
