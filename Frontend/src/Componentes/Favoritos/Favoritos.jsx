@@ -14,7 +14,7 @@ const Favoritos = (props) => {
 
   // Obtener los productos favoritos del usuario
   useEffect(() => {
-    obtenerProductosFavoritos();
+    if (user) obtenerProductosFavoritos();
   }, []);
 
   const obtenerProductosFavoritos = async () => {
