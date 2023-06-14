@@ -12,7 +12,7 @@ const ListaFavoritos = () => {
   const url = baseUrl.url + "/favoritos";
 
   useEffect(() => {
-    obtenerProductosFavoritos();
+    if (user) obtenerProductosFavoritos();
   }, []);
 
   const obtenerProductosFavoritos = async () => {

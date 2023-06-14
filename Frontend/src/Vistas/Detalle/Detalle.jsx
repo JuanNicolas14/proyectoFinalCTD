@@ -195,7 +195,7 @@ const Detalle = () => {
 
                 
                   <div className='boton-puntuacion'>
-                    {user.rol ? (
+                    {user?.rol ? (
                       <button className='boton-dar-puntuacion' onClick={() => setRatingWindowShow(true)}>
                         Califica
                       </button>
