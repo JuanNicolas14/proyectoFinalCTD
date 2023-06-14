@@ -10,7 +10,7 @@ const Administracion = () => {
   return (
     <main className='home'>
       {user
-      ? user.rol == "ADMIN"
+      ? user.rol == "ADMIN" || user.permisos.includes("ACCESO PANEL ADMINISTRACIÓN")
         ? (
             <section className='administracion-panel'>
                 <h2>Administracion</h2>
@@ -29,6 +29,21 @@ const Administracion = () => {
                         <li>
                             <Link to="/plan/registrar" style={{ textDecoration: 'none' }}>
                             <span>Agregar Plan</span>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/administracion/agregarRol" style={{ textDecoration: 'none' }}>
+                            <span>Agregar Rol</span>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/administracion/gestionRol" style={{ textDecoration: 'none' }}>
+                            <span>Gestión Rol</span>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/administracion/gestionUsuario" style={{ textDecoration: 'none' }}>
+                            <span>Gestión Usuarios</span>
                             </Link>
                         </li>
                     </ul>

@@ -68,7 +68,7 @@ const Header = () => {
           </div>
 
         {user?.nombre?.length > 3
-        ? user.rol == "ADMIN" 
+        ? user.rol == "ADMIN"  || user.permisos.includes("ACCESO PANEL ADMINISTRACIÓN")
           ? 
             <div className='botones-logueo'>
               <Link to='/usuario/detalle' className='avatar-user'>
@@ -135,7 +135,7 @@ const Header = () => {
                 <h2>Menú</h2>
               </div>
               
-                {user?.rol == "ADMIN" ?
+                {user?.rol == "ADMIN" || user.permisos.includes("ACCESO PANEL ADMINISTRACIÓN") ? 
                 (
                   <ul>
                     <li onClick={showMenu}>

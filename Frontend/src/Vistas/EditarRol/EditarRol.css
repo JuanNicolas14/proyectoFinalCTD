@@ -1,0 +1,110 @@
+.form-rol {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.form-rol h2 {
+    width: 30%;
+    text-align: center;
+    padding: 0.25em 0.5em 0.25em 0.5em;
+    border: 2px solid rgba(255, 69, 0, 0.25);
+    border-radius: 0.5em;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(165, 42, 42, 0.25);
+    margin: 40px 0 10px 0;
+}
+.form-rol form{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30%;
+    padding: 1em;
+    border: 2px solid rgba(255, 69, 0, 0.25);
+    border-radius: 0.75em;
+    margin-bottom: 30px;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(165, 42, 42, 0.25);
+    display: flex;
+    flex-wrap: wrap;
+}
+.form-rol form div {
+    width: 95%;
+    margin: 8px 0;
+}
+.form-rol label{
+    font-size: 1rem;
+    font-weight: 800;
+}
+.form-rol .nombre-rol{
+    width: 93.5%;
+    height: 30px;
+    border: 2px solid rgba(255, 69, 0, 0.25);
+    outline: none;
+    font-size: 1em;
+    font-weight: 500;
+    padding-left: 15px;
+    color: orangered;
+    border-radius: 5px;
+}
+.form-rol .checkbox-rol{
+    margin-right: 5px;
+}
+.form-rol .permiso{
+
+    font-size: .9rem;
+}
+.form-rol button {
+    width: 90%;
+    margin: 20px auto 10px;
+    height: 40px;
+    border: none;
+    border-radius: 0.5em;
+    font-family: "Quicksand", sans-serif;
+    font-weight: bold;
+    font-size: 1.125em;
+    color: white;
+    background-color: brown;
+    box-shadow: 0 0 30px rgba(165, 42, 42, 0.5);
+    cursor: pointer;
+}
+
+@media (max-width:1300px) {
+    .form-rol form {
+        width: 40%;
+    }
+    .form-rol h2 {
+        width: 40%;
+    }
+}
+
+@media (max-width:1024px) {
+    .form-rol form {
+        width: 50%;
+    }
+    .form-rol h2 {
+        width: 50%;
+    }
+}
+
+@media (max-width:768px) {
+    .form-rol form {
+        width: 70%;
+    }
+    .form-rol h2 {
+        width: 70%;
+    }
+}
+
+@media (max-width:480px) {
+    .form-rol form {
+        width: 80%;
+    }
+    .form-rol h2 {
+        width: 80%;
+    }
+}

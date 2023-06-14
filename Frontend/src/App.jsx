@@ -18,6 +18,11 @@ import FilterContextProvider from './utils/FilterContext'
 import ListaPorFiltros from './Vistas/ListaPorFiltros/ListaPorFiltros'
 import ValidarUsuario from './Vistas/ValidarUsuario/ValidarUsuario'
 import ListaFavoritos from "./Vistas/ListaFavoritos/ListaFavoritos";
+import GestionRol from './Vistas/GestionRol/GestionRol'
+import AgregarRol from './Vistas/AgregarRol/AgregarRol'
+import EditarRol from './Vistas/EditarRol/EditarRol'
+import GestionUsuario from './Vistas/GestionUsuario/GestionUsuario'
+import EditarUsuario from './Vistas/EditarUsuario/EditarUsuario'
 
 function App() {
   return (
@@ -50,6 +55,12 @@ function App() {
             element={<ListaPorFiltros />}
           />
           <Route path="/favoritos/:id" element={<ListaFavoritos />} />
+          <Route path='/restaurantes/ciudad-y-plan' element={<ListaPorFiltros/>}/>
+          <Route path='/administracion/gestionRol' element={<GestionRol/>}/>
+          <Route path='/administracion/agregarRol' element={<AgregarRol/>}/>
+          <Route path='/administracion/editarRol/:id' element={<EditarRol/>}/>
+          <Route path='/administracion/gestionUsuario' element={<GestionUsuario/>}/>
+          <Route path='/administracion/editarUsuario/:id' element={<EditarUsuario/>}/>
         </Routes>
         <Footer />
       </FilterContextProvider>

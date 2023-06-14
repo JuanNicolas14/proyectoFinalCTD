@@ -283,7 +283,7 @@ const AgregarProducto = () => {
 
   return (         
     <main className="form-add-product">
-      {user?.rol == "ADMIN"
+      {user?.rol == "ADMIN" || user.permisos.includes("CREAR PRODUCTO")
       ? (
         <section className="form">
             <h2>Agregar Restaurante</h2>
