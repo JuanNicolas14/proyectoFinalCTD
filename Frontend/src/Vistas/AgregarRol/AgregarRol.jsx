@@ -120,7 +120,7 @@ const AgregarRol = () => {
 
   return (
     <main className="form-add-rol">
-        {user.rol == "ADMIN"
+        {user.rol == "ADMIN" || user.permisos.includes("CREAR ROL")
         ? (
           <section className="form-rol">
             <h2>Agregar Rol</h2>

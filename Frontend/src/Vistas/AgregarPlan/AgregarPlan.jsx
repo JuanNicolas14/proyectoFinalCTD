@@ -58,7 +58,7 @@ const AgregarPlan = () => {
 
   return (
     <main className="form-add-plan">
-        {user.rol == "ADMIN"
+        {user.rol == "ADMIN" || user.permisos.includes("CREAR PLAN")
         ? (
           <section className="form-plan">
             <h2>Agregar Plan</h2>

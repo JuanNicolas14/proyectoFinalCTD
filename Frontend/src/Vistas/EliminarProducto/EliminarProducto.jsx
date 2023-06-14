@@ -68,7 +68,7 @@ const EliminarProducto = () => {
   
   return (
     <main className="eliminar-productos">
-      {user.rol == "ADMIN"
+      {user.rol == "ADMIN" || user.permisos.includes("ELIMINAR PRODUCTO")
       ? (
         <section className="table-container">
           <table>

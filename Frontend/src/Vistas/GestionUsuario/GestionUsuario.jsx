@@ -90,7 +90,7 @@ const GestionUsuario = () => {
 
   return (
     <main className="gestion-usuario">
-      {user.rol == "ADMIN"
+      {user.rol == "ADMIN" || user.permisos.includes("GESTIÓN USUARIO")
       ? (
       <div>
         <section className="seccion-usuarios">
