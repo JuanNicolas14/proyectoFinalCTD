@@ -77,12 +77,8 @@ const AgregarProducto = () => {
     calle: 0,
     numero: 0,
     localidad:'',
-    ciudad_id: 0,
-    pais_id:'',
-    reglas:'',
-    saludYseguridad:'',
-    politicas:'',
-    
+    ciudad:'',
+    pais_id:''
   })
 
   useEffect(() => {

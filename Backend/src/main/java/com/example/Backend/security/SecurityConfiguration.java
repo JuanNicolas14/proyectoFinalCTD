@@ -5,6 +5,7 @@ import com.example.Backend.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -33,29 +34,29 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers(
+                    "/ciudades/**",
+                    "/favoritos/**",
                     "/login",
-                    "/restaurante",
-                    "/restaurante/{id}",
-                    "/usuario/registrar",
+                    "/mail/**",
                     "/plan",
-                    "/usuario/detalle",
                     "/plan/registrar",
-                    "/usuario/validar/{id}",
                     "/puntuacion",
                     "/puntuacion/{id}",
                     "/restaurante/**",
+                    "/usuario/detalle",
+                    "/usuario/registrar",
                     "/usuario/validar/{id}",
-                    "/mail/**","/ciudades/**","/paises/**",
-                    "/favoritos/**"
+                    "/paises/**"
                 ).permitAll()
+                .antMatchers(HttpMethod.GET,"/usuario/{id}").hasAnyAuthority("USER", "ADMIN")
+                // TODO: Como MVP se deja que el usuario pueda eliminar perfiles, pero en un futuro solo el admin podrá hacerlo o un cron job
+                .antMatchers(HttpMethod.DELETE, "/usuario/{id}").hasAnyAuthority("USER")
                 .antMatchers("/plan/{id}").hasAnyAuthority("ADMIN")
-                //.antMatchers("/usuario/detalle").permitAll()
-                //.antMatchers("/usuario/detalle").hasAnyAuthority("USER","ADMIN")
-                //.antMatchers("/usuario", "/usuario/{id}").permitAll()
-                .antMatchers("/usuario", "/usuario/{id}").hasAuthority("ADMIN")
+                .antMatchers("/usuario").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.cors();
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 

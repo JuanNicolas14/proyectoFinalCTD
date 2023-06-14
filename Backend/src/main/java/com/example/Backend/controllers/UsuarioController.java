@@ -62,7 +62,7 @@ public class UsuarioController {
             throw new ResourceNotFoundException("No se encontró el usuario con id: " + id);
         }
         this.logger.info("Se encontró el usuario: " + usuarioBuscado);
-        return ResponseEntity.ok(usuarioBuscado.get());
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioBuscado.get());
     }
 
     @GetMapping

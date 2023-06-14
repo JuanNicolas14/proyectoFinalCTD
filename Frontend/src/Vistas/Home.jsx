@@ -1,10 +1,15 @@
-import React, { useContext, useEffect, useState } from 'react'
-import Searchbar from '../Componentes/Searchbar/Searchbar'
-import Categoria from '../Componentes/Categorias/Categoria'
-import RestauranteRecomendado from '../Componentes/Recomendados/RestauranteRecomendado'
-import baseUrl from '../utils/baseUrl.json'
+import React, { useContext, useEffect, useState } from 'react';
+import Searchbar from '../Componentes/Searchbar/Searchbar';
+import Categoria from '../Componentes/Categorias/Categoria';
+import RestauranteRecomendado from '../Componentes/Recomendados/RestauranteRecomendado';
+import baseUrl from '../utils/baseUrl.json';
+import { AuthContext } from '../utils/AuthContext';
+import solicitarValidacionCuenta from '../utils/solicitarValidacionCuenta';
+import showError from '../utils/showError';
+import { ERROR_CARGANDO_PLANES } from '../utils/errorConstants';
 
 const Home = () => {
+  const {user, token} = useContext(AuthContext);
 
   const [restaurantes, setRestaurantes] = useState([])
   const [planesdb, setPlanesdb] = useState([])
@@ -14,14 +19,17 @@ const Home = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log("realizando las dos peticiones")
+
       try {
         // Realiza la primera petición de los planes
         const fetchPlanes = await fetch(urlPlanes);
         const planes = await fetchPlanes.json();
         setPlanesdb(planes)
-        console.log(planesdb)
+      } catch (error) {
+        showError(ERROR_CARGANDO_PLANES);
+      }
 
+      try {
         // Realiza la segunda petición de los restaurantes recomendados.
         const fetchProductos = await fetch(urlRestaurantes)
         const productos = await fetchProductos.json();
@@ -32,15 +40,20 @@ const Home = () => {
         const restaurantesSeleccionados = restaurantesAleatorios.slice(0, 4);
         setRestaurantes(restaurantesSeleccionados)
 
-        
-        
       } catch (error) {
-        console.error('Error:', error);
+        showError(ERROR_CARGANDO_RESTAURANTE);
       }
     };
 
     fetchData();
   }, [urlRestaurantes]);
+
+  // Verificamos si el usuario está logueado y si está validada la cuenta
+  useEffect(() => {
+    if(user){
+      solicitarValidacionCuenta(user, token);
+    }
+  }, [user])
 
   function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
