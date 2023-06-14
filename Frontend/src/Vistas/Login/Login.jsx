@@ -37,7 +37,8 @@ const Login = () => {
           email: data.email,
           rol: data.rol,
           fechaCreacion: data.fechaCreacion,
-          validado: data.validado
+          validado: data.validado,
+          permisos:data.permisos
         }
         dispatch({ type: "LOGIN", payload: { user: resUser, accessToken: jwt } })
       }

@@ -1,0 +1,108 @@
+/*--Hasta aquí los estilos del header--*/
+/*--Ahora los estilos del main--*/
+
+.gestion-usuario {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+/*--Hasta aquí los estilos del main--*/
+/*---Ahora los estilos de la tabla---*/
+main.gestion-usuarios {
+    min-height: 100vh;
+}
+.tabla-usuarios {
+    width: 90vw;
+    margin: 10px auto;
+    border: 1px solid orangered;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(165, 42, 42, 0.25);
+}
+.caption-usuarios{
+    padding: 10px;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.tabla-usuarios td, th {
+    border: 1px solid rgba(165, 42, 42, 0.25);
+    padding: 5px;
+}
+.tabla-usuarios .permiso-listado{
+    left: -15px;
+}
+.tabla-usuarios button {
+    background-size:auto;
+    background-position: right;
+    margin: 0 10px;
+    display: inline;
+    border: none;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    text-align: center;
+}
+.tabla-usuarios button svg {
+    color: var(--main-color);
+    width: 100%;
+    height: 100%;
+}
+.tabla-usuarios td.button {
+    text-align: center;
+}
+
+.tabla-usuarios thead {
+    background-color: rgba(255, 69, 0, 0.25);
+}
+
+.tabla-usuarios tbody tr:hover {
+    background: rgba(255, 69, 0, 0.075);
+}
+.tabla-usuarios tbody td a {
+    color: var(--main-color);
+}
+.tabla-usuarios .centrar-campo-usuario {
+    text-align: center;
+}
+.tabla-usuarios .centrar-campo-usuario svg{
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+@media (max-width: 1024px){
+    .tabla-usuarios{
+        width: 90vw;
+    }
+    .tabla-usuarios .centrar-campo-usuario svg{
+        font-size: 1.0rem;
+    }
+}
+
+  @media (max-width: 768px) {
+    .tabla-usuarios {
+        width: 95vw;
+    }
+    .tabla-usuarios thead th {
+        font-size: .9rem;
+    }
+    .tabla-usuarios tbody td {
+        font-size: .8rem;
+    }
+    .tabla-usuarios .campo-esconder-email{
+        display: none;
+    }
+  }
+
+  @media (max-width:480px) {
+    .tabla-usuarios .campo-esconder-id {
+        display: none;
+      }
+  }
+
+  @media (max-width:360px) {
+    .tabla-usuarios .campo-esconder-nombre {
+      display: none;
+    }
+  }
