@@ -7,6 +7,9 @@ import { AuthContext } from '../utils/AuthContext';
 import solicitarValidacionCuenta from '../utils/solicitarValidacionCuenta';
 import showError from '../utils/showError';
 import { ERROR_CARGANDO_PLANES } from '../utils/errorConstants';
+import Sidebar from '../Componentes/Sidebar/Sidebar';
+import FacebookShareButton from '../Componentes/Facebook/FacebookShareButton';
+import TwitterShareButton from '../Componentes/Twitter/TwitterShareButton';
 
 const Home = () => {
   const {user, token} = useContext(AuthContext);
@@ -89,6 +92,10 @@ const Home = () => {
             }
           </div>
         </section>
+        <Sidebar>
+          <FacebookShareButton />
+          <TwitterShareButton />
+        </Sidebar>
     </main>
   )
 }
