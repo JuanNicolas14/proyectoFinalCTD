@@ -46,6 +46,11 @@ const Administracion = () => {
                             <span>Gestión Usuarios</span>
                             </Link>
                         </li>
+                        <li>
+                            <Link to="/ciudades" style={{ textDecoration: 'none' }}>
+                            <span>Gestionar Ciudades</span>
+                            </Link>
+                        </li>
                     </ul>
                 </div>
             </section>  
