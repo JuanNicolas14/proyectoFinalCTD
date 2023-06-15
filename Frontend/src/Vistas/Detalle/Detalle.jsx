@@ -24,6 +24,12 @@ import { AuthContext } from '../../utils/AuthContext'
 import Puntuacion from '../../Componentes/Puntuacion/Puntuacion'
 import MapsDistancia from '../../Componentes/MapsDistancia/MapsDistancia'
 
+import FacebookShareButton from '../../Componentes/Facebook/FacebookShareButton'
+import WhatsappShareButton from '../../Componentes/Whatsapp/WhatsappShareButton'
+import TwitterShareButton from '../../Componentes/Twitter/TwitterShareButton'
+import Popup from '../../Componentes/Popup/Popup';
+import { red } from '@mui/material/colors'
+
 const Detalle = () => {
   const [distanciaUser, setDistanciaUser] = useState(0)
 
@@ -203,8 +209,19 @@ const Detalle = () => {
                 <MdPlace/>
                 <p>{restaurante?.ciudad}, {restaurante?.pais}, {distanciaUser > 1 && `estas a ${distanciaUser} km de distancia`}</p>
               </div>
-              <div className='iconos'>
-                <HiOutlineShare/>
+              <div className='iconos' id="iconos">
+                <Popup
+                  icon={<HiOutlineShare />}
+                  direction="row"
+                  borderColor={red[800]}
+                  x={10}
+                  y={-40}
+                >
+                  {console.log(restaurante)}
+                  <FacebookShareButton size="small" link={`${baseUrl.appUrl}/restuarante/${restaurante?.id}`} />
+                  <TwitterShareButton size="small" message={`Te recomiendo este genial restaurante ${restaurante?.nombre} ! ${baseUrl.appUrl}/restaurante/${restaurante?.id}`} hashtags="BukinFood" />
+                  <WhatsappShareButton size="small" message={`Este restaurante ${restaurante?.id} esta super! ${baseUrl.appUrl}/restaurante/${restaurante?.id}`} />
+                </Popup>
                 <FiHeart/>
               </div>
             </div>

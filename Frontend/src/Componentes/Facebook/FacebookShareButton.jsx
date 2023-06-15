@@ -1,28 +1,26 @@
 // Ver: https://developers.facebook.com/docs/plugins/share-button/
+import facebook from '../../assets/images/facebook.png';
+import Button from '../Button/Button';
 
-import './facebookShareButton.css';
+const FacebookShareButton = ({size, text, link}) => {
+  const handleClick = (e) => {
+    e.preventDefault();;
+    window.open(
+      e.currentTarget.href,
+      'facebook-share-dialog',
+      'width=626,height=436'
+    );
+  }
 
-import images from '../../assets/images/images';
-
-const FacebookShareButton = () => {
-  return (
-    <div className="fb-share-button">
-        <img src={images.facebook} id="facebook-logo"/>
-        <a
-          href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fbukinfood.s3-website.us-east-2.amazonaws.com%2Fhome&amp;src=sdkpreparse"
-          onClick={(e) => {
-              e.preventDefault();
-              window.open(
-                e.currentTarget.href,
-                'facebook-share-dialog',
-                'width=626,height=436'
-              );
-            }
-          }
-        >Compartir
-        </a>
-      </div>
-  );
+  return <Button
+      icon={facebook}
+      color="#4267B2"
+      textColor="white"
+      size={size}
+      text={text}
+      onClick={handleClick}
+      href={`https://www.facebook.com/sharer/sharer.php?u=${link}&amp;src=sdkpreparse`}
+    />
 }
 
 export default FacebookShareButton;

@@ -44,6 +44,8 @@
     margin-right: 10px;
 }
 .producto-info .iconos {
+    display: flex;
+    align-items: center;
     font-size: 23px;
     
 }
