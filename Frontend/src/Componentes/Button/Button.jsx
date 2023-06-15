@@ -1,4 +1,4 @@
-import './Button.css'
+import './button.css'
 
 const Button = ({icon, text, size, color, textColor, href, onClick}) => {
   const divClassName = `button ${size} ${color}`;

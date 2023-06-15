@@ -5,13 +5,13 @@ import './popup.css';
 
 const Popup = ({ icon, children, direction, borderColor, x, y }) => {
   const [showPopup, setShowPopup] = useState(false);
-  const iconos = document.querySelectorAll('#iconos')[0];
+  const iconos = document.querySelectorAll('.iconos')[0];
 
   return (
     <>
       <Button
       icon={icon}
-      size="small"
+      size="tiny"
       color="white"
       onClick={(e) => {
         e.preventDefault();
