@@ -6,24 +6,29 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Value;
 
-import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 public class MailUtil {
     @Value("${frontend.url}")
     private String frontendUrl;
+
+    private final ClassLoader classLoader = getClass().getClassLoader();
 
     public MailUtil() {
     }
 
     /**
      * Método que genera el correo de validación de cuenta
-     * @param url URL de validación de cuenta
+     * 
+     * @param url  URL de validación de cuenta
      * @param user Usuario al que se le envía el correo
      * @return Cuerpo del correo de validación de cuenta
      */
     public String correoValidacion(String url, String user) throws IOException {
-        File template = new File("src/main/resources/templates/validacion.html");
+        String template = new String(classLoader.getResourceAsStream("templates/validacion.html").readAllBytes(),
+                StandardCharsets.UTF_8);
+
         Document doc = Jsoup.parse(template, "UTF-8");
 
         Elements homeLinks = doc.getElementsByClass("home-link");
@@ -46,11 +51,13 @@ public class MailUtil {
 
     /**
      * Método que genera el correo de bienvenida
+     * 
      * @param user Usuario al que se le envía el correo
      * @return Cuerpo del correo de bienvenida
      */
     public String correoBienvenida(String user) throws IOException {
-        File template = new File("src/main/resources/templates/bienvenida.html");
+        String template = new String(classLoader.getResourceAsStream("templates/bienvenida.html").readAllBytes(),
+                StandardCharsets.UTF_8);
         Document doc = Jsoup.parse(template, "UTF-8");
 
         Element mainTitle = doc.getElementById("main-title");

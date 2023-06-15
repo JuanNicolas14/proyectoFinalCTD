@@ -66,7 +66,7 @@ public class MailService {
      * @throws Exception Excepción en caso de que no se pueda enviar el correo
      */
     public void enviarCorreoValidacion(UsuarioDTO usuarioDTO) throws Exception {
-        String url = frontendUrl + "/usuario/validar/" + usuarioDTO.getId();
+        String url = frontendUrl + "usuario/validar/" + usuarioDTO.getId();
         String body = mailUtil.correoValidacion(url, usuarioDTO.getNombre() + " " + usuarioDTO.getApellido());
         sendMail(usuarioDTO.getEmail(), MailEnum.VALIDACION_CUENTA.toString(), body);
     }
