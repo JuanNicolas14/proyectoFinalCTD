@@ -1,4 +1,8 @@
 /*------------------- PAGINA LISTADO RESTAURANTES --------------------*/
+.restaurante-info {
+  position: relative;
+}
+
 .restaurantes{
   max-width: 95%;
 }

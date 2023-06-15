@@ -14,13 +14,13 @@ const Favoritos = (props) => {
 
   // Obtener los productos favoritos del usuario
   useEffect(() => {
-    if (user) obtenerProductosFavoritos();
+    obtenerProductosFavoritos();
   }, []);
 
   const obtenerProductosFavoritos = async () => {
     try {
       // Realizar la solicitud al backend para obtener los productos favoritos
-      const response = await fetch(`${url}/${user.id}`, {
+      const response = await fetch(`${url}/${user?.id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -39,10 +39,10 @@ const Favoritos = (props) => {
   const marcarComoFavorito = async (usuarioId) => {
     const idRestaurante = props.restauranteId;
     // Verificar si el usuario está autenticado
-    if (Object.keys(user).length === 0) {
+    if (!user) {
       Swal.fire({
         title: "Acción requerida",
-        text: "Para marcar productos como favoritos, debes iniciar sesión",
+        text: "Para marcar productos como favoritos, debes iniciar sesión.",
         icon: "warning",
         showCancelButton: true,
         confirmButtonText: "Ir a iniciar sesión",
@@ -67,6 +67,19 @@ const Favoritos = (props) => {
         // Actualizar la lista de favoritos después de marcar o desmarcar un producto
         obtenerProductosFavoritos(token);
         setEsFavorito(!esFavorito); // Cambiar el estado de favorito
+        if (esFavorito) {
+          Swal.fire(
+            "Éxito",
+            "Has <b>eliminado</b> este restaurante de tus favoritos.",
+            "success"
+          );
+        } else {
+          Swal.fire(
+            "Éxito",
+            "Has <b>agregado</b> este restaurante a tus favoritos.",
+            "success"
+          );
+        }
       }
     } catch (error) {
       console.error("Error al marcar como favorito:", error);
@@ -74,9 +87,15 @@ const Favoritos = (props) => {
   };
 
   return (
-    <span className="fav-icon" onClick={() => marcarComoFavorito(user.id)}>
-      {esFavorito ? <AiOutlineHeart /> : <AiFillHeart />}
-    </span>
+    <div className="container-fav-icon">
+      <span className="fav-icon" onClick={() => marcarComoFavorito(user?.id)}>
+        {esFavorito ? (
+          <AiFillHeart title="Desmarcar favorito" />
+        ) : (
+          <AiOutlineHeart title="Marcar favorito" />
+        )}
+      </span>
+    </div>
   );
 };
 

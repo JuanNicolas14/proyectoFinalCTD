@@ -1,14 +1,25 @@
-.fav-icon {
+.container-fav-icon {
+  background-color: white;
   position: absolute;
   z-index: 1;
-  left: 10px;
-  top: 10px;
-  font-size: 25px;
+  left: 7.5px;
+  top: 7.5px;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  box-shadow: .5px .5px .5px .5px brown;
+  display: flex;
+}
+
+.fav-icon {
+  font-size: 15px;
   cursor: pointer;
   transition: all .3s ease;
-  color: white;
+  color: brown;
+  padding-left: 5px;
+  padding-top: 5px;
 }
 
 .fav-icon:hover{
-  color: orange;
+  color: orangered;
 }
