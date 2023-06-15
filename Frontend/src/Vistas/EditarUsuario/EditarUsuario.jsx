@@ -126,7 +126,7 @@ const EditarUsuario = () => {
 
   return (
     <div className="editar-usuario">
-      {user.rol == "ADMIN"
+      {user.rol == "ADMIN" || user.permisos.includes("GESTIÓN USUARIO")
       ? (
       <section className="form-container">
       <h2>Editar usuario</h2>

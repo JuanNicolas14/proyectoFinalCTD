@@ -343,18 +343,13 @@ const Detalle = () => {
               </div>
             </section>
 
-            <div>
+            {/* <div>
               <h1>Ubicacion en el mapa</h1>
-              <button onClick={getUserLocation}>
-                Obtener ubicación del usuario
-              </button>
-              {userLocation && (
-                <MapsDistancia
-                  userLocation={userLocation}
-                  restauranteLocation={restauranteLocation}
-                />
-              )}
-            </div>
+              <button onClick={getUserLocation}>Obtener ubicación del usuario</button>
+            </div> */}
+            <section>
+            <MapsDistancia userLocation={userLocation} restauranteLocation={restauranteLocation} />
+            </section>
 
             <section className="producto-plan">
               <h2>Sobre Nosotros..</h2>

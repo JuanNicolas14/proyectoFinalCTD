@@ -54,11 +54,7 @@ const Searchbar = () => {
     e.preventDefault();
     const fetchData = async () => {
       try {
-        const response = await fetch(baseUrl.url + `/restaurante/${filtro.plan}/${filtro.ciudad}`, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          },
-        });
+        const response = await fetch(baseUrl.url + `/restaurante/${filtro.plan}/${filtro.ciudad}`);
         const jsonData = await response.json();
         // Mezcla aleatoria de los restaurantes
         const restaurantesAleatorios = shuffleArray(jsonData);
