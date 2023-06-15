@@ -324,6 +324,7 @@
 }
 
 .detalle-producto .reserva .button {
+  flex-direction: column;
   box-sizing: border-box;
   text-align: justify;
   color: black;

@@ -75,8 +75,8 @@ function MapsDistancia({ userLocation, restauranteLocation }) {
 
   return (
     <div>
-      {city && <p>Ciudad: {city}</p>}
-      {distance && <p>Distancia: {distance}</p>}
+      {/* {city && <p>Ciudad: {city}</p>} */}
+      {/* {distance && <p>Distancia: {distance}</p>} */}
       <GoogleMap
         mapContainerStyle={{ width: '100%', height: '400px' }}
         center={restauranteLocation}
