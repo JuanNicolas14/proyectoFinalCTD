@@ -20,6 +20,7 @@ import { ERROR_CARGANDO_PLANES } from '../utils/errorConstants';
 import Sidebar from '../Componentes/Sidebar/Sidebar';
 import FacebookShareButton from '../Componentes/Facebook/FacebookShareButton';
 import TwitterShareButton from '../Componentes/Twitter/TwitterShareButton';
+import WhatsappShareButton from '../Componentes/Whatsapp/WhatsappShareButton';
 import Categoria from '../Componentes/Categorias/Categoria'
 
 const Home = () => {
@@ -162,8 +163,17 @@ const Home = () => {
         </div>
       </section>
       <Sidebar>
-        <FacebookShareButton />
-        <TwitterShareButton />
+        <FacebookShareButton size="large" text="Compartir" link={baseUrl.appUrl} />
+        <TwitterShareButton
+          size="large"
+          text="Compartir"
+          message={`BukingFood. La app de suscripción a comida.! ${baseUrl.appUrl}`}
+          hashtags="BukinFood"
+        />
+        <WhatsappShareButton
+          size="large"
+          text="Compartir"
+          message={`Prueba esta nueva app que te va a encantar. Bukinfood, La app de suscripción a comida.! ${baseUrl.appUrl}`} />
       </Sidebar>
     </main>
   )
