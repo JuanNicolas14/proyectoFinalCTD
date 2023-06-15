@@ -23,6 +23,7 @@ import AgregarRol from './Vistas/AgregarRol/AgregarRol'
 import EditarRol from './Vistas/EditarRol/EditarRol'
 import GestionUsuario from './Vistas/GestionUsuario/GestionUsuario'
 import EditarUsuario from './Vistas/EditarUsuario/EditarUsuario'
+import GestionCiudades from './Vistas/GestionCiudades/GestionCiudades'
 
 function App() {
   return (
@@ -61,6 +62,7 @@ function App() {
           <Route path='/administracion/editarRol/:id' element={<EditarRol/>}/>
           <Route path='/administracion/gestionUsuario' element={<GestionUsuario/>}/>
           <Route path='/administracion/editarUsuario/:id' element={<EditarUsuario/>}/>
+          <Route path="/ciudades" element={<GestionCiudades/>} />
         </Routes>
         <Footer />
       </FilterContextProvider>

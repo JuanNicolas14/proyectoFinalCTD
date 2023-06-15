@@ -22,6 +22,7 @@ import Carrousel from '../../Componentes/Carrousel/Carrousel'
 import Slider from '../../Componentes/Slider/Slider'
 import { AuthContext } from '../../utils/AuthContext'
 import Puntuacion from '../../Componentes/Puntuacion/Puntuacion'
+import MapsDistancia from '../../Componentes/MapsDistancia/MapsDistancia'
 
 const Detalle = () => {
   const [distanciaUser, setDistanciaUser] = useState(0)
@@ -34,14 +35,36 @@ const Detalle = () => {
   });
   const [sliderShow, setShowSlider] = useState(false)
   const [ratingWindowShow, setRatingWindowShow] = useState(false)
+// para el componente de MapsDistancia
+  const [userLocation, setUserLocation] = useState(null);
+  const restauranteLocation = { lat: restaurante.latitud, lng: restaurante.longitud };
 
   //Obtenemos el id que trae la url por medio de useParams()
   const navigate = useNavigate()
   const { id } = useParams()
   const url = baseUrl.url + "/restaurante/" +id;
 
+  const handleUserLocation = (position) => {
+    const { latitude, longitude } = position.coords;
+    setUserLocation({ lat: latitude, lng: longitude });
+  };
+
+  const handleUserLocationError = (error) => {
+    console.error('Error al obtener la ubicación del usuario:', error);
+  };
+
+  const getUserLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(handleUserLocation, handleUserLocationError);
+    } else {
+      console.error('El navegador no soporta la geolocalización');
+    }
+  };
+
   //Hacemos la peticion una vez se carga el componente
   useEffect(() => {
+    //para obtener ubicacion del usuario por el navegador
+    getUserLocation();
     
     function calcularDistancia(lat1, lon1, lat2, lon2) {
       const radioTierra = 6371; // Radio promedio de la Tierra en kilómetros
@@ -245,6 +268,14 @@ const Detalle = () => {
                 >Ver mas</button>
               </div>
             </section>
+
+            <div>
+              <h1>Ubicacion en el mapa</h1>
+              <button onClick={getUserLocation}>Obtener ubicación del usuario</button>
+              {userLocation && (
+                <MapsDistancia userLocation={userLocation} restauranteLocation={restauranteLocation} />
+              )}
+            </div>
             
             <section className='producto-plan'>
               <h2>Sobre Nosotros..</h2>
