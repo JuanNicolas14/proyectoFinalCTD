@@ -23,11 +23,12 @@ import Slider from "../../Componentes/Slider/Slider";
 import { AuthContext } from "../../utils/AuthContext";
 import Puntuacion from "../../Componentes/Puntuacion/Puntuacion";
 import MapsDistancia from "../../Componentes/MapsDistancia/MapsDistancia";
+import Favoritos from "../../Componentes/Favoritos/Favoritos";
 
 const Detalle = () => {
   const [distanciaUser, setDistanciaUser] = useState(0);
 
-  const { user } = useContext(AuthContext);
+  const { user, token } = useContext(AuthContext);
   const [restaurante, setRestaurante] = useState({});
   const [reserva, setReserva] = useState({
     fechaInicio: null,
@@ -257,8 +258,10 @@ const Detalle = () => {
                 </p>
               </div>
               <div className="iconos">
-                <HiOutlineShare />
-                <FiHeart />
+                <div className="container-share-icon">
+                  <HiOutlineShare className="share-icon" title="Compartir" />
+                </div>
+                <Favoritos restauranteId={restaurante.id} jwt={token} />
               </div>
             </div>
 
