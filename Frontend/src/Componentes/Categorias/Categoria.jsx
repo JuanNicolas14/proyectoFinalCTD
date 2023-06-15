@@ -5,7 +5,7 @@ import './categoria.css'
 
 const Categoria = ({nombre, dias, descripcion}) => {
   return (
-    <article>
+    <article className='article-categoria'>
         <div className='categoria-imagen'>
           <div className="wrap">
             <h2>{nombre}</h2>
