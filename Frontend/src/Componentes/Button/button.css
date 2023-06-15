@@ -1,0 +1,43 @@
+.button {
+    margin: 2px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.button:hover {
+    cursor: pointer;
+}
+
+/* Icons */
+.button-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* Button sizes */
+.tiny {
+    width: 20px;
+    height: 20px;
+}
+
+.small {
+    width: 50px;
+    height: 40px;
+}
+
+.medium {
+    width: 100px;
+    height: 40px;
+    justify-content: space-evenly;
+    font-size: 11px;
+}
+
+.large {
+    width: 150px;
+    height: 40px;
+    justify-content: space-evenly;
+    font-size: 18px;
+}
