@@ -4,6 +4,7 @@ import "./recomendados.css";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import Favoritos from "../Favoritos/Favoritos";
 import { AuthContext } from "../../utils/AuthContext";
+import images from "../../assets/images/images";
 
 const RestauranteRecomendado = ({ restaurante }) => {
   const { token } = useContext(AuthContext);
@@ -47,7 +48,7 @@ const RestauranteRecomendado = ({ restaurante }) => {
   return (
     <article className="article-recomendados">
       <Favoritos restauranteId={restaurante.id} jwt={token} />
-      <img src={restaurante.imagenes[0]} alt="imagen restaurante recomendado" />
+      <img src={restaurante.imagenes[0] ? restaurante.imagenes[0] : images.notFound} alt="imagen restaurante recomendado" />
       <div className="descripcion">
         <div>
           <div className="puntuaciones-recomendados">

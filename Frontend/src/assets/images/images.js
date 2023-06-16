@@ -8,6 +8,7 @@ import linkedin from '../images/linkedin.png'
 import twitter from '../images/twitter.png'
 import facebook from '../images/facebook.png'
 import eliminar from '../images/eliminar.png'
+import notFound from '../images/notFound.jpg'
 
 export default {
     plato1,
@@ -19,5 +20,6 @@ export default {
     linkedin,
     facebook,
     twitter,
-    eliminar
+    eliminar,
+    notFound
 }

@@ -4,6 +4,7 @@ import "./restaurante.css";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import Favoritos from "../Favoritos/Favoritos";
 import { AuthContext } from "../../utils/AuthContext";
+import images from "../../assets/images/images";
 
 const Restaurante = ({ restaurante }) => {
   const { token } = useContext(AuthContext);
@@ -46,7 +47,7 @@ const Restaurante = ({ restaurante }) => {
     <article className="restaurante-info">
       <Favoritos restauranteId={restaurante.id} jwt={token} />
       <img
-        src={restaurante.imagenes[0]}
+        src={restaurante.imagenes[0] ? restaurante.imagenes[0] : images.notFound}
         alt="imagen principal del restaurante"
       />
       <div className="descripcion">
