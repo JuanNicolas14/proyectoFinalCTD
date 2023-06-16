@@ -1,5 +1,7 @@
 package com.example.Backend.controllers;
 
+import com.example.Backend.dto.RolDTO;
+import com.example.Backend.exceptions.BadRequestException;
 import com.example.Backend.exceptions.ResourceNotFoundException;
 import com.example.Backend.models.Ciudad;
 import com.example.Backend.service.CiudadService;
@@ -23,8 +25,9 @@ public class CiudadController {
     public ResponseEntity<Ciudad> agregarCiudad(@RequestBody Ciudad ciudad){
         return ResponseEntity.ok(ciudadService.registrarCiudad(ciudad));
     }
+
     @PutMapping("/{id}")
-    public ResponseEntity<Ciudad> actualizarCiudad(@RequestBody Ciudad ciudad, @PathVariable Long id){
+    public ResponseEntity<Ciudad> actualizarCiudad(@PathVariable Long id, @RequestBody Ciudad ciudad) throws BadRequestException, ResourceNotFoundException {
         return ResponseEntity.ok(ciudadService.actualizarCiudad(ciudad));
     }
 
