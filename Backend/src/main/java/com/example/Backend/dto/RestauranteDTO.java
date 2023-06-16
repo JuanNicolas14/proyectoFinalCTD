@@ -23,6 +23,8 @@ public class RestauranteDTO {
     private String saludYseguridad;
     private String politicas;
 
+    private String menu;
+
     private BigDecimal latitud;
     private BigDecimal longitud;
 
@@ -153,6 +155,14 @@ public class RestauranteDTO {
         this.longitud = longitud;
     }
 
+    public String getMenu() {
+        return menu;
+    }
+
+    public void setMenu(String menu) {
+        this.menu = menu;
+    }
+
     @Override
     public String toString() {
         return "RestauranteDTO{" +
@@ -169,6 +179,7 @@ public class RestauranteDTO {
                 ", reglas='" + reglas + '\'' +
                 ", saludYseguridad='" + saludYseguridad + '\'' +
                 ", politicas='" + politicas + '\'' +
+                ", menu='" + menu + '\'' +
                 '}';
     }
 }

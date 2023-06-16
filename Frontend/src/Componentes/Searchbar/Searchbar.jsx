@@ -4,6 +4,8 @@ import './searchbar.css'
 import baseUrl from '../../utils/baseUrl.json'
 import { AuthContext } from '../../utils/AuthContext'
 import { FilterContext } from '../../utils/FilterContext'
+/*Herramientas */
+import Swal from 'sweetalert2';
 
 const Searchbar = () => {
 
@@ -14,11 +16,13 @@ const Searchbar = () => {
   ]
   const navigate = useNavigate();
   const urlPlanes = baseUrl.url + "/plan"
+  const urlCiudades = baseUrl.url + "/ciudades"
   const {token} = useContext(AuthContext)
   const {dispatchFilter} = useContext(FilterContext)
   
 
   const [planesdb, setPlanesdb] = useState([])
+  const [ciudadesdb, setCiudadesdb] = useState([])
   const [filtro, setFiltro] = useState({
     ciudad:'',
     plan:''
@@ -40,7 +44,10 @@ const Searchbar = () => {
         const fetchPlanes = await fetch(urlPlanes);
         const planes = await fetchPlanes.json();
         setPlanesdb(planes)
-        console.log(planesdb)      
+        
+        const fetchCiudades = await fetch(urlCiudades)
+        const ciudades = await fetchCiudades.json()
+        setCiudadesdb(ciudades)
         
       } catch (error) {
         console.error('Error:', error);
@@ -52,27 +59,50 @@ const Searchbar = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const fetchData = async () => {
-      try {
-        const response = await fetch(baseUrl.url + `/restaurante/${filtro.plan}/${filtro.ciudad}`);
-        const jsonData = await response.json();
-        // Mezcla aleatoria de los restaurantes
-        const restaurantesAleatorios = shuffleArray(jsonData);
-        // Obtener los primeros 4 restaurantes aleatorios
-        const restaurantesSeleccionados = restaurantesAleatorios.slice(0, 2);
-
-        dispatchFilter({type:"SAVE", payload:{
-                                        ciudad: filtro.ciudad,
-                                        plan: filtro.plan,
-                                        restaurantesFiltrados: jsonData,
-                                        restaurantesRecomendados:restaurantesSeleccionados
-        }})
-        navigate('/restaurantes/ciudad-y-plan');
-      } catch (error) {
-        console.error(error);
+    if(filtro.plan.length != '' || filtro.ciudad.length != ''){
+      const fetchData = async () => {
+        try {
+          const response = await fetch(baseUrl.url + `/restaurante/${filtro.plan}/${filtro.ciudad}`);
+          const jsonData = await response.json();
+          // Mezcla aleatoria de los restaurantes
+          const restaurantesAleatorios = shuffleArray(jsonData);
+          // Obtener los primeros 4 restaurantes aleatorios
+          const restaurantesSeleccionados = restaurantesAleatorios.slice(0, 2);
+  
+          dispatchFilter({type:"SAVE", payload:{
+                                          ciudad: filtro.ciudad,
+                                          plan: filtro.plan,
+                                          restaurantesFiltrados: jsonData,
+                                          restaurantesRecomendados:restaurantesSeleccionados
+          }})
+          navigate('/restaurantes/ciudad-y-plan');
+        } catch (error) {
+          console.error(error);
+        }
       }
+      fetchData();
+
+    }else {
+      Swal.fire(
+        {
+          title: 'Espacios en blanco',
+          text: `No se puede realizar la busqueda ya que existe espacios en blanco.`,
+          icon: 'error',
+          showCancelButton: false,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Aceptar',
+        }
+      ).then((result) => {
+        if (result.isConfirmed) {
+          setFiltro({
+            ciudad:'',
+            plan:''
+          })
+          navigate('/home');
+        }
+      })
     }
-    fetchData();
     
   }
 
@@ -104,9 +134,9 @@ const Searchbar = () => {
             {filtro.ciudad?.length >=1
             && (
               <ul className='sugerencias'>
-                {ciudadesData.filter((ciudadActual) => {
+                {ciudadesdb?.filter((ciudadActual) => {
                   const searchTerm = filtro.ciudad.toLowerCase()
-                  const nombreCiudad = ciudadActual.toLowerCase()
+                  const nombreCiudad = ciudadActual.nombreCiudad.toLowerCase()
                   return (
                     searchTerm &&
                     nombreCiudad.startsWith(searchTerm) &&
@@ -114,10 +144,10 @@ const Searchbar = () => {
                   )
                 }).map((ciudadActual) => (
                   <li
-                    onClick={() => setFiltro({...filtro, ciudad: ciudadActual})}
-                    key={ciudadActual}
+                    onClick={() => setFiltro({...filtro, ciudad: ciudadActual.nombreCiudad})}
+                    key={ciudadActual.nombreCiudad}
                   >
-                    {ciudadActual}
+                    {ciudadActual.nombreCiudad}
                   </li>
                 ))
                 

@@ -1,4 +1,4 @@
 {
-    "url":"http://3.19.61.55:8080",
+    "url":"http://localhost:8080",
     "appUrl": "http://bukinfood.s3-website.us-east-2.amazonaws.com/"
 }

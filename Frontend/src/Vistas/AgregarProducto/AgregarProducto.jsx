@@ -78,7 +78,11 @@ const AgregarProducto = () => {
     numero: 0,
     localidad:'',
     ciudad:'',
-    pais_id:''
+    pais_id:'',
+    reglas:'',
+    politicas: '',
+    saludYseguridad: '',
+    menu:''
   })
 
   useEffect(() => {
@@ -155,7 +159,8 @@ const AgregarProducto = () => {
             pais_id:'',
             reglas:'',
             politicas: '',
-            saludYseguridad: ''
+            saludYseguridad: '',
+            menu:''
           })
           window.location.reload()
         }
@@ -174,7 +179,8 @@ const AgregarProducto = () => {
         pais_id:'',
         reglas:'',
         politicas: '',
-        saludYseguridad: ''
+        saludYseguridad: '',
+        menu:''
 
       })
 
@@ -201,6 +207,7 @@ const AgregarProducto = () => {
       formData.append('saludYseguridad', producto.saludYseguridad)
       formData.append('longitud', longitude)
       formData.append('latitud', latitude)
+      formData.append('menu', producto.menu)
       
       console.log("se creo el formData y se enviaran los datos !!!!")
 
@@ -233,7 +240,8 @@ const AgregarProducto = () => {
               pais_id:'',
               reglas:'',
               politicas: '',
-              saludYseguridad: ''
+              saludYseguridad: '', 
+              menu:''
             })
             window.location.reload()
           }
@@ -378,6 +386,16 @@ const AgregarProducto = () => {
                     id="politicas" 
                     cols="30" rows="5" maxLength="250" 
                     onChange={(e)=> setProducto({...producto, politicas: e.target.value})}
+                    required
+                  ></textarea>
+                </p>
+                <p className="descripcion">
+                  <label htmlFor="menu">Menu del restaurante:</label>
+                  <textarea 
+                    value={producto.menu}
+                    id="menu" 
+                    cols="30" rows="5" maxLength="250" 
+                    onChange={(e)=> setProducto({...producto, menu: e.target.value})}
                     required
                   ></textarea>
                 </p>

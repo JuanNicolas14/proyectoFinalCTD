@@ -228,6 +228,14 @@
   border: 1px solid var(--secondary-color);
   text-align: center;
 }
+.detalle-producto .producto-plan .menu {
+  width: 62%;
+  text-align: center;
+  margin: 0 auto;
+  border-radius: 5px;
+  border: 1px solid var(--secondary-color);
+}
+
 .detalle-producto .producto-ventajas {
   width: 100%;
 }
@@ -386,6 +394,10 @@
   .detalle-producto .producto-plan li {
     width: 30%;
   }
+
+  .detalle-producto .producto-plan .menu {
+    width: 93%;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -435,6 +447,9 @@
   /* -----PRODUCTO PLAN ------*/
   .detalle-producto .producto-plan li {
     width: 40%;
+  }
+  .detalle-producto .producto-plan .menu {
+    width: 97%;
   }
 
   /*------ Producto Ventajas ------*/
@@ -514,6 +529,9 @@
   .detalle-producto .producto-plan li {
     width: 90%;
     margin-bottom: 20px;
+  }
+  .detalle-producto .producto-plan .menu {
+    width: 89%;
   }
 
   /*------ Producto Ventajas ------*/
