@@ -24,8 +24,8 @@ public class CiudadController {
         return ResponseEntity.ok(ciudadService.registrarCiudad(ciudad));
     }
     @PutMapping("/{id}")
-    public Ciudad actualizarCiudad(@RequestBody Ciudad ciudad, @PathVariable Long id){
-        return ciudadService.actualizarCiudad(ciudad);
+    public ResponseEntity<Ciudad> actualizarCiudad(@RequestBody Ciudad ciudad, @PathVariable Long id){
+        return ResponseEntity.ok(ciudadService.actualizarCiudad(ciudad));
     }
 
 
