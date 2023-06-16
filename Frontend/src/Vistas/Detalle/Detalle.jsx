@@ -364,7 +364,11 @@ const Detalle = () => {
               <button onClick={getUserLocation}>Obtener ubicación del usuario</button>
             </div> */}
             <section>
-            <MapsDistancia userLocation={userLocation} restauranteLocation={restauranteLocation} />
+            <MapsDistancia 
+            userLocation={userLocation} 
+            restauranteLocation={restauranteLocation}
+            nombreRestaurante={restaurante.nombre} 
+            />
             </section>
 
             <section className="producto-plan">
