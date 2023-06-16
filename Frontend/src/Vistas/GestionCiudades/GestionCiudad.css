@@ -1,0 +1,93 @@
+/*--Hasta aquí los estilos del header--*/
+/*--Ahora los estilos del main--*/
+
+.gestion-ciudad {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+/*--Hasta aquí los estilos del main--*/
+/*---Ahora los estilos de la tabla---*/
+.tabla-ciudades {
+    width: 65vw;
+    margin: 10px auto;
+    border: 1px solid orangered;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(165, 42, 42, 0.25);
+}
+.caption-ciudades{
+    padding: 10px;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.tabla-ciudades td, th {
+    border: 1px solid rgba(165, 42, 42, 0.25);
+    padding: 5px;
+}
+.tabla-ciudades .permiso-listado{
+    left: -15px;
+}
+.tabla-ciudades button {
+    background-size:auto;
+    background-position: right;
+    margin: 0 10px;
+    display: inline;
+    border: none;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    text-align: center;
+}
+.tabla-ciudades button svg {
+    color: var(--main-color);
+    width: 100%;
+    height: 100%;
+}
+.tabla-ciudades td.button {
+    text-align: center;
+}
+
+.tabla-ciudades thead {
+    background-color: rgba(255, 69, 0, 0.25);
+}
+
+.tabla-ciudades tbody tr:hover {
+    background: rgba(255, 69, 0, 0.075);
+}
+.tabla-ciudades tbody td a {
+    color: var(--main-color);
+}
+.tabla-ciudades .centrar-campo-ciudad {
+    text-align: center;
+}
+.tabla-ciudades .centrar-campo-ciudad svg{
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+@media (max-width: 1024px){
+    .tabla-ciudades{
+        width: 85vw;
+    }
+    .tabla-ciudades .centrar-campo-ciudad svg{
+        font-size: 1.0rem;
+    }
+}
+
+@media (max-width:550px) {
+    .tabla-ciudades{
+        width: 95vw;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .tabla-ciudades thead th {
+        font-size: .9rem;
+    }
+    .tabla-ciudades tbody td {
+        font-size: .8rem;
+    }
+  }
