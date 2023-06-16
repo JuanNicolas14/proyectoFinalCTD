@@ -5,19 +5,16 @@ import { BiArrowBack } from "react-icons/bi";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { MdPlace } from "react-icons/md";
 import { HiOutlineShare } from "react-icons/hi";
-import { FiHeart } from "react-icons/fi";
 import { MdOutlineDeliveryDining } from "react-icons/md";
 import { BiTimer } from "react-icons/bi";
 import { BsFillDoorClosedFill } from "react-icons/bs";
+//Imagenes
+import images from "../../assets/images/images";
 //Hojas de estilos
 import "./detalle.css";
 //Url para consumir api
 import baseUrl from "../../utils/baseUrl.json";
 //Material UI
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import dayjs from "dayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import Carrousel from "../../Componentes/Carrousel/Carrousel";
 import Slider from "../../Componentes/Slider/Slider";
 import { AuthContext } from "../../utils/AuthContext";
@@ -319,7 +316,7 @@ const Detalle = () => {
         </section>
       )}
 
-      {restaurante.imagenes && (
+      {restaurante?.imagenes && (
         <section className="detalle-producto">
           <article>
             <section className="carrousel">
@@ -329,26 +326,26 @@ const Detalle = () => {
               <div className="imagenes">
                 <div className="principal">
                   <img
-                    src={restaurante?.imagenes[0]}
+                    src={restaurante?.imagenes[0] ? restaurante.imagenes[0] : images.notFound}
                     alt="img-detalle-producto"
                   />
                 </div>
                 <div className="secundarias">
                   <img
-                    src={restaurante?.imagenes[1]}
+                    src={restaurante?.imagenes[1] ? restaurante.imagenes[1] : images.notFound}
                     alt="img-detalle-producto"
                   />
                   <img
-                    src={restaurante?.imagenes[2]}
+                    src={restaurante?.imagenes[2] ? restaurante.imagenes[2] : images.notFound}
                     alt="img-detalle-producto"
                   />
                   <img
-                    src={restaurante?.imagenes[3]}
+                    src={restaurante?.imagenes[3] ? restaurante.imagenes[3] : images.notFound}
                     alt="img-detalle-producto"
                     className="imagen"
                   />
                   <img
-                    src={restaurante?.imagenes[4]}
+                    src={restaurante?.imagenes[4] ? restaurante.imagenes[4] : images.notFound}
                     alt="img-detalle-producto"
                     className="imagen"
                   />
