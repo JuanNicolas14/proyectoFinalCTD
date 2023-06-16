@@ -96,7 +96,7 @@ const EditarCiudad = () => {
 
   return (
     <main className="form-add-rol">
-        {user.rol == "ADMIN"
+        {user.rol == "ADMIN" || user.permisos.includes("GESTIÓN CIUDAD")
         ? (
           <section className="form-rol">
             <h2>Editar Ciudad</h2>

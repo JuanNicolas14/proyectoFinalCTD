@@ -106,7 +106,7 @@ const AgregarPlan = () => {
             </form>
           </section>
         )
-        : <ErrorPage mensaje="No cuentas con los permisos necesarios para ingresar a esta pagina." />
+        : <ErrorPage mensaje="No cuentas con los permisos necesarios para ingresar a esta página." />
         }
     </main>
   )

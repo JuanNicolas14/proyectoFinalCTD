@@ -13,7 +13,7 @@ const Administracion = () => {
       ? user.rol == "ADMIN" || user.permisos.includes("ACCESO PANEL ADMINISTRACIÓN")
         ? (
             <section className='administracion-panel'>
-                <h2>Administracion</h2>
+                <h2>Administración</h2>
                 <div className='opciones'>
                     <ul>
                         <li>
@@ -61,9 +61,9 @@ const Administracion = () => {
             </section>  
         )
         : (
-            <ErrorPage mensaje="No cuenta con los permisos necesarios para ingresar a esta pagina."/>
+            <ErrorPage mensaje="No cuenta con los permisos necesarios para ingresar a esta página."/>
         )
-      : <ErrorPage mensaje="No cuenta con los permisos necesarios para ingresar a esta pagina."/>
+      : <ErrorPage mensaje="No cuenta con los permisos necesarios para ingresar a esta página."/>
       }
 
       

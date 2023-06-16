@@ -106,7 +106,7 @@ const AgregarRol = () => {
                 }
               ).then((result) => {
                 if (result.isConfirmed) {
-                  window.location.reload()
+                  window.location.href = '/administracion';
                 }
               })
           } else {
@@ -161,7 +161,7 @@ const AgregarRol = () => {
             </form>
           </section>
         )
-        : <ErrorPage mensaje="No cuentas con los permisos necesarios para ingresar a esta pagina." />
+        : <ErrorPage mensaje="No cuentas con los permisos necesarios para ingresar a esta página." />
         }
     </main>
   )

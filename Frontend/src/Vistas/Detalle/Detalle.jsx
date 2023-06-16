@@ -257,7 +257,7 @@ const Detalle = () => {
                 <p>
                   {restaurante?.ciudad}, {restaurante?.pais},{" "}
                   {distanciaUser > 1 &&
-                    `estas a ${distanciaUser} km de distancia`}
+                    `estás a ${distanciaUser} km de distancia`}
                 </p>
               </div>
               <div className='iconos'>
@@ -352,7 +352,7 @@ const Detalle = () => {
                 </div>
               </div>
               <div className="buttons">
-                <button onClick={() => setShowSlider(true)}>Ver mas</button>
+                <button onClick={() => setShowSlider(true)}>Ver más</button>
               </div>
             </section>
 
@@ -386,13 +386,13 @@ const Detalle = () => {
                 </li>
               </ul>
               <div className="menu">
-                <h3>Menu:</h3>
+                <h3>Menú:</h3>
                 <p>{restaurante?.menu}</p>
               </div>
             </section>
             <section className="producto-ventajas">
               <div>
-                <h2>¿ Que ofrecemos ?</h2>
+                <h2>¿ Qué ofrecemos ?</h2>
               </div>
               <ul>
                 <li>
@@ -471,7 +471,7 @@ const Detalle = () => {
             </section>
             <section className="politicas">
               <div className="titulo">
-                <h2>Que necesitas saber</h2>
+                <h2>Qué necesitas saber</h2>
               </div>
               <div className="contenedor">
                 <div>

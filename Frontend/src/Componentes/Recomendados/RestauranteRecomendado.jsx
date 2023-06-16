@@ -70,7 +70,7 @@ const RestauranteRecomendado = ({ restaurante }) => {
           to={"/detalle/" + restaurante.id}
           style={{ textDecoration: "none" }}
         >
-          <button>Ver mas</button>
+          <button>Ver más</button>
         </Link>
       </div>
     </article>

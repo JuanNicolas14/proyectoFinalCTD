@@ -123,7 +123,7 @@ const EditarRol = () => {
 
   return (
     <main className="form-add-rol">
-        {user.rol == "ADMIN"
+        {user.rol == "ADMIN" || user.permisos.includes("GESTIÓN ROL")
         ? (
           <section className="form-rol">
             <h2>Editar Rol</h2>
@@ -164,7 +164,7 @@ const EditarRol = () => {
             </form>
           </section>
         )
-        : <ErrorPage mensaje="No cuentas con los permisos necesarios para ingresar a esta pagina." />
+        : <ErrorPage mensaje="No cuentas con los permisos necesarios para ingresar a esta página." />
         }
     </main>
   )
