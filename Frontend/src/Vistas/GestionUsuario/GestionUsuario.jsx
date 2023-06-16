@@ -15,7 +15,7 @@ const GestionUsuario = () => {
   const { user, token } = useContext(AuthContext);
   const [usuarios, setUsuarios] = useState([]);
   const [pagina, setPagina] = useState(1)
-  const [cantidadPorPagina, setCantidadPorPagina] = useState(8)
+  const [cantidadPorPagina, setCantidadPorPagina] = useState(10)
 
   /* Codigo paginacion */
   const maximo = usuarios.length / cantidadPorPagina

@@ -47,7 +47,12 @@ const Administracion = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link to="/ciudades" style={{ textDecoration: 'none' }}>
+                            <Link to="/administracion/agregarCiudad" style={{ textDecoration: 'none' }}>
+                            <span>Agregar Ciudad</span>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/administracion/gestionCiudad" style={{ textDecoration: 'none' }}>
                             <span>Gestionar Ciudades</span>
                             </Link>
                         </li>

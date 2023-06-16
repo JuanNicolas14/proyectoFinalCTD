@@ -13,7 +13,7 @@
     border-radius: 0.5em;
     background: rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(20px);
-    box-shadow: 0 0 10px rgba(165, 42, 42, 0.25);
+    box-shadow: 0 0 30px rgba(165, 42, 42, 0.25);
     margin: 40px 0 10px 0;
 }
 .form-rol form{
@@ -28,7 +28,7 @@
     margin-bottom: 30px;
     background: rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(20px);
-    box-shadow: 0 0 10px rgba(165, 42, 42, 0.25);
+    box-shadow: 0 0 30px rgba(165, 42, 42, 0.25);
     display: flex;
     flex-wrap: wrap;
 }
@@ -69,7 +69,7 @@
     font-size: 1.125em;
     color: white;
     background-color: brown;
-    box-shadow: 0 0 10px rgba(165, 42, 42, 0.5);
+    box-shadow: 0 0 30px rgba(165, 42, 42, 0.5);
     cursor: pointer;
 }
 
