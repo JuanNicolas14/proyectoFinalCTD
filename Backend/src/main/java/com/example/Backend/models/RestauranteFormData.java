@@ -22,9 +22,10 @@ public class RestauranteFormData {
     private String reglas;
     private String saludYseguridad;
     private String politicas;
+    private String menu;
 
 
-    public RestauranteFormData(String nombre, List<MultipartFile> imagenes, Long plan_id, String descripcion, double precio, String calle, String numero, String localidad, Long ciudad_id, Long pais_id,String reglas,String saludYseguridad, String politicas) {
+    public RestauranteFormData(String nombre, List<MultipartFile> imagenes, Long plan_id, String descripcion, double precio, String calle, String numero, String localidad, Long ciudad_id, Long pais_id,String reglas,String saludYseguridad, String politicas,String menu) {
         this.nombre = nombre;
         this.imagenes = imagenes;
         this.plan_id = plan_id;
@@ -40,6 +41,7 @@ public class RestauranteFormData {
         this.reglas = reglas;
         this.saludYseguridad = saludYseguridad;
         this.politicas = politicas;
+        this.menu = menu;
     }
 
     @Override
@@ -61,7 +63,8 @@ public class RestauranteFormData {
                 ", pais_id=" + pais_id + '\'' +
                 ", reglas=" + reglas + '\'' +
                 ", saludYseguridad=" + saludYseguridad + '\'' +
-                ", politicas=" + politicas +
+                ", politicas=" + politicas + '\'' +
+                ", menu=" + menu +
                 '}';
     }
 
@@ -183,5 +186,13 @@ public class RestauranteFormData {
 
     public void setPoliticas(String politicas) {
         this.politicas = politicas;
+    }
+
+    public String getMenu() {
+        return menu;
+    }
+
+    public void setMenu(String menu) {
+        this.menu = menu;
     }
 }

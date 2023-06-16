@@ -55,6 +55,9 @@ public class Restaurante {
     @Column(name = "politicas")
     private String politicas;
 
+    @Column(name = "menu")
+    private String menu;
+
     @JsonIgnore
     @ManyToMany(mappedBy = "restaurantesFavoritos")
     private Set<Usuario> usuariosFavoritos;
@@ -62,7 +65,7 @@ public class Restaurante {
     // Constructor
 
 
-    public Restaurante(String nombre, String descripcion, Set<Imagen> imagen, double precio, Domicilio domicilio, Plan plan, String reglas, String saludYseguridad, String politicas) {
+    public Restaurante(String nombre, String descripcion, Set<Imagen> imagen, double precio, Domicilio domicilio, Plan plan, String reglas, String saludYseguridad, String politicas,String menu) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.imagen = imagen;
@@ -72,6 +75,7 @@ public class Restaurante {
         this.reglas = reglas;
         this.saludYseguridad = saludYseguridad;
         this.politicas = politicas;
+        this.menu = menu;
     }
 
     public Restaurante() {
@@ -202,6 +206,14 @@ public class Restaurante {
         this.politicas = politicas;
     }
 
+    public String getMenu() {
+        return menu;
+    }
+
+    public void setMenu(String menu) {
+        this.menu = menu;
+    }
+
     @Override
     public String toString() {
         return "Restaurante{" +
@@ -218,6 +230,7 @@ public class Restaurante {
                 ", reglas='" + reglas + '\'' +
                 ", saludYseguridad='" + saludYseguridad + '\'' +
                 ", politicas='" + politicas + '\'' +
+                ", menu='" + menu + '\'' +
                 '}';
     }
 }

@@ -388,6 +388,10 @@ const Detalle = () => {
                   <p> {restaurante?.precio}$</p>
                 </li>
               </ul>
+              <div className="menu">
+                <h3>Menu:</h3>
+                <p>{restaurante?.menu}</p>
+              </div>
             </section>
             <section className="producto-ventajas">
               <div>
