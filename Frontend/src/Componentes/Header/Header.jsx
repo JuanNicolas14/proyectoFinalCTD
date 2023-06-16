@@ -82,7 +82,7 @@ const Header = () => {
 
               <button>
                 <Link to='/administracion' style={{ textDecoration: 'none' }}>
-                  Modulo Admin
+                  Módulo Admin
                 </Link>
               </button>
 

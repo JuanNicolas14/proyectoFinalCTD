@@ -380,7 +380,7 @@ const AgregarProducto = () => {
                     required/>
                 </p>
                 <p className="descripcion">
-                  <label htmlFor="politicas">Politicas del restaurante:</label>
+                  <label htmlFor="politicas">Políticas del restaurante:</label>
                   <textarea 
                     value={producto.politicas}
                     id="politicas" 
@@ -390,7 +390,7 @@ const AgregarProducto = () => {
                   ></textarea>
                 </p>
                 <p className="descripcion">
-                  <label htmlFor="menu">Menu del restaurante:</label>
+                  <label htmlFor="menu">Menú del restaurante:</label>
                   <textarea 
                     value={producto.menu}
                     id="menu" 
@@ -424,7 +424,7 @@ const AgregarProducto = () => {
                 </p>
                 
                 <div className="direccion">
-                  <h3>--Direccion--</h3>
+                  <h3>--Dirección--</h3>
                   <p>
                     <label htmlFor="calle">Calle:</label>
                     <input 
@@ -467,7 +467,7 @@ const AgregarProducto = () => {
                   </fieldset>
                   
                   <fieldset className="tipo-plan">
-                    <legend>Pais</legend>
+                    <legend>País</legend>
                     <select
                       className='select-categorias'
                       value={producto.pais_id} 
@@ -508,7 +508,7 @@ const AgregarProducto = () => {
             </form>
         </section>
       )
-      : <ErrorPage mensaje="No cuentas con los permisos necesarios para ingresar a esta pagina."/>
+      : <ErrorPage mensaje="No cuentas con los permisos necesarios para ingresar a esta página."/>
       }
       
     </main>

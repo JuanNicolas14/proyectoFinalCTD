@@ -72,7 +72,7 @@ const Restaurante = ({ restaurante }) => {
             to={"/detalle/" + restaurante.id}
             style={{ textDecoration: "none" }}
           >
-            Ver mas
+            Ver más
           </Link>
         </button>
       </div>
