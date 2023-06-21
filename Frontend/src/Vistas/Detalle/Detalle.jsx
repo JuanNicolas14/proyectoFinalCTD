@@ -8,6 +8,8 @@ import { HiOutlineShare } from "react-icons/hi";
 import { MdOutlineDeliveryDining } from "react-icons/md";
 import { BiTimer } from "react-icons/bi";
 import { BsFillDoorClosedFill } from "react-icons/bs";
+/*Herramienta Alertas */
+import Swal from 'sweetalert2';
 //Imagenes
 import images from "../../assets/images/images";
 //Hojas de estilos
@@ -30,6 +32,7 @@ import { red } from '@mui/material/colors'
 
 const Detalle = () => {
   const [distanciaUser, setDistanciaUser] = useState(0);
+  const navigate = useNavigate()
 
   const { user, token } = useContext(AuthContext);
   const [restaurante, setRestaurante] = useState({});
@@ -48,7 +51,6 @@ const Detalle = () => {
   };
 
   //Obtenemos el id que trae la url por medio de useParams()
-  const navigate = useNavigate();
   const { id } = useParams();
   const url = baseUrl.url + "/restaurante/" + id;
 
@@ -216,6 +218,29 @@ const Detalle = () => {
   const handleCambioFechaInicio = (event) => {
     setReserva({ fechaInicio: event.target.value });
   };
+
+  const handleReserva = () => {
+    if(user?.nombre.length > 1){
+      navigate('/reserva')
+    }else{
+      Swal.fire(
+        {
+          title: 'No tienes permiso.',
+          text: `Para realizar una reserva, debes iniciar sesión.`,
+          icon: 'error',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: "Ir a iniciar sesión",
+          cancelButtonText: "Cancelar"
+        }
+      ).then((result) => {
+        if(result.isConfirmed){
+          navigate('/login')
+        }
+      })
+    }
+  }
 
   return (
     <main className="main-detail">
@@ -445,15 +470,11 @@ const Detalle = () => {
                       }
                     >
                       <option value="">Seleccionar hora</option>
-                      <option value="11:00">11:00</option>
-                      <option value="11:30">11:30</option>
                       <option value="12:00">12:00</option>
                       <option value="12:30">12:30</option>
                       <option value="13:00">13:00</option>
                       <option value="13:30">13:30</option>
                       <option value="14:00">14:00</option>
-                      <option value="14:30">14:30</option>
-                      <option value="15:00">15:00</option>
                     </select>
                   </div>
                 </div>
@@ -464,7 +485,7 @@ const Detalle = () => {
                       Agrega la fecha en la que quieres comenzar a recibir el
                       servicio, al igual que la fecha a finalizar.
                     </p>
-                    <button>Iniciar Reserva</button>
+                    <button onClick={handleReserva}>Iniciar Reserva</button>
                   </div>
                 </div>
               </section>
