@@ -26,6 +26,7 @@ import EditarUsuario from './Vistas/EditarUsuario/EditarUsuario'
 import GestionCiudades from './Vistas/GestionCiudades/GestionCiudades'
 import EditarCiudad from './Vistas/EditarCiudad/EditarCiudad'
 import AgregarCiudad from './Vistas/AgregarCiudad/AgregarCiudad'
+import Reserva from './Vistas/Reserva/Reserva'
 
 function App() {
   return (
@@ -67,6 +68,7 @@ function App() {
           <Route path='/administracion/agregarCiudad' element={<AgregarCiudad/>}/>
           <Route path="/administracion/gestionCiudad" element={<GestionCiudades/>} />
           <Route path='/administracion/editarCiudad/:id' element={<EditarCiudad/>}/>
+          <Route path='/reserva' element={<Reserva />} />
         </Routes>
         <Footer />
       </FilterContextProvider>
