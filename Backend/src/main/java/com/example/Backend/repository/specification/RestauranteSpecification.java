@@ -40,10 +40,11 @@ public class RestauranteSpecification implements Specification<Restaurante> {
         }
 
         if (hora != null) {
-            predicates.add(criteriaBuilder.and(
-                    criteriaBuilder.lessThanOrEqualTo(root.get("horaApertura"), hora),
-                    criteriaBuilder.greaterThanOrEqualTo(root.get("horaCierre"), hora)
-            ));
+            predicates.add(criteriaBuilder.and(criteriaBuilder.equal(root.get("horaApertura"),hora )));
+            //predicates.add(criteriaBuilder.and(
+            //        criteriaBuilder.lessThanOrEqualTo(root.get("horaApertura"), hora),
+            //        criteriaBuilder.greaterThanOrEqualTo(root.get("horaCierre"), hora)
+            //));
         }
 
         return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
