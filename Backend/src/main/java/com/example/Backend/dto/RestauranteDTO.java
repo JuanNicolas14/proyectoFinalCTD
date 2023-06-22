@@ -28,10 +28,31 @@ public class RestauranteDTO {
     private BigDecimal latitud;
     private BigDecimal longitud;
 
+    private String horaApertura;
+
+    private String horaCierre;
+
     // Constructor
     public RestauranteDTO() {}
 
     // Getters and Setters
+
+    public String getHoraApertura() {
+        return horaApertura;
+    }
+
+    public void setHoraApertura(String horaApertura) {
+        this.horaApertura = horaApertura;
+    }
+
+    public String getHoraCierre() {
+        return horaCierre;
+    }
+
+    public void setHoraCierre(String horaCierre) {
+        this.horaCierre = horaCierre;
+    }
+
     public Long getId() {
         return this.id;
     }

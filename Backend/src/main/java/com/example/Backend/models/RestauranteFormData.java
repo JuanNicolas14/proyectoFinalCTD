@@ -24,25 +24,9 @@ public class RestauranteFormData {
     private String politicas;
     private String menu;
 
+    private String horaApertura;
+    private String horaCierre;
 
-    public RestauranteFormData(String nombre, List<MultipartFile> imagenes, Long plan_id, String descripcion, double precio, String calle, String numero, String localidad, Long ciudad_id, Long pais_id,String reglas,String saludYseguridad, String politicas,String menu) {
-        this.nombre = nombre;
-        this.imagenes = imagenes;
-        this.plan_id = plan_id;
-        this.descripcion = descripcion;
-        this.precio = precio;
-        this.calle = calle;
-        this.numero = numero;
-        this.localidad = localidad;
-        this.ciudad_id = ciudad_id;
-        this.pais_id = pais_id;
-        this.latitud = latitud;
-        this.longitud = longitud;
-        this.reglas = reglas;
-        this.saludYseguridad = saludYseguridad;
-        this.politicas = politicas;
-        this.menu = menu;
-    }
 
     @Override
     public String toString() {
@@ -59,13 +43,50 @@ public class RestauranteFormData {
                 ", pais_id=" + pais_id +
                 ", longitud=" + longitud +
                 ", latitud=" + latitud +
-                ", ciudad='" + ciudad_id + '\'' +
-                ", pais_id=" + pais_id + '\'' +
-                ", reglas=" + reglas + '\'' +
-                ", saludYseguridad=" + saludYseguridad + '\'' +
-                ", politicas=" + politicas + '\'' +
-                ", menu=" + menu +
+                ", reglas='" + reglas + '\'' +
+                ", saludYseguridad='" + saludYseguridad + '\'' +
+                ", politicas='" + politicas + '\'' +
+                ", menu='" + menu + '\'' +
+                ", hora_apertura='" + horaApertura + '\'' +
+                ", hora_cierre='" + horaCierre + '\'' +
                 '}';
+    }
+
+    public RestauranteFormData(String nombre, List<MultipartFile> imagenes, Long plan_id, String descripcion, double precio, String calle, String numero, String localidad, Long ciudad_id, Long pais_id, String reglas, String saludYseguridad, String politicas, String menu, String horaApertura, String horaCierre) {
+        this.nombre = nombre;
+        this.imagenes = imagenes;
+        this.plan_id = plan_id;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.calle = calle;
+        this.numero = numero;
+        this.localidad = localidad;
+        this.ciudad_id = ciudad_id;
+        this.pais_id = pais_id;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.reglas = reglas;
+        this.saludYseguridad = saludYseguridad;
+        this.politicas = politicas;
+        this.menu = menu;
+        this.horaApertura = horaApertura;
+        this.horaCierre = horaCierre;
+    }
+
+    public String getHoraApertura() {
+        return horaApertura;
+    }
+
+    public void setHoraApertura(String horaApertura) {
+        this.horaApertura = horaApertura;
+    }
+
+    public String getHoraCierre() {
+        return horaCierre;
+    }
+
+    public void setHoraCierre(String horaCierre) {
+        this.horaCierre = horaCierre;
     }
 
     public BigDecimal getLongitud() {

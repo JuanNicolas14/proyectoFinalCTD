@@ -4,6 +4,7 @@ import com.example.Backend.dto.RestauranteDTO;
 import com.example.Backend.models.Restaurante;
 import com.example.Backend.repository.RestauranteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -49,8 +50,8 @@ public class RestauranteService {
      * Busca todos los restaurantes
      * @return Lista de restaurantes
      */
-    public List<RestauranteDTO> buscarTodosRestaurantes() {
-        List<Restaurante> restaurantes = restauranteRepository.findAll();
+    public List<RestauranteDTO> buscarTodosRestaurantes(Specification specification) {
+        List<Restaurante> restaurantes = restauranteRepository.findAll(specification);
         List<RestauranteDTO> restaurantesDTO = new ArrayList<>();
         for (Restaurante restaurante:restaurantes) {
             restaurantesDTO.add(
@@ -120,6 +121,8 @@ public class RestauranteService {
         restauranteDTO.setSaludYseguridad(restaurante.getSaludYseguridad());
         restauranteDTO.setPoliticas(restaurante.getPoliticas());
         restauranteDTO.setMenu(restaurante.getMenu());
+        restauranteDTO.setHoraApertura(restaurante.getHoraApertura());
+        restauranteDTO.setHoraCierre(restaurante.getHoraCierre());
 
         return restauranteDTO;
     }
