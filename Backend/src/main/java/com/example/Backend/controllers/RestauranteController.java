@@ -7,9 +7,11 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.example.Backend.dto.RestauranteDTO;
 import com.example.Backend.exceptions.ResourceNotFoundException;
 import com.example.Backend.models.*;
+import com.example.Backend.repository.specification.RestauranteSpecification;
 import com.example.Backend.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -115,7 +117,9 @@ public class RestauranteController {
                 restauranteFormData.getReglas(),
                 restauranteFormData.getSaludYseguridad(),
                 restauranteFormData.getPoliticas(),
-                restauranteFormData.getMenu()
+                restauranteFormData.getMenu(),
+                restauranteFormData.getHoraApertura(),
+                restauranteFormData.getHoraCierre()
         );
         Restaurante restauranteGuardado = restauranteService.guardarRestaurante(restaurante);
 
@@ -149,16 +153,18 @@ public class RestauranteController {
      * @return ResponseEntity con la lista de restaurantes
      */
     @GetMapping
-    public List<RestauranteDTO> listarRestaurantes(@RequestParam(name = "plan", required = false) String plan) {
+    public List<RestauranteDTO> listarRestaurantes(
+            @RequestParam(name = "plan", required = false) String plan,
+            @RequestParam(name = "ciudad", required = false) String ciudad,
+            @RequestParam(name = "hora", required = false) String hora
+    ) {
         this.logger.info("Listando restaurantes");
+        this.logger.info("Filtros. Plan: " + plan + ", Ciudad: " + ciudad + ", Hora: " + hora);
+        Specification<Restaurante> specification = new RestauranteSpecification(plan, ciudad, hora);
+
         List<RestauranteDTO> restaurantes = null;
-        if (plan != null) {
-            this.logger.info("Filtrando por plan: " + plan);
-            restaurantes = restauranteService.buscarPorPlan(plan);
-            this.logger.info("Se encontraron " + restaurantes.size() + " restaurantes");
-            return restaurantes;
-        }
-        restaurantes = restauranteService.buscarTodosRestaurantes();
+
+        restaurantes = restauranteService.buscarTodosRestaurantes(specification);
         this.logger.info("Se encontraron " + restaurantes.size() + " restaurantes");
         return restaurantes;
     }

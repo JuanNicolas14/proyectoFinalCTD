@@ -55,17 +55,45 @@ public class Restaurante {
     @Column(name = "politicas")
     private String politicas;
 
-    @Column(name = "menu")
+    @Column(name = "menu", length = 500)
     private String menu;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "restaurantesFavoritos")
     private Set<Usuario> usuariosFavoritos;
 
+    @Column(name = "hora_apertura")
+    private String horaApertura;
+
+    @Column(name = "hora_cierre")
+    private String horaCierre;
+
     // Constructor
 
 
-    public Restaurante(String nombre, String descripcion, Set<Imagen> imagen, double precio, Domicilio domicilio, Plan plan, String reglas, String saludYseguridad, String politicas,String menu) {
+    @Override
+    public String toString() {
+        return "Restaurante{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", imagen=" + imagen +
+                ", precio=" + precio +
+                ", domicilio=" + domicilio +
+                ", plan=" + plan +
+                ", puntuaciones=" + puntuaciones +
+                ", puntuacionPromedio=" + puntuacionPromedio +
+                ", numeroValoraciones=" + numeroValoraciones +
+                ", reglas='" + reglas + '\'' +
+                ", saludYseguridad='" + saludYseguridad + '\'' +
+                ", politicas='" + politicas + '\'' +
+                ", menu='" + menu + '\'' +
+                ", horaApertura='" + horaApertura + '\'' +
+                ", horaCierre='" + horaCierre + '\'' +
+                '}';
+    }
+
+    public Restaurante(String nombre, String descripcion, Set<Imagen> imagen, double precio, Domicilio domicilio, Plan plan, String reglas, String saludYseguridad, String politicas, String menu, String horaApertura, String horaCierre) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.imagen = imagen;
@@ -76,6 +104,24 @@ public class Restaurante {
         this.saludYseguridad = saludYseguridad;
         this.politicas = politicas;
         this.menu = menu;
+        this.horaApertura = horaApertura;
+        this.horaCierre = horaCierre;
+    }
+
+    public String getHoraApertura() {
+        return horaApertura;
+    }
+
+    public void setHoraApertura(String horaApertura) {
+        this.horaApertura = horaApertura;
+    }
+
+    public String getHoraCierre() {
+        return horaCierre;
+    }
+
+    public void setHoraCierre(String horaCierre) {
+        this.horaCierre = horaCierre;
     }
 
     public Restaurante() {
@@ -214,23 +260,4 @@ public class Restaurante {
         this.menu = menu;
     }
 
-    @Override
-    public String toString() {
-        return "Restaurante{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                ", imagen=" + imagen +
-                ", precio=" + precio +
-                ", domicilio=" + domicilio +
-                ", plan=" + plan +
-                ", puntuaciones=" + puntuaciones +
-                ", puntuacionPromedio=" + puntuacionPromedio +
-                ", numeroValoraciones=" + numeroValoraciones +
-                ", reglas='" + reglas + '\'' +
-                ", saludYseguridad='" + saludYseguridad + '\'' +
-                ", politicas='" + politicas + '\'' +
-                ", menu='" + menu + '\'' +
-                '}';
-    }
 }
