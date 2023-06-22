@@ -40,12 +40,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     "/login",
                     "/mail/**",
                     "/permiso",
-                    "/plan",
-                    "/plan/registrar",
-                    "/puntuacion",
-                    "/puntuacion/{id}",
+                    "/plan/**",
+                    "/puntuacion/**",
                     "/restaurante/**",
-                    "/rol",
                     "/rol/**",
                     "/usuario",
                     "/usuario/{id}",
@@ -57,7 +54,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 ).permitAll()
                 // TODO: Como MVP se deja que el usuario pueda eliminar perfiles, pero en un futuro solo el admin podrá hacerlo o un cron job
                 .antMatchers(HttpMethod.DELETE, "/usuario/{id}").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers("/plan/{id}").hasAnyAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

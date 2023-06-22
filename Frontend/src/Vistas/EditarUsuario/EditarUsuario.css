@@ -1,10 +1,12 @@
+
 .editar-usuario {
     margin: auto;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 86vh;
+    min-height: 80vh;
+    padding-bottom: 120px;
     background: url("https://cdn.pixabay.com/photo/2016/09/12/08/22/breakfast-1663295_1280.jpg") no-repeat;
     background-size: cover;
     background-position: center;
