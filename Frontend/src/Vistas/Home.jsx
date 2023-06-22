@@ -104,6 +104,7 @@ const Home = () => {
                     nombre={planes.nombre}
                     dias={planes.dias}
                     descripcion={planes.descripcion}
+                    imagen={planes.imagen}
                   />
                 </SwiperSlide>
               ))}
@@ -125,6 +126,7 @@ const Home = () => {
                     nombre={planes.nombre}
                     dias={planes.dias}
                     descripcion={planes.descripcion}
+                    imagen={planes.imagen}
                   />
                 </SwiperSlide>
               ))}
@@ -145,6 +147,7 @@ const Home = () => {
                     nombre={planes.nombre}
                     dias={planes.dias}
                     descripcion={planes.descripcion}
+                    imagen={planes.imagen}
                   />
                 </SwiperSlide>
               ))}

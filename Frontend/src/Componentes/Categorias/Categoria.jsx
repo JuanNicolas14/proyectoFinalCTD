@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom'
 import {FaMedal,FaTrophy} from 'react-icons/fa'
 import './categoria.css'
 
-const Categoria = ({nombre, dias, descripcion}) => {
+const Categoria = ({nombre, dias, descripcion, imagen}) => {
   return (
     <article className='article-categoria'>
-        <div className='categoria-imagen'>
+        <div className='categoria-imagen' style={{ backgroundImage: `url(${imagen})`}}>
           <div className="wrap">
             <h2>{nombre}</h2>
             <p className='descripcion'>{descripcion}</p>
@@ -26,6 +26,16 @@ const Categoria = ({nombre, dias, descripcion}) => {
               </p>
             }
             {nombre === 'Trimestral' && 
+              <p className='medalla'>
+                <FaTrophy style={{ color: 'yellow'}}/>
+              </p>
+            }
+            {nombre === 'Semestral' && 
+              <p className='medalla'>
+                <FaTrophy style={{ color: 'yellow'}}/>
+              </p>
+            }
+            {nombre === 'Anual' && 
               <p className='medalla'>
                 <FaTrophy style={{ color: 'yellow'}}/>
               </p>

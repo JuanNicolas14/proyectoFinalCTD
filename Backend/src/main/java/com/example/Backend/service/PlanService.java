@@ -31,4 +31,8 @@ public class PlanService {
     public List<Plan> buscarTodosPlanes() {
         return planRepository.findAll();
     }
+
+    public Plan actualizarPlan(Plan plan){
+        return planRepository.save(plan);
+    }
 }
