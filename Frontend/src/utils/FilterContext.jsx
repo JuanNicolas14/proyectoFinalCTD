@@ -17,6 +17,7 @@ const filterReducer = (state, action) => {
         ...state,
         ciudad: action.payload.ciudad,
         plan: action.payload.plan,
+        hora: action.payload.hora,
         restaurantesFiltrados: action.payload.restaurantesFiltrados,
         restaurantesRecomendados: action.payload.restaurantesRecomendados
       };
@@ -32,6 +33,7 @@ const FilterContextProvider = ({ children }) => {
     dispatchFilter,
     ciudad: state.ciudad,
     plan: state.plan,
+    hora: state.hora,
     restaurantesFiltradosGuardados: state.restaurantesFiltrados,
     restaurantesRecomendados: state.restaurantesRecomendados
   }

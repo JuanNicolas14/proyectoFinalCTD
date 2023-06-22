@@ -9,23 +9,22 @@ import Swal from 'sweetalert2';
 
 const Searchbar = () => {
 
-  let ciudadesData = [
-    "bogota dc",
-    "medellin",
-    "barranquilla"
-  ]
+  const MIN_HOUR = '12:00'
+  const MAX_HOUR = '15:00'
+
   const navigate = useNavigate();
   const urlPlanes = baseUrl.url + "/plan"
   const urlCiudades = baseUrl.url + "/ciudades"
-  const {token} = useContext(AuthContext)
-  const {dispatchFilter} = useContext(FilterContext)
-  
+  const { token } = useContext(AuthContext)
+  const { dispatchFilter } = useContext(FilterContext)
+
 
   const [planesdb, setPlanesdb] = useState([])
   const [ciudadesdb, setCiudadesdb] = useState([])
   const [filtro, setFiltro] = useState({
-    ciudad:'',
-    plan:''
+    ciudad: '',
+    plan: '',
+    hora: ''
   })
 
   function shuffleArray(array) {
@@ -34,7 +33,7 @@ const Searchbar = () => {
       [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
-  } 
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,11 +43,11 @@ const Searchbar = () => {
         const fetchPlanes = await fetch(urlPlanes);
         const planes = await fetchPlanes.json();
         setPlanesdb(planes)
-        
+
         const fetchCiudades = await fetch(urlCiudades)
         const ciudades = await fetchCiudades.json()
         setCiudadesdb(ciudades)
-        
+
       } catch (error) {
         console.error('Error:', error);
       }
@@ -57,36 +56,35 @@ const Searchbar = () => {
     fetchData();
   }, []);
 
-  const handleSubmit = e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if(filtro.plan.length != '' || filtro.ciudad.length != ''){
-      const fetchData = async () => {
-        try {
-          const response = await fetch(baseUrl.url + `/restaurante/${filtro.plan}/${filtro.ciudad}`);
-          const jsonData = await response.json();
-          // Mezcla aleatoria de los restaurantes
-          const restaurantesAleatorios = shuffleArray(jsonData);
-          // Obtener los primeros 4 restaurantes aleatorios
-          const restaurantesSeleccionados = restaurantesAleatorios.slice(0, 2);
-  
-          dispatchFilter({type:"SAVE", payload:{
-                                          ciudad: filtro.ciudad,
-                                          plan: filtro.plan,
-                                          restaurantesFiltrados: jsonData,
-                                          restaurantesRecomendados:restaurantesSeleccionados
-          }})
-          navigate('/restaurantes/ciudad-y-plan');
-        } catch (error) {
-          console.error(error);
-        }
-      }
-      fetchData();
+    try {
+      const queryParams = new URLSearchParams();
+      if (filtro.ciudad) queryParams.append('ciudad', filtro.ciudad)
+      if (filtro.plan) queryParams.append('plan', filtro.plan)
+      if (filtro.hora) queryParams.append('hora', filtro.hora)
+      const response = await fetch(baseUrl.url + `/restaurante?${queryParams}`);
+      const jsonData = await response.json();
+      // Mezcla aleatoria de los restaurantes
+      const restaurantesAleatorios = shuffleArray(jsonData);
+      // Obtener los primeros 4 restaurantes aleatorios
+      const restaurantesSeleccionados = restaurantesAleatorios.slice(0, 2);
 
-    }else {
+      dispatchFilter({
+        type: "SAVE", payload: {
+          ciudad: filtro.ciudad,
+          plan: filtro.plan,
+          hora: filtro.hora,
+          restaurantesFiltrados: jsonData,
+          restaurantesRecomendados: restaurantesSeleccionados
+        }
+      })
+      navigate('/restaurantes/ciudad-y-plan');
+    } catch (error) {
       Swal.fire(
         {
-          title: 'Espacios en blanco',
-          text: `No se puede realizar la busqueda ya que existe espacios en blanco.`,
+          title: 'Error',
+          text: 'No se pudo realizar la busqueda',
           icon: 'error',
           showCancelButton: false,
           confirmButtonColor: '#3085d6',
@@ -96,42 +94,54 @@ const Searchbar = () => {
       ).then((result) => {
         if (result.isConfirmed) {
           setFiltro({
-            ciudad:'',
-            plan:''
+            ciudad: '',
+            plan: '',
+            hora: ''
           })
           navigate('/home');
         }
-      })
+      }
+      )
     }
-    
+
   }
 
-  
+
   return (
     <section className="busqueda">
-        <div>
-          <h2>Buscar restaurantes por ciudad y fecha</h2>
-          <div className="formulario">
-            <form onSubmit={e => handleSubmit(e)}>
-              <input
-                value={filtro.ciudad} 
-                onChange={(e)=> setFiltro({...filtro, ciudad: e.target.value})} 
-                type="text" 
-                placeholder=" 📍 Digita tu ciudad" 
-              />
-              <select
-                value={filtro.plan} 
-                onChange={(e)=> setFiltro({...filtro, plan: e.target.value})}
-              >
-                <option value="">Selecciona una opción</option>
-                {planesdb.map(plan => {
-                  return <option key={plan.id} value={plan.nombre}>{plan.nombre}</option>
-                })}
-                    
-              </select>
-              <button type='submit'>Buscar</button>
-            </form>
-            {filtro.ciudad?.length >=1
+      <div>
+        <h2>Buscar restaurantes por ciudad y fecha</h2>
+        <div className="formulario">
+          <form onSubmit={e => handleSubmit(e)}>
+            <input
+              value={filtro.ciudad}
+              onChange={(e) => setFiltro({ ...filtro, ciudad: e.target.value })}
+              type="text"
+              placeholder=" 📍 Digita tu ciudad"
+            />
+            <select
+              value={filtro.plan}
+              onChange={(e) => setFiltro({ ...filtro, plan: e.target.value })}
+            >
+              <option value="">Selecciona una opción</option>
+              {planesdb.map(plan => {
+                return <option key={plan.id} value={plan.nombre}>{plan.nombre}</option>
+              })}
+
+            </select>
+
+            <select value={filtro.hora}
+              onChange={(e) => setFiltro({ ...filtro, hora: e.target.value })}
+            >
+              <option value="">Filtrar por hora de servicio</option>
+              <option value="12:00 - 13:00">12:00 - 13:00</option>
+              <option value="13:00 - 14:00">13:00 - 14:00</option>
+              <option value="14:00 - 15:00">14:00 - 15:00</option>
+            </select>
+
+            <button type='submit'>Buscar</button>
+          </form>
+          {filtro.ciudad?.length >= 1
             && (
               <ul className='sugerencias'>
                 {ciudadesdb?.filter((ciudadActual) => {
@@ -144,20 +154,20 @@ const Searchbar = () => {
                   )
                 }).map((ciudadActual) => (
                   <li
-                    onClick={() => setFiltro({...filtro, ciudad: ciudadActual.nombreCiudad})}
+                    onClick={() => setFiltro({ ...filtro, ciudad: ciudadActual.nombreCiudad })}
                     key={ciudadActual.nombreCiudad}
                   >
                     {ciudadActual.nombreCiudad}
                   </li>
                 ))
-                
+
                 }
               </ul>
             )
-            }
-            
-          </div>
+          }
+
         </div>
+      </div>
     </section>
   )
 }

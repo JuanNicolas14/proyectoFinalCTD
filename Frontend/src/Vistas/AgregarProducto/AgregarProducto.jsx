@@ -16,7 +16,7 @@ const AgregarProducto = () => {
   const urlPaises = baseUrl.url + "/paises"
   let confirmador = false;
   //Estado global
-  const {user,token} = useContext(AuthContext)
+  const { user, token } = useContext(AuthContext)
 
   /*-----*/
 
@@ -64,9 +64,9 @@ const AgregarProducto = () => {
   };
 
 
-  const [paisesdb,setPaisesdb] = useState([])
-  const [ciudadesdb,setCiudadesdb] = useState([])
-  const [planesdb, setPlanesdb]= useState([])
+  const [paisesdb, setPaisesdb] = useState([])
+  const [ciudadesdb, setCiudadesdb] = useState([])
+  const [planesdb, setPlanesdb] = useState([])
   const [productos, setProductos] = useState([])
   const [producto, setProducto] = useState({
     nombre: '',
@@ -76,51 +76,52 @@ const AgregarProducto = () => {
     plan_id: '',
     calle: 0,
     numero: 0,
-    localidad:'',
-    ciudad:'',
-    pais_id:'',
-    reglas:'',
+    localidad: '',
+    ciudad: '',
+    pais_id: '',
+    reglas: '',
     politicas: '',
     saludYseguridad: '',
-    menu:''
+    menu: '',
+    hora:''
   })
 
   useEffect(() => {
-      const fetchData = async () => {
-        try {
-          // Realiza la primera petición con JWT (POST con autenticación)
-          const fetchPlanes = await fetch(urlPlanes, {
-            headers: {
-              'Authorization': `Bearer ${token}`,
-            },
-          });
-          const planes = await fetchPlanes.json();
-          setPlanesdb(planes)
+    const fetchData = async () => {
+      try {
+        // Realiza la primera petición con JWT (POST con autenticación)
+        const fetchPlanes = await fetch(urlPlanes, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+        const planes = await fetchPlanes.json();
+        setPlanesdb(planes)
 
 
 
-          // Realiza la segunda petición de los productos sin JWT.
-          const fetchProductos = await fetch(urlRestaurantes)
-          const productos = await fetchProductos.json();
-          setProductos(productos)
-  
-          //Realiza la tercer peticion de las ciudades
-          const fetchCiudades = await fetch(urlCiudades)
-          const ciudades = await fetchCiudades.json();
-          setCiudadesdb(ciudades)
+        // Realiza la segunda petición de los productos sin JWT.
+        const fetchProductos = await fetch(urlRestaurantes)
+        const productos = await fetchProductos.json();
+        setProductos(productos)
 
-          //Realiza la tercer peticion de las ciudades
-          const fetchPaises = await fetch(urlPaises)
-          const paises = await fetchPaises.json();
-          setPaisesdb(paises)
-          
-          
-        } catch (error) {
-          console.error('Error:', error);
-        }
-      };
-  
-      fetchData();
+        //Realiza la tercer peticion de las ciudades
+        const fetchCiudades = await fetch(urlCiudades)
+        const ciudades = await fetchCiudades.json();
+        setCiudadesdb(ciudades)
+
+        //Realiza la tercer peticion de las ciudades
+        const fetchPaises = await fetch(urlPaises)
+        const paises = await fetchPaises.json();
+        setPaisesdb(paises)
+
+
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   const handleSubmit = async (e) => {
@@ -128,12 +129,12 @@ const AgregarProducto = () => {
     e.preventDefault()
 
     productos.map((productoActual) => {
-      if(productoActual.nombre.toLowerCase() === producto.nombre.toLowerCase()){
+      if (productoActual.nombre.toLowerCase() === producto.nombre.toLowerCase()) {
         confirmador = true;
       }
     })
 
-    if(confirmador){
+    if (confirmador) {
       Swal.fire(
         {
           title: 'Nombre Repetido',
@@ -154,18 +155,19 @@ const AgregarProducto = () => {
             plan_id: '',
             calle: 0,
             numero: 0,
-            localidad:'',
+            localidad: '',
             ciudad_id: 0,
-            pais_id:'',
-            reglas:'',
+            pais_id: '',
+            reglas: '',
             politicas: '',
             saludYseguridad: '',
-            menu:''
+            menu: '',
+            hora: ''
           })
           window.location.reload()
         }
       })
-      
+
       setProducto({
         nombre: '',
         descripcion: '',
@@ -174,19 +176,20 @@ const AgregarProducto = () => {
         plan_id: '',
         calle: 0,
         numero: 0,
-        localidad:'',
+        localidad: '',
         ciudad_id: 0,
-        pais_id:'',
-        reglas:'',
+        pais_id: '',
+        reglas: '',
         politicas: '',
         saludYseguridad: '',
-        menu:''
+        menu: '',
+        hora: ''
 
       })
 
       return
 
-    }else{
+    } else {
       const formData = new FormData()
 
       formData.append('nombre', producto.nombre)
@@ -208,56 +211,58 @@ const AgregarProducto = () => {
       formData.append('longitud', longitude)
       formData.append('latitud', latitude)
       formData.append('menu', producto.menu)
-      
+      formData.append('horaApertura', producto.hora)
+
       console.log("se creo el formData y se enviaran los datos !!!!")
 
-      axios.post(urlRestaurantes,formData)
-      .then((response) => {
-        // Maneja la respuesta exitosa
-        console.log("Se guardaron los datos :)")
-        Swal.fire(
-          {
-            title: 'Restaurante Guardado',
-            text: `Restaurante ${producto.nombre} ha sido guardado con exito.`,
-            icon: 'success',
-            showCancelButton: false,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Aceptar',
-          }
-        ).then((result) => {
-          if (result.isConfirmed) {
-            setProducto({
-              nombre: '',
-              descripcion: '',
-              imagenes: [],
-              precio: 0,
-              plan_id: '',
-              calle: 0,
-              numero: 0,
-              localidad:'',
-              ciudad_id: 0,
-              pais_id:'',
-              reglas:'',
-              politicas: '',
-              saludYseguridad: '', 
-              menu:''
-            })
-            window.location.reload()
-          }
+      axios.post(urlRestaurantes, formData)
+        .then((response) => {
+          // Maneja la respuesta exitosa
+          console.log("Se guardaron los datos :)")
+          Swal.fire(
+            {
+              title: 'Restaurante Guardado',
+              text: `Restaurante ${producto.nombre} ha sido guardado con exito.`,
+              icon: 'success',
+              showCancelButton: false,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Aceptar',
+            }
+          ).then((result) => {
+            if (result.isConfirmed) {
+              setProducto({
+                nombre: '',
+                descripcion: '',
+                imagenes: [],
+                precio: 0,
+                plan_id: '',
+                calle: 0,
+                numero: 0,
+                localidad: '',
+                ciudad_id: 0,
+                pais_id: '',
+                reglas: '',
+                politicas: '',
+                saludYseguridad: '',
+                menu: '',
+                hora: ''
+              })
+              window.location.reload()
+            }
+          })
         })
-      })
-      .catch((error) => {
-        // Maneja el error
-        console.error(error);
-      });
-  
-      
-    }  
+        .catch((error) => {
+          // Maneja el error
+          console.error(error);
+        });
+
+
+    }
   }
 
   const handleImages = (e) => {
-    setProducto({...producto, imagenes: [...producto.imagenes, e.target.files[0]]})
+    setProducto({ ...producto, imagenes: [...producto.imagenes, e.target.files[0]] })
   }
 
   //HANDLE PARA EL CAMBIO DE MARCADOR
@@ -269,10 +274,10 @@ const AgregarProducto = () => {
     setMarkerPosition({ lat, lng });
   };
 
- /*  const eliminarImagen = nombre => {
-    let nuevaLista = producto.imagenes.filter(imagen => imagen.name != nombre )
-    setProducto({...producto, imagenes: nuevaLista})
-  } */
+  /*  const eliminarImagen = nombre => {
+     let nuevaLista = producto.imagenes.filter(imagen => imagen.name != nombre )
+     setProducto({...producto, imagenes: nuevaLista})
+   } */
 
   const eliminarImagen = posicion => {
 
@@ -281,40 +286,40 @@ const AgregarProducto = () => {
     let contador = 0;
 
     producto.imagenes.map(imagen => {
-      if(contador !== posicionNumber){
+      if (contador !== posicionNumber) {
         nuevaLista.push(imagen)
       }
       contador++;
     })
-    setProducto({...producto, imagenes: nuevaLista})
+    setProducto({ ...producto, imagenes: nuevaLista })
   }
 
-  return (         
+  return (
     <main className="form-add-product">
       {user?.rol == "ADMIN" || user.permisos.includes("CREAR PRODUCTO")
-      ? (
-        <section className="form">
+        ? (
+          <section className="form">
             <h2>Agregar Restaurante</h2>
             <form onSubmit={(e) => handleSubmit(e)} encType='multipart/form-data'>
               <section className="form-parte-A">
                 <p>
                   <label htmlFor="nombre">Nombre:</label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     id="nombre"
                     value={producto.nombre}
-                    onChange={(e)=> setProducto({...producto, nombre: e.target.value})}
+                    onChange={(e) => setProducto({ ...producto, nombre: e.target.value })}
                     required
                   />
                 </p>
 
                 <div className="carga-imagen">
                   <span>Imagen:</span>
-                  <input 
+                  <input
                     type="file"
-                    className="input-imagen" 
-                    name="imagen" id="imagen" 
-                    placeholder="imagen" accept="image/*" 
+                    className="input-imagen"
+                    name="imagen" id="imagen"
+                    placeholder="imagen" accept="image/*"
                     onChange={e => handleImages(e)}
                     required
                     multiple
@@ -323,20 +328,20 @@ const AgregarProducto = () => {
                     <div className='imagenes-selectas'>
                       <ul>
 
-                      {producto.imagenes.map((imagen,index) => {
-                        return <li key={index}> {imagen.name} <span onClick={()=> eliminarImagen(index)}>X</span></li>
-                      })}
+                        {producto.imagenes.map((imagen, index) => {
+                          return <li key={index}> {imagen.name} <span onClick={() => eliminarImagen(index)}>X</span></li>
+                        })}
                       </ul>
                     </div>
                   }
-                  
+
                   <label className="label-imagen" htmlFor="imagen">
                     <span className="input-imagen_input-imagen-nombre">
-                    {producto.imagenes?.length > 0 
-                      ? `${producto.imagenes.length} ${producto.imagenes.length > 1 
-                        ? "archivos seleccionados" 
-                        : "archivo seleccionado"}`
-                      : "Ningún archivo seleccionado"
+                      {producto.imagenes?.length > 0
+                        ? `${producto.imagenes.length} ${producto.imagenes.length > 1
+                          ? "archivos seleccionados"
+                          : "archivo seleccionado"}`
+                        : "Ningún archivo seleccionado"
                       }
                     </span>
                     <span className="input-imagen_input-imagen-boton">
@@ -349,135 +354,148 @@ const AgregarProducto = () => {
                   <legend>Tipo de Plan</legend>
                   <select
                     className='select-categorias'
-                    value={producto.plan_id} 
-                    onChange={(e)=> setProducto({...producto, plan_id: e.target.value})}
+                    value={producto.plan_id}
+                    onChange={(e) => setProducto({ ...producto, plan_id: e.target.value })}
                   >
                     <option value="">Selecciona una opción</option>
                     {planesdb.map(plan => {
                       return <option key={plan.id} value={plan.id}>{plan.nombre}</option>
                     })}
-                    
+
+                  </select>
+                </fieldset>
+                <fieldset className="tipo-plan">
+                  <legend>Horario de entrega</legend>
+                  <select
+                    className='select-categorias'
+                    value={producto.hora}
+                    onChange={(e) => setProducto({ ...producto, hora: e.target.value })}
+                  >
+                    <option value="">Selecciona una hora</option>
+                    <option value="12:00 - 13:00">12:00 - 13:00</option>
+                    <option value="13:00 - 14:00">13:00 - 14:00</option>
+                    <option value="14:00 - 15:00">14:00 - 15:00</option>
                   </select>
                 </fieldset>
                 <p className="descripcion">
                   <label htmlFor="descripcion">Descripción:</label>
-                  <textarea 
+                  <textarea
                     value={producto.descripcion}
-                    id="descripcion" 
-                    cols="30" rows="5" maxLength="250" 
-                    onChange={(e)=> setProducto({...producto, descripcion: e.target.value})}
+                    id="descripcion"
+                    cols="30" rows="5" maxLength="250"
+                    onChange={(e) => setProducto({ ...producto, descripcion: e.target.value })}
                     required
                   ></textarea>
                 </p>
 
                 <p className="precio">
                   <label htmlFor="precio">Precio:</label>
-                  <input 
+                  <input
                     value={producto.precio}
-                    type='number' id="precio" 
-                    name="precio"  placeholder="$ 0,00" step="any"  
-                    onChange={(e)=> setProducto({...producto, precio: e.target.value})}
-                    required/>
+                    type='number' id="precio"
+                    name="precio" placeholder="$ 0,00" step="any"
+                    onChange={(e) => setProducto({ ...producto, precio: e.target.value })}
+                    required />
                 </p>
                 <p className="descripcion">
                   <label htmlFor="politicas">Políticas del restaurante:</label>
-                  <textarea 
+                  <textarea
                     value={producto.politicas}
-                    id="politicas" 
-                    cols="30" rows="5" maxLength="250" 
-                    onChange={(e)=> setProducto({...producto, politicas: e.target.value})}
+                    id="politicas"
+                    cols="30" rows="5" maxLength="250"
+                    onChange={(e) => setProducto({ ...producto, politicas: e.target.value })}
                     required
                   ></textarea>
                 </p>
                 <p className="descripcion">
                   <label htmlFor="menu">Menú del restaurante:</label>
-                  <textarea 
+                  <textarea
                     value={producto.menu}
-                    id="menu" 
-                    cols="30" rows="5" maxLength="250" 
-                    onChange={(e)=> setProducto({...producto, menu: e.target.value})}
+                    id="menu"
+                    cols="30" rows="5" maxLength="250"
+                    onChange={(e) => setProducto({ ...producto, menu: e.target.value })}
                     required
                   ></textarea>
                 </p>
               </section>
-              
+
               <section className="form-parte-B">
-              <p className="descripcion">
+                <p className="descripcion">
                   <label htmlFor="reglas">Reglas del restaurante:</label>
-                  <textarea 
+                  <textarea
                     value={producto.reglas}
-                    id="reglas" 
-                    cols="30" rows="5" maxLength="250" 
-                    onChange={(e)=> setProducto({...producto, reglas: e.target.value})}
+                    id="reglas"
+                    cols="30" rows="5" maxLength="250"
+                    onChange={(e) => setProducto({ ...producto, reglas: e.target.value })}
                     required
                   ></textarea>
                 </p>
                 <p className="descripcion">
                   <label htmlFor="saludYseguridad">Medidas de salud y seguridad:</label>
-                  <textarea 
+                  <textarea
                     value={producto.saludYseguridad}
-                    id="saludYseguridad" 
-                    cols="30" rows="5" maxLength="250" 
-                    onChange={(e)=> setProducto({...producto, saludYseguridad: e.target.value})}
+                    id="saludYseguridad"
+                    cols="30" rows="5" maxLength="250"
+                    onChange={(e) => setProducto({ ...producto, saludYseguridad: e.target.value })}
                     required
                   ></textarea>
                 </p>
-                
+
                 <div className="direccion">
                   <h3>--Dirección--</h3>
                   <p>
                     <label htmlFor="calle">Calle:</label>
-                    <input 
+                    <input
                       value={producto.calle}
                       type="number" id="calle"
-                      onChange={(e)=> setProducto({...producto, calle: e.target.value})}
+                      onChange={(e) => setProducto({ ...producto, calle: e.target.value })}
                       required
                     />
                   </p>
                   <p>
                     <label htmlFor="numero">Número:</label>
-                    <input 
+                    <input
                       value={producto.numero}
-                      type="number" id="numero" 
-                      onChange={(e)=> setProducto({...producto, numero: e.target.value})}
+                      type="number" id="numero"
+                      onChange={(e) => setProducto({ ...producto, numero: e.target.value })}
                       required
                     />
                   </p>
                   <p>
                     <label htmlFor="localidad">Localidad:</label>
-                    <input 
+                    <input
                       value={producto.localidad}
                       type="text" id="localidad"
-                      onChange={(e)=> setProducto({...producto, localidad: e.target.value})} 
-                      required/>
+                      onChange={(e) => setProducto({ ...producto, localidad: e.target.value })}
+                      required />
                   </p>
                   <fieldset className="tipo-plan">
                     <legend>Ciudad</legend>
                     <select
                       className='select-categorias'
-                      value={producto.ciudad_id} 
-                      onChange={(e)=> setProducto({...producto, ciudad_id: e.target.value})}
+                      value={producto.ciudad_id}
+                      onChange={(e) => setProducto({ ...producto, ciudad_id: e.target.value })}
                     >
                       <option value="">Selecciona una ciudad</option>
                       {ciudadesdb?.map(ciudad => {
                         return <option key={ciudad.id} value={ciudad.id}>{ciudad.nombreCiudad}</option>
                       })}
-                      
+
                     </select>
                   </fieldset>
-                  
+
                   <fieldset className="tipo-plan">
                     <legend>País</legend>
                     <select
                       className='select-categorias'
-                      value={producto.pais_id} 
-                      onChange={(e)=> setProducto({...producto, pais_id: e.target.value})}
+                      value={producto.pais_id}
+                      onChange={(e) => setProducto({ ...producto, pais_id: e.target.value })}
                     >
                       <option value="">Selecciona un pais</option>
                       {paisesdb?.map(pais => {
                         return <option key={pais.id} value={pais.id}>{pais.nombre}</option>
                       })}
-                      
+
                     </select>
                   </fieldset>
                 </div>
@@ -485,20 +503,20 @@ const AgregarProducto = () => {
               <div id="map" className='map'>
                 <fieldset className='mapa'>
                   <legend>Ubicación en el mapa</legend>
-                  
+
                   <div>
                     <label>Latitud:</label>
                     <input type="number" value={latitude} onChange={handleLatitudeChange} />
                   </div>
                   <div>
                     <label>Longitud:</label>
-                    <input type="number" value={longitude} onChange={handleLongitudeChange} 
+                    <input type="number" value={longitude} onChange={handleLongitudeChange}
                     />
                   </div>
-                  
+
                   <Map onMarkerPositionChange={handleMarkerPositionChange} />
                 </fieldset>
-                              
+
               </div>
 
 
@@ -506,11 +524,11 @@ const AgregarProducto = () => {
                 <button type="submit">Guardar</button>
               </section>
             </form>
-        </section>
-      )
-      : <ErrorPage mensaje="No cuentas con los permisos necesarios para ingresar a esta página."/>
+          </section>
+        )
+        : <ErrorPage mensaje="No cuentas con los permisos necesarios para ingresar a esta página." />
       }
-      
+
     </main>
   )
 }

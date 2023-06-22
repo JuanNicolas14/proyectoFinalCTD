@@ -9,7 +9,7 @@ import {BiArrowBack} from 'react-icons/bi'
 import './listaPorFiltros.css'
 
 const ListaPorFiltros = () => {
-    const {restaurantesFiltradosGuardados,restaurantesRecomendados,plan, ciudad} = useContext(FilterContext)
+    const {restaurantesFiltradosGuardados,restaurantesRecomendados,plan, ciudad, hora} = useContext(FilterContext)
     const [pagina, setPagina] = useState(1)
     const [cantidadPorPagina, setCantidadPorPagina] = useState(4)
 
@@ -29,7 +29,45 @@ const ListaPorFiltros = () => {
         ?(
         <>
           <section className='restaurantes'>
-            <h2>{`Restaurantes con plan ${plan} en ${primerLetraMayuscula(ciudad)}`}</h2>
+            {plan.length > 1 && ciudad.length > 1 && hora.length > 1
+            ?(
+              <h2>{`Restaurantes en ${ciudad} con plan ${plan} y hora de entrega:${hora}`}</h2>
+            )
+            :(
+              plan.length > 1 && ciudad.length > 1
+              ? (
+                <h2>{`Restaurantes en ${ciudad} con plan ${plan}`}</h2>
+              )
+              :(
+                plan.length > 1 && hora.length > 1
+                ?(
+                  <h2>{`Restaurantes con plan ${plan} y hora de entrega:${hora}`}</h2>
+                )
+                :(
+                  hora.length > 1 && ciudad.length > 1
+                  ?(
+                    <h2>{`Restaurantes en ${ciudad} y hora de entrega:${hora}`}</h2>
+                  )
+                  :(
+                    plan.length > 1
+                    ?(
+                      <h2>{`Restaurantes con plan ${plan}`}</h2>
+                    )
+                    :(
+                      ciudad.length > 1
+                      ?(
+                        <h2>{`Restaurantes en ${ciudad}`}</h2>
+                      )
+                      :(
+                        <h2>{`Restaurantes con hora de entrega: ${hora}`}</h2>
+                      )
+                    )
+                  )
+                )
+              )
+            )
+            }
+            
             <div className='listado-restaurantes'>
               {restaurantesFiltradosGuardados.slice(
                 (pagina - 1) * cantidadPorPagina,
@@ -46,7 +84,7 @@ const ListaPorFiltros = () => {
           <Paginacion pagina={pagina} setPagina={setPagina} maximo={maximo}/>
 
           <section className='recomendados'>
-            <h2>{`Recomendados con plan ${plan} en ${primerLetraMayuscula(ciudad)}`}</h2>
+            <h2>{`Recomendados por ${plan} ${ciudad} ${hora}`}</h2>
             <div className='listado-recomendados'>
               {restaurantesRecomendados.map(restaurante => (
                 <RestauranteRecomendado key={restaurante.id} restaurante={restaurante}/>
