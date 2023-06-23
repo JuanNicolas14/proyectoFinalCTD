@@ -89,7 +89,7 @@ deploy_frontend:
     - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
     - aws configure set region $AWS_REGION
     - echo "Deploying application..."
-    - aws s3 sync Frontend/dist s3://bukinfood/
+    - aws s3 sync Frontend/dist s3://proyectodh.bukinfood.online/
     - echo "Application successfully deployed."
   when: manual
   rules:
