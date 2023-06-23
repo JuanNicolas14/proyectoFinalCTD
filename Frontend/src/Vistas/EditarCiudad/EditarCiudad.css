@@ -1,11 +1,11 @@
-.form-rol {
+.form-editar-ciudad {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
-.form-rol h2 {
+.form-editar-ciudad h2 {
     width: 30%;
     text-align: center;
     padding: 0.25em 0.5em 0.25em 0.5em;
@@ -16,7 +16,7 @@
     box-shadow: 0 0 30px rgba(165, 42, 42, 0.25);
     margin: 40px 0 10px 0;
 }
-.form-rol form{
+.form-editar-ciudad form{
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -32,15 +32,15 @@
     display: flex;
     flex-wrap: wrap;
 }
-.form-rol form div {
+.form-editar-ciudad form div {
     width: 95%;
     margin: 8px 0;
 }
-.form-rol label{
+.form-editar-ciudad label{
     font-size: 1rem;
     font-weight: 800;
 }
-.form-rol .nombre-rol{
+.form-editar-ciudad .nombre-ciudad{
     width: 93.5%;
     height: 30px;
     border: 2px solid rgba(255, 69, 0, 0.25);
@@ -51,14 +51,7 @@
     color: orangered;
     border-radius: 5px;
 }
-.form-rol .checkbox-rol{
-    margin-right: 5px;
-}
-.form-rol .permiso{
-
-    font-size: .9rem;
-}
-.form-rol button {
+.form-editar-ciudad button {
     width: 90%;
     margin: 20px auto 10px;
     height: 40px;
@@ -74,37 +67,37 @@
 }
 
 @media (max-width:1300px) {
-    .form-rol form {
+    .form-editar-ciudad form {
         width: 40%;
     }
-    .form-rol h2 {
+    .form-editar-ciudad h2 {
         width: 40%;
     }
 }
 
 @media (max-width:1024px) {
-    .form-rol form {
+    .form-editar-ciudad form {
         width: 50%;
     }
-    .form-rol h2 {
+    .form-editar-ciudad h2 {
         width: 50%;
     }
 }
 
 @media (max-width:768px) {
-    .form-rol form {
+    .form-editar-ciudad form {
         width: 70%;
     }
-    .form-rol h2 {
+    .form-editar-ciudad h2 {
         width: 70%;
     }
 }
 
 @media (max-width:480px) {
-    .form-rol form {
+    .form-editar-ciudad form {
         width: 80%;
     }
-    .form-rol h2 {
+    .form-editar-ciudad h2 {
         width: 80%;
     }
 }

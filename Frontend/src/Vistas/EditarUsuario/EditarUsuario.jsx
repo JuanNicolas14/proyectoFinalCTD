@@ -115,6 +115,11 @@ const EditarUsuario = () => {
             });
           } else {
             // Ocurrió un error al enviar los datos
+            Swal.fire({
+              icon: "error",
+              title: "Error al actualizar el usuario",
+              text: "Por favor, inténtalo nuevamente",
+            });
             console.error('Error al enviar los datos');
           }
         } catch (error) {

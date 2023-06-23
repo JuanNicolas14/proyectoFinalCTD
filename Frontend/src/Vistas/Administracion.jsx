@@ -32,6 +32,11 @@ const Administracion = () => {
                             </Link>
                         </li>
                         <li>
+                            <Link to="/administracion/gestionPlan" style={{ textDecoration: 'none' }}>
+                            <span>Gestión Planes</span>
+                            </Link>
+                        </li>
+                        <li>
                             <Link to="/administracion/agregarRol" style={{ textDecoration: 'none' }}>
                             <span>Agregar Rol</span>
                             </Link>

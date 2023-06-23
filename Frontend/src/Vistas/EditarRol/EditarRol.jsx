@@ -112,6 +112,11 @@ const EditarRol = () => {
         } else {
           // Ocurrió un error al enviar los datos
           console.error('Error al enviar los datos');
+          Swal.fire({
+            icon: "error",
+            title: "Error al actualizar el rol",
+            text: "Por favor, inténtalo nuevamente",
+          });
         }
       } catch (error) {
         console.error('Error al actualizar los permisos del rol:', error);
@@ -122,7 +127,7 @@ const EditarRol = () => {
 
 
   return (
-    <main className="form-add-rol">
+    <main className="editar-rol">
         {user.rol == "ADMIN" || user.permisos.includes("GESTIÓN ROL")
         ? (
           <section className="form-rol">

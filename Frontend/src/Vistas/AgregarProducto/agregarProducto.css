@@ -106,6 +106,7 @@ section.form {
   background-color: rgba(165, 42, 42, 0.5);
   padding: 10px;
   color: white;
+  
 }
 
 
@@ -139,6 +140,7 @@ section.form {
   align-items: center;
   background: rgba(255, 255, 255, 1);
   padding: 5px;
+  margin-bottom: 10px;
 }
 .form-add-product .mapa legend{
   font-size: 1.2rem;

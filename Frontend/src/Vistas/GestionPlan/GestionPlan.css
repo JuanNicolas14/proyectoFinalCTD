@@ -1,0 +1,93 @@
+/*--Hasta aquí los estilos del header--*/
+/*--Ahora los estilos del main--*/
+
+.gestion-plan {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+/*--Hasta aquí los estilos del main--*/
+/*---Ahora los estilos de la tabla---*/
+.tabla-planes {
+    width: 65vw;
+    margin: 10px auto;
+    border: 1px solid orangered;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(165, 42, 42, 0.25);
+}
+.caption-planes{
+    padding: 10px;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.tabla-planes td, th {
+    border: 1px solid rgba(165, 42, 42, 0.25);
+    padding: 5px;
+}
+.tabla-planes .permiso-listado{
+    left: -15px;
+}
+.tabla-planes button {
+    background-size:auto;
+    background-position: right;
+    margin: 0 10px;
+    display: inline;
+    border: none;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    text-align: center;
+}
+.tabla-planes button svg {
+    color: var(--main-color);
+    width: 100%;
+    height: 100%;
+}
+.tabla-planes td.button {
+    text-align: center;
+}
+
+.tabla-planes thead {
+    background-color: rgba(255, 69, 0, 0.25);
+}
+
+.tabla-planes tbody tr:hover {
+    background: rgba(255, 69, 0, 0.075);
+}
+.tabla-planes tbody td a {
+    color: var(--main-color);
+}
+.tabla-planes .centrar-campo-plan {
+    text-align: center;
+}
+.tabla-planes .centrar-campo-plan svg{
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+@media (max-width: 1024px){
+    .tabla-planes{
+        width: 85vw;
+    }
+    .tabla-planes .centrar-campo-ciudad svg{
+        font-size: 1.0rem;
+    }
+}
+
+@media (max-width:550px) {
+    .tabla-planes{
+        width: 95vw;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .tabla-planes thead th {
+        font-size: .9rem;
+    }
+    .tabla-planes tbody td {
+        font-size: .8rem;
+    }
+  }

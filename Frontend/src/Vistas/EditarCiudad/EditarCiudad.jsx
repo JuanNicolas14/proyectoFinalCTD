@@ -84,6 +84,11 @@ const EditarCiudad = () => {
           });
         } else {
           // Ocurrió un error al enviar los datos
+          Swal.fire({
+            icon: "error",
+            title: "Error al actualizar la ciudad",
+            text: "Por favor, inténtalo nuevamente",
+          });
           console.error('Error al enviar los datos');
         }
       } catch (error) {
@@ -95,17 +100,17 @@ const EditarCiudad = () => {
 
 
   return (
-    <main className="form-add-rol">
+    <main className="editar-ciudad">
         {user.rol == "ADMIN" || user.permisos.includes("GESTIÓN CIUDAD")
         ? (
-          <section className="form-rol">
+          <section className="form-editar-ciudad">
             <h2>Editar Ciudad</h2>
 
             <form onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="nombre">Nombre:</label>
                 <input
-                className='nombre-rol'
+                className='nombre-ciudad'
                 type="text"
                 id="nombre"
                 value={ciudadEncontrada?.nombreCiudad}

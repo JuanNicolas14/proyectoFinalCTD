@@ -83,11 +83,67 @@ public class PlanController {
      * @return Lista de planes
      */
     @GetMapping
-    public List<Plan> listarPlanes () {
+    public ResponseEntity<List<Plan>> listarPlanes () {
         this.logger.info("Listando planes");
         List<Plan> planes = planService.buscarTodosPlanes();
         this.logger.info("Se encontraron " + planes.size() + " planes");
-        return planes;
+        return ResponseEntity.ok(planes);
+    }
+
+    /**
+     * Endpoint para listar plan por id
+     * @return Plan encontrado
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<Plan> listarPlanPorId (@PathVariable Long id) throws ResourceNotFoundException{
+        this.logger.info("Buscando Plan con id: " + id);
+        Plan planBuscado = planService.buscarPlan(id);
+        if (planBuscado== null) {
+            this.logger.warning("No se encontró el plan con id: " + id);
+            throw new ResourceNotFoundException("No se encontró el plan con id: " + id);
+        }
+        this.logger.info("Se encontró el plan: " + planBuscado);
+        return ResponseEntity.ok(planBuscado);
+    }
+
+    /**
+     * Endpoint para actualizar un plan
+     * @param planFormData objeto con los datos del plan
+     * @return ResponseEntity con el plan actualizado
+     */
+    @PutMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, path = "/actualizar/{id}")
+    public ResponseEntity<Plan> actualizarPlan(@PathVariable Long id, @ModelAttribute PlanFormData planFormData) {
+        this.logger.info("Actualizando plan con id: " + id);
+
+        // Verificar si el plan existe antes de actualizarlo
+        Plan planExistente = planService.buscarPlan(id);
+        if (planExistente == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        // Actualizar los datos del plan
+        planExistente.setNombre(planFormData.getNombre());
+        planExistente.setDescripcion(planFormData.getDescripcionPlan());
+
+        // Subir la nueva imagen solo si se proporciona una
+        if (planFormData.getImagenPlan() != null) {
+            String imagenUrl = null;
+            try {
+                File file = File.createTempFile("temp", null);
+                planFormData.getImagenPlan().transferTo(file);
+                clienteS3.putObject(bucketName, planFormData.getImagenPlan().getOriginalFilename(), file);
+                imagenUrl = "https://" + bucketName + ".s3." + region + ".amazonaws.com/" + planFormData.getImagenPlan().getOriginalFilename();
+                planExistente.setImagen(imagenUrl);
+            } catch (Exception e) {
+                this.logger.warning("Error al subir la nueva imagen: " + e.getMessage());
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+        }
+
+        // Guardar los cambios actualizados
+        Plan planActualizado = planService.actualizarPlan(planExistente);
+
+        return new ResponseEntity<>(planActualizado, HttpStatus.OK);
     }
 
     /**

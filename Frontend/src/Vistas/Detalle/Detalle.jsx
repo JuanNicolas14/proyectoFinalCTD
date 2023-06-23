@@ -96,9 +96,9 @@ const Detalle = () => {
       const a =
         Math.sin(diferenciaLatitud / 2) * Math.sin(diferenciaLatitud / 2) +
         Math.cos(latitud1) *
-          Math.cos(latitud2) *
-          Math.sin(diferenciaLongitud / 2) *
-          Math.sin(diferenciaLongitud / 2);
+        Math.cos(latitud2) *
+        Math.sin(diferenciaLongitud / 2) *
+        Math.sin(diferenciaLongitud / 2);
       const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
       const distancia = radioTierra * c;
 
@@ -220,9 +220,9 @@ const Detalle = () => {
   };
 
   const handleReserva = () => {
-    if(user?.nombre.length > 1){
+    if (user?.nombre.length > 1) {
       navigate('/reserva')
-    }else{
+    } else {
       Swal.fire(
         {
           title: 'No tienes permiso.',
@@ -235,7 +235,7 @@ const Detalle = () => {
           cancelButtonText: "Cancelar"
         }
       ).then((result) => {
-        if(result.isConfirmed){
+        if (result.isConfirmed) {
           navigate('/login')
         }
       })
@@ -386,11 +386,11 @@ const Detalle = () => {
               <button onClick={getUserLocation}>Obtener ubicación del usuario</button>
             </div> */}
             <section>
-            <MapsDistancia 
-            userLocation={userLocation} 
-            restauranteLocation={restauranteLocation}
-            nombreRestaurante={restaurante.nombre} 
-            />
+              <MapsDistancia
+                userLocation={userLocation}
+                restauranteLocation={restauranteLocation}
+                nombreRestaurante={restaurante.nombre}
+              />
             </section>
 
             <section className="producto-plan">
@@ -464,17 +464,12 @@ const Detalle = () => {
                     </label>
                     <select
                       id="hora"
-                      value={reserva.hora}
+                      value={restaurante?.horaApertura}
                       onChange={(e) =>
                         setReserva({ ...reserva, hora: e.target.value })
                       }
                     >
-                      <option value="">Seleccionar hora</option>
-                      <option value="12:00">12:00</option>
-                      <option value="12:30">12:30</option>
-                      <option value="13:00">13:00</option>
-                      <option value="13:30">13:30</option>
-                      <option value="14:00">14:00</option>
+                      <option value={restaurante?.horaApertura}>{restaurante?.horaApertura}</option>
                     </select>
                   </div>
                 </div>
