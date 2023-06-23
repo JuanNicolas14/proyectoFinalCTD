@@ -81,7 +81,6 @@ public class Restaurante {
                 ", precio=" + precio +
                 ", domicilio=" + domicilio +
                 ", plan=" + plan +
-                ", puntuaciones=" + puntuaciones +
                 ", puntuacionPromedio=" + puntuacionPromedio +
                 ", numeroValoraciones=" + numeroValoraciones +
                 ", reglas='" + reglas + '\'' +

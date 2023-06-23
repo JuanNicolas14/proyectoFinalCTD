@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -53,6 +54,11 @@ public class ReservaController {
         this.restauranteService = restauranteService;
     }
 
+    /**
+     *Endpoint para registrar una reserva
+     * @param reservaForm Formulario con los datos de la reserva
+     * @return ResponseEntity con informacion de la reserva registrada
+     */
     @PostMapping("/registrar")
     public ResponseEntity<ReservaDTO> registrarReserva(@ModelAttribute ReservaForm reservaForm) throws Exception {
         this.logger.info("Registrando reserva" + reservaForm.toString());
@@ -91,7 +97,29 @@ public class ReservaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(reservaGuardada);
     }
 
-        /**
+    /**
+     * Endpoint para listar las reservas de un usuario
+     * @param usuarioId Id del usuario
+     * @return ResponseEntity con la lista de reservas del usuario
+     */
+    @GetMapping("/buscar/{usuarioId}")
+    public ResponseEntity<List<ReservaDTO>> buscarReservasUsuario(@PathVariable Long usuarioId) throws Exception {
+        this.logger.info("Buscando reservas del usuario con id " + usuarioId);
+
+        Optional<Usuario> usuario = usuarioService.findById(usuarioId);
+        if (usuario.isEmpty()) {
+            this.logger.warning("No existe el usuario con id " + usuarioId);
+            throw new ResourceNotFoundException("No existe el usuario con id " + usuarioId);
+        }
+
+        List<ReservaDTO> reservas = reservaService.findByUserId(usuarioId);
+        this.logger.info("Reservas encontradas: " + reservas.size());
+
+        return ResponseEntity.ok(reservas);
+    }
+
+
+    /**
      * Maneja la excepción SQLException y retorna un ResponseEntity con el mensaje de error
      * @param exc instancia de SQLException
      * @return ResponseEntity con el mensaje de error
@@ -138,6 +166,7 @@ public class ReservaController {
      */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleException(Exception exc) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exc.getMessage());
+        exc.printStackTrace();
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ha ocurrido un error inesperado!");
     }
 }

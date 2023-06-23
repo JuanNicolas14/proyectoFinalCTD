@@ -6,6 +6,8 @@ import com.example.Backend.repository.ReservaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 @Service
@@ -23,6 +25,16 @@ public class ReservaService {
     public ReservaDTO guardarReserva(Reserva reserva) {
         Reserva reservaGuardada = reservaRepository.save(reserva);
         return convertirReservaAReservaDTO(reservaGuardada);
+    }
+
+    public List<ReservaDTO> findByUserId(Long id) {
+        List<Reserva> reservas = reservaRepository.findByUsuarioId(id);
+        List<ReservaDTO> reservasDTO = new ArrayList<>();
+        for (Reserva reserva : reservas) {
+            reservasDTO.add(convertirReservaAReservaDTO(reserva));
+        }
+
+        return reservasDTO;
     }
 
     private ReservaDTO convertirReservaAReservaDTO(Reserva reserva) {
