@@ -133,6 +133,10 @@ public class UsuarioService implements UserDetailsService {
         }
     }
 
+    public Optional<Usuario> findById(Long id) {
+        return usuarioRepository.findById(id);
+    }
+
 
     private Usuario convertirUsuarioDTOaUsuario(UsuarioDTO usuarioDTO){
         Usuario usuario = new Usuario();
