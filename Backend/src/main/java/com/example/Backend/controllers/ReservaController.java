@@ -58,19 +58,19 @@ public class ReservaController {
         this.logger.info("Registrando reserva" + reservaForm.toString());
 
         Optional<Ciudad> ciudad = ciudadService.buscarCiudad(reservaForm.getCiudadId());
-        if (!ciudad.isPresent()) {
+        if (ciudad.isEmpty()) {
             this.logger.warning("No existe la ciudad con id " + reservaForm.getCiudadId());
             throw new ResourceNotFoundException("No existe la ciudad con id " + reservaForm.getCiudadId());
         }
 
         Optional<Usuario> usuario = usuarioService.findById(reservaForm.getUsuarioId());
-        if (!usuario.isPresent()) {
+        if (usuario.isEmpty()) {
             this.logger.warning("No existe el usuario con id " + reservaForm.getUsuarioId());
             throw new ResourceNotFoundException("No existe el usuario con id " + reservaForm.getUsuarioId());
         }
 
         Optional<Restaurante> restaurante = restauranteService.findById(reservaForm.getRestauranteId());
-        if (!restaurante.isPresent()) {
+        if (restaurante.isEmpty()) {
             this.logger.warning("No existe el restaurante con id " + reservaForm.getRestauranteId());
             throw new ResourceNotFoundException("No existe el restaurante con id " + reservaForm.getRestauranteId());
         }
@@ -86,6 +86,7 @@ public class ReservaController {
         ));
 
         // TODO: Enviar correo de registro de reserva
+        mailService.enviarCorreoReserva(usuario.get().getEmail(), reservaGuardada);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(reservaGuardada);
     }
@@ -128,5 +129,15 @@ public class ReservaController {
     @ExceptionHandler(IOException.class)
     public ResponseEntity<String> handleIOException(String exc) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exc);
+    }
+
+    /**
+     * Maneja excepciones no controladas y retorna un ResponseEntity con el mensaje de error
+     * @param exc Mensaje de la excepción
+     * @return ResponseEntity con el mensaje de error
+     */
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleException(Exception exc) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exc.getMessage());
     }
 }
