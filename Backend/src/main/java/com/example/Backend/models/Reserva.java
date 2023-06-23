@@ -45,6 +45,10 @@ public class Reserva {
         this.ciudad = ciudad;
     }
 
+    public Reserva() {
+        super();
+    }
+
     public Long getId() {
         return id;
     }
