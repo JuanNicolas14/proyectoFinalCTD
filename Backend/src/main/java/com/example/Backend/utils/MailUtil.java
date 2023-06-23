@@ -6,6 +6,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Value;
 
+import com.example.Backend.dto.ReservaDTO;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
@@ -65,6 +67,44 @@ public class MailUtil {
             throw new IOException("No se ha encontrado el elemento con id main-title");
         }
         mainTitle.after("<h2 style='font-size: 30px'>¡Hola " + user + "!</h2>");
+
+        return doc.toString();
+    }
+
+    /**
+     * Metodo que genera el correo de registro de registro de reserva
+     * 
+     * @param reserva Reserva que se ha registrado
+     * @return Cuerpo del correo de registro de reserva
+     */
+    public String correoReserva(ReservaDTO reserva) throws Exception {
+        String template = new String(classLoader.getResourceAsStream("templates/reserva.html").readAllBytes(),
+                StandardCharsets.UTF_8);
+        Document doc = Jsoup.parse(template, "UTF-8");
+
+        Element restaurante = doc.getElementById("restaurante");
+        restaurante.after("<p>" + reserva.getNombreRestaurante() + "</p>");
+
+        Element plan = doc.getElementById("plan");
+        plan.after("<p>" + reserva.getNombrePlan() + "</p>");
+
+        Element precio = doc.getElementById("precio");
+        precio.after("<p>" + reserva.getPrecio() + "</p>");
+
+        Element fechaInicio = doc.getElementById("fecha-inicio");
+        fechaInicio.after("<p>" + reserva.getFechaInicio() + "</p>");
+
+        Element fechaFinalizacion = doc.getElementById("fecha-finalizacion");
+        fechaFinalizacion.after("<p>" + reserva.getFechaFinalizacion() + "</p>");
+
+        Element horaEntrega = doc.getElementById("hora-entrega");
+        horaEntrega.after("<p>" + reserva.getHoraEntrega() + "</p>");
+
+        Element direccionEntrega = doc.getElementById("direccion-entrega");
+        direccionEntrega.after("<p>" + reserva.getDireccionEntrega() + "</p>");
+
+        Element ciudad = doc.getElementById("ciudad");
+        ciudad.after("<p>" + reserva.getNombreCiudad() + "</p>");
 
         return doc.toString();
     }

@@ -2,6 +2,7 @@ package com.example.Backend.service;
 
 import java.util.logging.Logger;
 
+import com.example.Backend.dto.ReservaDTO;
 import com.example.Backend.dto.UsuarioDTO;
 import com.example.Backend.enums.MailEnum;
 import com.example.Backend.utils.MailUtil;
@@ -65,6 +66,7 @@ public class MailService {
      * @param usuarioDTO Usuario al que se le enviará el correo
      * @throws Exception Excepción en caso de que no se pueda enviar el correo
      */
+    @Async
     public void enviarCorreoValidacion(UsuarioDTO usuarioDTO) throws Exception {
         String url = frontendUrl + "usuario/validar/" + usuarioDTO.getId();
         String body = mailUtil.correoValidacion(url, usuarioDTO.getNombre() + " " + usuarioDTO.getApellido());
@@ -76,8 +78,22 @@ public class MailService {
      * @param usuarioDTO Usuario al que se le enviará el correo
      * @throws Exception Excepción en caso de que no se pueda enviar el correo
      */
+    @Async
     public void enviarCorreoBienvenida(UsuarioDTO usuarioDTO) throws Exception {
         String body = mailUtil.correoBienvenida(usuarioDTO.getNombre() + " " + usuarioDTO.getApellido());
         sendMail(usuarioDTO.getEmail(), MailEnum.BIENVENIDA.toString(), body);
+    }
+
+    /**
+     * Envia correo de registro de reserva
+     * 
+     * @param reserva Informacion de la reserva
+     * @param email Email del usuario al que se le enviará el correo
+     * @throws Exception Excepción en caso de que no se pueda enviar el correo
+     */
+    @Async
+    public void enviarCorreoReserva(String email, ReservaDTO reserva) throws Exception {
+        String body = mailUtil.correoReserva(reserva);
+        sendMail(email, MailEnum.RESERVA.toString(), body);
     }
 }

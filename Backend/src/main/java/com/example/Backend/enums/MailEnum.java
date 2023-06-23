@@ -5,7 +5,8 @@ package com.example.Backend.enums;
  */
 public enum MailEnum {
     VALIDACION_CUENTA("Validación de cuenta"),
-    BIENVENIDA("Bienvenido a la aplicación");
+    BIENVENIDA("Bienvenido a la aplicación"),
+    RESERVA("Reserva realizada");
 
     private final String asunto;
 
