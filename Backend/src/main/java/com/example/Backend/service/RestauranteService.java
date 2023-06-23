@@ -145,4 +145,8 @@ public class RestauranteService {
 
         return restaurantesDTO;
     }
+
+    public Optional<Restaurante> findById(Long id) {
+        return restauranteRepository.findById(id);
+    }
 }
