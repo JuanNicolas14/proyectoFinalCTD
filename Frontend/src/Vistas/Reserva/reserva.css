@@ -3,12 +3,13 @@
     flex-wrap: wrap;
     justify-content: center;
 }
-.reserva h2 {
+.reserva h2, .reserva h3 {
     width: 100%;
     text-align: center;
 }
+
 .reserva div, .reserva .detalle-reserva {
-    margin: 0 10px;
+    margin: 10px;
 }
 .reserva-imagenes {
     height: 200px;
@@ -50,7 +51,10 @@ form.detalle-reserva {
     max-height: 530px;
 }
 .reserva-restaurante .reserva-imagenes {
-    margin-bottom: 30px;
+    margin: 0 auto 30px;
+}
+.reserva-imagenes .imagenes-container {
+    margin: 0;
 }
 
 .reserva-restaurante p {
@@ -64,8 +68,9 @@ form.detalle-reserva {
     box-sizing: border-box;
     padding: 10px;
     border: 2px solid rgba(255, 69, 0, 0.25);
-    height: 380px;
+    height: auto;
     margin-bottom: 20%;
+    text-align: center;
 }
 
 .reserva .detalle-reserva fieldset {
@@ -74,6 +79,119 @@ form.detalle-reserva {
 .reserva .detalle-reserva legend {
     font-weight: bold;
 }
+.reserva fieldset .info {
+    margin: 5px auto;
+    color: gray;
+    font-size: .7rem;
+}
 .reserva .detalle-reserva input {
     padding: 5px;
 }
+.reserva .detalle-reserva button {
+    margin: 10px auto;
+    width: 60%;
+    background-color: var(--main-color);
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+    transition: all .5s ease;
+}
+.reserva .detalle-reserva button:hover {
+    background-color: #be3535;
+}
+
+@media (max-width: 840px) {
+    .reserva div, .reserva form {
+        width: 80%;
+    }
+    .reserva form .datepickers {
+        margin: 0 auto;
+    }
+    .reserva .reserva-user {
+        height: auto;
+    }
+    .reserva-restaurante .restaurante-container {
+        display: flex;
+        height: 270px;
+    }
+    .reserva-restaurante .reserva-imagenes {
+        width: 80%;
+    }
+    .reserva-restaurante .restaurante-info {
+        margin: 0 auto;
+    }
+    .reserva-imagenes .contenedor .flechas div{
+        margin: 60px 1px;
+        width: 10px;
+    }
+    .reserva-imagenes .contenedor .puntos {
+        text-align: center;
+    }
+
+    .reserva .reserva-user .user-container {
+        margin: 0 auto;
+        text-align: center;
+    }
+}
+
+@media (max-width:480px) {
+    .reserva div {
+        width: 80%;
+    }
+    .reserva .reserva-user .user-container {
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .reserva-restaurante .restaurante-container {
+        justify-content: space-around;
+    }
+    .reserva-restaurante .reserva-imagenes {
+        width: 100%;
+    }
+    .reserva-restaurante .restaurante-info {
+        width: 100%;
+    }
+    .reserva-restaurante .restaurante-info p {
+        margin: 8px;
+        width: 100%;
+    }
+    .reserva-restaurante h3 {
+        margin: 10px auto;
+    }
+    .reserva-imagenes .contenedor .flechas div{
+        display: flex;
+        justify-content: center;
+        margin: 60px auto;
+        width: 5px;
+    } 
+    .reserva-imagenes .puntos {
+        display: flex;
+        text-align: center;
+    }
+
+}
+
+@media (max-width:400px) {
+    
+    .reserva-restaurante .restaurante-container {
+        flex-direction: column-reverse;
+        justify-content: flex-end;
+        height: 100%;
+        margin: 0;
+    }
+    .reserva-restaurante .restaurante-container .reserva-imagenes {
+        margin: 0 30px 50px;
+        width: 100%;
+    }
+    .reserva-imagenes .contenedor {
+        margin: 10px;
+    }
+    .reserva-imagenes .contenedor .flechas div {
+        margin: 10px;
+        width: 5px;
+    }
+    
+}
+    

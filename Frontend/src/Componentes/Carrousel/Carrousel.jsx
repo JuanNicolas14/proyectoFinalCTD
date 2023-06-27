@@ -77,7 +77,7 @@ const Carrousel = ({imagenes}) => {
     return (
                    
         <div className='contenedor' style={sliderStyles}>
-            <div>
+            <div className='flechas'>
                 <div onClick={goToPrevious} style={leftArrowStyles}>
                 ❰
                 </div>
@@ -85,8 +85,8 @@ const Carrousel = ({imagenes}) => {
                 ❱
                 </div>
             </div>
-            <div style={slideStylesWidthBackground}></div>
-            <div style={dotsContainerStyles}>
+            <div className='imagenes-container' style={slideStylesWidthBackground}></div>
+            <div className='puntos' style={dotsContainerStyles}>
                 {imagenes.map((imagen, slideIndex) => (
                 <div
                     style={dotStyle}

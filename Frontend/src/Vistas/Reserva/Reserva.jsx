@@ -26,6 +26,7 @@ const Reserva = () => {
       ? JSON.parse(localStorage.getItem('fechas')).hora : '',
     direccion: '',
     ciudadNumero: 0,
+    telefonoUser: ''
   });
   const [restauranteReserva, setRestauranteReserva] = useState({})
 
@@ -90,7 +91,10 @@ const Reserva = () => {
 
   const handleReserva = (e) => {
     e.preventDefault()
-    if (reservaFinal?.direccion != '' || reservaFinal?.horaEntrega != '' || reservaFinal?.ciudadNumero != 0) {
+    if (reservaFinal?.direccion != '' 
+        && reservaFinal?.horaEntrega != '' 
+        && reservaFinal?.ciudadNumero != 0
+        && reservaFinal?.telefonoUser != '') {
       const formDataReserva = new FormData()
       formDataReserva.append('horaEntrega', reservaFinal.hora)
       formDataReserva.append('fechaInicio', reservaFinal.fechaInicioReserva)
@@ -99,6 +103,7 @@ const Reserva = () => {
       formDataReserva.append('usuarioId', user.id)
       formDataReserva.append('ciudadId', reservaFinal.ciudadNumero)
       formDataReserva.append('restauranteId', restauranteContext.id)
+      formDataReserva.append('telefonoUsuario', reservaFinal.telefonoUser)
       // Realiza la petición Fetch
       fetch(urlReserva, {
         method: 'POST',
@@ -111,30 +116,17 @@ const Reserva = () => {
         .then(data => {
           // Maneja la respuesta del servidor
           console.log(data);
-          Swal.fire(
-            {
-              title: 'Reserva Realizada',
-              text: `La reserva se ha guardado con exito.`,
-              icon: 'success',
-              showCancelButton: false,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              confirmButtonText: 'Aceptar',
-            }
-          ).then((result) => {
-            if (result.isConfirmed) {
-              setReservaFinal({
-                fechaInicioReserva: '',
-                fechaFinal: '',
-                hora: '',
-                direccion: '',
-                ciudadNumero: 0,
-              })
-              localStorage.removeItem('fechas')
-              localStorage.removeItem('restaurante')
-              navigate('/')
-            }
+          setReservaFinal({
+            fechaInicioReserva: '',
+            fechaFinal: '',
+            hora: '',
+            direccion: '',
+            ciudadNumero: 0,
+            telefonoUser: ''
           })
+          localStorage.removeItem('fechas')
+          localStorage.removeItem('restaurante')
+          navigate('/reserva/exito')
         })
         .catch(error => {
           // Maneja cualquier error ocurrido durante la petición
@@ -159,7 +151,7 @@ const Reserva = () => {
       <h2>RESERVA</h2>
       <div className='reserva-user'>
         <h3>Detalles del Usuario</h3>
-        <div>
+        <div className='user-container'>
           <div className='reserva-avatar'>
             <span>{user.nombre[0]}{user.apellido[0]}</span>
           </div>
@@ -181,7 +173,7 @@ const Reserva = () => {
       {restauranteReserva &&
         <div className='reserva-restaurante'>
           <h3>Detalles del Restaurante</h3>
-          <div>
+          <div className='restaurante-container'>
             <div className='reserva-imagenes'>
               {restauranteReserva?.imagenes &&
                 <Carrousel
@@ -190,22 +182,24 @@ const Reserva = () => {
               }
 
             </div>
-            <p>
-              Nombre: <span>{restauranteReserva?.nombre}</span>
-            </p>
-            <p>
-              Ubicación: <span>{restauranteReserva?.ciudad}, {restauranteReserva?.pais}</span>
-            </p>
-            <p>Descripción: <span>{restauranteReserva?.descripcion}</span></p>
-            <p>
-              Plan: <span>{restauranteReserva?.plan}</span>
-            </p>
-            <p>
-              Valor: <span>${restauranteReserva?.precio}</span>
-            </p>
-            <p>
-              Puntuación: <span>{restauranteReserva?.puntuacionPromedio}</span>
-            </p>
+            <div className='restaurante-info'>
+              <p>
+                Nombre: <span>{restauranteReserva?.nombre}</span>
+              </p>
+              <p>
+                Ubicación: <span>{restauranteReserva?.ciudad}, {restauranteReserva?.pais}</span>
+              </p>
+              <p>Descripción: <span>{restauranteReserva?.descripcion}</span></p>
+              <p>
+                Plan: <span>{restauranteReserva?.plan}</span>
+              </p>
+              <p>
+                Valor: <span>${restauranteReserva?.precio}</span>
+              </p>
+              <p>
+                Puntuación: <span>{restauranteReserva?.puntuacionPromedio}</span>
+              </p>
+            </div>
           </div>
         </div>
       }
@@ -246,11 +240,22 @@ const Reserva = () => {
         </fieldset>
         <fieldset className="tipo-plan">
           <legend htmlFor="direccion">Dirección de entrega</legend>
+          <p className='info'>A donde llevaremos tu almuerzo ?</p>
           <input
             id='direccion'
             type="text"
             placeholder='Digita tu dirección'
             onChange={(e) => setReservaFinal({ ...reservaFinal, direccion: e.target.value })}
+          />
+        </fieldset>
+        <fieldset className="tipo-plan">
+          <legend htmlFor="telefonoUser">Telefono</legend>
+          <p className='info'>Necesitamos contactarte en caso de alguna eventualidad</p>
+          <input
+            id='telefonoUser'
+            type="text"
+            placeholder='Digita tu telefono'
+            onChange={(e) => setReservaFinal({ ...reservaFinal, telefonoUser: e.target.value })}
           />
         </fieldset>
         <button type='submit'>Reservar</button>

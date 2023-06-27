@@ -88,7 +88,9 @@ public class ReservaController {
             usuario.get(),
             restaurante.get(),
             reservaForm.getDireccionEntrega(),
-            ciudad.get()
+            ciudad.get(),
+            reservaForm.getTelefonoUsuario()
+
         ));
 
         // TODO: Enviar correo de registro de reserva

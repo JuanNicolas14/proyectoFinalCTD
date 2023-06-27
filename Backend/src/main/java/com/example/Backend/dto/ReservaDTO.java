@@ -11,6 +11,7 @@ public class ReservaDTO {
     private String nombreCiudad;
     private String horaEntrega;
     private double precio;
+    private String telefonoUsuario;
 
     public ReservaDTO(
         String nombreRestaurante,
@@ -20,7 +21,8 @@ public class ReservaDTO {
         String direccionEntrega,
         String nombreCiudad,
         String horaEntrega,
-        double precio
+        double precio,
+        String telefonoUsuario
     ) {
         this.nombreRestaurante = nombreRestaurante;
         this.nombrePlan = nombrePlan;
@@ -30,6 +32,7 @@ public class ReservaDTO {
         this.nombreCiudad = nombreCiudad;
         this.horaEntrega = horaEntrega;
         this.precio = precio;
+        this.telefonoUsuario = telefonoUsuario;
     }
 
     public ReservaDTO() {
@@ -99,6 +102,14 @@ public class ReservaDTO {
         this.precio = precio;
     }
 
+    public String getTelefonoUsuario() {
+        return telefonoUsuario;
+    }
+
+    public void setTelefonoUsuario(String telefonoUsuario) {
+        this.telefonoUsuario = telefonoUsuario;
+    }
+
     @Override
     public String toString() {
         return "ReservaDTO{" +
@@ -108,7 +119,7 @@ public class ReservaDTO {
             ", fechaFinalizacion=" + fechaFinalizacion +
             ", direccionEntrega='" + direccionEntrega + '\'' +
             ", nombreCiudad='" + nombreCiudad + '\'' +
-            ", horaEntrega='" + horaEntrega + '\'' +
+            ", horaEntrega='" + horaEntrega + '\'' + ", telefonoUsuario='" + telefonoUsuario + '\'' +
             '}';
     }
 }

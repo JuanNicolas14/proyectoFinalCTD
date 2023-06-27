@@ -48,6 +48,7 @@ public class ReservaService {
         reservaDTO.setNombreCiudad(reserva.getCiudad().getNombreCiudad());
         reservaDTO.setHoraEntrega(reserva.getHoraEntrega());
         reservaDTO.setPrecio(reserva.getRestaurante().getPrecio());
+        reservaDTO.setTelefonoUsuario(reserva.getTelefonoUsuario());
 
         return reservaDTO;
     }
