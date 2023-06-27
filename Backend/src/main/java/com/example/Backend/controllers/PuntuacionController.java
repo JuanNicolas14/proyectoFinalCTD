@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -55,6 +56,20 @@ public class PuntuacionController {
         List<PuntuacionDTO> puntuaciones = puntuacionService.buscarTodasPuntuaciones();
         this.logger.info("Se encontraron " + puntuaciones.size() + " puntuaciones");
         return ResponseEntity.ok(puntuaciones);
+    }
+
+    @GetMapping("/restaurante/{id}")
+    public ResponseEntity<List<PuntuacionDTO>> buscarPuntuacionesPorRestauranteId(@PathVariable Long id) throws ResourceNotFoundException {
+        List<PuntuacionDTO> todasLasPuntuaciones = puntuacionService.buscarTodasPuntuaciones();
+        List<PuntuacionDTO> puntuacionesRestauranteBuscado = new ArrayList<>();
+
+        for (PuntuacionDTO puntuacionEncontrada : todasLasPuntuaciones) {
+            if (puntuacionEncontrada.getRestaurante_id().equals(id)){
+                puntuacionesRestauranteBuscado.add(puntuacionEncontrada);
+            }
+        }
+        this.logger.info("Se encontraron " + puntuacionesRestauranteBuscado.size() + " puntuaciones para el restaurante");
+        return ResponseEntity.ok(puntuacionesRestauranteBuscado);
     }
 
 }
