@@ -8,6 +8,10 @@ public class PuntuacionDTO {
 
     private Long usuario_id;
 
+    private String comentario;
+
+    private String nombreCompleto;
+
     public PuntuacionDTO() {
     }
 
@@ -43,6 +47,22 @@ public class PuntuacionDTO {
         this.usuario_id = usuario_id;
     }
 
+    public String getNombreCompleto() {
+        return nombreCompleto;
+    }
+
+    public void setNombreCompleto(String nombreCompleto) {
+        this.nombreCompleto = nombreCompleto;
+    }
+
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
+
     @Override
     public String toString() {
         return "CalificacionDTO{" +
@@ -50,6 +70,8 @@ public class PuntuacionDTO {
                 ", puntuacion=" + puntuacion +
                 ", restaurante_id=" + restaurante_id +
                 ", usuario_id=" + usuario_id +
+                ", comentario=" + comentario +
+                ", nombreCompleto=" + nombreCompleto +
                 '}';
     }
 }
