@@ -23,6 +23,9 @@ public class Reserva {
     @Column
     private String direccionEntrega;
 
+    @Column
+    private String telefonoUsuario;
+
     @ManyToOne
     @JoinColumn(name = "ciudad_id", referencedColumnName = "id")
     private Ciudad ciudad;
@@ -35,7 +38,7 @@ public class Reserva {
     @JoinColumn(name = "restaurante_id" ,referencedColumnName = "id")
     private Restaurante restaurante;
 
-    public Reserva(String horaEntrega, Date fechaInicio, Date fechaFinalizacion, Usuario usuario, Restaurante restaurante, String direccionEntrega, Ciudad ciudad) {
+    public Reserva(String horaEntrega, Date fechaInicio, Date fechaFinalizacion, Usuario usuario, Restaurante restaurante, String direccionEntrega,Ciudad ciudad, String telefonoUsuario) {
         this.horaEntrega = horaEntrega;
         this.fechaInicio = fechaInicio;
         this.fechaFinalizacion = fechaFinalizacion;
@@ -43,6 +46,7 @@ public class Reserva {
         this.restaurante = restaurante;
         this.direccionEntrega = direccionEntrega;
         this.ciudad = ciudad;
+        this.telefonoUsuario = telefonoUsuario;
     }
 
     public Reserva() {
@@ -113,6 +117,14 @@ public class Reserva {
         this.ciudad = ciudad;
     }
 
+    public String getTelefonoUsuario() {
+        return telefonoUsuario;
+    }
+
+    public void setTelefonoUsuario(String telefonoUsuario) {
+        this.telefonoUsuario = telefonoUsuario;
+    }
+
     @Override
     public String toString() {
         return "Reserva{" +
@@ -123,6 +135,7 @@ public class Reserva {
                 ", direccionEntrega='" + direccionEntrega + '\'' +
                 ", usuario=" + usuario +
                 ", restaurante=" + restaurante +
+                ", telefonoUsuario=" + telefonoUsuario +
                 '}';
     }
 }

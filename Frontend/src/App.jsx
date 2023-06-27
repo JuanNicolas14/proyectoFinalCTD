@@ -30,6 +30,7 @@ import Reserva from './Vistas/Reserva/Reserva'
 import GestionPlan from './Vistas/GestionPlan/GestionPlan'
 import EditarPlan from './Vistas/EditarPlan/EditarPlan'
 import ReservaContextProvider from './utils/ReservaContext'
+import ReservaExitosa from './Vistas/ReservaExitosa/ReservaExitosa'
 
 function App() {
   return (
@@ -75,6 +76,7 @@ function App() {
           <Route path="/administracion/gestionPlan" element={<GestionPlan/>}/>
           <Route path='/administracion/editarPlan/:id' element={<EditarPlan/>}/>
           <Route path='/reserva' element={<Reserva />} />
+          <Route path='/reserva/exito' element={<ReservaExitosa/>} />
         </Routes>
         <Footer />
       </FilterContextProvider>

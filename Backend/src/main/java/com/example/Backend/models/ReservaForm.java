@@ -11,7 +11,9 @@ public class ReservaForm {
     private Long restauranteId;
     private Long ciudadId;
 
-    public ReservaForm(String horaEntrega, Date fechaInicio, Date fechaFinalizacion, String direccionEntrega, Long usuarioId, Long restauranteId, Long ciudadId) {
+    private String telefonoUsuario;
+
+    public ReservaForm(String horaEntrega, Date fechaInicio, Date fechaFinalizacion, String direccionEntrega, Long usuarioId, Long restauranteId, Long ciudadId, String telefonoUsuario) {
         this.horaEntrega = horaEntrega;
         this.fechaInicio = fechaInicio;
         this.fechaFinalizacion = fechaFinalizacion;
@@ -19,6 +21,7 @@ public class ReservaForm {
         this.usuarioId = usuarioId;
         this.restauranteId = restauranteId;
         this.ciudadId = ciudadId;
+        this.telefonoUsuario = telefonoUsuario;
     }
 
     public String getHoraEntrega() {
@@ -77,6 +80,14 @@ public class ReservaForm {
         this.ciudadId = ciudad;
     }
 
+    public String getTelefonoUsuario() {
+        return telefonoUsuario;
+    }
+
+    public void setTelefonoUsuario(String telefonoUsuario) {
+        this.telefonoUsuario = telefonoUsuario;
+    }
+
     @Override
     public String toString() {
         return "ReservaForm{" +
@@ -87,6 +98,7 @@ public class ReservaForm {
                 ", usuarioId=" + usuarioId +
                 ", restauranteId=" + restauranteId +
                 ", ciudadId=" + ciudadId +
+                ", telefonoUsuario=" + telefonoUsuario +
                 '}';
     }
 }
