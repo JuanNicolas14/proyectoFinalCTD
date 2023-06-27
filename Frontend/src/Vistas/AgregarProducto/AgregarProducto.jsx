@@ -110,7 +110,7 @@ const AgregarProducto = () => {
         const ciudades = await fetchCiudades.json();
         setCiudadesdb(ciudades)
 
-        //Realiza la tercer peticion de las ciudades
+        //Realiza la cuarta peticion de los paises
         const fetchPaises = await fetch(urlPaises)
         const paises = await fetchPaises.json();
         setPaisesdb(paises)
