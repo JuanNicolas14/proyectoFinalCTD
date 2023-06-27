@@ -80,6 +80,7 @@ public class PuntuacionService {
 
         puntuacion.setId(puntuacionDTO.getId());
         puntuacion.setPuntuacion(puntuacionDTO.getPuntuacion());
+        puntuacion.setComentario(puntuacionDTO.getComentario());
         Optional<Restaurante> restauranteBuscado = restauranteRepository.findById(puntuacionDTO.getRestaurante_id());
         Optional<Usuario> usuarioBuscado = usuarioRepository.findById(puntuacionDTO.getUsuario_id());
         puntuacion.setRestaurante(restauranteBuscado.get());
@@ -95,6 +96,9 @@ public class PuntuacionService {
         puntuacionDTO.setPuntuacion(puntuacion.getPuntuacion());
         puntuacionDTO.setRestaurante_id(puntuacion.getRestaurante().getId());
         puntuacionDTO.setUsuario_id(puntuacion.getUsuario().getId());
+        puntuacionDTO.setComentario(puntuacion.getComentario());
+        Optional<Usuario> usuarioBuscado = usuarioRepository.findById(puntuacion.getUsuario().getId());
+        puntuacionDTO.setNombreCompleto(usuarioBuscado.get().getNombre()+ " "+ usuarioBuscado.get().getApellido());
 
         return puntuacionDTO;
     }

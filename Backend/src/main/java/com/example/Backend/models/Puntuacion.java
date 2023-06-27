@@ -19,13 +19,17 @@ public class Puntuacion {
     @ManyToOne
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private Usuario usuario;
-    // Constructor
 
-    public Puntuacion(Long id, int puntuacion, Restaurante restaurante, Usuario usuario) {
+    @Column(name = "comentario")
+    private String comentario;
+
+    // Constructor
+    public Puntuacion(Long id, int puntuacion, Restaurante restaurante, Usuario usuario, String comentario) {
         this.id = id;
         this.puntuacion = puntuacion;
         this.restaurante = restaurante;
         this.usuario = usuario;
+        this.comentario = comentario;
     }
 
     public Puntuacion() {
@@ -65,6 +69,14 @@ public class Puntuacion {
         this.usuario = usuario;
     }
 
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
+
     @Override
     public String toString() {
         return "Calificacion{" +
@@ -72,6 +84,7 @@ public class Puntuacion {
                 ", puntuacion=" + puntuacion +
                 ", restaurante=" + restaurante +
                 ", usuario=" + usuario +
+                ", comentario=" + comentario +
                 '}';
     }
 }
