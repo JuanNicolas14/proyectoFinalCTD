@@ -29,10 +29,12 @@ import AgregarCiudad from './Vistas/AgregarCiudad/AgregarCiudad'
 import Reserva from './Vistas/Reserva/Reserva'
 import GestionPlan from './Vistas/GestionPlan/GestionPlan'
 import EditarPlan from './Vistas/EditarPlan/EditarPlan'
+import ReservaContextProvider from './utils/ReservaContext'
 
 function App() {
   return (
     <AuthContextProvider>
+    <ReservaContextProvider>
       <FilterContextProvider>
         <Header />
         <Routes>
@@ -76,6 +78,7 @@ function App() {
         </Routes>
         <Footer />
       </FilterContextProvider>
+      </ReservaContextProvider>
     </AuthContextProvider>
   );
 }

@@ -29,16 +29,18 @@ import WhatsappShareButton from '../../Componentes/Whatsapp/WhatsappShareButton'
 import TwitterShareButton from '../../Componentes/Twitter/TwitterShareButton'
 import Popup from '../../Componentes/Popup/Popup';
 import { red } from '@mui/material/colors'
+import { ReservaContext } from "../../utils/ReservaContext";
 
 const Detalle = () => {
   const [distanciaUser, setDistanciaUser] = useState(0);
   const navigate = useNavigate()
 
-  const { user, token } = useContext(AuthContext);
+  const { user, token} = useContext(AuthContext);
+  const { fechaInicio, fechaFinalizacion, horaEntrega, dispatchReserva, restauranteContext } = useContext(ReservaContext) 
   const [restaurante, setRestaurante] = useState({});
   const [reserva, setReserva] = useState({
-    fechaInicio: null,
-    fechaFinal: null,
+    fechaInicio: '',
+    fechaFinal: '',
     hora: "",
   });
   const [sliderShow, setShowSlider] = useState(false);
@@ -221,7 +223,40 @@ const Detalle = () => {
 
   const handleReserva = () => {
     if (user?.nombre.length > 1) {
-      navigate('/reserva')
+      if(reserva?.fechaFinal?.length > 1
+        && reserva?.fechaInicio?.length > 1
+        && reserva?.hora?.length > 1
+      ){
+        dispatchReserva({
+          type: "RESERVA",
+          payload: {
+            fechaInicio: reserva.fechaInicio,
+            fechaFinalizacion: reserva.fechaFinal,
+            horaEntrega: reserva.hora,
+            restauranteContext: restaurante
+          }
+        })
+        // Guardar un valor en el localStorage
+        localStorage.setItem('fechas', JSON.stringify({
+          fechaInicial: reserva.fechaInicio,
+          fechaFinal: reserva.fechaFinal,
+          hora: reserva.hora
+        }))
+        localStorage.setItem('restaurante', JSON.stringify(restaurante));
+        navigate('/reserva')
+      }else{
+        console.log("datos incompletos")
+        Swal.fire(
+          {
+            title: 'Datos incompletos.',
+            text: `Para realizar una reserva,  necesitas digitar fechas y hora.`,
+            icon: 'error',
+            showCancelButton: false,
+            cancelButtonColor: '#d33',
+            cancelButtonText: "Cancelar"
+          }
+        )
+      }      
     } else {
       Swal.fire(
         {
@@ -464,11 +499,12 @@ const Detalle = () => {
                     </label>
                     <select
                       id="hora"
-                      value={restaurante?.horaApertura}
+                      value={reserva?.hora}
                       onChange={(e) =>
                         setReserva({ ...reserva, hora: e.target.value })
                       }
                     >
+                      <option value="">--Escoge una hora--</option>
                       <option value={restaurante?.horaApertura}>{restaurante?.horaApertura}</option>
                     </select>
                   </div>
