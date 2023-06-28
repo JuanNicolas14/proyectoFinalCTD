@@ -32,6 +32,12 @@ const DetalleUser = () => {
                 <a href={`/favoritos/${user.id}`}>Ir a mis favoritos</a>
               </span>
             </p>
+            <p>
+              Historial de mis reservas:{" "}
+              <span>
+                <a href={`/reserva/historial`}>Ir a mi historial</a>
+              </span>
+            </p>
           </div>
         </section>
       ) : (
