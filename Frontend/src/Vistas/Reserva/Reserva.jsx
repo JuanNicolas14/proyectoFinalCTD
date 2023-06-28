@@ -64,27 +64,27 @@ const Reserva = () => {
         const fecha = new Date(reservaFinal.fechaInicioReserva);
         fecha.setDate(fecha.getDate() + 14);
         const fechaFinalFormateada = fecha.toISOString().slice(0, 10);
-        setReserva({ ...reservaFinal, fechaFinal: fechaFinalFormateada });
+        setReservaFinal({ ...reservaFinal, fechaFinal: fechaFinalFormateada });
       } else if (restauranteReserva?.plan === "Mensual") {
         const fecha = new Date(reservaFinal.fechaInicioReserva);
         fecha.setDate(fecha.getDate() + 29);
         const fechaFinalFormateada = fecha.toISOString().slice(0, 10);
-        setReserva({ ...reservaFinal, fechaFinal: fechaFinalFormateada });
+        setReservaFinal({ ...reservaFinal, fechaFinal: fechaFinalFormateada });
       } else if (restauranteReserva?.plan === "Trimestral") {
         const fecha = new Date(reservaFinal.fechaInicioReserva);
         fecha.setDate(fecha.getDate() + 89);
         const fechaFinalFormateada = fecha.toISOString().slice(0, 10);
-        setReserva({ ...reservaFinal, fechaFinal: fechaFinalFormateada });
+        setReservaFinal({ ...reservaFinal, fechaFinal: fechaFinalFormateada });
       } else if (restauranteReserva?.plan === "Semestral") {
         const fecha = new Date(reservaFinal.fechaInicioReserva);
         fecha.setDate(fecha.getDate() + 179);
         const fechaFinalFormateada = fecha.toISOString().slice(0, 10);
-        setReserva({ ...reservaFinal, fechaFinal: fechaFinalFormateada });
+        setReservaFinal({ ...reservaFinal, fechaFinal: fechaFinalFormateada });
       } else if (restauranteReserva?.plan === "Anual") {
         const fecha = new Date(reservaFinal.fechaInicioReserva);
         fecha.setDate(fecha.getDate() + 364);
         const fechaFinalFormateada = fecha.toISOString().slice(0, 10);
-        setReserva({ ...reservaFinal, fechaFinal: fechaFinalFormateada });
+        setReservaFinal({ ...reservaFinal, fechaFinal: fechaFinalFormateada });
       }
     }
   }, [reservaFinal?.fechaInicioReserva]);
