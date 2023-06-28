@@ -10,6 +10,8 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 /*Herramientas */
 import Swal from 'sweetalert2';
+//Importar fecha actual
+import moment from 'moment';
 
 const Reserva = () => {
   const navigate = useNavigate()
@@ -29,6 +31,8 @@ const Reserva = () => {
     telefonoUser: ''
   });
   const [restauranteReserva, setRestauranteReserva] = useState({})
+  //Obtener fecha mañana
+  const fechaMañana = moment().add(1, 'day').format('YYYY-MM-DD');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -214,6 +218,7 @@ const Reserva = () => {
               id="startDate"
               value={reservaFinal.fechaInicioReserva}
               onChange={(e) => setReservaFinal({ ...reservaFinal, fechaInicioReserva: e.target.value })}
+              min={fechaMañana}
             />
           </fieldset>
           <fieldset className="datepicker-fechaFinal">
