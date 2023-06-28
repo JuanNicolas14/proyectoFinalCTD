@@ -89,7 +89,7 @@ function MapsDistancia({ userLocation, restauranteLocation,nombreRestaurante }) 
       <GoogleMap
         mapContainerStyle={{ width: '100%', height: '400px' }}
         center={restauranteLocation}
-        zoom={7}
+        zoom={13}
       >
         {restauranteLocation && (
           <Marker

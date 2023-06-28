@@ -31,6 +31,9 @@ import Popup from '../../Componentes/Popup/Popup';
 import { red } from '@mui/material/colors'
 import { ReservaContext } from "../../utils/ReservaContext";
 
+//Importar fecha actual
+import moment from 'moment';
+
 const Detalle = () => {
   const [distanciaUser, setDistanciaUser] = useState(0);
   const navigate = useNavigate()
@@ -51,6 +54,9 @@ const Detalle = () => {
     lat: restaurante.latitud,
     lng: restaurante.longitud,
   };
+
+  //Obtener fecha mañana
+  const fechaMañana = moment().add(1, 'day').format('YYYY-MM-DD');
 
   //Obtenemos el id que trae la url por medio de useParams()
   const { id } = useParams();
@@ -482,6 +488,7 @@ const Detalle = () => {
                       id="startDate"
                       value={reserva.fechaInicio}
                       onChange={handleCambioFechaInicio}
+                      min={fechaMañana}
                     />
                   </div>
                   <div className="datepicker-fechaFinal">
