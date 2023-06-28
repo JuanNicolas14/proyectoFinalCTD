@@ -58,6 +58,7 @@ const Puntuacion = ({ setRatingWindowShow, restaurante }) => {
         if (response.ok) {
           const data = await response.json();
           console.log(data);
+          setIsLoading(false);
           setPuntuaciones(data);
         }
       } catch (error) {
