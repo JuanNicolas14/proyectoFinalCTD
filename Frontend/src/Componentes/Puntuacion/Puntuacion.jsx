@@ -4,7 +4,7 @@ import {AiFillStar, AiOutlineStar} from 'react-icons/ai'
 import { AuthContext } from '../../utils/AuthContext';
 import baseUrl from '../../utils/baseUrl.json'
 import Swal from 'sweetalert2';
-
+import SpinnerGrande from '../../Componentes/SpinnerGrande/SpinnerGrande'
 
 const Puntuacion = ({ setRatingWindowShow, restaurante }) => {
 
@@ -17,6 +17,7 @@ const Puntuacion = ({ setRatingWindowShow, restaurante }) => {
     const [selectedRating, setSelectedRating] = useState(0);
     const [puntuaciones, setPuntuaciones] = useState([])
     const [comentario, setComentario] = useState("")
+    const [isLoading, setIsLoading] = useState(true);
 
     function calcularEstrellas(puntuacion){
       let numEstrellas = 0;
@@ -146,6 +147,9 @@ const Puntuacion = ({ setRatingWindowShow, restaurante }) => {
 
         <div className='contenedor-reseñas'>
           <h2>Comentarios</h2>
+          {isLoading ? (
+              <SpinnerGrande/>
+            ) : (
           <div className='reseñas'>
             {puntuaciones.map((puntuacion) => (
             <div key={puntuacion.id} className='reseña'>
@@ -161,6 +165,7 @@ const Puntuacion = ({ setRatingWindowShow, restaurante }) => {
             ))
             }
           </div>
+          )}
         </div>
       </div>
     </div>
