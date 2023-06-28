@@ -1,0 +1,12 @@
+
+@media (max-width:400px) {
+    .historial-user .historial-plan {
+        display: none;
+    }
+    .historial-user thead th {
+        font-size: .77rem;
+    }
+    .historial-user tbody td {
+        font-size: .7rem;
+    }
+}

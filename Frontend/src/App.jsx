@@ -31,6 +31,7 @@ import GestionPlan from './Vistas/GestionPlan/GestionPlan'
 import EditarPlan from './Vistas/EditarPlan/EditarPlan'
 import ReservaContextProvider from './utils/ReservaContext'
 import ReservaExitosa from './Vistas/ReservaExitosa/ReservaExitosa'
+import ReservaHistorial from './Vistas/ReservaHistorial/ReservaHistorial'
 
 function App() {
   return (
@@ -77,6 +78,7 @@ function App() {
           <Route path='/administracion/editarPlan/:id' element={<EditarPlan/>}/>
           <Route path='/reserva' element={<Reserva />} />
           <Route path='/reserva/exito' element={<ReservaExitosa/>} />
+          <Route path='/reserva/historial' element={<ReservaHistorial/>} />
         </Routes>
         <Footer />
       </FilterContextProvider>
