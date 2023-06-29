@@ -268,70 +268,75 @@
   margin: 1.2% auto;
 }
 /*------ Reservas ------*/
-.detalle-producto .reserva {
+.detalle-producto .reserva-producto {
   display: flex;
   flex-direction: column;
 }
-.detalle-producto .reserva .titulo {
+.detalle-producto .reserva-producto .titulo {
   width: 100%;
   border-top: 1px solid var(--secondary-color);
 }
-.detalle-producto .reserva .titulo h2 {
+.detalle-producto .reserva-producto .titulo h2 {
   margin: 5% auto 2%;
 }
-.detalle-producto .reserva .formulario {
+.detalle-producto .reserva-producto .formulario {
   padding: 30px 0;
 }
-.detalle-producto .reserva .datepickers {
+.detalle-producto .reserva-producto .datepickers {
   display: flex;
   flex-direction: column;
   width: 35%;
 }
-.detalle-producto .reserva .datepickers .datepicker-fechaInicio label,
-.detalle-producto .reserva .datepickers .datepicker-fechaFinal label {
+.detalle-producto .reserva-producto .datepickers .datepicker-fechaInicio label,
+.detalle-producto .reserva-producto .datepickers .datepicker-fechaFinal label {
   font-weight: 500;
   align-self: center;
 }
-.detalle-producto .reserva .datepickers .datepicker-fechaInicio input,
-.detalle-producto .reserva .datepickers .datepicker-fechaFinal input {
-  height: 25px;
-  padding-left: 5px;
+.detalle-producto .reserva-producto .datepickers .datepicker-fechaInicio input,
+.detalle-producto .reserva-producto .datepickers .datepicker-fechaFinal input {
+  height: 20px;
+  width: 85px;
+  padding-left: 30px;
   border: 1px solid brown;
   border-radius: 5px;
 }
-.detalle-producto .datepickers div {
+.detalle-producto .reserva-producto .datepickers .datepicker-fechaInicio input{
+    cursor: pointer;
+}
+.detalle-producto .datepickers .div-datepicker {
   max-width: 65%;
   margin: 10px 0;
   display: flex;
   justify-content: space-between;
-}
+} 
 
-.detalle-producto .reserva .hora {
+.detalle-producto .reserva-producto .hora {
   display: flex;
   flex-direction: column;
   max-width: 65%;
 }
 
-.detalle-producto .reserva .hora label {
+.detalle-producto .reserva-producto .hora label {
   margin-bottom: 10px;
   font-weight: 500;
   font-size: 0.85em;
 }
 
-.detalle-producto .reserva .hora select {
+.detalle-producto .reserva-producto .hora select {
   margin-bottom: 20px;
   padding: 10px;
   border: 1px solid brown;
   border-radius: 5px;
+  cursor: pointer;
 }
 
-.detalle-producto .reserva .container-button {
+.detalle-producto .reserva-producto .container-button {
   width: 35%;
   display: flex;
   justify-content: flex-end;
 }
 
-.detalle-producto .reserva .button {
+.detalle-producto .reserva-producto .button {
   flex-direction: column;
   box-sizing: border-box;
   text-align: justify;
@@ -341,7 +346,7 @@
   border-radius: 5px;
   box-shadow: 1px 1px 2.5px 0px rgba(165, 42, 42, 0.5);
 }
-.detalle-producto .reserva .button .leyenda-button-reserva {
+.detalle-producto .reserva-producto .button .leyenda-button-reserva {
   margin-block-start: 0;
   margin-block-end: 1em;
 }
@@ -353,6 +358,7 @@
   background-color: var(--secondary-color);
   width: 100%;
   padding: 10px;
+  cursor: pointer;
 }
 
 /*------ Politicas ------*/
@@ -463,16 +469,16 @@
     text-align: left;
   }
 
-  .detalle-producto .reserva .datepickers {
+  .detalle-producto .reserva-producto .datepickers {
     text-align: center;
     align-items: center;
     width: 45%;
   }
-  .detalle-producto .reserva .button {
+  .detalle-producto .reserva-producto .button {
     padding: 0 10px 10px;
     width: 80%;
   }
-  .detalle-producto .reserva {
+  .detalle-producto .reserva-producto {
     margin-bottom: 10%;
   }
 
@@ -540,28 +546,28 @@
   }
 
   /*------ Producto Reserva ------*/
-  .detalle-producto .reserva h2 {
+  .detalle-producto .reserva-producto h2 {
     margin: 5% 0 0 5%;
   }
-  .detalle-producto .reserva .formulario {
+  .detalle-producto .reserva-producto .formulario {
     flex-wrap: wrap;
   }
-  .detalle-producto .reserva .datepickers {
+  .detalle-producto .reserva-producto .datepickers {
     text-align: center;
     align-items: center;
     width: 90%;
   }
-  .detalle-producto .datepickers div {
+  .detalle-producto .datepickers .div-datepicker {
     width: 100%;
   }
-  .detalle-producto .reserva .container-button {
+  .detalle-producto .reserva-producto .container-button {
     width: 60%;
   }
-  .detalle-producto .reserva .button {
+  .detalle-producto .reserva-producto .button {
     padding: 0 10px 10px;
     width: 100%;
   }
-  .detalle-producto .reserva {
+  .detalle-producto .reserva-producto {
     margin-bottom: 10%;
   }
 
