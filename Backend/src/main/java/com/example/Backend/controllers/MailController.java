@@ -97,4 +97,8 @@ public class MailController {
     public ResponseEntity<String> handleBadRequestException(BadRequestException exc) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exc.getMessage());
     }
+
+    public void setSolicitudes(HashMap<Long, HashMap<String, Long>> solicitudes) {
+        this.solicitudes = solicitudes;
+    }
 }
