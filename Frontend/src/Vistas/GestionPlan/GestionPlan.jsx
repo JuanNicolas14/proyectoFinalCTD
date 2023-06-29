@@ -96,8 +96,8 @@ const GestionPlan = () => {
             <caption className='caption-planes'>Gestión de planes</caption>
             <thead>
               <tr>
-                <th>Id</th>
                 <th>Plan</th>
+                <th>Descripción</th>
                 <th>Actualizar</th>
                 <th>Eliminar</th>
               </tr>
@@ -108,8 +108,8 @@ const GestionPlan = () => {
                 (pagina - 1) * cantidadPorPagina + cantidadPorPagina
               ).map( plan=> (
                 <tr key={plan.id}>
-                  <td className='centrar-campo-plan'>{plan.id}</td>
                   <td>{plan.nombre}</td>
+                  <td>{plan.descripcion}</td>
                   <td
                     className='centrar-campo-plan'
                   >
