@@ -72,7 +72,7 @@ const Reserva = () => {
         setReservaFinal({ ...reservaFinal, fechaFinal: fechaFinalFormateada });
       } else if (restauranteReserva?.plan === "Quincenal") {
         const fecha = new Date(reservaFinal.fechaInicioReserva);
-        fecha.setDate(fecha.getDate() + 14);
+        fecha.setDate(fecha.getDate() + 13);
         const fechaFinalFormateada = fecha.toISOString().slice(0, 10);
         setReservaFinal({ ...reservaFinal, fechaFinal: fechaFinalFormateada });
       } else if (restauranteReserva?.plan === "Mensual") {
@@ -222,10 +222,11 @@ const Reserva = () => {
             <DatePicker
               type="date"
               id="startDate"
-              selected={reservaFinal.fechaInicioReserva ? new Date(reservaFinal.fechaInicioReserva) : null}
+              selected={reservaFinal.fechaInicioReserva ? moment(reservaFinal.fechaInicioReserva).toDate() : null}
               onChange={(date) => setReservaFinal({ ...reservaFinal, fechaInicioReserva: date.toISOString().slice(0, 10) })}
               minDate={new Date(fechaMañana)}
               className='calendario-reserva-fecha calendario-reserva-fecha-inicial'
+              dateFormat="dd/MM/yyyy"
               showIcon
             />
           </fieldset>
@@ -234,8 +235,9 @@ const Reserva = () => {
             <DatePicker
               type="date"
               id="endDate"
-              value={reservaFinal.fechaFinal?.replace(/-/g, "/")}
+              selected={reservaFinal.fechaFinal ? moment(reservaFinal.fechaFinal).toDate() : null}
               className='calendario-reserva-fecha'
+              dateFormat="dd/MM/yyyy"
               showIcon
               readOnly
             />
