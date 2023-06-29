@@ -211,7 +211,7 @@ const Detalle = () => {
         setReserva({ ...reserva, fechaFinal: fechaFinalFormateada });
       } else if (restaurante?.plan === "Quincenal") {
         const fecha = new Date(reserva.fechaInicio);
-        fecha.setDate(fecha.getDate() + 14);
+        fecha.setDate(fecha.getDate() + 13);
         const fechaFinalFormateada = fecha.toISOString().slice(0, 10);
         setReserva({ ...reserva, fechaFinal: fechaFinalFormateada });
       } else if (restaurante?.plan === "Mensual") {
@@ -239,7 +239,7 @@ const Detalle = () => {
   }, [reserva.fechaInicio]);
 
   const handleCambioFechaInicio = (date) => {
-    const fechaSeleccionada = moment(date).add(1, 'day').format('YYYY-MM-DD');
+    const fechaSeleccionada = moment(date).format('YYYY-MM-DD');
     setReserva({ ...reserva, fechaInicio: fechaSeleccionada });
   }
 
@@ -502,11 +502,12 @@ const Detalle = () => {
                   <label htmlFor="startDate">Fecha inicial:</label>
                   <DatePicker
                     id="startDate"
-                    selected={reserva.fechaInicio ? new Date(reserva.fechaInicio) : null}
+                    selected={reserva.fechaInicio ? moment(reserva.fechaInicio).toDate() : null}
                     onChange={handleCambioFechaInicio}
                     minDate={new Date(fechaMañana)}
                     className="custom-datepicker"
                     calendarClassName="custom-calendar"
+                    dateFormat="dd/MM/yyyy"
                     placeholderText="dd /mm/ aaaa"
                     showIcon
                   />
@@ -516,9 +517,10 @@ const Detalle = () => {
                     <DatePicker
                       type="date"
                       id="endDate"
-                      value={reserva.fechaFinal?.replace(/-/g, "/")}
+                      selected={reserva.fechaFinal ? moment(reserva.fechaFinal).toDate() : null}
                       className="custom-datepicker"
                       placeholderText="dd /mm/ aaaa"
+                      dateFormat="dd/MM/yyyy"
                       showIcon
                       readOnly
                     />
