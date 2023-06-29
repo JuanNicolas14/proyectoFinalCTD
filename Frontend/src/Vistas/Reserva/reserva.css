@@ -8,7 +8,7 @@
     text-align: center;
 }
 
-.reserva div, .reserva .detalle-reserva {
+.reserva .div-reserva, .reserva .detalle-reserva {
     margin: 10px;
 }
 .reserva-imagenes {
@@ -86,8 +86,18 @@ form.detalle-reserva {
 }
 .reserva .detalle-reserva input {
     padding: 5px;
+    border: 1px solid rgba(165, 42, 42, 0.5);
+    border-radius: 5px;
 }
-.reserva .detalle-reserva button {
+.reserva .detalle-reserva .calendario-reserva-fecha{
+    padding-left: 30px;
+    height: 17px;
+    width: 85px;
+}
+.reserva .detalle-reserva .calendario-reserva-fecha-inicial{
+    cursor: pointer;
+}
+.reserva .detalle-reserva .boton-reserva-final {
     margin: 10px auto;
     width: 60%;
     background-color: var(--main-color);
@@ -96,13 +106,20 @@ form.detalle-reserva {
     padding: 10px;
     color: white;
     transition: all .5s ease;
+    cursor: pointer;
+}
+.reserva .detalle-reserva .select-reserva-hora{
+    border: 1px solid rgba(165, 42, 42, 0.5);
+    border-radius: 5px;
+    height: 25px;
+    cursor: pointer;
 }
 .reserva .detalle-reserva button:hover {
     background-color: #be3535;
 }
 
 @media (max-width: 840px) {
-    .reserva div, .reserva form {
+    .reserva .div-reserva, .reserva form {
         width: 80%;
     }
     .reserva form .datepickers {
@@ -136,7 +153,7 @@ form.detalle-reserva {
 }
 
 @media (max-width:480px) {
-    .reserva div {
+    .reserva .div-reserva {
         width: 80%;
     }
     .reserva .reserva-user .user-container {

@@ -12,6 +12,11 @@ import { useEffect } from 'react'
 import Swal from 'sweetalert2';
 //Importar fecha actual
 import moment from 'moment';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+//Configurar calendario al español
+import { registerLocale, setDefaultLocale } from "react-datepicker";
+import es from "date-fns/locale/es";
 
 const Reserva = () => {
   const navigate = useNavigate()
@@ -32,7 +37,8 @@ const Reserva = () => {
   });
   const [restauranteReserva, setRestauranteReserva] = useState({})
   //Obtener fecha mañana
-  const fechaMañana = moment().add(1, 'day').format('YYYY-MM-DD');
+  const fechaMañana = new Date();
+  fechaMañana.setDate(fechaMañana.getDate() + 1);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -153,9 +159,9 @@ const Reserva = () => {
   return (
     <section className='reserva'>
       <h2>RESERVA</h2>
-      <div className='reserva-user'>
+      <div className='reserva-user div-reserva'>
         <h3>Detalles del Usuario</h3>
-        <div className='user-container'>
+        <div className='user-container div-reserva'>
           <div className='reserva-avatar'>
             <span>{user.nombre[0]}{user.apellido[0]}</span>
           </div>
@@ -175,10 +181,10 @@ const Reserva = () => {
         </div>
       </div>
       {restauranteReserva &&
-        <div className='reserva-restaurante'>
+        <div className='reserva-restaurante div-reserva'>
           <h3>Detalles del Restaurante</h3>
-          <div className='restaurante-container'>
-            <div className='reserva-imagenes'>
+          <div className='restaurante-container div-reserva'>
+            <div className='reserva-imagenes div-reserva'>
               {restauranteReserva?.imagenes &&
                 <Carrousel
                   imagenes={restauranteReserva?.imagenes}
@@ -186,7 +192,7 @@ const Reserva = () => {
               }
 
             </div>
-            <div className='restaurante-info'>
+            <div className='restaurante-info div-reserva'>
               <p>
                 Nombre: <span>{restauranteReserva?.nombre}</span>
               </p>
@@ -210,23 +216,27 @@ const Reserva = () => {
 
       <form onSubmit={(e) => handleReserva(e)} className='detalle-reserva'>
         <h3>Detalle de la reserva</h3>
-        <div className="datepickers">
+        <div className="datepickers div-reserva">
           <fieldset className="datepicker-fechaInicio">
             <legend htmlFor="startDate">Fecha inicial:</legend>
-            <input
+            <DatePicker
               type="date"
               id="startDate"
-              value={reservaFinal.fechaInicioReserva}
-              onChange={(e) => setReservaFinal({ ...reservaFinal, fechaInicioReserva: e.target.value })}
-              min={fechaMañana}
+              selected={reservaFinal.fechaInicioReserva ? new Date(reservaFinal.fechaInicioReserva) : null}
+              onChange={(date) => setReservaFinal({ ...reservaFinal, fechaInicioReserva: date.toISOString().slice(0, 10) })}
+              minDate={new Date(fechaMañana)}
+              className='calendario-reserva-fecha calendario-reserva-fecha-inicial'
+              showIcon
             />
           </fieldset>
           <fieldset className="datepicker-fechaFinal">
             <legend htmlFor="endDate">Fecha final:</legend>
-            <input
+            <DatePicker
               type="date"
               id="endDate"
-              value={reservaFinal.fechaFinal}
+              value={reservaFinal.fechaFinal?.replace(/-/g, "/")}
+              className='calendario-reserva-fecha'
+              showIcon
               readOnly
             />
           </fieldset>
@@ -235,7 +245,7 @@ const Reserva = () => {
           <legend htmlFor="horaEntrega">Hora de entrega</legend>
           <select
             id='horaEntrega'
-            className='select-reserva'
+            className='select-reserva-hora'
             value={reservaFinal.hora}
             onChange={(e) => setReservaFinal({ ...reservaFinal, hora: e.target.value })}
           >
@@ -245,7 +255,7 @@ const Reserva = () => {
         </fieldset>
         <fieldset className="tipo-plan">
           <legend htmlFor="direccion">Dirección de entrega</legend>
-          <p className='info'>A donde llevaremos tu almuerzo ?</p>
+          <p className='info'>¿A dónde llevaremos tu almuerzo?</p>
           <input
             id='direccion'
             type="text"
@@ -254,16 +264,16 @@ const Reserva = () => {
           />
         </fieldset>
         <fieldset className="tipo-plan">
-          <legend htmlFor="telefonoUser">Telefono</legend>
+          <legend htmlFor="telefonoUser">Teléfono</legend>
           <p className='info'>Necesitamos contactarte en caso de alguna eventualidad</p>
           <input
             id='telefonoUser'
             type="text"
-            placeholder='Digita tu telefono'
+            placeholder='Digita tu teléfono'
             onChange={(e) => setReservaFinal({ ...reservaFinal, telefonoUser: e.target.value })}
           />
         </fieldset>
-        <button type='submit'>Reservar</button>
+        <button className='boton-reserva-final' type='submit'>Reservar</button>
       </form>
 
     </section>

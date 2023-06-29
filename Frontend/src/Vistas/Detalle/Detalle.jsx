@@ -33,6 +33,12 @@ import { ReservaContext } from "../../utils/ReservaContext";
 
 //Importar fecha actual
 import moment from 'moment';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+//Configurar calendario al español
+import { registerLocale, setDefaultLocale } from "react-datepicker";
+import es from "date-fns/locale/es";
+
 
 const Detalle = () => {
   const [distanciaUser, setDistanciaUser] = useState(0);
@@ -56,7 +62,12 @@ const Detalle = () => {
   };
 
   //Obtener fecha mañana
-  const fechaMañana = moment().add(1, 'day').format('YYYY-MM-DD');
+  const fechaMañana = new Date();
+  fechaMañana.setDate(fechaMañana.getDate() + 1);
+    // Registrar el idioma español
+  registerLocale("es", es);
+  // Establecer el idioma español como idioma predeterminado para el calendario
+  setDefaultLocale("es");
 
   //Obtenemos el id que trae la url por medio de useParams()
   const { id } = useParams();
@@ -151,6 +162,10 @@ const Detalle = () => {
     fetchData();
   }, []);
 
+  useEffect( () =>{
+    console.log(reserva);
+  },[reserva])
+
   //Puntuación del producto
   const puntuacionPromedio = restaurante?.puntuacionPromedio;
   let calidad = "";
@@ -223,9 +238,10 @@ const Detalle = () => {
     }
   }, [reserva.fechaInicio]);
 
-  const handleCambioFechaInicio = (event) => {
-    setReserva({ fechaInicio: event.target.value });
-  };
+  const handleCambioFechaInicio = (date) => {
+    const fechaSeleccionada = moment(date).add(1, 'day').format('YYYY-MM-DD');
+    setReserva({ ...reserva, fechaInicio: fechaSeleccionada });
+  }
 
   const handleReserva = () => {
     if (user?.nombre.length > 1) {
@@ -252,6 +268,7 @@ const Detalle = () => {
         navigate('/reserva')
       }else{
         console.log("datos incompletos")
+        console.log(reserva);
         Swal.fire(
           {
             title: 'Datos incompletos.',
@@ -475,32 +492,38 @@ const Detalle = () => {
                 </li>
               </ul>
             </section>
-            <section className="reserva">
+            <section className="reserva-producto">
               <div className="titulo">
                 <h2>Reserva</h2>
               </div>
               <section className="formulario">
                 <div className="datepickers">
-                  <div className="datepicker-fechaInicio">
-                    <label htmlFor="startDate">Fecha inicial:</label>
-                    <input
-                      type="date"
-                      id="startDate"
-                      value={reserva.fechaInicio}
-                      onChange={handleCambioFechaInicio}
-                      min={fechaMañana}
-                    />
+                  <div className="datepicker-fechaInicio div-datepicker">
+                  <label htmlFor="startDate">Fecha inicial:</label>
+                  <DatePicker
+                    id="startDate"
+                    selected={reserva.fechaInicio ? new Date(reserva.fechaInicio) : null}
+                    onChange={handleCambioFechaInicio}
+                    minDate={new Date(fechaMañana)}
+                    className="custom-datepicker"
+                    calendarClassName="custom-calendar"
+                    placeholderText="dd /mm/ aaaa"
+                    showIcon
+                  />
                   </div>
-                  <div className="datepicker-fechaFinal">
+                  <div className="datepicker-fechaFinal div-datepicker">
                     <label htmlFor="endDate">Fecha final:</label>
-                    <input
+                    <DatePicker
                       type="date"
                       id="endDate"
-                      value={reserva.fechaFinal}
+                      value={reserva.fechaFinal?.replace(/-/g, "/")}
+                      className="custom-datepicker"
+                      placeholderText="dd /mm/ aaaa"
+                      showIcon
                       readOnly
                     />
                   </div>
-                  <div className="hora">
+                  <div className="hora div-datepicker">
                     <label htmlFor="hora">
                       Selecciona la hora en la que deseas recibir tus almuerzos:
                     </label>
