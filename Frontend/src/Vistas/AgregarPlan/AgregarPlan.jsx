@@ -44,7 +44,7 @@ const AgregarPlan = () => {
                     setNombre('')
                     setDescripcion('')
                     setImagen(null)
-                    window.location.reload()
+                    window.location.href = '/administracion';
                   }
                 })
             } else {
