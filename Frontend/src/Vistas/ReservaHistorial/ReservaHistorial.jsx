@@ -54,6 +54,7 @@ const ReservaHistorial = () => {
 
     return (
         <section className='historial-user'>
+            <h2>Historia de reservas</h2>
             {user?.rol == "ADMIN" || user?.rol == "USER"
                 ? reservasUser.length > 0 
                 

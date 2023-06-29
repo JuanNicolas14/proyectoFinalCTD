@@ -19,6 +19,7 @@ import baseUrl from "../../utils/baseUrl.json";
 //Material UI
 import Carrousel from "../../Componentes/Carrousel/Carrousel";
 import Slider from "../../Componentes/Slider/Slider";
+import {FilterContext} from "../../utils/FilterContext";
 import { AuthContext } from "../../utils/AuthContext";
 import Puntuacion from "../../Componentes/Puntuacion/Puntuacion";
 import MapsDistancia from "../../Componentes/MapsDistancia/MapsDistancia";
@@ -43,14 +44,14 @@ import es from "date-fns/locale/es";
 const Detalle = () => {
   const [distanciaUser, setDistanciaUser] = useState(0);
   const navigate = useNavigate()
-
+  const {hora} = useContext(FilterContext);
   const { user, token} = useContext(AuthContext);
   const { fechaInicio, fechaFinalizacion, horaEntrega, dispatchReserva, restauranteContext } = useContext(ReservaContext) 
   const [restaurante, setRestaurante] = useState({});
   const [reserva, setReserva] = useState({
     fechaInicio: '',
     fechaFinal: '',
-    hora: "",
+    hora: hora?.length > 1 ? hora : '',
   });
   const [sliderShow, setShowSlider] = useState(false);
   const [ratingWindowShow, setRatingWindowShow] = useState(false);
