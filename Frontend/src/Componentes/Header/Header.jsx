@@ -54,163 +54,187 @@ const Header = () => {
   return (
     <header>
       <section>
-          <div className="imagotipo">
-            <Link to='/home' style={{ textDecoration: 'none' }}>
+        <div className="imagotipo">
+          <Link to="/home" style={{ textDecoration: "none" }}>
+            <img src={images.logoBukinFood} alt="icon-logo" />
+          </Link>
+          <Link to="/home" style={{ textDecoration: "none" }}>
+            <div className="texto-logo">
+              <h1>La forma más fácil </h1>
+              <h3>De tener almuerzos deliciosos</h3>
+            </div>
+          </Link>
+        </div>
 
-              <img src={images.logoBukinFood} alt="icon-logo" />
-            </Link>
-            <Link to='/home' style={{ textDecoration: 'none' }}>
-              <div className="texto-logo">
-                <h1>La forma más fácil </h1>
-                <h3>De tener almuerzos deliciosos</h3>
-              </div>
-            </Link>
-          </div>
-
-        {user?.nombre?.length > 3
-        ? user.rol == "ADMIN"  || user.permisos.includes("ACCESO PANEL ADMINISTRACIÓN")
-          ? 
-            <div className='botones-logueo'>
-              <Link to='/usuario/detalle' className='avatar-user'>
+        {user?.nombre?.length > 3 ? (
+          user.rol == "ADMIN" ||
+          user.permisos.includes("ACCESO PANEL ADMINISTRACIÓN") ? (
+            <div className="botones-logueo">
+              <Link to="/usuario/detalle" className="avatar-user">
                 <span>{user.nombre.charAt(0).toUpperCase()}</span>
                 <span>{user.apellido.charAt(0).toUpperCase()}</span>
               </Link>
 
-              <Link to='/usuario/detalle' className='usuario-nombre'>
-                <span>{capitalizeFirstLetter(user.nombre)} {capitalizeFirstLetter(user.apellido)}</span>
+              <Link to="/usuario/detalle" className="usuario-nombre">
+                <span>
+                  {capitalizeFirstLetter(user.nombre)}{" "}
+                  {capitalizeFirstLetter(user.apellido)}
+                </span>
               </Link>
+              <span>
+                <a
+                  href={`/favoritos/${user.id}`}
+                  title="Ir a ver mis restaurantes favoritos"
+                >
+                  Ir a Mis Favoritos
+                </a>
+              </span>
 
               <button>
-                <Link to='/administracion' style={{ textDecoration: 'none' }}>
+                <Link to="/administracion" style={{ textDecoration: "none" }}>
                   Módulo Admin
                 </Link>
               </button>
 
               <button onClick={cerrarSesion}>
-                <Link style={{ textDecoration: 'none' }}>
-                  Cerrar sesión
-                </Link>
+                <Link style={{ textDecoration: "none" }}>Cerrar sesión</Link>
               </button>
-
             </div>
-          : <div className='botones-logueo'>
-              <Link to='/usuario/detalle' className='avatar-user'>
+          ) : (
+            <div className="botones-logueo">
+              <Link to="/usuario/detalle" className="avatar-user">
                 <span>{user.nombre.charAt(0).toUpperCase()}</span>
                 <span>{user.apellido.charAt(0).toUpperCase()}</span>
               </Link>
-              <Link to='/usuario/detalle' className='usuario-nombre'>
-                <p>{capitalizeFirstLetter(user.nombre)} {capitalizeFirstLetter(user.apellido)}</p>
+              <Link to="/usuario/detalle" className="usuario-nombre">
+                <p>
+                  {capitalizeFirstLetter(user.nombre)}{" "}
+                  {capitalizeFirstLetter(user.apellido)}
+                </p>
               </Link>
+              <span>
+                <a
+                  href={`/favoritos/${user.id}`}
+                  title="Ir a ver mis restaurantes favoritos"
+                >
+                  Ir a Mis Favoritos
+                </a>
+              </span>
               <button onClick={cerrarSesion}>
-                <Link style={{ textDecoration: 'none' }}>
-                  Cerrar sesión
-                </Link>
+                <Link style={{ textDecoration: "none" }}>Cerrar sesión</Link>
               </button>
-              
-              
             </div>
-        
-        : (
+          )
+        ) : (
           <div className="botones-logueo">
             <button>
-              <Link to='/usuario/registrar' style={{ textDecoration: 'none' }}>
+              <Link to="/usuario/registrar" style={{ textDecoration: "none" }}>
                 Crear cuenta
               </Link>
             </button>
 
             <button>
-              <Link to='/login' style={{ textDecoration: 'none' }}>
+              <Link to="/login" style={{ textDecoration: "none" }}>
                 Iniciar sesión
               </Link>
             </button>
           </div>
-          )
-        }
+        )}
 
-        {show 
-        ? <div className='menu-movil'>
+        {show ? (
+          <div className="menu-movil">
             <div className="menu">
-              <div className='menu-container'>
-                <button onClick={showMenu}><GrClose/></button>
+              <div className="menu-container">
+                <button onClick={showMenu}>
+                  <GrClose />
+                </button>
                 <h2>Menú</h2>
               </div>
-              
-                {user?.rol == "ADMIN" || user?.permisos.includes("ACCESO PANEL ADMINISTRACIÓN") ? 
-                (
-                  <ul>
-                    <li onClick={showMenu}>
-                      <Link to='/administracion' style={{ textDecoration: 'none' }}>
-                        Modulo Admin
-                      </Link>
-                    </li>
-                    <li onClick={cerrarSesion}>
-                      <Link style={{ textDecoration: 'none' }}>
-                        Cerrar sesión
-                      </Link>
-                    </li>
-                  </ul>
-                ):user?.rol == "USER" 
-                ? (
-                  <ul>
-                    <li onClick={cerrarSesion}>
-                      <Link style={{ textDecoration: 'none' }}>
-                        Cerrar sesión
-                      </Link>
-                    </li>
-                  </ul>
-                )
-                :(
-                  <ul>
-                    <li onClick={showMenu}>
-                      <Link to='/login' style={{ textDecoration: 'none' }}>
-                        Iniciar Sesión
-                      </Link>
-                    </li>
-                    <li onClick={showMenu}>
-                      <Link to='/usuario/registrar' style={{ textDecoration: 'none' }}>
-                        Crear cuenta
-                      </Link>
-                    </li>
-                  </ul>
-                )
-                }
-                
-      
+
+              {user?.rol == "ADMIN" ||
+              user?.permisos.includes("ACCESO PANEL ADMINISTRACIÓN") ? (
+                <ul>
+                  <li onClick={showMenu}>
+                    <Link
+                      to="/administracion"
+                      style={{ textDecoration: "none" }}
+                    >
+                      Modulo Admin
+                    </Link>
+                  </li>
+                  <li onClick={cerrarSesion}>
+                    <Link style={{ textDecoration: "none" }}>
+                      Cerrar sesión
+                    </Link>
+                  </li>
+                </ul>
+              ) : user?.rol == "USER" ? (
+                <ul>
+                  <li onClick={cerrarSesion}>
+                    <Link style={{ textDecoration: "none" }}>
+                      Cerrar sesión
+                    </Link>
+                  </li>
+                </ul>
+              ) : (
+                <ul>
+                  <li onClick={showMenu}>
+                    <Link to="/login" style={{ textDecoration: "none" }}>
+                      Iniciar Sesión
+                    </Link>
+                  </li>
+                  <li onClick={showMenu}>
+                    <Link
+                      to="/usuario/registrar"
+                      style={{ textDecoration: "none" }}
+                    >
+                      Crear cuenta
+                    </Link>
+                  </li>
+                </ul>
+              )}
             </div>
             <div className="redes-menu">
+              <img src={images.facebook} alt="icono-facebook" />
               <img
-                src={images.facebook}
-                alt="icono-facebook"
+                className="logo"
+                src={images.linkedin}
+                alt="icono-linkedin"
               />
-              <img className='logo' src={images.linkedin} alt="icono-linkedin" />
               <img src={images.twitter} alt="icono-twitter" />
-              <img className='logo' src={images.instagram} alt="icono-instagram" />
+              <img
+                className="logo"
+                src={images.instagram}
+                alt="icono-instagram"
+              />
             </div>
           </div>
-        : user?.nombre?.length > 3 
-        ? (
-          <div className='menu-icono'>
-            <Link to='/usuario/detalle' className='avatar-user'>
+        ) : user?.nombre?.length > 3 ? (
+          <div className="menu-icono">
+            <Link to="/usuario/detalle" className="avatar-user">
               <span>{user?.nombre?.charAt(0).toUpperCase()}</span>
               <span>{user?.apellido?.charAt(0).toUpperCase()}</span>
             </Link>
-            <Link to='/usuario/detalle' className='usuario-nombre'>
-              <span>{capitalizeFirstLetter(user.nombre)} {capitalizeFirstLetter(user.apellido)}</span>
+            <Link to="/usuario/detalle" className="usuario-nombre">
+              <span>
+                {capitalizeFirstLetter(user.nombre)}{" "}
+                {capitalizeFirstLetter(user.apellido)}
+              </span>
             </Link>
-            <button onClick={showMenu}><HiMenu /></button>
+            <button onClick={showMenu}>
+              <HiMenu />
+            </button>
           </div>
-        )
-        : (
-          <div className='menu-icono'>
-            
-            <button onClick={showMenu}><HiMenu /></button>
+        ) : (
+          <div className="menu-icono">
+            <button onClick={showMenu}>
+              <HiMenu />
+            </button>
           </div>
-        )
-        }
-        
+        )}
       </section>
     </header>
-  )
+  );
 }
 
 export default Header

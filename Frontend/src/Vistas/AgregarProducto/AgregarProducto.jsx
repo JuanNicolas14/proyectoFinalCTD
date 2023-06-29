@@ -503,22 +503,9 @@ const AgregarProducto = () => {
               <div id="map" className='map'>
                 <fieldset className='mapa'>
                   <legend>Ubicación en el mapa</legend>
-
-                  <div>
-                    <label>Latitud:</label>
-                    <input type="number" value={latitude} onChange={handleLatitudeChange} />
-                  </div>
-                  <div>
-                    <label>Longitud:</label>
-                    <input type="number" value={longitude} onChange={handleLongitudeChange}
-                    />
-                  </div>
-
                   <Map onMarkerPositionChange={handleMarkerPositionChange} />
                 </fieldset>
-
               </div>
-
 
               <section className="form-parte-C">
                 <button type="submit">Guardar</button>

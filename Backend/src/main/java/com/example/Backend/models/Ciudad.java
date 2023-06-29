@@ -41,4 +41,8 @@ public class Ciudad {
                 ", nombreCiudad='" + nombreCiudad + '\'' +
                 '}';
     }
+
+    public void setNombre(String nombre) {
+        this.nombreCiudad = nombre;
+    }
 }

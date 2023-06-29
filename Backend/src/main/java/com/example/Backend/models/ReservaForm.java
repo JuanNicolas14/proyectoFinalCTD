@@ -24,6 +24,10 @@ public class ReservaForm {
         this.telefonoUsuario = telefonoUsuario;
     }
 
+    public ReservaForm() {
+
+    }
+
     public String getHoraEntrega() {
         return horaEntrega;
     }
