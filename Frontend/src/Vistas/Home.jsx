@@ -22,6 +22,7 @@ import FacebookShareButton from '../Componentes/Facebook/FacebookShareButton';
 import TwitterShareButton from '../Componentes/Twitter/TwitterShareButton';
 import WhatsappShareButton from '../Componentes/Whatsapp/WhatsappShareButton';
 import Categoria from '../Componentes/Categorias/Categoria'
+import images from '../assets/images/images';
 
 const Home = () => {
   const isMobile = useMediaQuery('(max-width: 550px)');
@@ -81,7 +82,7 @@ const Home = () => {
     return array;
   }
 
-
+  console.log(planesdb)
 
   return (
     <main className='home'>
@@ -104,7 +105,7 @@ const Home = () => {
                     nombre={planes.nombre}
                     dias={planes.dias}
                     descripcion={planes.descripcion}
-                    imagen={planes.imagen}
+                    imagen={images.fondoPlanes}
                   />
                 </SwiperSlide>
               ))}

@@ -9,6 +9,7 @@ import twitter from '../images/twitter.png'
 import facebook from '../images/facebook.png'
 import eliminar from '../images/eliminar.png'
 import notFound from '../images/notFound.jpg'
+import fondoPlanes from '../images/fondo-planes.jpg'
 
 export default {
     plato1,
@@ -21,5 +22,6 @@ export default {
     facebook,
     twitter,
     eliminar,
-    notFound
+    notFound,
+    fondoPlanes
 }
